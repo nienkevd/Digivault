@@ -21,8 +21,8 @@ public class KlantController {
     }
 
     @GetMapping("/klanten/{klantId}")
-    public Klant getKlantByIdHandler(@PathVariable int klantId) {
-        return klantService.getKlantById(klantId);
+    public Klant getKlantByIdHandler(@PathVariable String gebruikersnaam) {
+        return klantService.getKlantByUsername(gebruikersnaam);
     }
 
     @GetMapping("/klanten")

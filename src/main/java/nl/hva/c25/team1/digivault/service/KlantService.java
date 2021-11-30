@@ -22,9 +22,9 @@ public class KlantService {
         klantDAO.save(klant);
     }
 
-    public Klant getKlantById(int klantId) {
+    public Klant getKlantByUsername(String gebruikersnaam) {
 
-        return klantDAO.findKlantById(klantId);
+        return klantDAO.findKlantByUsername(gebruikersnaam);
     }
 
     public List<Klant> getAlleKlanten() {
