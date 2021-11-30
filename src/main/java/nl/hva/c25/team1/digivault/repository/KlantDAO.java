@@ -8,7 +8,7 @@ public interface KlantDAO {
 
     public void save(Klant klant);
 
-    public Klant findKlantById(int klantnummer);
+    public Klant findKlantByUsername(String gebruikersnaam);
 
     public List<Klant> findAlleKlanten();
 

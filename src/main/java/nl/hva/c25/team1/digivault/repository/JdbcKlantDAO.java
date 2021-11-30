@@ -18,18 +18,6 @@ public class JdbcKlantDAO implements KlantDAO {
     public JdbcKlantDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    private String voornaam;
-    private String tussenvoegsel;
-    private String achternaam;
-    private LocalDate geboortedatum;
-    private String bsn;
-    private String straat;
-    private int huisnummer;
-    private String toevoeging;
-    private String postcode;
-    private String woonplaats;
-    private String emailadres;
-
 
     @Override
     public void save(Klant klant) {
@@ -40,8 +28,9 @@ public class JdbcKlantDAO implements KlantDAO {
     }
 
     @Override
-    public Klant findKlantById(int klantnummer) {
-        return null;
+    public Klant findKlantByUsername(String gebruikersnaam) {
+        String sql = "SELECT * FROM Klant k JOIN Account a WHERE ;";
+        return jdbcTemplate.queryForObject(sql, new KlantRowMapper(), gebruikersnaam);
     }
 
     @Override
