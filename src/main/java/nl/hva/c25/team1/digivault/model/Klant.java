@@ -14,11 +14,11 @@ public class Klant {
     private String postcode;
     private String woonplaats;
     private String emailadres;
-    private Account account;
-    private Rekening rekening;
-    private Portefeuille portefeuille;
+//    private Account account;
+//    private Rekening rekening;
+//    private Portefeuille portefeuille;
 
-    public Klant(String voornaam, String tussenvoegsel, String achternaam, LocalDate geboortedatum, String bsn, String straat, int huisnummer, String toevoeging, String postcode, String woonplaats, String emailadres, Account account, Rekening rekening, Portefeuille portefeuille) {
+    public Klant(String voornaam, String tussenvoegsel, String achternaam, LocalDate geboortedatum, String bsn, String straat, int huisnummer, String toevoeging, String postcode, String woonplaats, String emailadres) {
         this.voornaam = voornaam;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
@@ -30,9 +30,6 @@ public class Klant {
         this.postcode = postcode;
         this.woonplaats = woonplaats;
         this.emailadres = emailadres;
-        this.account = account;
-        this.rekening = rekening;
-        this.portefeuille = portefeuille;
     }
 
     public String getVoornaam() {
@@ -123,29 +120,29 @@ public class Klant {
         this.emailadres = emailadres;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public Rekening getRekening() {
-        return rekening;
-    }
-
-    public void setRekening(Rekening rekening) {
-        this.rekening = rekening;
-    }
-
-    public Portefeuille getPortefeuille() {
-        return portefeuille;
-    }
-
-    public void setPortefeuille(Portefeuille portefeuille) {
-        this.portefeuille = portefeuille;
-    }
+//    public Account getAccount() {
+//        return account;
+//    }
+//
+//    public void setAccount(Account account) {
+//        this.account = account;
+//    }
+//
+//    public Rekening getRekening() {
+//        return rekening;
+//    }
+//
+//    public void setRekening(Rekening rekening) {
+//        this.rekening = rekening;
+//    }
+//
+//    public Portefeuille getPortefeuille() {
+//        return portefeuille;
+//    }
+//
+//    public void setPortefeuille(Portefeuille portefeuille) {
+//        this.portefeuille = portefeuille;
+//    }
 
     @Override
     public String toString() {
@@ -161,9 +158,6 @@ public class Klant {
                 ", postcode='" + postcode + '\'' +
                 ", woonplaats='" + woonplaats + '\'' +
                 ", emailadres='" + emailadres + '\'' +
-                ", account=" + account +
-                ", rekening=" + rekening +
-                ", portefeuille=" + portefeuille +
                 '}';
     }
 }
