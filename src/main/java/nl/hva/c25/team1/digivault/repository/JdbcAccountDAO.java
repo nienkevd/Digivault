@@ -9,6 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * @author Sezi, studentnummer 500889525
+ * @version 1-12-2021
+ */
+
 @Repository
 public class JdbcAccountDAO implements AccountDAO {
     JdbcTemplate jdbcTemplate;

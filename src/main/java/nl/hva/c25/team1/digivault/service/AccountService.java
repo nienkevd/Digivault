@@ -6,6 +6,11 @@ import nl.hva.c25.team1.digivault.repository.RootRepository;
 
 import java.util.List;
 
+/**
+ * @author Sezi, studentnummer 500889525
+ * @version 1-12-2021
+ */
+
 public class AccountService {
 
     private JdbcAccountDAO accountDAO;

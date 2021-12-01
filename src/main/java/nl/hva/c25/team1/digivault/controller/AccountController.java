@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
+/**
+ * @author Sezi, studentnummer 500889525
+ * @version 1-12-2021
+ */
+
+
 public class AccountController {
     private AccountService accountService;
 

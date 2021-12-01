@@ -2,6 +2,12 @@ package nl.hva.c25.team1.digivault.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+/**
+ * @author Sezi, studentnummer 500889525
+ * @version 1-12-2021
+ */
+
+
 public class Account {
     private String gebruikersnaam;
     private String wachtwoord;
