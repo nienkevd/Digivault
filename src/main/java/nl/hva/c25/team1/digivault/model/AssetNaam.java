@@ -33,10 +33,18 @@ public enum AssetNaam {
 
     private String naamAlsString;
 
+    /**
+     *
+     * @param naamAlsString
+     */
     AssetNaam(String naamAlsString) {
         this.naamAlsString = naamAlsString;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return naamAlsString;
