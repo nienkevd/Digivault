@@ -37,24 +37,15 @@ public class Klant {
         this.account = account;
         this.rekening = rekening;
         this.portefeuille = portefeuille;
-
     }
 
     public Klant(String voornaam, String tussenvoegsel, String achternaam,
                  LocalDate geboortedatum, String bsn, String straat,
                  int huisnummer, String toevoeging, String postcode,
                  String woonplaats, String emailadres) {
-        this.voornaam = voornaam;
-        this.tussenvoegsel = tussenvoegsel;
-        this.achternaam = achternaam;
-        this.geboortedatum = geboortedatum;
-        this.bsn = bsn;
-        this.straat = straat;
-        this.huisnummer = huisnummer;
-        this.toevoeging = toevoeging;
-        this.postcode = postcode;
-        this.woonplaats = woonplaats;
-        this.emailadres = emailadres;
+        this(voornaam,tussenvoegsel,achternaam,geboortedatum,bsn,
+                straat,huisnummer,toevoeging,postcode,woonplaats,emailadres,
+                null, null, null);
     }
 
     public String getVoornaam() {
