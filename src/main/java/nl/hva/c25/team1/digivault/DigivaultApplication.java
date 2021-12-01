@@ -9,5 +9,4 @@ public class DigivaultApplication {
     public static void main(String[] args) {
         SpringApplication.run(DigivaultApplication.class, args);
     }
-
 }
