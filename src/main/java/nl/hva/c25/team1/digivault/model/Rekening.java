@@ -4,9 +4,14 @@ public class Rekening {
     private String IBAN;
     private double saldo;
 
-    public Rekening (String IBAN, double saldo) {
+    public Rekening(String IBAN, double saldo) {
         this.IBAN = IBAN;
         this.saldo = saldo;
+    }
+
+    public Rekening() {
+        this.IBAN = "onbekend";
+        this.saldo = 0;
     }
 
     public String getIBAN() {

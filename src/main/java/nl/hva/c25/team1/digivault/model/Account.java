@@ -9,7 +9,7 @@ public class Account {
     @JsonBackReference
     private Klant klant;
 
-    public Account (String gebruikersnaam, String wachtwoord, Klant klant) {
+    private Account (String gebruikersnaam, String wachtwoord, Klant klant) {
         this.gebruikersnaam = gebruikersnaam;
         this.wachtwoord = wachtwoord;
         this.klant = klant;
@@ -18,6 +18,12 @@ public class Account {
     public Account(String gebruikersnaam, String wachtwoord) {
         this.gebruikersnaam = gebruikersnaam;
         this.wachtwoord = wachtwoord;
+        this.klant = null;
+    }
+
+    public Account () {
+        this.gebruikersnaam = "onbekend";
+        this.wachtwoord = "onbekend";
         this.klant = null;
     }
 
