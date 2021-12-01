@@ -7,6 +7,8 @@ import nl.hva.c25.team1.digivault.repository.RootRepository;
 
 import java.util.List;
 
+// review door Erwin, 1 december: eventueel nog auteursinfo toevoegen
+
 public class RekeningService {
 
     private JdbcRekeningDAO rekeningDAO;

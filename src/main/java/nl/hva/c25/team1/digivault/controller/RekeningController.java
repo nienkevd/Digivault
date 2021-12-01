@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
+// review door Erwin, 1 december: eventueel nog auteursinfo toevoegen, eventueel enter regel 42 verwijderen
+
 public class RekeningController {
 
     private RekeningService rekeningService;
