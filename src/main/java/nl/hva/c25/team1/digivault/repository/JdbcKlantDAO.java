@@ -26,9 +26,9 @@ public class JdbcKlantDAO implements KlantDAO {
      */
     @Override
     public void bewaar(Klant klant) {
-        String sql = "INSERT INTO Klant values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-        jdbcTemplate.update(sql, klant.getVoornaam(),klant.getTussenvoegsel(),klant.getAchternaam(),
-                klant.getGeboortedatum(), klant.getBsn(),klant.getStraat(),klant.getHuisnummer(),
+        String sql = "INSERT INTO Klant values(?,?,?,?,?,?,?,?,?,?,?);";
+        jdbcTemplate.update(sql, klant.getBsn(), klant.getVoornaam(),klant.getTussenvoegsel(),klant.getAchternaam(),
+                klant.getGeboortedatum(),klant.getStraat(),klant.getHuisnummer(),
                 klant.getToevoeging(),klant.getPostcode(),klant.getWoonplaats(),klant.getEmailadres());
     }
 
