@@ -22,6 +22,10 @@ public class Portefeuille {
         this(portefeuilleId, totaleWaarde, new HashMap<Asset, Double>());
     }
 
+    public Portefeuille() {
+        this(0,0);
+    }
+
     public int getPortefeuilleId() {
         return portefeuilleId;
     }
