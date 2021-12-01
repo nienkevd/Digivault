@@ -26,11 +26,6 @@ public class PortefeuilleService {
         portefeuilleDAO.bewaarPortefeuilleMetSleutel(portefeuille);
     }
 
-    @PostMapping("/klanten")
-    public void createKlantHandler(@RequestBody Klant klant) {
-        klantService.saveKlant(klant);
-    }
-
     public Portefeuille vindPortefeuilleOpId(int id) {
         return portefeuilleDAO.vindPortefeuilleOpId(id);
     }
