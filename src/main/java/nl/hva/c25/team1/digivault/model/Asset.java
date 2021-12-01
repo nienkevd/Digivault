@@ -1,8 +1,10 @@
 package nl.hva.c25.team1.digivault.model;
 
+import java.util.Objects;
+
 /**
  * @Author: Erwin, studentnummer 500889293
- * @Version: 30-11-2021
+ * @Version: 1-12-2021
  */
 
 public class Asset {
@@ -11,6 +13,7 @@ public class Asset {
     private double euroKoers;
 
     public Asset(String afkorting, String naam, double euroKoers) {
+        super();
         this.afkorting = afkorting;
         this.naam = naam;
         this.euroKoers = euroKoers;
@@ -41,14 +44,18 @@ public class Asset {
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Asset asset = (Asset) o;
+        return Double.compare(asset.euroKoers, euroKoers) == 0 && Objects.equals(afkorting, asset.afkorting)
+                && Objects.equals(naam, asset.naam);
     }
 
-//    @Override
-//    public boolean equals(Asset other) {
-//        return String.compare(getAfkorting(), other.getAfkorting());
-//    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(afkorting, naam, euroKoers);
+    }
 
     @Override
     public String toString() {

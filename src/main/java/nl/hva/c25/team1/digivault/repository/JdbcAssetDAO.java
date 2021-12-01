@@ -11,7 +11,9 @@ import java.util.List;
 
 /**
  * @Author: Erwin, studentnummer 500889293
- * @Version: 30-11-2021
+ * @Version: 1-12-2021
+ *
+ * Java Database Connectivity voor tabel Asset
  */
 
 @Repository
@@ -35,16 +37,10 @@ public class JdbcAssetDAO implements AssetDAO{
         return jdbcTemplate.queryForObject(sql, new AssetRowMapper(), afkorting);
     }
 
-
     @Override
     public List<Asset> findAllAssets() {
         String sql = "SELECT * FROM Asset";
         return jdbcTemplate.query(sql, new AssetRowMapper());
-    }
-
-    @Override
-    public void update(Asset asset) {
-
     }
 
     private class AssetRowMapper implements RowMapper<Asset> {
