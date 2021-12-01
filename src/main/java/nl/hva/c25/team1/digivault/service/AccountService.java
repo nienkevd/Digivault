@@ -22,7 +22,6 @@ public class AccountService {
 
     public void ververs(Account account) {
         accountDAO.ververs(account);
-
     }
 
     public Account vindAccountOpGebruikersnaam(String gebruikersnaam) {
