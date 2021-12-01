@@ -16,18 +16,18 @@ public class KlantController {
     }
 
     @PostMapping("/klanten")
-    public void createKlant(@RequestBody Klant klant) {
-        klantService.saveKlant(klant);
+    public void bewaarKlant(@RequestBody Klant klant) {
+        klantService.bewaarKlant(klant);
     }
 
     @GetMapping("/klanten/{klantId}")
-    public Klant getKlantByIdHandler(@PathVariable String gebruikersnaam) {
-        return klantService.getKlantByUsername(gebruikersnaam);
+    public Klant vindKlantopGebruikersnaamHandler(@PathVariable String gebruikersnaam) {
+        return klantService.vindKlantOpGebruikersnaam(gebruikersnaam);
     }
 
     @GetMapping("/klanten")
-    public List<Klant> getKlantenHandler() {
-        return klantService.getAlleKlanten();
+    public List<Klant> vindKlantenHandler() {
+        return klantService.vindAlleKlanten();
     }
 
 
