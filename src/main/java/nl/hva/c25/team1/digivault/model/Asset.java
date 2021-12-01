@@ -45,10 +45,10 @@ public class Asset {
         return super.hashCode();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
+//    @Override
+//    public boolean equals(Asset other) {
+//        return String.compare(getAfkorting(), other.getAfkorting());
+//    }
 
     @Override
     public String toString() {
