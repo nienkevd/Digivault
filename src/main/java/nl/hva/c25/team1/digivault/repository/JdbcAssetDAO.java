@@ -10,10 +10,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @Author: Erwin, studentnummer 500889293
- * @Version: 1-12-2021
+ * @author Erwin, studentnummer 500889293
+ * @version 1-12-2021
  *
- * Java Database Connectivity voor tabel Asset
+ * Java Database Connectivity voor DB-tabel Asset
  */
 
 @Repository
@@ -26,21 +26,26 @@ public class JdbcAssetDAO implements AssetDAO{
     }
 
     @Override
-    public void save(Asset asset) {
+    public void bewaar(Asset asset) {
         String sql = "INSERT INTO Asset VALUES (?,?,?)";
         jdbcTemplate.update(sql, asset.getAfkorting(), asset.getNaam(), asset.getEuroKoers());
     }
 
     @Override
-    public Asset findAssetByAfkorting(String afkorting) {
+    public Asset vindAssetOpAfkorting(String afkorting) {
         String sql = "SELECT * FROM Asset WHERE afkorting = ?";
         return jdbcTemplate.queryForObject(sql, new AssetRowMapper(), afkorting);
     }
 
     @Override
-    public List<Asset> findAllAssets() {
+    public List<Asset> geefAlleAssets() {
         String sql = "SELECT * FROM Asset";
         return jdbcTemplate.query(sql, new AssetRowMapper());
+    }
+
+    @Override
+    public void ververs(Asset asset) {
+
     }
 
     private class AssetRowMapper implements RowMapper<Asset> {

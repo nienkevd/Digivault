@@ -3,8 +3,8 @@ package nl.hva.c25.team1.digivault.model;
 import java.util.Objects;
 
 /**
- * @Author: Erwin, studentnummer 500889293
- * @Version: 1-12-2021
+ * @author Erwin, studentnummer 500889293
+ * @version 1-12-2021
  */
 
 public class Asset {
@@ -59,7 +59,6 @@ public class Asset {
 
     @Override
     public String toString() {
-        return "Asset{" + "afkorting='" + afkorting + '\'' + ", naam='" + naam + '\'' +
-                ", euroKoers=" + euroKoers + '}';
+        return "Asset{afkorting='" + afkorting + '\'' + ", naam='" + naam + '\'' + ", euroKoers=" + euroKoers + '}';
     }
 }
