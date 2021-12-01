@@ -1,6 +1,7 @@
 package nl.hva.c25.team1.digivault.repository;
 
 import nl.hva.c25.team1.digivault.model.Klant;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,6 +17,7 @@ public class JdbcKlantDAO implements KlantDAO {
 
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public JdbcKlantDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -29,7 +31,8 @@ public class JdbcKlantDAO implements KlantDAO {
         String sql = "INSERT INTO Klant values(?,?,?,?,?,?,?,?,?,?,?);";
         jdbcTemplate.update(sql, klant.getBsn(), klant.getVoornaam(),klant.getTussenvoegsel(),klant.getAchternaam(),
                 klant.getGeboortedatum(),klant.getStraat(),klant.getHuisnummer(),
-                klant.getToevoeging(),klant.getPostcode(),klant.getWoonplaats(),klant.getEmailadres());
+                klant.getToevoeging(),klant.getPostcode(),klant.getWoonplaats(),klant.getEmailadres()/*,
+                klant.getAccount().getGebruikersnaam(),klant.getRekening().getIBAN(),klant.getPortefeuille().getPortefeuilleId()*/);
     }
 
     /**
