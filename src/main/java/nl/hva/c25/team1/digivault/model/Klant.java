@@ -34,7 +34,10 @@ public class Klant {
         this.postcode = postcode;
         this.woonplaats = woonplaats;
         this.emailadres = emailadres;
-//   git
+        this.account = account;
+        this.rekening = rekening;
+        this.portefeuille = portefeuille;
+
     }
 
     public Klant(String voornaam, String tussenvoegsel, String achternaam,
