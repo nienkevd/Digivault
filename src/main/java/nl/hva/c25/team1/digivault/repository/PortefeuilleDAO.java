@@ -4,10 +4,10 @@ import nl.hva.c25.team1.digivault.model.Portefeuille;
 
 public interface PortefeuilleDAO {
 
-    public void savePortefeuille(Portefeuille portefeuille);
+    void bewaarPortefeuilleMetSleutel(Portefeuille portefeuille);
 
-    public Portefeuille getPortefeuilleById(int id);
+    Portefeuille vindPortefeuilleOpId(int id);
 
-    public void updatePortefeuille(Portefeuille portefeuille);
+    void updatePortefeuille(Portefeuille portefeuille);
 
 }

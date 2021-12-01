@@ -6,16 +6,36 @@ package nl.hva.c25.team1.digivault.model;
 import java.util.*;
 
 public class Portefeuille {
-/*
+
+    private int portefeuilleId;
+    private double totaleWaarde;
     private Map<Asset, Double> assetLijst;
 
-    private Portefeuille(Map<Asset, Double> assetLijst) {
+    private Portefeuille(int portefeuilleId, double totaleWaarde ,Map<Asset, Double> assetLijst) {
         super();
+        this.portefeuilleId = portefeuilleId;
+        this.totaleWaarde = totaleWaarde;
         this.assetLijst = assetLijst;
     }
 
-    public Portefeuille() {
-        this(new HashMap<Asset, Double>());
+    public Portefeuille(int portefeuilleId, double totaleWaarde) {
+        this(portefeuilleId, totaleWaarde, new HashMap<Asset, Double>());
+    }
+
+    public int getPortefeuilleId() {
+        return portefeuilleId;
+    }
+
+    public void setPortefeuilleId(int portefeuilleId) {
+        this.portefeuilleId = portefeuilleId;
+    }
+
+    public double getTotaleWaarde() {
+        return totaleWaarde;
+    }
+
+    public void setTotaleWaarde(double totaleWaarde) {
+        this.totaleWaarde = totaleWaarde;
     }
 
     public Map<Asset, Double> getAssetLijst() {
@@ -31,7 +51,7 @@ public class Portefeuille {
         StringBuilder stringBuilder = new StringBuilder(String.format("Portefeuille:\n"));
         for (Asset asset: assetLijst.keySet()) stringBuilder.append(String.format("%-25s%+15.5f", asset,
                 assetLijst.get(asset)));
-        return stringBuilder.append("\n").toString();
+        return stringBuilder.append(String.format("\n\nTotale waarde: %.2f EUR\n", totaleWaarde)).toString();
     }
-*/
+
 }
