@@ -12,6 +12,12 @@ public class Asset {
     private String naam;
     private double euroKoers;
 
+    /**
+     *
+     * @param afkorting
+     * @param naam
+     * @param euroKoers
+     */
     public Asset(String afkorting, String naam, double euroKoers) {
         super();
         this.afkorting = afkorting;
@@ -43,6 +49,11 @@ public class Asset {
         this.euroKoers = euroKoers;
     }
 
+    /**
+     *
+     * @param o
+     * @return equals-waarde
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,11 +63,19 @@ public class Asset {
                 && Objects.equals(naam, asset.naam);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         return Objects.hash(afkorting, naam, euroKoers);
     }
 
+    /**
+     *
+     * @return toString
+     */
     @Override
     public String toString() {
         return "Asset{afkorting='" + afkorting + '\'' + ", naam='" + naam + '\'' + ", euroKoers=" + euroKoers + '}';
