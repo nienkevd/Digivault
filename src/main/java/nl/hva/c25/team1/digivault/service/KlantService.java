@@ -18,17 +18,17 @@ public class KlantService {
         this.rootRepository = rootRepository;
     }
 
-    public void saveKlant(Klant klant) {
-        klantDAO.save(klant);
+    public void bewaarKlant(Klant klant) {
+        klantDAO.bewaar(klant);
     }
 
-    public Klant getKlantByUsername(String gebruikersnaam) {
+    public Klant vindKlantOpGebruikersnaam(String gebruikersnaam) {
 
-        return klantDAO.findKlantByUsername(gebruikersnaam);
+        return klantDAO.vindKlantOpGebruikersnaam(gebruikersnaam);
     }
 
-    public List<Klant> getAlleKlanten() {
-        return klantDAO.findAlleKlanten();
+    public List<Klant> vindAlleKlanten() {
+        return klantDAO.vindAlleKlanten();
     }
 
 

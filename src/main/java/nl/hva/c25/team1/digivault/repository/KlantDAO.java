@@ -6,10 +6,12 @@ import java.util.List;
 
 public interface KlantDAO {
 
-    public void save(Klant klant);
+    void bewaar(Klant klant);
 
-    public Klant findKlantByUsername(String gebruikersnaam);
+    Klant vindKlantOpGebruikersnaam(String gebruikersnaam);
 
-    public List<Klant> findAlleKlanten();
+    List<Klant> vindAlleKlanten();
+
+    void update(Klant klant);
 
 }
