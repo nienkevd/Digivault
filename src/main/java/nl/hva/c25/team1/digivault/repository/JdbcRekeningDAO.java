@@ -1,6 +1,5 @@
 package nl.hva.c25.team1.digivault.repository;
 
-import nl.hva.c25.team1.digivault.model.Account;
 import nl.hva.c25.team1.digivault.model.Rekening;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
