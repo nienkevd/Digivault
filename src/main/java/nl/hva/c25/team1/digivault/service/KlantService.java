@@ -13,20 +13,38 @@ public class KlantService {
     private JdbcKlantDAO klantDAO;
     private RootRepository rootRepository;
 
+    /**
+     *
+     * @param klantDAO interface klantDAO
+     * @param rootRepository rootrepo
+     */
     public KlantService(JdbcKlantDAO klantDAO, RootRepository rootRepository) {
         this.klantDAO = klantDAO;
         this.rootRepository = rootRepository;
     }
 
+    /**
+     *
+     * @param klant opslaan
+     */
     public void bewaarKlant(Klant klant) {
         klantDAO.bewaar(klant);
     }
 
+    /**
+     *
+     * @param gebruikersnaam van klant die gevonden moet worden
+     * @return Klant klant
+     */
     public Klant vindKlantOpGebruikersnaam(String gebruikersnaam) {
 
         return klantDAO.vindKlantOpGebruikersnaam(gebruikersnaam);
     }
 
+    /**
+     *
+     * @return List<Klant>
+     */
     public List<Klant> vindAlleKlanten() {
         return klantDAO.vindAlleKlanten();
     }

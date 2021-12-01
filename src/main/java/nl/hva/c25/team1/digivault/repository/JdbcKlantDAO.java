@@ -20,6 +20,10 @@ public class JdbcKlantDAO implements KlantDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     *
+     * @param klant die opgeslagen moet worden
+     */
     @Override
     public void bewaar(Klant klant) {
         String sql = "INSERT INTO Klant values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
@@ -28,6 +32,11 @@ public class JdbcKlantDAO implements KlantDAO {
                 klant.getToevoeging(),klant.getPostcode(),klant.getWoonplaats(),klant.getEmailadres());
     }
 
+    /**
+     *
+     * @param gebruikersnaam
+     * @return Klant
+     */
     @Override
     public Klant vindKlantOpGebruikersnaam(String gebruikersnaam) {
         String sql = "SELECT * FROM Klant WHERE gebruikersnaam = ? ;";
@@ -40,12 +49,21 @@ public class JdbcKlantDAO implements KlantDAO {
         return klant;
     }
 
+    /**
+     *
+     * @return List<Klant>
+     */
     @Override
     public List<Klant> vindAlleKlanten() {
         String sql = "SELECT * FROM Klant;";
         return jdbcTemplate.query(sql, new KlantRowMapper());
     }
 
+    /**
+     *
+     * @param klant
+     */
+    @Override
     public void update(Klant klant) {
         String sql = "UPDATE Klant SET voornaam= ?, tussenvoegsel = ?, " +
                 "achternaam = ?, geboortedatum =?, straat = ?, " +
