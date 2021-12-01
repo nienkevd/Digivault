@@ -2,6 +2,8 @@ package nl.hva.c25.team1.digivault.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+// review door Erwin, 1 december: eventueel nog auteursinfo toevoegen, regel 52 is te lang
+
 public class Account {
     private String gebruikersnaam;
     private String wachtwoord;

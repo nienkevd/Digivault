@@ -1,9 +1,10 @@
 package nl.hva.c25.team1.digivault.repository;
 
-
 import nl.hva.c25.team1.digivault.model.Account;
 
 import java.util.List;
+
+// review door Erwin, 1 december: eventueel nog auteursinfo toevoegen
 
 public interface AccountDAO {
 

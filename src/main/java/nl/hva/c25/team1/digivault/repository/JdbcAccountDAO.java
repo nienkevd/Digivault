@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+// review door Erwin, 1 december: eventueel nog auteursinfo toevoegen
+
 @Repository
 public class JdbcAccountDAO implements AccountDAO {
     JdbcTemplate jdbcTemplate;

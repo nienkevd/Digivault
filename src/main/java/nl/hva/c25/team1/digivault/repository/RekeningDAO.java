@@ -5,6 +5,8 @@ import nl.hva.c25.team1.digivault.model.Rekening;
 
 import java.util.List;
 
+// review door Erwin, 1 december: eventueel nog auteursinfo toevoegen
+
 public interface RekeningDAO {
 
     public void bewaar(Rekening rekening);

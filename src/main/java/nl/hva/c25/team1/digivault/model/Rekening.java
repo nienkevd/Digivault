@@ -1,5 +1,7 @@
 package nl.hva.c25.team1.digivault.model;
 
+// review door Erwin, 1 december
+
 public class Rekening {
     private String IBAN;
     private double saldo;
