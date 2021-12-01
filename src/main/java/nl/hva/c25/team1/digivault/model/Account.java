@@ -2,7 +2,14 @@ package nl.hva.c25.team1.digivault.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-// review door Erwin, 1 december: eventueel nog auteursinfo toevoegen, regel 52 is te lang
+
+// review door Erwin, 1 december
+
+/**
+ * @author Sezi, studentnummer 500889525
+ * @version 1-12-2021
+ */
+
 
 public class Account {
     private String gebruikersnaam;
@@ -55,6 +62,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return String.format("Account of %s met gebruikersnaam : %s en wachtwoord : %s", klant.getAchternaam(), this.gebruikersnaam, this.wachtwoord);
+        return String.format("Account of %s met gebruikersnaam : %s en wachtwoord : %s",
+                klant.getAchternaam(), this.gebruikersnaam, this.wachtwoord);
     }
 }

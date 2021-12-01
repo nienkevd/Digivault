@@ -10,7 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-// review door Erwin, 1 december: eventueel nog auteursinfo toevoegen, eventueel enter regel 42 verwijderen
+// review door Erwin, 1 december
+
+/**
+ * @author Sezi, studentnummer 500889525
+ * @version 1-12-2021
+ */
 
 public class RekeningController {
 
@@ -39,5 +44,4 @@ public class RekeningController {
     public List<Rekening> geefRekeningenHandler() {
         return rekeningService.geefAlleRekeningen();
     }
-
 }

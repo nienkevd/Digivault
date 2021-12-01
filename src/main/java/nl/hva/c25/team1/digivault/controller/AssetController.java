@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
+// review door Sezi, 1 december
+
 /**
  * @author Erwin, studentnummer 500889293
  * @version 1-12-2021

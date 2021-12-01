@@ -2,6 +2,11 @@ package nl.hva.c25.team1.digivault.model;
 
 // review door Erwin, 1 december
 
+/**
+ * @author Sezi, studentnummer 500889525
+ * @version 1-12-2021
+ */
+
 public class Rekening {
     private String IBAN;
     private double saldo;
