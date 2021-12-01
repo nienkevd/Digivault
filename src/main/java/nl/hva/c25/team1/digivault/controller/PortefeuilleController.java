@@ -3,7 +3,6 @@
 
 package nl.hva.c25.team1.digivault.controller;
 
-import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.Portefeuille;
 import nl.hva.c25.team1.digivault.service.PortefeuilleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +17,6 @@ public class PortefeuilleController {
     @Autowired
     public PortefeuilleController(PortefeuilleService portefeuilleService) {
         this.portefeuilleService = portefeuilleService;
-    }
-
-    @PostMapping("/portefeuilles")
-    public void maakPortefeuilleHandler(@RequestBody Portefeuille portefeuille) {
-        portefeuilleService.bewaarPortefeuille(portefeuille);
     }
 
     @GetMapping("/portefeuilles/{id}")

@@ -4,7 +4,7 @@ import nl.hva.c25.team1.digivault.model.Portefeuille;
 
 public interface PortefeuilleDAO {
 
-    void bewaarPortefeuilleMetSleutel(Portefeuille portefeuille);
+    int slaLegePortefeuilleOpMetSleutel();
 
     Portefeuille vindPortefeuilleOpId(int id);
 

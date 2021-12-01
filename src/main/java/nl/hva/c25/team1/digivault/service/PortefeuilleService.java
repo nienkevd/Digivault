@@ -3,13 +3,11 @@
 
 package nl.hva.c25.team1.digivault.service;
 
-import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.Portefeuille;
 import nl.hva.c25.team1.digivault.repository.PortefeuilleDAO;
+import nl.hva.c25.team1.digivault.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class PortefeuilleService {
@@ -20,10 +18,6 @@ public class PortefeuilleService {
     public PortefeuilleService(PortefeuilleDAO portefeuilleDAO) {
         super();
         this.portefeuilleDAO = portefeuilleDAO;
-    }
-
-    public void bewaarPortefeuille(Portefeuille portefeuille) {
-        portefeuilleDAO.bewaarPortefeuilleMetSleutel(portefeuille);
     }
 
     public Portefeuille vindPortefeuilleOpId(int id) {

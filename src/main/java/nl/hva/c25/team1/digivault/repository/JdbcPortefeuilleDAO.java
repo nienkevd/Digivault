@@ -3,7 +3,6 @@
 
 package nl.hva.c25.team1.digivault.repository;
 
-import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.Portefeuille;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -35,18 +34,17 @@ public class JdbcPortefeuilleDAO implements PortefeuilleDAO{
     }
 
     @Override
-    public void bewaarPortefeuilleMetSleutel(Portefeuille portefeuille) {
-        String sql = "INSERT INTO portefeuille (totaleWaarde) VALUES (?)";
+    public int slaLegePortefeuilleOpMetSleutel() {
+        String sql = "INSERT INTO portefeuille (totaleWaarde) VALUES (0)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setDouble(1, portefeuille.getTotaleWaarde());
                 return ps;
             }
         }, keyHolder);
-        portefeuille.setPortefeuilleId(keyHolder.getKey().intValue());
+        return keyHolder.getKey().intValue();
     }
 
     @Override
