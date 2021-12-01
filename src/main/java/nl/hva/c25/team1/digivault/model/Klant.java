@@ -18,7 +18,29 @@ public class Klant {
     private Rekening rekening;
     private Portefeuille portefeuille;
 
-    public Klant(String voornaam, String tussenvoegsel, String achternaam, LocalDate geboortedatum, String bsn, String straat, int huisnummer, String toevoeging, String postcode, String woonplaats, String emailadres) {
+    private Klant(String voornaam, String tussenvoegsel,
+                  String achternaam, LocalDate geboortedatum,
+                  String bsn, String straat, int huisnummer,
+                  String toevoeging, String postcode, String woonplaats,
+                  String emailadres, Account account, Rekening rekening, Portefeuille portefeuille) {
+        this.voornaam = voornaam;
+        this.tussenvoegsel = tussenvoegsel;
+        this.achternaam = achternaam;
+        this.geboortedatum = geboortedatum;
+        this.bsn = bsn;
+        this.straat = straat;
+        this.huisnummer = huisnummer;
+        this.toevoeging = toevoeging;
+        this.postcode = postcode;
+        this.woonplaats = woonplaats;
+        this.emailadres = emailadres;
+//   git
+    }
+
+    public Klant(String voornaam, String tussenvoegsel, String achternaam,
+                 LocalDate geboortedatum, String bsn, String straat,
+                 int huisnummer, String toevoeging, String postcode,
+                 String woonplaats, String emailadres) {
         this.voornaam = voornaam;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
