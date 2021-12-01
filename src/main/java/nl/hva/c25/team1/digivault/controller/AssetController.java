@@ -23,7 +23,7 @@ public class AssetController {
     }
 
     @PostMapping("/assets")
-    public void bewaarAsset(@RequestBody Asset asset) {
+    public void bewaar(@RequestBody Asset asset) {
         assetService.bewaarAsset(asset);
     }
 
@@ -35,5 +35,10 @@ public class AssetController {
     @PostMapping("/assets")
     public List<Asset> geefAlleAssets() {
         return assetService.geefAlleAssets();
+    }
+
+    @PostMapping("/assets/{afkorting}")
+    public String ververs(@RequestBody Asset asset) {
+        return assetService.verversAsset(asset);
     }
 }

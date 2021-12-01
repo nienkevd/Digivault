@@ -37,7 +37,7 @@ public class AssetService {
     public String verversAsset(Asset asset) {
         if (jdbcAssetDAO.vindAssetOpAfkorting(asset.getAfkorting()) == null) {
             return "Asset is niet gevonden, het verversen is mislukt.";
-        } else{
+        } else {
             jdbcAssetDAO.ververs(asset);
             return "Asset is ververst.";
         }
