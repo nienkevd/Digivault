@@ -20,7 +20,7 @@ public class KlantController {
         klantService.bewaarKlant(klant);
     }
 
-    @GetMapping("/klanten/{klantId}")
+    @GetMapping("/klanten/{gebruikersnaam}")
     public Klant vindKlantopGebruikersnaamHandler(@PathVariable String gebruikersnaam) {
         return klantService.vindKlantOpGebruikersnaam(gebruikersnaam);
     }
