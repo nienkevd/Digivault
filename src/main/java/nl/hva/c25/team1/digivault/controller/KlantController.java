@@ -1,7 +1,9 @@
 package nl.hva.c25.team1.digivault.controller;
 
 import nl.hva.c25.team1.digivault.model.Klant;
+import nl.hva.c25.team1.digivault.model.transfer.KlantDto;
 import nl.hva.c25.team1.digivault.service.KlantService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +18,11 @@ public class KlantController {
     }
 
     @PostMapping("/klanten")
-    public void bewaarKlant(@RequestBody Klant klant) {
+    public Klant bewaarKlant(@RequestBody KlantDto klantDto) {
+        Klant klant = new Klant(klantDto);
+        System.out.println("*** " + klantDto.getAchternaam() + " ***");
         klantService.bewaarKlant(klant);
+        return klant;
     }
 
     @GetMapping("/klanten/{gebruikersnaam}")

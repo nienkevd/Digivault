@@ -31,8 +31,7 @@ public class JdbcKlantDAO implements KlantDAO {
         String sql = "INSERT INTO Klant values(?,?,?,?,?,?,?,?,?,?,?);";
         jdbcTemplate.update(sql, klant.getBsn(), klant.getVoornaam(),klant.getTussenvoegsel(),klant.getAchternaam(),
                 klant.getGeboortedatum(),klant.getStraat(),klant.getHuisnummer(),
-                klant.getToevoeging(),klant.getPostcode(),klant.getWoonplaats(),klant.getEmailadres()/*,
-                klant.getAccount().getGebruikersnaam(),klant.getRekening().getIBAN(),klant.getPortefeuille().getPortefeuilleId()*/);
+                klant.getToevoeging(),klant.getPostcode(),klant.getWoonplaats(),klant.getEmailadres());
     }
 
     /**

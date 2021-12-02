@@ -1,5 +1,7 @@
 package nl.hva.c25.team1.digivault.model;
 
+import nl.hva.c25.team1.digivault.model.transfer.KlantDto;
+
 import java.time.LocalDate;
 
 public class Klant {
@@ -46,6 +48,12 @@ public class Klant {
         this(voornaam,tussenvoegsel,achternaam,geboortedatum,bsn,
                 straat,huisnummer,toevoeging,postcode,woonplaats,emailadres,
                 null, null, null);
+    }
+
+    public Klant(KlantDto dto){
+        this(dto.getVoornaam(),dto.getTussenvoegsel(),dto.getAchternaam(),
+                dto.getGeboortedatum(),dto.getBsn(),dto.getStraat(),dto.getHuisnummer(),
+                dto.getToevoeging(),dto.getPostcode(),dto.getWoonplaats(),dto.getEmailadres());
     }
 
     public String getVoornaam() {
