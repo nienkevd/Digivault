@@ -4,11 +4,13 @@ import nl.hva.c25.team1.digivault.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,6 +35,24 @@ public class JdbcKlantDAO implements KlantDAO {
         String sql = "INSERT INTO Klant values(?,?,?);";
         jdbcTemplate.update(sql, klant.getKlantId(),klant.getBsn(),klant.getGeboortedatum());
     }
+
+//    public void saveWithKey(Klant klant) {
+//        String sql = "Insert into Klant(voorletters, voorvoegsels, achternaam, telefoon) values (?,?,?,?)";
+//
+//        KeyHolder keyHolder = new GeneratedKeyHolder();
+//        jdbcTemplate.update(new PreparedStatementCreator() {
+//            @Override
+//            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+//                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//                ps.setString(1, klant.getVoorletters());
+//                ps.setString(2, klant.getVoorvoegsels());
+//                ps.setString(3, klant.getAchternaam());
+//                ps.setString(4, klant.getTelefoon());
+//                return ps;
+//            }
+//        }, keyHolder);
+//        klant.setKlantnummer(keyHolder.getKey().intValue());
+//    }
 
     /**
      *
@@ -67,7 +87,7 @@ public class JdbcKlantDAO implements KlantDAO {
     @Override
     public void update(Klant klant) {
         String sql = "UPDATE Klant SET klantId = ?, bsn = ?, geboortedatum = ? WHERE klantId = ?;";
-        jdbcTemplate.update(sql, jdbcTemplate.update(sql, klant.getKlantId(),klant.getBsn(),klant.getGeboortedatum()));
+        jdbcTemplate.update(sql, klant.getKlantId(),klant.getBsn(),klant.getGeboortedatum());
     }
 
     private class KlantRowMapper implements RowMapper<Klant> {
