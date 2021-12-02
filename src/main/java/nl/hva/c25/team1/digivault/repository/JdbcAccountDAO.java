@@ -29,13 +29,13 @@ public class JdbcAccountDAO implements AccountDAO {
     @Override
     public void bewaar(Account account) {
         String sql = "Insert into account values (?,?)";
-        jdbcTemplate.update(sql, account.getGebruikersnaam(), account.getWachtwoord());
+        jdbcTemplate.update(sql, account.getEmailadres(), account.getWachtwoord());
     }
 
     @Override
     public void ververs(Account account) {
         String sql = "Update account Set gebruikersnaam = ?, wachtwoord = ? ;";
-        jdbcTemplate.update(sql, account.getGebruikersnaam(), account.getWachtwoord());
+        jdbcTemplate.update(sql, account.getEmailadres(), account.getWachtwoord());
     }
 
     @Override
@@ -53,7 +53,7 @@ public class JdbcAccountDAO implements AccountDAO {
     private class AccountRowMapper implements RowMapper<Account> {
         @Override
         public Account mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
-            return new Account(resultSet.getString("gebruikersnaam"),
+            return new Account(resultSet.getString("emailadres"),
                     resultSet.getString("wachtwoord"));
         }
     }

@@ -1,91 +1,41 @@
 package nl.hva.c25.team1.digivault.model;
 
-import nl.hva.c25.team1.digivault.model.transfer.KlantDto;
-
 import java.time.LocalDate;
 
 public class Klant {
-    private String voornaam;
-    private String tussenvoegsel;
-    private String achternaam;
-    private LocalDate geboortedatum;
+    private int klantId;
     private String bsn;
-    private String straat;
-    private int huisnummer;
-    private String toevoeging;
-    private String postcode;
-    private String woonplaats;
-    private String emailadres;
+    private LocalDate geboortedatum;
+    private Naam naam;
+    private Adres adres;
     private Account account;
     private Rekening rekening;
     private Portefeuille portefeuille;
 
-    private Klant(String voornaam, String tussenvoegsel,
-                  String achternaam, LocalDate geboortedatum,
-                  String bsn, String straat, int huisnummer,
-                  String toevoeging, String postcode, String woonplaats,
-                  String emailadres, Account account, Rekening rekening, Portefeuille portefeuille) {
-        this.voornaam = voornaam;
-        this.tussenvoegsel = tussenvoegsel;
-        this.achternaam = achternaam;
-        this.geboortedatum = geboortedatum;
+    private Klant(int klantId, String bsn, LocalDate geboortedatum, Naam naam, Adres adres,
+                 Account account, Rekening rekening, Portefeuille portefeuille) {
+        this.klantId = klantId;
         this.bsn = bsn;
-        this.straat = straat;
-        this.huisnummer = huisnummer;
-        this.toevoeging = toevoeging;
-        this.postcode = postcode;
-        this.woonplaats = woonplaats;
-        this.emailadres = emailadres;
+        this.geboortedatum = geboortedatum;
+        this.naam = naam;
+        this.adres = adres;
         this.account = account;
         this.rekening = rekening;
         this.portefeuille = portefeuille;
     }
 
-    public Klant(String voornaam, String tussenvoegsel, String achternaam,
-                 LocalDate geboortedatum, String bsn, String straat,
-                 int huisnummer, String toevoeging, String postcode,
-                 String woonplaats, String emailadres) {
-        this(voornaam,tussenvoegsel,achternaam,geboortedatum,bsn,
-                straat,huisnummer,toevoeging,postcode,woonplaats,emailadres,
-                null, null, null);
+
+    public Klant(int klantId, String bsn, LocalDate geboortedatum) {
+        this(klantId,bsn,geboortedatum, null, null,null, null, null);
     }
 
-    public Klant(KlantDto dto){
-        this(dto.getVoornaam(),dto.getTussenvoegsel(),dto.getAchternaam(),
-                dto.getGeboortedatum(),dto.getBsn(),dto.getStraat(),dto.getHuisnummer(),
-                dto.getToevoeging(),dto.getPostcode(),dto.getWoonplaats(),dto.getEmailadres());
+
+    public int getKlantId() {
+        return klantId;
     }
 
-    public String getVoornaam() {
-        return voornaam;
-    }
-
-    public void setVoornaam(String voornaam) {
-        this.voornaam = voornaam;
-    }
-
-    public String getTussenvoegsel() {
-        return tussenvoegsel;
-    }
-
-    public void setTussenvoegsel(String tussenvoegsel) {
-        this.tussenvoegsel = tussenvoegsel;
-    }
-
-    public String getAchternaam() {
-        return achternaam;
-    }
-
-    public void setAchternaam(String achternaam) {
-        this.achternaam = achternaam;
-    }
-
-    public LocalDate getGeboortedatum() {
-        return geboortedatum;
-    }
-
-    public void setGeboortedatum(LocalDate geboortedatum) {
-        this.geboortedatum = geboortedatum;
+    public void setKlantId(int klantId) {
+        this.klantId = klantId;
     }
 
     public String getBsn() {
@@ -96,52 +46,28 @@ public class Klant {
         this.bsn = bsn;
     }
 
-    public String getStraat() {
-        return straat;
+    public LocalDate getGeboortedatum() {
+        return geboortedatum;
     }
 
-    public void setStraat(String straat) {
-        this.straat = straat;
+    public void setGeboortedatum(LocalDate geboortedatum) {
+        this.geboortedatum = geboortedatum;
     }
 
-    public int getHuisnummer() {
-        return huisnummer;
+    public Naam getNaam() {
+        return naam;
     }
 
-    public void setHuisnummer(int huisnummer) {
-        this.huisnummer = huisnummer;
+    public void setNaam(Naam naam) {
+        this.naam = naam;
     }
 
-    public String getToevoeging() {
-        return toevoeging;
+    public Adres getAdres() {
+        return adres;
     }
 
-    public void setToevoeging(String toevoeging) {
-        this.toevoeging = toevoeging;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public String getWoonplaats() {
-        return woonplaats;
-    }
-
-    public void setWoonplaats(String woonplaats) {
-        this.woonplaats = woonplaats;
-    }
-
-    public String getEmailadres() {
-        return emailadres;
-    }
-
-    public void setEmailadres(String emailadres) {
-        this.emailadres = emailadres;
+    public void setAdres(Adres adres) {
+        this.adres = adres;
     }
 
     public Account getAccount() {
@@ -171,17 +97,14 @@ public class Klant {
     @Override
     public String toString() {
         return "Klant{" +
-                "voornaam='" + voornaam + '\'' +
-                ", tussenvoegsel='" + tussenvoegsel + '\'' +
-                ", achternaam='" + achternaam + '\'' +
-                ", geboortedatum=" + geboortedatum +
+                "klantId=" + klantId +
                 ", bsn='" + bsn + '\'' +
-                ", straat='" + straat + '\'' +
-                ", huisnummer=" + huisnummer +
-                ", toevoeging='" + toevoeging + '\'' +
-                ", postcode='" + postcode + '\'' +
-                ", woonplaats='" + woonplaats + '\'' +
-                ", emailadres='" + emailadres + '\'' +
+                ", geboortedatum=" + geboortedatum +
+                ", naam=" + naam +
+                ", adres=" + adres +
+                ", account=" + account +
+                ", rekening=" + rekening +
+                ", portefeuille=" + portefeuille +
                 '}';
     }
 }

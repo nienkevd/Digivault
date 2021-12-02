@@ -12,36 +12,46 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 public class Account {
-    private String gebruikersnaam;
+    private int accountId;
+    private String emailadres;
     private String wachtwoord;
 
     @JsonBackReference
     private Klant klant;
 
-    private Account (String gebruikersnaam, String wachtwoord, Klant klant) {
-        this.gebruikersnaam = gebruikersnaam;
+    private Account (int accountId,String emailadres, String wachtwoord, Klant klant) {
+        this.accountId = accountId;
+        this.emailadres = emailadres;
         this.wachtwoord = wachtwoord;
         this.klant = klant;
     }
 
-    public Account(String gebruikersnaam, String wachtwoord) {
-        this.gebruikersnaam = gebruikersnaam;
+    public Account(String emailadres, String wachtwoord) {
+        this.emailadres = emailadres;
         this.wachtwoord = wachtwoord;
         this.klant = null;
     }
 
     public Account () {
-        this.gebruikersnaam = "onbekend";
+        this.emailadres = "onbekend";
         this.wachtwoord = "onbekend";
         this.klant = null;
     }
 
-    public String getGebruikersnaam() {
-        return gebruikersnaam;
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setGebruikersnaam(String gebruikersnaam) {
-        this.gebruikersnaam = gebruikersnaam;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getEmailadres() {
+        return emailadres;
+    }
+
+    public void setEmailadres(String emailadres) {
+        this.emailadres = emailadres;
     }
 
     public String getWachtwoord() {
@@ -62,7 +72,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return String.format("Account of %s met gebruikersnaam : %s en wachtwoord : %s",
-                klant.getAchternaam(), this.gebruikersnaam, this.wachtwoord);
+        return String.format("Account of %s met emailadres : %s en wachtwoord : %s",
+                klant.getNaam().getAchternaam(), this.emailadres, this.wachtwoord);
     }
 }

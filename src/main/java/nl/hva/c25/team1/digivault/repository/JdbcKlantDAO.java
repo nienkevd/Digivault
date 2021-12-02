@@ -1,6 +1,6 @@
 package nl.hva.c25.team1.digivault.repository;
 
-import nl.hva.c25.team1.digivault.model.Klant;
+import nl.hva.c25.team1.digivault.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,25 +26,24 @@ public class JdbcKlantDAO implements KlantDAO {
      *
      * @param klant die opgeslagen moet worden
      */
+
+
     @Override
     public void bewaar(Klant klant) {
-        String sql = "INSERT INTO Klant values(?,?,?,?,?,?,?,?,?,?,?);";
-        jdbcTemplate.update(sql, klant.getBsn(), klant.getVoornaam(),klant.getTussenvoegsel(),klant.getAchternaam(),
-                klant.getGeboortedatum(),klant.getStraat(),klant.getHuisnummer(),
-                klant.getToevoeging(),klant.getPostcode(),klant.getWoonplaats(),klant.getEmailadres());
+        String sql = "INSERT INTO Klant values(?,?,?);";
+        jdbcTemplate.update(sql, klant.getKlantId(),klant.getBsn(),klant.getGeboortedatum());
     }
 
     /**
      *
-     * @param gebruikersnaam
+     * @param klantId
      * @return Klant
      */
-    @Override
-    public Klant vindKlantOpGebruikersnaam(String gebruikersnaam) {
-        String sql = "SELECT * FROM Klant WHERE gebruikersnaam = ? ;";
+    public Klant vindKlantOpKlantId(int klantId) {
+        String sql = "SELECT * FROM Klant WHERE klantId = ? ;";
         Klant klant;
         try {
-            klant = jdbcTemplate.queryForObject(sql, new KlantRowMapper(), gebruikersnaam);
+            klant = jdbcTemplate.queryForObject(sql, new KlantRowMapper(), klantId);
         } catch (EmptyResultDataAccessException noResult) {
             klant = null;
         }
@@ -67,25 +66,15 @@ public class JdbcKlantDAO implements KlantDAO {
      */
     @Override
     public void update(Klant klant) {
-        String sql = "UPDATE Klant SET voornaam= ?, tussenvoegsel = ?, " +
-                "achternaam = ?, geboortedatum =?, straat = ?, " +
-                "huisnummer = ?, toevoeging = ?, postcode = ?, woonplaats = ?, " +
-                "emailadres = ? WHERE bsn = ?;";
-        jdbcTemplate.update(sql, klant.getVoornaam(),klant.getTussenvoegsel(),klant.getAchternaam(),
-                klant.getGeboortedatum(),klant.getStraat(),klant.getHuisnummer(),
-                klant.getToevoeging(),klant.getPostcode(),klant.getWoonplaats(),klant.getEmailadres(),
-                klant.getBsn());
+        String sql = "UPDATE Klant SET klantId = ?, bsn = ?, geboortedatum = ? WHERE klantId = ?;";
+        jdbcTemplate.update(sql, jdbcTemplate.update(sql, klant.getKlantId(),klant.getBsn(),klant.getGeboortedatum()));
     }
 
     private class KlantRowMapper implements RowMapper<Klant> {
         @Override
         public Klant mapRow(ResultSet resultSet, int RowNumber) throws SQLException {
-            return new Klant(resultSet.getString("voornaam"), resultSet.getString("tussenvoegsel"),
-                    resultSet.getString("achternaam"), LocalDate.parse(resultSet.getString("geboortedatum")),
-                    resultSet.getString("bsn"), resultSet.getString("straat"),
-                    resultSet.getInt("huisnummer"), resultSet.getString("toevoeging"),
-                    resultSet.getString("postcode"), resultSet.getString("woonplaats"),
-                    resultSet.getString("emailadres"));
+            return new Klant(resultSet.getInt("klantId"), resultSet.getString("bsn"),
+                    LocalDate.parse(resultSet.getString("geboortedatum")));
         }
     }
 }

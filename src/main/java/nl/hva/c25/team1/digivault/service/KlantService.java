@@ -31,14 +31,15 @@ public class KlantService {
         klantDAO.bewaar(klant);
     }
 
+
     /**
      *
-     * @param gebruikersnaam van klant die gevonden moet worden
-     * @return Klant klant
+     * @param klandId van klant die gevonden moet worden
+     * @return Klant
      */
-    public Klant vindKlantOpGebruikersnaam(String gebruikersnaam) {
+    public Klant vindKlantOpKlantID(int klandId) {
 
-        return klantDAO.vindKlantOpGebruikersnaam(gebruikersnaam);
+        return klantDAO.vindKlantOpKlantId(klandId);
     }
 
     /**
