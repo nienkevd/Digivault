@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @author Erwin, studentnummer 500889293
- * @version 1-12-2021
+ * @version 2-12-2021
  */
 
 public class AssetController {
@@ -20,7 +20,7 @@ public class AssetController {
     private AssetService assetService;
 
     /**
-     *
+     * Constructor van de AssetController
      * @param assetService
      */
     public AssetController(AssetService assetService) {
@@ -30,7 +30,7 @@ public class AssetController {
 
     /**
      *
-     * @param asset
+     * @param asset de te bewaren asset
      */
     @PostMapping("/assets")
     public void bewaar(@RequestBody Asset asset) {
@@ -39,12 +39,12 @@ public class AssetController {
 
     /**
      *
-     * @param afkorting
+     * @param assetId het id waarmee de asset gevonden moet worden
      * @return
      */
-    @PostMapping("/assets/{afkorting}")
-    public Asset vindAssetOpAfkorting(@PathVariable String afkorting) {
-        return assetService.vindAssetOpAfkorting(afkorting);
+    @PostMapping("/assets/{assetId}")
+    public Asset vindAssetOpId(@PathVariable int assetId) {
+        return assetService.vindAssetOpId(assetId);
     }
 
     /**
@@ -58,10 +58,10 @@ public class AssetController {
 
     /**
      *
-     * @param asset
+     * @param asset de te verversen asset
      * @return
      */
-    @PostMapping("/assets/{afkorting}")
+    @PostMapping("/assets/{assetId}")
     public String ververs(@RequestBody Asset asset) {
         return assetService.verversAsset(asset);
     }

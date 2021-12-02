@@ -6,25 +6,36 @@ import java.util.Objects;
 
 /**
  * @author Erwin, studentnummer 500889293
- * @version 1-12-2021
+ * @version 2-12-2021
  */
 
 public class Asset {
+    private int assetId;
     private String afkorting;
     private String naam;
-    private double euroKoers;
+    private double dagKoers;
 
     /**
      *
-     * @param afkorting
-     * @param naam
-     * @param euroKoers
+     * @param assetId de id van een asset
+     * @param afkorting de afkorting van een asset
+     * @param naam de naam van een asset
+     * @param dagKoers de huidige waarde van een asset
      */
-    public Asset(String afkorting, String naam, double euroKoers) {
+    public Asset(int assetId, String afkorting, String naam, double dagKoers) {
         super();
+        this.assetId = assetId;
         this.afkorting = afkorting;
         this.naam = naam;
-        this.euroKoers = euroKoers;
+        this.dagKoers = dagKoers;
+    }
+
+    public int getAssetId() {
+        return assetId;
+    }
+
+    public void setAssetId(int assetId) {
+        this.assetId = assetId;
     }
 
     public String getAfkorting() {
@@ -43,26 +54,26 @@ public class Asset {
         this.naam = naam;
     }
 
-    public double getEuroKoers() {
-        return euroKoers;
+    public double getDagKoers() {
+        return dagKoers;
     }
 
-    public void setEuroKoers(double euroKoers) {
-        this.euroKoers = euroKoers;
+    public void setDagKoers(double dagKoers) {
+        this.dagKoers = dagKoers;
     }
 
     /**
      *
-     * @param o
-     * @return equals-waarde
+     * @param other
+     * @return
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Asset asset = (Asset) o;
-        return Double.compare(asset.euroKoers, euroKoers) == 0 && Objects.equals(afkorting, asset.afkorting)
-                && Objects.equals(naam, asset.naam);
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        Asset asset = (Asset) other;
+        return assetId == asset.assetId && Double.compare(asset.dagKoers, dagKoers) == 0 &&
+                Objects.equals(afkorting, asset.afkorting) && Objects.equals(naam, asset.naam);
     }
 
     /**
@@ -71,7 +82,7 @@ public class Asset {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(afkorting, naam, euroKoers);
+        return Objects.hash(assetId, afkorting, naam, dagKoers);
     }
 
     /**
@@ -80,6 +91,7 @@ public class Asset {
      */
     @Override
     public String toString() {
-        return "Asset{afkorting='" + afkorting + '\'' + ", naam='" + naam + '\'' + ", euroKoers=" + euroKoers + '}';
+        return "Asset{assetId=" + assetId + ", afkorting='" + afkorting + '\'' + ", naam='" + naam + '\'' +
+                ", dagKoers=" + dagKoers + '}';
     }
 }
