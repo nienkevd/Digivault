@@ -17,7 +17,7 @@ public interface AssetDAO {
 
     public void bewaar(Asset asset);
 
-    public Asset vindAssetOpAfkorting(String afkorting);
+    public Asset vindAssetOpId(int assetId);
 
     public List<Asset> geefAlleAssets();
 

@@ -13,77 +13,49 @@ import java.util.List;
 
 /**
  * @author Erwin, studentnummer 500889293
- * @version 1-12-2021
+ * @version 2-12-2021
  *
  * Java Database Connectivity voor DB-tabel Asset
  */
 
 @Repository
-public class JdbcAssetDAO implements AssetDAO{
+public class JdbcAssetDAO implements AssetDAO {
 
     JdbcTemplate jdbcTemplate;
 
-    /**
-     *
-     * @param jdbcTemplate
-     */
     public JdbcAssetDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    /**
-     *
-     * @param asset
-     */
     @Override
     public void bewaar(Asset asset) {
-        String sql = "INSERT INTO Asset VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, asset.getAfkorting(), asset.getNaam(), asset.getEuroKoers());
+        String sql = "INSERT INTO Asset VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, asset.getAssetId(), asset.getAfkorting(), asset.getNaam(), asset.getDagKoers());
     }
 
-    /**
-     *
-     * @param afkorting
-     * @return
-     */
     @Override
-    public Asset vindAssetOpAfkorting(String afkorting) {
-        String sql = "SELECT * FROM Asset WHERE afkorting = ?";
-        return jdbcTemplate.queryForObject(sql, new AssetRowMapper(), afkorting);
+    public Asset vindAssetOpId(int assetId) {
+        String sql = "SELECT * FROM Asset WHERE assetId = ?";
+        return jdbcTemplate.queryForObject(sql, new AssetRowMapper(), assetId);
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public List<Asset> geefAlleAssets() {
         String sql = "SELECT * FROM Asset";
         return jdbcTemplate.query(sql, new AssetRowMapper());
     }
 
-    /**
-     *
-     * @param asset
-     */
     @Override
     public void ververs(Asset asset) {
-        String sql = "UPDATE asset SET afkorting = ?, naam = ?, euroKoers = ? ";
-        jdbcTemplate.update(sql, asset.getAfkorting(), asset.getNaam(), asset.getEuroKoers());
+        String sql = "UPDATE asset SET assetId = ?, afkorting = ?, naam = ?, dagKoers = ? ";
+        jdbcTemplate.update(sql, asset.getAfkorting(), asset.getNaam(), asset.getDagKoers());
     }
 
     private class AssetRowMapper implements RowMapper<Asset> {
-        /**
-         *
-         * @param resultSet
-         * @param rowNumber
-         * @return
-         * @throws SQLException
-         */
         @Override
         public Asset mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
-            return new Asset(resultSet.getString("afkorting"), resultSet.getString("naam"),
-                    resultSet.getDouble("euroKoers"));
+            return new Asset(resultSet.getInt("assetId"), resultSet.getString("afkorting"),
+                    resultSet.getString("naam"), resultSet.getDouble("dagKoers"));
         }
     }
 }

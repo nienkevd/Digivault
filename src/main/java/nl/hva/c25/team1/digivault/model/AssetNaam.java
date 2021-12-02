@@ -10,26 +10,26 @@ package nl.hva.c25.team1.digivault.model;
  */
 
 public enum AssetNaam {
-    BITCOIN("Bitcoin (BTC)"),
-    ETHEREUM("Ethereum (ETH)"),
-    BINANCE_COIN("Binance Coin (BNB)"),
-    SOLANA("Solana (SOL)"),
-    CARDANO("Cardano (ADA)"),
-    XRP("XRP (XRP)"),
-    POLKADOT("Polkadot (DOT)"),
-    DOGECOIN("Dogecoin (DOGE)"),
-    AVALANCHE("Avalanche (AVAX)"),
-    TERRA("Terra (LUNA)"),
-    LITECOIN("Litecoin (LTC)"),
-    POLYGON("Polygon (MATIC)"),
-    ALGORAND("Algorand (ALGO)"),
-    BITCOIN_CASH("Bitcoin Cash (BCH)"),
-    STELLAR("Stellar (XLM)"),
-    VECHAIN("VeChain (VET)"),
-    INTERNET_COMPUTER("Internet Computer (ICP)"),
-    TERRA_USD("TerraUSD (UST)"),
-    ELROND("Elrond (EGLD)"),
-    FILECOIN("Filecoin (FIL)");
+    BITCOIN("Bitcoin"),
+    ETHEREUM("Ethereum"),
+    BINANCE_COIN("Binance Coin"),
+    SOLANA("Solana"),
+    CARDANO("Cardano"),
+    XRP("XRP"),
+    POLKADOT("Polkadot"),
+    DOGECOIN("Dogecoin"),
+    AVALANCHE("Avalanche"),
+    TERRA("Terra"),
+    LITECOIN("Litecoin"),
+    POLYGON("Polygon"),
+    ALGORAND("Algorand"),
+    BITCOIN_CASH("Bitcoin Cash"),
+    STELLAR("Stellar"),
+    VECHAIN("VeChain"),
+    INTERNET_COMPUTER("Internet Computer"),
+    TERRA_USD("TerraUSD"),
+    ELROND("Elrond"),
+    FILECOIN("Filecoin");
 
     private String naamAlsString;
 

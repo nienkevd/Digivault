@@ -39,12 +39,12 @@ public class AssetService {
     }
 
     /**
-     * Geeft een asset op basis van afkorting terug
-     * @param afkorting waarop gezocht wordt
+     * Geeft een asset op basis van id terug
+     * @param assetId waarop gezocht wordt
      * @return de bijbehorende asset
      */
-    public Asset vindAssetOpAfkorting(String afkorting) {
-        return jdbcAssetDAO.vindAssetOpAfkorting(afkorting);
+    public Asset vindAssetOpId(int assetId) {
+        return jdbcAssetDAO.vindAssetOpId(assetId);
     }
 
     /**
@@ -61,7 +61,7 @@ public class AssetService {
      * @return String-melding of verversen gelukt is
      */
     public String verversAsset(Asset asset) {
-        if (jdbcAssetDAO.vindAssetOpAfkorting(asset.getAfkorting()) == null) {
+        if (jdbcAssetDAO.vindAssetOpId(asset.getAssetId()) == null) {
             return "Asset is niet gevonden, het verversen is mislukt.";
         } else {
             jdbcAssetDAO.ververs(asset);
