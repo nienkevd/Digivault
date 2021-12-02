@@ -16,18 +16,25 @@ public class Asset {
     private double dagKoers;
 
     /**
-     *
+     * Constructor van de klasse Asset
      * @param assetId de id van een asset
      * @param afkorting de afkorting van een asset
      * @param naam de naam van een asset
      * @param dagKoers de huidige waarde van een asset
      */
-    public Asset(int assetId, String afkorting, String naam, double dagKoers) {
+    public Asset(int assetId, String afkorting, String naam, double dagKoers) {     // TODO private + kale constructor
         super();
         this.assetId = assetId;
         this.afkorting = afkorting;
         this.naam = naam;
         this.dagKoers = dagKoers;
+    }
+
+    /**
+     * Lege constructor van de Klasse Asset
+     */
+    public Asset() {
+        this(0,"", "", 0.0);
     }
 
     public int getAssetId() {
@@ -63,31 +70,30 @@ public class Asset {
     }
 
     /**
-     *
-     * @param other
-     * @return
+     * Equals-methode Asset
+     * @param other te vergelijken Asset
+     * @return boolean
      */
     @Override
     public boolean equals(Object other) {
         if (this == other) return true;
         if (other == null || getClass() != other.getClass()) return false;
         Asset asset = (Asset) other;
-        return assetId == asset.assetId && Double.compare(asset.dagKoers, dagKoers) == 0 &&
-                Objects.equals(afkorting, asset.afkorting) && Objects.equals(naam, asset.naam);
+        return assetId == asset.assetId;
     }
 
     /**
-     *
-     * @return
+     * HashCode Asset
+     * @return Hash assetId
      */
     @Override
     public int hashCode() {
-        return Objects.hash(assetId, afkorting, naam, dagKoers);
+        return assetId;
     }
 
     /**
-     *
-     * @return toString
+     * ToString-methode Asset
+     * @return toString van klasse Asset
      */
     @Override
     public String toString() {

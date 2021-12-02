@@ -14,12 +14,26 @@ public class EuroKoers {
     private double koers;
     private int assetId;
 
-    public EuroKoers(int euroKoersId, LocalDate datum, double koers, int assetId) {
+    /**
+     * Constructor van klasse EuroKoers
+     * @param euroKoersId de euroKoers
+     * @param datum de betreffende datum
+     * @param koers de bijbehorende koers
+     * @param assetId de bijbehorende assetId
+     */
+    public EuroKoers(int euroKoersId, LocalDate datum, double koers, int assetId) {    // TODO private + kale constructor
         super();
         this.euroKoersId = euroKoersId;
         this.datum = datum;
         this.koers = koers;
         this.assetId = assetId;
+    }
+
+    /**
+     * Lege constructor van de Klasse EuroKoers
+     */
+    public EuroKoers() {
+        this(0,null, 0.0, 0);
     }
 
     public int getEuroKoersId() {
@@ -54,6 +68,10 @@ public class EuroKoers {
         this.assetId = assetId;
     }
 
+    /**
+     * ToString-methode EuroKoers
+     * @return toString van klasse EuroKoers
+     */
     @Override
     public String toString() {
         return "EuroKoers{euroKoersId=" + euroKoersId + ", datum=" + datum + ", koers=" + koers + ", assetId="

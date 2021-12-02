@@ -2,9 +2,11 @@ package nl.hva.c25.team1.digivault.controller;
 
 import nl.hva.c25.team1.digivault.model.Asset;
 import nl.hva.c25.team1.digivault.service.AssetService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -15,22 +17,24 @@ import java.util.List;
  * @version 2-12-2021
  */
 
+@RestController
 public class AssetController {
 
     private AssetService assetService;
 
     /**
      * Constructor van de AssetController
-     * @param assetService
+     * @param assetService AssetService
      */
+    @Autowired
     public AssetController(AssetService assetService) {
         super();
         this.assetService = assetService;
     }
 
     /**
-     *
-     * @param asset de te bewaren asset
+     * Slaat Asset op
+     * @param asset de te bewaren Asset
      */
     @PostMapping("/assets")
     public void bewaar(@RequestBody Asset asset) {
@@ -38,9 +42,9 @@ public class AssetController {
     }
 
     /**
-     *
-     * @param assetId het id waarmee de asset gevonden moet worden
-     * @return
+     * Vindt Asset op assetId
+     * @param assetId waarop Asset gezocht wordt
+     * @return doorgeefluik
      */
     @PostMapping("/assets/{assetId}")
     public Asset vindAssetOpId(@PathVariable int assetId) {
@@ -48,8 +52,8 @@ public class AssetController {
     }
 
     /**
-     *
-     * @return
+     * Geeft een lijst van alle Assets terug
+     * @return doorgeefluik
      */
     @PostMapping("/assets")
     public List<Asset> geefAlleAssets() {
@@ -57,9 +61,9 @@ public class AssetController {
     }
 
     /**
-     *
-     * @param asset de te verversen asset
-     * @return
+     * Ververst een bepaalde Asset
+     * @param asset welke ververst moet worden
+     * @return doorgeefluik
      */
     @PostMapping("/assets/{assetId}")
     public String ververs(@RequestBody Asset asset) {
