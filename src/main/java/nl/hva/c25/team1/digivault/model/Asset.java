@@ -17,12 +17,12 @@ public class Asset {
 
     /**
      * Constructor van de klasse Asset
-     * @param assetId de id van een asset
-     * @param afkorting de afkorting van een asset
-     * @param naam de naam van een asset
+     * @param assetId id van de Asset
+     * @param afkorting afkorting van de Asset
+     * @param naam naam van de Asset
      * @param dagKoers de huidige waarde van een asset
      */
-    public Asset(int assetId, String afkorting, String naam, double dagKoers) {     // TODO private + kale constructor
+    private Asset(int assetId, String afkorting, String naam, double dagKoers) {     // TODO check kale constructor
         super();
         this.assetId = assetId;
         this.afkorting = afkorting;
@@ -31,7 +31,16 @@ public class Asset {
     }
 
     /**
-     * Lege constructor van de Klasse Asset
+     * Kale constructor met alleen afkorting en naam
+     * @param afkorting afkorting van de Asset
+     * @param naam naam van de Asset
+     */
+    public Asset(String afkorting, String naam) {
+        this(0, afkorting, naam, 0.0);
+    }
+
+    /**
+     * Lege constructor van de klasse Asset
      */
     public Asset() {
         this(0,"", "", 0.0);

@@ -33,7 +33,7 @@ public class AssetController {
     }
 
     /**
-     * Slaat Asset op
+     * Slaat een Asset op
      * @param asset de te bewaren Asset
      */
     @PostMapping("/assets")
