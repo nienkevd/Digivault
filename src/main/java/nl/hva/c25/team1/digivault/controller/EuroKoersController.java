@@ -28,7 +28,7 @@ public class EuroKoersController {
     }
 
     /**
-     * Slaat EuroKoers op
+     * Slaat een EuroKoers op
      * @param euroKoers de te bewaren EuroKoers
      */
     @PostMapping("/eurokoersen")

@@ -77,8 +77,8 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
     private class EuroKoersRowMapper implements RowMapper<EuroKoers> {
         @Override
         public EuroKoers mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
-            return new EuroKoers(resultSet.getInt("euroKoersId"), resultSet.getDate("datum")
-                    .toLocalDate(), resultSet.getDouble("koers"), resultSet.getInt("assetId"));
+            return new EuroKoers(resultSet.getDate("datum").toLocalDate(),
+                    resultSet.getDouble("koers"));
         }
     }
 }

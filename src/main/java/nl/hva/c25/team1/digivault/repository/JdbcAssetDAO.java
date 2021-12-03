@@ -77,8 +77,7 @@ public class JdbcAssetDAO implements AssetDAO {
     private class AssetRowMapper implements RowMapper<Asset> {
         @Override
         public Asset mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
-            return new Asset(resultSet.getInt("assetId"), resultSet.getString("afkorting"),
-                    resultSet.getString("naam"), resultSet.getDouble("dagKoers"));
+            return new Asset(resultSet.getString("afkorting"), resultSet.getString("naam"));
         }
     }
 }
