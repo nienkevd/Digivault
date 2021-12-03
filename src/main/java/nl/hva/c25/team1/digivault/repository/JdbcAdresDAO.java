@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
+
 import java.sql.*;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import java.util.List;
  * @version 3-12-2021
  */
 
+@Repository
 public class JdbcAdresDAO implements AdresDAO {
 
     JdbcTemplate jdbcTemplate;

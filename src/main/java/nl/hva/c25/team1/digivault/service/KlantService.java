@@ -7,6 +7,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service van de klasse Klant
+ *
+ * @author Anneke, studentnummer 500889251
+ * @version 1-12-2021
+ */
+
 @Service
 public class KlantService {
 
@@ -16,11 +23,10 @@ public class KlantService {
     /**
      *
      * @param klantDAO interface klantDAO
-     * @param rootRepository rootrepo
      */
-    public KlantService(JdbcKlantDAO klantDAO, RootRepository rootRepository) {
+    public KlantService(JdbcKlantDAO klantDAO /*, RootRepository rootRepository*/) {
         this.klantDAO = klantDAO;
-        this.rootRepository = rootRepository;
+//        this.rootRepository = rootRepository;
     }
 
     /**
@@ -48,6 +54,21 @@ public class KlantService {
      */
     public List<Klant> vindAlleKlanten() {
         return klantDAO.vindAlleKlanten();
+    }
+
+    /**
+     *
+     * update een bestaande klant uit de database
+     * @param klant die geupdate moet worden
+     * @return String melding die aangeeft of update geslaagd is
+     */
+    public String updateKlant(Klant klant) {
+        if (klantDAO.vindKlantOpKlantId(klant.getKlantId()) == null ) {
+            return "Klant bestaat niet, update mislukt.";
+        } else {
+            klantDAO.update(klant);
+            return "Update geslaagd";
+        }
     }
 
 

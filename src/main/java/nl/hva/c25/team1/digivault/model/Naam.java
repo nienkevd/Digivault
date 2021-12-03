@@ -1,5 +1,11 @@
 package nl.hva.c25.team1.digivault.model;
 
+/**
+ *
+ * @author Anneke, studentnummer 500889251
+ * @version 1-12-2021
+ */
+
 public class Naam {
     private int naamId;
     private String voornaam;
