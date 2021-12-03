@@ -6,6 +6,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller van de klasse Klant
+ *
+ * @author Anneke, studentnummer 500889251
+ * @version 1-12-2021
+ */
+
 @RestController
 public class KlantController {
 
@@ -32,6 +39,10 @@ public class KlantController {
         return klantService.vindAlleKlanten();
     }
 
+    @PutMapping("/klanten/{klantId}")
+    public String updateKlant(@RequestBody Klant klant) {
+        return klantService.updateKlant(klant);
+    }
 
 
 }

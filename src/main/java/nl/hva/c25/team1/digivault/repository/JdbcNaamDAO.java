@@ -9,10 +9,19 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.List;
 
+/**
+ * Java Database Connectivity voor DB-tabel Naam
+ *
+ * @author Anneke, studentnummer 500889251
+ * @version 3-12-2021
+ */
+
+@Repository
 public class JdbcNaamDAO implements NaamDAO {
 
     JdbcTemplate jdbcTemplate;
@@ -55,7 +64,7 @@ public class JdbcNaamDAO implements NaamDAO {
     /**
      *
      * vindt een klant in database adhv klantID
-     * @param naamId
+     * @param naamId van klant
      * @return Naam
      */
     @Override
@@ -84,7 +93,7 @@ public class JdbcNaamDAO implements NaamDAO {
     /**
      *
      * update gegevens van naam
-     * @param naam
+     * @param naam van klant die geupdate moet worden
      */
     @Override
     public void update(Naam naam) {

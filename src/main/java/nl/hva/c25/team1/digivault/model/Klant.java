@@ -2,6 +2,12 @@ package nl.hva.c25.team1.digivault.model;
 
 import java.time.LocalDate;
 
+/**
+ *
+ * @author Anneke, studentnummer 500889251
+ * @version 1-12-2021
+ */
+
 public class Klant {
     private int klantId;
     private String bsn;
