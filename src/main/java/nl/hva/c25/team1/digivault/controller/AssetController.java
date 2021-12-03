@@ -3,10 +3,7 @@ package nl.hva.c25.team1.digivault.controller;
 import nl.hva.c25.team1.digivault.model.Asset;
 import nl.hva.c25.team1.digivault.service.AssetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,7 +43,7 @@ public class AssetController {
      * @param assetId waarop Asset gezocht wordt
      * @return doorgeefluik
      */
-    @PostMapping("/assets/{assetId}")
+    @GetMapping("/assets/{assetId}")
     public Asset vindAssetOpId(@PathVariable int assetId) {
         return assetService.vindAssetOpId(assetId);
     }
@@ -55,7 +52,7 @@ public class AssetController {
      * Geeft een lijst van alle Assets terug
      * @return doorgeefluik
      */
-    @PostMapping("/assets")
+    @GetMapping("/assets")
     public List<Asset> geefAlleAssets() {
         return assetService.geefAlleAssets();
     }
@@ -65,7 +62,7 @@ public class AssetController {
      * @param asset welke ververst moet worden
      * @return doorgeefluik
      */
-    @PostMapping("/assets/{assetId}")
+    @PutMapping("/assets/{assetId}")
     public String ververs(@RequestBody Asset asset) {
         return assetService.verversAsset(asset);
     }

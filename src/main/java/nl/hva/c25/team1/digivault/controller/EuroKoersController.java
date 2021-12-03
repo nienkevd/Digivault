@@ -3,10 +3,7 @@ package nl.hva.c25.team1.digivault.controller;
 import nl.hva.c25.team1.digivault.model.EuroKoers;
 import nl.hva.c25.team1.digivault.service.EuroKoersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,7 +41,7 @@ public class EuroKoersController {
      * @param euroKoersId waarop EuroKoers gezocht wordt
      * @return doorgeefluik
      */
-    @PostMapping("/eurokoersen/{eurokoers}")
+    @GetMapping("/eurokoersen/{euroKoersId}")
     public EuroKoers vindEuroKoersOpId(@PathVariable int euroKoersId) {
         return euroKoersService.vindEuroKoersOpId(euroKoersId);
     }
@@ -53,7 +50,7 @@ public class EuroKoersController {
      * Geeft een lijst van alle EuroKoersen terug
      * @return doorgeefluik
      */
-    @PostMapping("/eurokoersen")
+    @GetMapping("/eurokoersen")
     public List<EuroKoers> geefAlleEuroKoersen() {
         return euroKoersService.geefAlleEuroKoersen();
     }
@@ -63,7 +60,7 @@ public class EuroKoersController {
      * @param euroKoers welke ververst moet worden
      * @return doorgeefluik
      */
-    @PostMapping("/eurokoersen/{")
+    @PutMapping("/eurokoersen/{euroKoersId}")
     public String ververs(@RequestBody EuroKoers euroKoers) {
         return euroKoersService.verversEuroKoers(euroKoers);
     }
