@@ -61,12 +61,13 @@ public class JdbcKlantDAO implements KlantDAO {
                 return ps;
             }
         } , keyholder);
-        return keyholder.getKey().intValue();
+        klant.setKlantId(keyholder.getKey().intValue());
+        return klant.getKlantId();
     }
 
     /**
      *
-     * vind een klant in database adhv klantID
+     * vindt een klant in database adhv klantID
      * @param klantId
      * @return Klant
      */
@@ -83,7 +84,7 @@ public class JdbcKlantDAO implements KlantDAO {
 
     /**
      *
-     * @return List<Klant> geeft lijst van alle klanten in DB terug
+     * @return List<Klant> geeft lijst van alle klanten uit DB terug
      */
     @Override
     public List<Klant> vindAlleKlanten() {

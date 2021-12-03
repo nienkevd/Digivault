@@ -25,11 +25,5 @@ public class RootRepository {
 
     // TODO: bij registreer klant moet de methode public int slaLegePortefeuilleOpMetSleutel() worden gebruikt
 
-    //    public void registreerKlant(Klant klant) {
-//        String sql = "INSERT INTO Klant values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-//        jdbcTemplate.update(sql, klant.getBsn(), klant.getVoornaam(),klant.getTussenvoegsel(),klant.getAchternaam(),
-//                klant.getGeboortedatum(),klant.getStraat(),klant.getHuisnummer(),
-//                klant.getToevoeging(),klant.getPostcode(),klant.getWoonplaats(),klant.getEmailadres(),
-//                klant.getAccount().getGebruikersnaam(),klant.getRekening().getIBAN(),klant.getPortefeuille().getPortefeuilleId());
-//    }
+
 }
