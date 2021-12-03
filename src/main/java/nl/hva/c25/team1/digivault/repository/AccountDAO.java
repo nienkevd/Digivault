@@ -11,8 +11,6 @@ import java.util.List;
  * @version 1-12-2021
  */
 
-
-
 public interface AccountDAO {
 
     public void bewaar(Account account);
