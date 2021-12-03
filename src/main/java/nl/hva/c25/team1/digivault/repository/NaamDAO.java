@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface NaamDAO {
 
-    void bewaar(Naam naam);
+    int bewaarNaamMetSK(Naam naam);
 
     Naam vindNaamOpNaamId(int naamId);
 

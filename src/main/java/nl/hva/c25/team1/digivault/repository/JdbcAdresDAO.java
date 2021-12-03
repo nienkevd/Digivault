@@ -34,7 +34,7 @@ public class JdbcAdresDAO implements AdresDAO {
      * @return int adresID, de automatisch gegenereerde surrogate key
      */
     @Override
-    public int bewaarMetSK(Adres adres) {
+    public int bewaarAdresMetSK(Adres adres) {
         String sql = "INSERT INTO Adres a JOIN Ziphuisnr j ON a.ziphuisnrId = z.ziphuisnrId " +
                 "(straat, huisnummer, toevoeging, postcode, woonplaats) VALUES (?,?,?,?,?);";
         KeyHolder keyholder = new GeneratedKeyHolder();

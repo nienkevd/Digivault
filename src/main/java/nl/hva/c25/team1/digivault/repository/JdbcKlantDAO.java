@@ -45,7 +45,7 @@ public class JdbcKlantDAO implements KlantDAO {
      * @return int klantID, de automatisch gegenereerde surrogate key
      */
     @Override
-    public int bewaarMetSK(Klant klant) {
+    public int bewaarKlantMetSK(Klant klant) {
         String sql = "INSERT INTO Klant (bsn, geboortedatum) VALUES (?,?);";
         KeyHolder keyholder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {

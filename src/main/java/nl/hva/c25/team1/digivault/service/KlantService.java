@@ -28,7 +28,7 @@ public class KlantService {
      * @param klant opslaan
      */
     public void bewaarKlant(Klant klant) {
-        klantDAO.bewaarMetSK(klant);
+        klantDAO.bewaarKlantMetSK(klant);
     }
 
 
