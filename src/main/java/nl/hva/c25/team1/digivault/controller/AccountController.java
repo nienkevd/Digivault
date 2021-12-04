@@ -35,9 +35,9 @@ public class AccountController {
         accountService.ververs(account);
     }
 
-    @GetMapping("/accounts/{accountId}")
-    public Account geefAccountOpIdHandler(@PathVariable String gebruikersnaam) {
-        return accountService.vindAccountOpGebruikersnaam(gebruikersnaam);
+    @GetMapping("/accounts/{emailadres}")
+    public Account geefAccountOpEmailadres(@PathVariable String emailadres) {
+        return accountService.vindAccountOpEmailadres(emailadres);
     }
 
     @GetMapping("/accounts")
