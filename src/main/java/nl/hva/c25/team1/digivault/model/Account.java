@@ -70,7 +70,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return String.format("Account of %s met emailadres : %s en wachtwoord : %s",
-                klant.getNaam().getAchternaam(), this.emailadres, this.wachtwoord);
+        return String.format("Account of %s %s met emailadres : %s en wachtwoord : %s",
+                klant.getNaam().getVoornaam(), klant.getNaam().getAchternaam(), this.emailadres, this.wachtwoord);
     }
 }

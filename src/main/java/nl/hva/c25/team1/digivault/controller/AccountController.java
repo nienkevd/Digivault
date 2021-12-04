@@ -12,6 +12,8 @@ import java.util.List;
 // review door Erwin, 1 december
 
 /**
+ * Controller van de klasse Account
+ *
  * @author Sezi, studentnummer 500889525
  * @version 1-12-2021
  */

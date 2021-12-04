@@ -2,18 +2,22 @@ package nl.hva.c25.team1.digivault.repository;
 
 import nl.hva.c25.team1.digivault.model.Rekening;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 // review door Erwin, 1 december
 
 /**
+ * Java Database Connectivity voor DB-tabel Rekening
+ *
  * @author Sezi, studentnummer 500889525
- * @version 1-12-2021
+ * @version 4-12-2021
  */
 
 @Repository
@@ -31,17 +35,58 @@ public class JdbcRekeningDAO implements RekeningDAO{
         jdbcTemplate.update(sql, rekening.getIBAN(), rekening.getSaldo());
     }
 
+    /**
+     *
+     * slaat rekening op in database en genereert een surrogate key
+     * @param rekening die opgeslagen moet worden
+     * @return int rekeningId, de automatisch gegenereerde surrogate key
+     */
+
+    @Override
+    public void bewaarRekeningMetSK(Rekening rekening) {
+        String sql = "Insert into rekening (IBAN, saldo) values (?,?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, rekening.getIBAN());
+                ps.setDouble(2, rekening.getSaldo());
+                return ps;
+            }
+        }, keyHolder);
+        rekening.setRekeningId(keyHolder.getKey().intValue());
+    }
+
+    /**
+     *
+     * ververs gegevens van klant
+     * @param rekening
+     */
+
     @Override
     public void ververs(Rekening rekening) {
         String sql = "Update rekening Set IBAN = ?, saldo = ? ;";
         jdbcTemplate.update(sql, rekening.getIBAN(), rekening.getSaldo());
     }
 
+    /**
+     *
+     * vindt een klant in database adhv IBAN
+     * @param IBAN
+     * @return Rekening
+     */
+
     @Override
     public Rekening vindRekeningOpIBAN(String IBAN) {
         String sql = "Select * From rekening Where IBAN = ?";
         return jdbcTemplate.queryForObject(sql, new JdbcRekeningDAO.RekeningRowMapper(), IBAN);
     }
+
+    /**
+     *
+     * @return List<Rekening> geeft lijst van alle rekeningen uit DB terug
+     */
 
     @Override
     public List<Rekening> geefAlleRekeningen() {
@@ -52,8 +97,8 @@ public class JdbcRekeningDAO implements RekeningDAO{
     private class RekeningRowMapper implements RowMapper<Rekening> {
         @Override
         public Rekening mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
-            return new Rekening(resultSet.getString("IBAN"),
-                    resultSet.getDouble("saldo"));
+            return new Rekening(resultSet.getInt("RekeningId"),
+                    resultSet.getString("IBAN"));
         }
     }
 }

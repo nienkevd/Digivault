@@ -4,21 +4,35 @@ package nl.hva.c25.team1.digivault.model;
 
 /**
  * @author Sezi, studentnummer 500889525
- * @version 1-12-2021
+ * @version 4-12-2021
  */
 
 public class Rekening {
+    private int rekeningId;
     private String IBAN;
     private double saldo;
 
-    public Rekening(String IBAN, double saldo) {
+    private Rekening(int rekeningId, String IBAN, double saldo) {
+        super();
+        this.rekeningId = rekeningId;
         this.IBAN = IBAN;
         this.saldo = saldo;
     }
 
+    public Rekening (int rekeningId, String IBAN) {
+        this(rekeningId, IBAN, 0);
+    }
+
     public Rekening() {
-        this.IBAN = "onbekend";
-        this.saldo = 0;
+        this(0, "onbekend", 0);
+    }
+
+    public int getRekeningId() {
+        return rekeningId;
+    }
+
+    public void setRekeningId(int rekeningId) {
+        this.rekeningId = rekeningId;
     }
 
     public String getIBAN() {

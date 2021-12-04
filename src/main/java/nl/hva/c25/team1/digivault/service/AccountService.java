@@ -31,8 +31,8 @@ public class AccountService {
         accountDAO.ververs(account);
     }
 
-    public Account vindAccountOpGebruikersnaam(String gebruikersnaam) {
-        return accountDAO.vindAccountOpGebruikersnaam(gebruikersnaam);
+    public Account vindAccountOpGebruikersnaam(String emailadres) {
+        return accountDAO.vindAccountOpEmailadres(emailadres);
     }
 
     public List<Account> geefAlleAccounts() {

@@ -12,8 +12,10 @@ import java.util.List;
 // review door Erwin, 1 december
 
 /**
+ * Java Database Connectivity voor DB-tabel Account
+ *
  * @author Sezi, studentnummer 500889525
- * @version 1-12-2021
+ * @version 4-12-2021
  */
 
 @Repository
@@ -30,17 +32,35 @@ public class JdbcAccountDAO implements AccountDAO {
         jdbcTemplate.update(sql, account.getEmailadres(), account.getWachtwoord());
     }
 
+    /**
+     *
+     * ververs gegevens van account
+     * @param account
+     */
+
     @Override
     public void ververs(Account account) {
         String sql = "Update account Set gebruikersnaam = ?, wachtwoord = ? ;";
         jdbcTemplate.update(sql, account.getEmailadres(), account.getWachtwoord());
     }
 
+    /**
+     *
+     * vindt een account in database adhv emailadres
+     * @param emailadres
+     * @return Account
+     */
+
     @Override
-    public Account vindAccountOpGebruikersnaam(String gebruikersnaam) {
-        String sql = "Select * From account Where gebruikersnaam = ?";
-        return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), gebruikersnaam);
+    public Account vindAccountOpEmailadres(String emailadres) {
+        String sql = "Select * From account Where emailadres = ?";
+        return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), emailadres);
     }
+
+    /**
+     *
+     * @return List<Account> geeft lijst van alle accounts uit DB terug
+     */
 
     @Override
     public List<Account> geefAlleAccounts() {
