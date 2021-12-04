@@ -17,6 +17,8 @@ public interface AssetDAO {
 
     void bewaar(Asset asset);
 
+    int bewaarAssetMetSK(Asset asset);
+
     Asset vindAssetOpId(int assetId);
 
     List<Asset> geefAlleAssets();

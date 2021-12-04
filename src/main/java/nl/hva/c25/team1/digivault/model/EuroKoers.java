@@ -21,7 +21,7 @@ public class EuroKoers {
      * @param koers bijbehorende koers
      * @param assetId de bijbehorende assetId
      */
-    private EuroKoers(int euroKoersId, LocalDate datum, double koers, int assetId) {     // TODO check kale constructor
+    private EuroKoers(int euroKoersId, LocalDate datum, double koers, int assetId) {
         super();
         this.euroKoersId = euroKoersId;
         this.datum = datum;
@@ -30,12 +30,12 @@ public class EuroKoers {
     }
 
     /**
-     * Kale constructor met alleen datum en koers
+     * Kale constructor zonder assetId
      * @param datum datum bij EuroKoers
      * @param koers bijbehorende koers
      */
-    public EuroKoers(LocalDate datum, double koers) {
-        this(0, datum, koers, 0);
+    public EuroKoers(int euroKoersId, LocalDate datum, double koers) {
+        this(euroKoersId, datum, koers, 0);
     }
 
     /**

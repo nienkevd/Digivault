@@ -15,6 +15,8 @@ public interface EuroKoersDAO {
 
     void bewaar(EuroKoers euroKoers);
 
+    int bewaarEuroKoersMetSK(EuroKoers euroKoers);
+
     EuroKoers vindEuroKoersOpId(int euroKoersId);
 
     List<EuroKoers> geefAlleEuroKoersen();

@@ -1,7 +1,5 @@
 package nl.hva.c25.team1.digivault.model;
 
-import java.util.Objects;
-
 // review door Sezi, 1 december
 
 /**
@@ -22,7 +20,7 @@ public class Asset {
      * @param naam naam van de Asset
      * @param dagKoers de huidige waarde van een asset
      */
-    private Asset(int assetId, String afkorting, String naam, double dagKoers) {     // TODO check kale constructor
+    private Asset(int assetId, String afkorting, String naam, double dagKoers) {
         super();
         this.assetId = assetId;
         this.afkorting = afkorting;
@@ -31,12 +29,13 @@ public class Asset {
     }
 
     /**
-     * Kale constructor met alleen afkorting en naam
+     * Kale constructor zonder dagkoers
+     * @param assetId id van de Asset
      * @param afkorting afkorting van de Asset
      * @param naam naam van de Asset
      */
-    public Asset(String afkorting, String naam) {
-        this(0, afkorting, naam, 0.0);
+    public Asset(int assetId, String afkorting, String naam) {
+        this(assetId, afkorting, naam, 0.0);
     }
 
     /**

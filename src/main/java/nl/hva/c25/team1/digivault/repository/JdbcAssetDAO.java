@@ -2,12 +2,15 @@ package nl.hva.c25.team1.digivault.repository;
 
 import nl.hva.c25.team1.digivault.model.Asset;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 // review door Sezi, 1 december
@@ -39,8 +42,27 @@ public class JdbcAssetDAO implements AssetDAO {
      */
     @Override
     public void bewaar(Asset asset) {
-        String sql = "INSERT INTO Asset VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Asset (afkorting, naam, dagKoers) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(sql, asset.getAssetId(), asset.getAfkorting(), asset.getNaam(), asset.getDagKoers());
+    }
+
+    /**
+     * Slaat Asset op in Database en geeft assetId terug
+     * @param asset de te bewaren Asset
+     * @return de gegenereerde assetId
+     */
+    @Override
+    public int bewaarAssetMetSK(Asset asset) {
+        String sql = "INSERT INTO Asset (afkorting, naam, dagKoers) VALUES (?, ?, ?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                return preparedStatement;
+            }
+        }, keyHolder);
+        return keyHolder.getKey().intValue();
     }
 
     /**
@@ -51,7 +73,13 @@ public class JdbcAssetDAO implements AssetDAO {
     @Override
     public Asset vindAssetOpId(int assetId) {
         String sql = "SELECT * FROM Asset WHERE assetId = ?";
-        return jdbcTemplate.queryForObject(sql, new AssetRowMapper(), assetId);
+        Asset asset;
+        try {
+            asset = jdbcTemplate.queryForObject(sql, new AssetRowMapper(), assetId);
+        } catch (EmptyResultDataAccessException noResult) {
+            asset = null;
+        }
+        return asset;
     }
 
     /**
@@ -77,7 +105,8 @@ public class JdbcAssetDAO implements AssetDAO {
     private class AssetRowMapper implements RowMapper<Asset> {
         @Override
         public Asset mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
-            return new Asset(resultSet.getString("afkorting"), resultSet.getString("naam"));
+            return new Asset(resultSet.getInt("assetId"), resultSet.getString("afkorting"),
+                    resultSet.getString("naam"));
         }
     }
 }

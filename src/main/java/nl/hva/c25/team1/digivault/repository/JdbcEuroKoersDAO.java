@@ -2,6 +2,7 @@ package nl.hva.c25.team1.digivault.repository;
 
 import nl.hva.c25.team1.digivault.model.EuroKoers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -42,6 +43,11 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
                 euroKoers.getAssetId());
     }
 
+    @Override
+    public int bewaarEuroKoersMetSK(EuroKoers euroKoers) {
+        return 0;                                   // TODO
+    }
+
     /**
      * Vindt EuroKoers op euroKoersId in Database
      * @param euroKoersId waarop EuroKoers gezocht wordt
@@ -50,7 +56,13 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
     @Override
     public EuroKoers vindEuroKoersOpId(int euroKoersId) {
         String sql = "SELECT * FROM EuroKoers WHERE euroKoersId = ?";
-        return jdbcTemplate.queryForObject(sql, new EuroKoersRowMapper(), euroKoersId);
+        EuroKoers euroKoers;
+        try {
+            euroKoers = jdbcTemplate.queryForObject(sql, new EuroKoersRowMapper(), euroKoersId);
+        } catch (EmptyResultDataAccessException noResult) {
+            euroKoers = null;
+        }
+        return euroKoers;
     }
 
     /**
@@ -77,8 +89,8 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
     private class EuroKoersRowMapper implements RowMapper<EuroKoers> {
         @Override
         public EuroKoers mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
-            return new EuroKoers(resultSet.getDate("datum").toLocalDate(),
-                    resultSet.getDouble("koers"));
+            return new EuroKoers(resultSet.getInt("euroKoersId"),
+                    resultSet.getDate("datum").toLocalDate(), resultSet.getDouble("koers"));
         }
     }
 }
