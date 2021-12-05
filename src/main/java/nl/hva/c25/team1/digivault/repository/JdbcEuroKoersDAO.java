@@ -4,11 +4,13 @@ import nl.hva.c25.team1.digivault.model.EuroKoers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -33,19 +35,23 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
     }
 
     /**
-     * Slaat EuroKoers op in Database
+     * Slaat EuroKoers op in Database en geeft surrogate key (SK) euroKoersId terug
      * @param euroKoers de te bewaren EuroKoers
+     * @return de gegenereerde euroKoersId
      */
     @Override
-    public void bewaar(EuroKoers euroKoers) {
-        String sql = "INSERT INTO EuroKoers VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, euroKoers.getEuroKoersId(), euroKoers.getDatum(), euroKoers.getKoers(),
-                euroKoers.getAssetId());
-    }
-
-    @Override
     public int bewaarEuroKoersMetSK(EuroKoers euroKoers) {
-        return 0;                                   // TODO
+        String sql = "INSERT INTO EuroKoers VALUES (?, ?, ?, ?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                return preparedStatement;
+            }
+        }, keyHolder);
+        euroKoers.setEuroKoersId(keyHolder.getKey().intValue());
+        return euroKoers.getEuroKoersId();
     }
 
     /**

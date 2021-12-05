@@ -24,21 +24,21 @@ public class EuroKoersService {
     /**
      * Constructor van de EuroKoersService
      * @param jdbcEuroKoersDAO JDBC EuroKoers-DAO
-     * @param rootRepository RootRepository
+//     * @param rootRepository RootRepository
      */
     @Autowired
-    public EuroKoersService(JdbcEuroKoersDAO jdbcEuroKoersDAO, RootRepository rootRepository) {
+    public EuroKoersService(JdbcEuroKoersDAO jdbcEuroKoersDAO/*, RootRepository rootRepository*/) {
         super();
         this.jdbcEuroKoersDAO = jdbcEuroKoersDAO;
-        this.rootRepository = rootRepository;
+//        this.rootRepository = rootRepository;
     }
 
     /**
      * Slaat een nieuwe EuroKoers op
      * @param euroKoers de te bewaren EuroKoers
      */
-    public void bewaarEuroKoers(EuroKoers euroKoers) {
-        jdbcEuroKoersDAO.bewaar(euroKoers);
+    public void bewaarEuroKoersMetSK(EuroKoers euroKoers) {
+        jdbcEuroKoersDAO.bewaarEuroKoersMetSK(euroKoers);
     }
 
     /**

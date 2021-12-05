@@ -35,7 +35,7 @@ public class AssetController {
      */
     @PostMapping("/assets")
     public void bewaar(@RequestBody Asset asset) {
-        assetService.bewaarAsset(asset);
+        assetService.bewaarAssetMetSK(asset);
     }
 
     /**

@@ -15,8 +15,6 @@ import java.util.List;
 
 public interface AssetDAO {
 
-    void bewaar(Asset asset);
-
     int bewaarAssetMetSK(Asset asset);
 
     Asset vindAssetOpId(int assetId);
