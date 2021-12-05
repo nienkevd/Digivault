@@ -18,9 +18,9 @@ public class AccountService {
     private JdbcAccountDAO accountDAO;
     private RootRepository rootRepository;
 
-    public AccountService(JdbcAccountDAO accountDAO, RootRepository rootRepository) {
+    public AccountService(JdbcAccountDAO accountDAO/* , RootRepository rootRepository */) {
         this.accountDAO = accountDAO;
-        this.rootRepository = rootRepository;
+        //this.rootRepository = rootRepository;
     }
 
     public void bewaar(Account account) {
@@ -31,7 +31,7 @@ public class AccountService {
         accountDAO.ververs(account);
     }
 
-    public Account vindAccountOpGebruikersnaam(String emailadres) {
+    public Account vindAccountOpEmailadres(String emailadres) {
         return accountDAO.vindAccountOpEmailadres(emailadres);
     }
 
