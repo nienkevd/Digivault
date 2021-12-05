@@ -30,7 +30,8 @@ public class EuroKoers {
     }
 
     /**
-     * Kale constructor zonder assetId
+     * Kale constructor van de klasse EuroKoers zonder assetId
+     * @param euroKoersId id van de EuroKoers
      * @param datum datum bij EuroKoers
      * @param koers bijbehorende koers
      */
@@ -42,7 +43,7 @@ public class EuroKoers {
      * Lege constructor van de klasse EuroKoers
      */
     public EuroKoers() {
-        this(0,null, 0.0, 0);
+        this(0,null, 0.0);
     }
 
     public int getEuroKoersId() {

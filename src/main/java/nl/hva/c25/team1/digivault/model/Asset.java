@@ -29,7 +29,7 @@ public class Asset {
     }
 
     /**
-     * Kale constructor zonder dagkoers
+     * Kale constructor van de klasse Asset zonder dagkoers
      * @param assetId id van de Asset
      * @param afkorting afkorting van de Asset
      * @param naam naam van de Asset
@@ -42,7 +42,7 @@ public class Asset {
      * Lege constructor van de klasse Asset
      */
     public Asset() {
-        this(0,"", "", 0.0);
+        this(0,"", "");
     }
 
     public int getAssetId() {
