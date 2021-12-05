@@ -37,17 +37,7 @@ public class JdbcAssetDAO implements AssetDAO {
     }
 
     /**
-     * Slaat Asset op in Database
-     * @param asset de te bewaren Asset
-     */
-    @Override
-    public void bewaar(Asset asset) {
-        String sql = "INSERT INTO Asset (afkorting, naam, dagKoers) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, asset.getAssetId(), asset.getAfkorting(), asset.getNaam(), asset.getDagKoers());
-    }
-
-    /**
-     * Slaat Asset op in Database en geeft assetId terug
+     * Slaat Asset op in Database en geeft surrogate key (SK) assetId terug
      * @param asset de te bewaren Asset
      * @return de gegenereerde assetId
      */
@@ -62,7 +52,8 @@ public class JdbcAssetDAO implements AssetDAO {
                 return preparedStatement;
             }
         }, keyHolder);
-        return keyHolder.getKey().intValue();
+        asset.setAssetId(keyHolder.getKey().intValue());
+        return asset.getAssetId();
     }
 
     /**

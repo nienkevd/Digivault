@@ -26,21 +26,21 @@ public class AssetService {
     /**
      * Constructor van de AssetService
      * @param jdbcAssetDAO JDBC Asset-DAO
-     * @param rootRepository RootRepository
+//     * @param rootRepository RootRepository
      */
     @Autowired
-    public AssetService(JdbcAssetDAO jdbcAssetDAO, RootRepository rootRepository) {
+    public AssetService(JdbcAssetDAO jdbcAssetDAO /*, RootRepository rootRepository*/) {
         super();
         this.jdbcAssetDAO = jdbcAssetDAO;
-        this.rootRepository = rootRepository;
+//        this.rootRepository = rootRepository;
     }
 
     /**
      * Slaat een nieuwe Asset op
      * @param asset de te bewaren Asset
      */
-    public void bewaarAsset(Asset asset) {
-        jdbcAssetDAO.bewaar(asset);
+    public void bewaarAssetMetSK(Asset asset) {
+        jdbcAssetDAO.bewaarAssetMetSK(asset);
     }
 
     /**

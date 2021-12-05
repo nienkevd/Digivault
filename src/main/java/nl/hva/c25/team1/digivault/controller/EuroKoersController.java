@@ -32,8 +32,8 @@ public class EuroKoersController {
      * @param euroKoers de te bewaren EuroKoers
      */
     @PostMapping("/eurokoersen")
-    public void bewaar(@RequestBody EuroKoers euroKoers) {
-        euroKoersService.bewaarEuroKoers(euroKoers);
+    public void bewaarEuroKoersMetSK(@RequestBody EuroKoers euroKoers) {
+        euroKoersService.bewaarEuroKoersMetSK(euroKoers);
     }
 
     /**
