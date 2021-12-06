@@ -9,6 +9,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // review door Sezi, 6 december
 
+/**
+ * Testen bij AssetService
+ *
+ * @author Erwin, studentnummer 500889293
+ * @version 6-12-2021
+ */
+
+
 class AssetServiceTest {
 
     private static Asset expected = new Asset(1, "BNB", "Binance_Coin");
@@ -28,6 +36,6 @@ class AssetServiceTest {
     void verversAsset() {
         Mockito.when(mockDAO.vindAssetOpId(1)).thenReturn(expected);
         String actual = serviceUnderTest.updateAsset(expected);
-        assertThat(actual).contains("ververst");
+        assertThat(actual).contains("geüpdatet");
     }
 }
