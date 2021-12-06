@@ -44,21 +44,21 @@ public class JdbcNaamDAO implements NaamDAO {
      * @return int naamID, de automatisch gegenereerde surrogate key
      */
     @Override
-    public int bewaarNaamMetSK(Naam naam) {
+    public Naam bewaarNaamMetSK(Naam naam) {
         String sql = "INSERT INTO Naam (voornaam,tussenvoegsel,achternaam) VALUES (?,?,?);";
         KeyHolder keyholder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, "Jan");
-                ps.setString(2,"de");
-                ps.setString(3, "Wit");
+                ps.setString(1, naam.getVoornaam());
+                ps.setString(2, naam.getTussenvoegsel());
+                ps.setString(3, naam.getAchternaam());
                 return ps;
             }
         } , keyholder);
         naam.setNaamId(keyholder.getKey().intValue());
-        return naam.getNaamId();
+        return naam;
     }
 
     /**

@@ -37,7 +37,7 @@ public class JdbcAdresDAO implements AdresDAO {
      * @return int adresID, de automatisch gegenereerde surrogate key
      */
     @Override
-    public int bewaarAdresMetSK(Adres adres) {
+    public Adres bewaarAdresMetSK(Adres adres) {
         String sql = "INSERT INTO Adres a JOIN Ziphuisnr j ON a.ziphuisnrId = z.ziphuisnrId " +
                 "(straat, huisnummer, toevoeging, postcode, woonplaats) VALUES (?,?,?,?,?);";
         KeyHolder keyholder = new GeneratedKeyHolder();
@@ -45,22 +45,22 @@ public class JdbcAdresDAO implements AdresDAO {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, "Jan van Galenstraat");
-                ps.setInt(2,7);
-                ps.setString(3,"A");
-                ps.setString(4, "1051NJ");
-                ps.setString(5,"Amsterdam" );
+                ps.setString(1, adres.getStraat());
+                ps.setInt(2, adres.getHuisnummer());
+                ps.setString(3, adres.getToevoeging());
+                ps.setString(4, adres.getToevoeging());
+                ps.setString(5, adres.getWoonplaats() );
                 return ps;
             }
         } , keyholder);
         adres.setAdresId(keyholder.getKey().intValue());
-        return adres.getAdresId();
+        return adres;
     }
 
 
     /**
      * vindt een adres in database adhv adresID
-     * @param adresId
+     * @param adresId van adres dat je wilt vinden
      * @return Adres
      */
     @Override
@@ -90,7 +90,7 @@ public class JdbcAdresDAO implements AdresDAO {
 
     /**
      * update adres van klant
-     * @param adres
+     * @param adres van adres dat je wilt updaten
      */
     @Override
     public void update(Adres adres) {

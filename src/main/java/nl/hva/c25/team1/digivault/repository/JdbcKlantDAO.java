@@ -45,30 +45,26 @@ public class JdbcKlantDAO implements KlantDAO {
      * @return int klantID, de automatisch gegenereerde surrogate key
      */
     @Override
-    public int bewaarKlantMetSK(Klant klant) {
+    public Klant bewaarKlantMetSK(Klant klant) {
         String sql = "INSERT INTO Klant (bsn, geboortedatum) VALUES (?,?);";
         KeyHolder keyholder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, "109876543");
-                try {
-                    ps.setDate(2, new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-01-26").getTime()));
-                } catch (ParseException e) {
-                    System.out.println("ParseException");
-                }
+                ps.setString(1, klant.getBsn());
+                ps.setDate(2, java.sql.Date.valueOf(klant.getGeboortedatum()));
                 return ps;
             }
         } , keyholder);
         klant.setKlantId(keyholder.getKey().intValue());
-        return klant.getKlantId();
+        return klant;
     }
 
     /**
      *
      * vindt een klant in database adhv klantID
-     * @param klantId
+     * @param klantId van klant die je wilt vinden
      * @return Klant
      */
     public Klant vindKlantOpKlantId(int klantId) {
@@ -95,7 +91,7 @@ public class JdbcKlantDAO implements KlantDAO {
     /**
      *
      * update gegevens van klant
-     * @param klant
+     * @param klant van klant die je wilt updaten
      */
     @Override
     public void update(Klant klant) {

@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface KlantDAO {
 
-    int bewaarKlantMetSK(Klant klant);
+    Klant bewaarKlantMetSK(Klant klant);
 
     Klant vindKlantOpKlantId(int klantId);
 
