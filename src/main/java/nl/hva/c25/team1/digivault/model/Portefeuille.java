@@ -5,33 +5,28 @@ package nl.hva.c25.team1.digivault.model;
 
 import java.util.*;
 
+/**
+ * @author Anthon van Dijk (studentnummer 500889247)
+ */
 public class Portefeuille {
 
-    private int portefeuilleId;
     private double totaleWaarde;
     private Map<Asset, Double> assetLijst;
+    private Klant klant;
 
-    private Portefeuille(int portefeuilleId, double totaleWaarde ,Map<Asset, Double> assetLijst) {
+    private Portefeuille(double totaleWaarde ,Map<Asset, Double> assetLijst, Klant klant) {
         super();
-        this.portefeuilleId = portefeuilleId;
         this.totaleWaarde = totaleWaarde;
         this.assetLijst = assetLijst;
+        this.klant = klant;
     }
 
-    public Portefeuille(int portefeuilleId, double totaleWaarde) {
-        this(portefeuilleId, totaleWaarde, new HashMap<Asset, Double>());
+    public Portefeuille(double totaleWaarde) {
+        this(totaleWaarde, new HashMap<Asset, Double>(), null);
     }
 
     public Portefeuille() {
-        this(0,0);
-    }
-
-    public int getPortefeuilleId() {
-        return portefeuilleId;
-    }
-
-    public void setPortefeuilleId(int portefeuilleId) {
-        this.portefeuilleId = portefeuilleId;
+        this(0);
     }
 
     public double getTotaleWaarde() {
@@ -48,6 +43,14 @@ public class Portefeuille {
 
     public void setAssetLijst(Map<Asset, Double> assetLijst) {
         this.assetLijst = assetLijst;
+    }
+
+    public Klant getKlant() {
+        return klant;
+    }
+
+    public void setKlant(Klant klant) {
+        this.klant = klant;
     }
 
     @Override
