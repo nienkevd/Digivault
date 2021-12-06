@@ -7,19 +7,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Testen bij EuroKoersService
- *
- * @author Erwin, studentnummer 500889293
- * @version 6-12-2021
- */
-
-/**
- * Testen bij EuroKoersService
- *
- * @author Erwin, studentnummer 500889293
- * @version 6-12-2021
- */
+// review door Sezi, 6 december
 
 class AssetServiceTest {
 
@@ -37,9 +25,9 @@ class AssetServiceTest {
     }
 
     @Test
-    void updateAsset() {
+    void verversAsset() {
         Mockito.when(mockDAO.vindAssetOpId(1)).thenReturn(expected);
         String actual = serviceUnderTest.updateAsset(expected);
-        assertThat(actual).contains("geüpdatet");
+        assertThat(actual).contains("ververst");
     }
 }

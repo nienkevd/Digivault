@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-// review door Erwin, 1 december
+// review door Erwin, 6 december
 
 /**
  * Controller van de klasse Account
