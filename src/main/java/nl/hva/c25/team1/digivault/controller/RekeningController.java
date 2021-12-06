@@ -29,12 +29,13 @@ public class RekeningController {
 
     @PostMapping("/rekeningen")
     public void bewaarRekening(@RequestBody Rekening rekening) {
-        rekeningService.bewaar(rekening);
+
+        rekeningService.bewaarRekening(rekening);
     }
 
     @PostMapping("/rekeningen")
     public void verversRekening(@RequestBody Rekening rekening) {
-        rekeningService.ververs(rekening);
+        rekeningService.updateRekening(rekening);
     }
 
     @GetMapping("/rekeningen/{IBAN}")
