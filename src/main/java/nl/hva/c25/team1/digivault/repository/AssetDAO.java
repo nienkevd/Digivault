@@ -10,7 +10,7 @@ import java.util.List;
  * Interface met de te implementeren methodes voor JdbcAssetDAO
  *
  * @author Erwin, studentnummer 500889293
- * @version 1-12-2021
+ * @version 6-12-2021
  */
 
 public interface AssetDAO {
@@ -21,5 +21,5 @@ public interface AssetDAO {
 
     List<Asset> geefAlleAssets();
 
-    void ververs(Asset asset);
+    void update(Asset asset);
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @author Erwin, studentnummer 500889293
- * @version 2-12-2021
+ * @version 6-12-2021
  */
 
 @RestController
@@ -56,12 +56,12 @@ public class EuroKoersController {
     }
 
     /**
-     * Ververst een bepaalde EuroKoers
-     * @param euroKoers welke ververst moet worden
+     * Updatet een bepaalde EuroKoers
+     * @param euroKoers de te updaten EuroKoers
      * @return doorgeefluik
      */
     @PutMapping("/eurokoersen/{euroKoersId}")
-    public String ververs(@RequestBody EuroKoers euroKoers) {
-        return euroKoersService.verversEuroKoers(euroKoers);
+    public String update(@RequestBody EuroKoers euroKoers) {
+        return euroKoersService.updateEuroKoers(euroKoers);
     }
 }

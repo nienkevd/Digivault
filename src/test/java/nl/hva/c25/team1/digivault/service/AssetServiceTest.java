@@ -7,6 +7,13 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Testen bij EuroKoersService
+ *
+ * @author Erwin, studentnummer 500889293
+ * @version 6-12-2021
+ */
+
 class AssetServiceTest {
 
     private static Asset expected = new Asset(1, "BNB", "Binance_Coin");
@@ -23,9 +30,9 @@ class AssetServiceTest {
     }
 
     @Test
-    void verversAsset() {
+    void updateAsset() {
         Mockito.when(mockDAO.vindAssetOpId(1)).thenReturn(expected);
-        String actual = serviceUnderTest.verversAsset(expected);
-        assertThat(actual).contains("ververst");
+        String actual = serviceUnderTest.updateAsset(expected);
+        assertThat(actual).contains("geüpdatet");
     }
 }

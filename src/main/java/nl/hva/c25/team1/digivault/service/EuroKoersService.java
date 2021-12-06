@@ -12,7 +12,7 @@ import java.util.List;
  * Service van de klasse EuroKoers
  *
  * @author Erwin, studentnummer 500889293
- * @version 2-12-2021
+ * @version 6-12-2021
  */
 
 @Service
@@ -59,16 +59,16 @@ public class EuroKoersService {
     }
 
     /**
-     * Ververst een bepaalde EuroKoers
-     * @param euroKoers welke ververst moet worden
-     * @return String-melding of verversen gelukt is
+     * Updatet een bepaalde EuroKoers
+     * @param euroKoers de te updaten EuroKoers
+     * @return String-melding of updaten gelukt is
      */
-    public String verversEuroKoers(EuroKoers euroKoers) {
+    public String updateEuroKoers(EuroKoers euroKoers) {
         if (jdbcEuroKoersDAO.vindEuroKoersOpId(euroKoers.getEuroKoersId()) == null) {
-            return "Eurokoers is niet gevonden, het verversen is mislukt.";
+            return "Eurokoers is niet gevonden, het updaten is mislukt.";
         } else {
-            jdbcEuroKoersDAO.ververs(euroKoers);
-            return "Eurokoers is ververst.";
+            jdbcEuroKoersDAO.update(euroKoers);
+            return "Eurokoers is geüpdatet.";
         }
     }
 }
