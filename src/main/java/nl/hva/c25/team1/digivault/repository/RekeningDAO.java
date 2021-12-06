@@ -19,7 +19,7 @@ public interface RekeningDAO {
 
     public void bewaarRekeningMetSK(Rekening rekening);
 
-    public void ververs(Rekening rekening);
+    public void updateRekening(Rekening rekening);
 
     public Rekening vindRekeningOpIBAN(String IBAN);
 
