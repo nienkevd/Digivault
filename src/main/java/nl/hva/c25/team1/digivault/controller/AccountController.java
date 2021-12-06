@@ -26,11 +26,6 @@ public class AccountController {
     }
 
     @PostMapping("/accounts")
-    public void bewaarAccount(@RequestBody Account account) {
-        accountService.bewaar(account);
-    }
-
-    @PostMapping("/accounts")
     public void verversAccount(@RequestBody Account account) {
         accountService.ververs(account);
     }

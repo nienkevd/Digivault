@@ -14,6 +14,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @version 6-12-2021
  */
 
+/**
+ * Testen bij EuroKoersService
+ *
+ * @author Erwin, studentnummer 500889293
+ * @version 6-12-2021
+ */
+
 class AssetServiceTest {
 
     private static Asset expected = new Asset(1, "BNB", "Binance_Coin");
