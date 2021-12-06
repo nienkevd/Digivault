@@ -32,7 +32,7 @@ public class AccountController {
 
     @PostMapping("/accounts")
     public void verversAccount(@RequestBody Account account) {
-        accountService.ververs(account);
+        accountService.update(account);
     }
 
     @GetMapping("/accounts/{emailadres}")

@@ -23,12 +23,8 @@ public class AccountService {
         //this.rootRepository = rootRepository;
     }
 
-    public void bewaar(Account account) {
-        accountDAO.bewaar(account);
-    }
-
-    public void ververs(Account account) {
-        accountDAO.ververs(account);
+    public void update(Account account) {
+        accountDAO.update(account);
     }
 
     public Account vindAccountOpEmailadres(String emailadres) {
