@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface EuroKoersDAO {
 
-    int bewaarEuroKoersMetSK(EuroKoers euroKoers);
+    EuroKoers bewaarEuroKoersMetSK(EuroKoers euroKoers);
 
     EuroKoers vindEuroKoersOpId(int euroKoersId);
 
