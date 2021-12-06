@@ -2,7 +2,7 @@ package nl.hva.c25.team1.digivault.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-// review door Erwin, 1 december
+// review door Erwin, 6 december
 
 /**
  * @author Sezi, studentnummer 500889525

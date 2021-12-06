@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-// review door Erwin, 1 december
+// review door Erwin, 6 december
 
 /**
  * Controller van de klasse Account
@@ -23,11 +23,6 @@ public class AccountController {
 
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
-    }
-
-    @PostMapping("/accounts")
-    public void bewaarAccount(@RequestBody Account account) {
-        accountService.bewaar(account);
     }
 
     @PostMapping("/accounts")

@@ -27,7 +27,7 @@ class AssetServiceTest {
     @Test
     void verversAsset() {
         Mockito.when(mockDAO.vindAssetOpId(1)).thenReturn(expected);
-        String actual = serviceUnderTest.verversAsset(expected);
+        String actual = serviceUnderTest.updateAsset(expected);
         assertThat(actual).contains("ververst");
     }
 }

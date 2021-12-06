@@ -14,7 +14,7 @@ import java.util.List;
  * Service van de klasse Asset
  *
  * @author Erwin, studentnummer 500889293
- * @version 1-12-2021
+ * @version 6-12-2021
  */
 
 @Service
@@ -61,16 +61,16 @@ public class AssetService {
     }
 
     /**
-     * Ververst een bepaalde Asset
-     * @param asset welke ververst moet worden
-     * @return String-melding of verversen gelukt is
+     * Updatet een bepaalde Asset
+     * @param asset de te updaten Asset
+     * @return String-melding of updaten gelukt is
      */
-    public String verversAsset(Asset asset) {
+    public String updateAsset(Asset asset) {
         if (jdbcAssetDAO.vindAssetOpId(asset.getAssetId()) == null) {
-            return "Asset is niet gevonden, het verversen is mislukt.";
+            return "Asset is niet gevonden, het updaten is mislukt.";
         } else {
-            jdbcAssetDAO.ververs(asset);
-            return "Asset is ververst.";
+            jdbcAssetDAO.update(asset);
+            return "Asset is geüpdatet.";
         }
     }
 }
