@@ -26,22 +26,16 @@ public class JdbcAccountDAO implements AccountDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
-    public void bewaar(Account account) {
-        String sql = "Insert into account values (?,?)";
-        jdbcTemplate.update(sql, account.getEmailadres(), account.getWachtwoord());
-    }
-
     /**
      *
-     * ververs gegevens van account
+     * update emailadres en wachtwoord van de klant
      * @param account
      */
 
     @Override
-    public void ververs(Account account) {
-        String sql = "Update account Set gebruikersnaam = ?, wachtwoord = ? ;";
-        jdbcTemplate.update(sql, account.getEmailadres(), account.getWachtwoord());
+    public void update(Account account) {
+        String sql = "Update klant Set emailadres = ?, wachtwoord = ? Where klantId = ?;";
+        jdbcTemplate.update(sql, account.getEmailadres(), account.getWachtwoord(), account.getKlant().getKlantId());
     }
 
     /**
@@ -53,7 +47,7 @@ public class JdbcAccountDAO implements AccountDAO {
 
     @Override
     public Account vindAccountOpEmailadres(String emailadres) {
-        String sql = "Select * From account Where emailadres = ?";
+        String sql = "Select emailadres, wachtwoord From klant Where emailadres = ?";
         return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), emailadres);
     }
 
@@ -64,7 +58,7 @@ public class JdbcAccountDAO implements AccountDAO {
 
     @Override
     public List<Account> geefAlleAccounts() {
-        String sql = "Select * From account";
+        String sql = "Select emailadres, wachtwoord From klant";
         return jdbcTemplate.query(sql, new AccountRowMapper());
     }
 

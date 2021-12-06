@@ -15,9 +15,7 @@ import java.util.List;
 
 public interface AccountDAO {
 
-    public void bewaar(Account account);
-
-    public void ververs(Account account);
+    public void update(Account account);
 
     public Account vindAccountOpEmailadres(String emailadres);
 
