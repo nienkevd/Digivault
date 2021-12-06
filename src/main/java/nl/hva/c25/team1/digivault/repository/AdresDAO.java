@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface AdresDAO {
 
-    int bewaarAdresMetSK(Adres adres);
+    Adres bewaarAdresMetSK(Adres adres);
 
     Adres vindAdresOpAdresId(int adresId);
 

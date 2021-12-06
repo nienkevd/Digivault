@@ -33,8 +33,8 @@ public class KlantService {
      *
      * @param klant opslaan
      */
-    public void bewaarKlant(Klant klant) {
-        klantDAO.bewaarKlantMetSK(klant);
+    public Klant bewaarKlant(Klant klant) {
+        return klantDAO.bewaarKlantMetSK(klant);
     }
 
 
