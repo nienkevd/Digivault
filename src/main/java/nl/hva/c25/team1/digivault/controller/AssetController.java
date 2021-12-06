@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// review door Sezi, 1 december
+// review door Sezi, 6 december
 
 /**
  * @author Erwin, studentnummer 500889293

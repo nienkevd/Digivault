@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.List;
 
-// review door Sezi, 1 december
+// review door Sezi, 6 december
 
 /**
  * Java Database Connectivity voor DB-tabel Asset

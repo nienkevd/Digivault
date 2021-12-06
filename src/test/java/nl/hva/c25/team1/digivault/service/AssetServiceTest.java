@@ -7,6 +7,8 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.assertj.core.api.Assertions.assertThat;
 
+// review door Sezi, 6 december
+
 class AssetServiceTest {
 
     private static Asset expected = new Asset(1, "BNB", "Binance_Coin");
