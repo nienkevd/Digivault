@@ -4,7 +4,7 @@ import nl.hva.c25.team1.digivault.model.Asset;
 
 import java.util.List;
 
-// review door Sezi, 1 december
+// review door Sezi, 6 december
 
 /**
  * Interface met de te implementeren methodes voor JdbcAssetDAO

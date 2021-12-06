@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-// review door Sezi, 1 december
+// review door Sezi, 6 december
 
 /**
  * Service van de klasse Asset
