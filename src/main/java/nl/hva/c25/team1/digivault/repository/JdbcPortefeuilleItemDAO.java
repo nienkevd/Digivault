@@ -3,8 +3,6 @@
 
 package nl.hva.c25.team1.digivault.repository;
 
-import nl.hva.c25.team1.digivault.model.Klant;
-import nl.hva.c25.team1.digivault.model.Portefeuille;
 import nl.hva.c25.team1.digivault.model.PortefeuilleItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Anthon van Dijk (studentnummer 500889247)
@@ -46,20 +43,19 @@ public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
      * @return De waarde van de surrogate key uit de DB.
      */
     @Override
-    public int bewaarPortefeuilleItem(PortefeuilleItem portefeuilleItem) {
+    public PortefeuilleItem bewaarPortefeuilleItemMetKey(PortefeuilleItem portefeuilleItem) {
         String sql = "INSERT INTO portefeuille_item (aantal) VALUES (?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setDouble(1, portefeuilleItem.getAantal());
+                ps.setDouble(1, portefeuilleItem.getHoeveelheid());
                 return ps;
             }
         }, keyHolder);
-        int key = keyHolder.getKey().intValue();
-        portefeuilleItem.setPortefeuilleItemId(key);
-        return key;
+        portefeuilleItem.setPortefeuilleItemId(keyHolder.getKey().intValue());
+        return portefeuilleItem;
     }
 
     /**
@@ -69,7 +65,7 @@ public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
      * @return De complete portefeuille als lijst van items.
      */
     @Override
-    public List<PortefeuilleItem> vindAlleItemsVanKlantMetId(int klantId) {
+    public List<PortefeuilleItem> genereerPortefeuilleVanKlantMetId(int klantId) {
         String sql = "SELECT * FROM portefeuille_item WHERE klantId = ?";
         return jdbcTemplate.query(sql, new PortefeuilleItemRowMapper(), klantId);
     }
@@ -82,7 +78,7 @@ public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
     @Override
     public void updatePortefeuilleItem(PortefeuilleItem portefeuilleItem) {
         String sql = "UPDATE portefeuille_item SET aantal = ? WHERE itemId = ?";
-        jdbcTemplate.update(sql, portefeuilleItem.getAantal(), portefeuilleItem.getPortefeuilleItemId());
+        jdbcTemplate.update(sql, portefeuilleItem.getHoeveelheid(), portefeuilleItem.getPortefeuilleItemId());
     }
 
     /**

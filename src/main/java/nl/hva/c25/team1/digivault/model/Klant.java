@@ -1,6 +1,7 @@
 package nl.hva.c25.team1.digivault.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -18,10 +19,10 @@ public class Klant {
     private Adres adres;
     private Account account;
     private Rekening rekening;
-    private Portefeuille portefeuille;
+    private List<PortefeuilleItem> portefeuille;
 
     private Klant(int klantId, String bsn, LocalDate geboortedatum, Naam naam, Adres adres,
-                 Account account, Rekening rekening, Portefeuille portefeuille) {
+                 Account account, Rekening rekening, List<PortefeuilleItem> portefeuille) {
         this.klantId = klantId;
         this.bsn = bsn;
         this.geboortedatum = geboortedatum;
@@ -94,11 +95,11 @@ public class Klant {
         this.rekening = rekening;
     }
 
-    public Portefeuille getPortefeuille() {
+    public List<PortefeuilleItem> getPortefeuille() {
         return portefeuille;
     }
 
-    public void setPortefeuille(Portefeuille portefeuille) {
+    public void setPortefeuille(List<PortefeuilleItem> portefeuille) {
         this.portefeuille = portefeuille;
     }
 

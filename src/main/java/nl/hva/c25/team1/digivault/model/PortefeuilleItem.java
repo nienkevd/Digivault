@@ -9,18 +9,19 @@ package nl.hva.c25.team1.digivault.model;
 public class PortefeuilleItem {
 
     private int portefeuilleItemId;
-    private double aantal;
+    private double hoeveelheid;
     private Klant klant;
     private Asset asset;
 
-    private PortefeuilleItem(int portefeuilleItemId, double aantal, Klant klant, Asset asset) {
+    private PortefeuilleItem(int portefeuilleItemId, double hoeveelheid, Klant klant, Asset asset) {
         this.portefeuilleItemId = portefeuilleItemId;
-        this.aantal = aantal;
+        this.hoeveelheid = hoeveelheid;
         this.klant = klant;
         this.asset = asset;
     }
-    public PortefeuilleItem(int portefeuilleItemId, double aantal) {
-        this(portefeuilleItemId, aantal, null, null);
+
+    public PortefeuilleItem(int portefeuilleItemId, double hoeveelheid) {
+        this(portefeuilleItemId, hoeveelheid, null, null);
     }
 
     public int getPortefeuilleItemId() {
@@ -31,12 +32,12 @@ public class PortefeuilleItem {
         this.portefeuilleItemId = portefeuilleItemId;
     }
 
-    public double getAantal() {
-        return aantal;
+    public double getHoeveelheid() {
+        return hoeveelheid;
     }
 
-    public void setAantal(double aantal) {
-        this.aantal = aantal;
+    public void setHoeveelheid(double hoeveelheid) {
+        this.hoeveelheid = hoeveelheid;
     }
 
     public Klant getKlant() {
@@ -57,7 +58,7 @@ public class PortefeuilleItem {
 
     @Override
     public String toString() {
-        return String.format("%-25s%+15.5f", asset, aantal);
+        return String.format("%-25s%+15.5f", asset, hoeveelheid);
     }
 
 }
