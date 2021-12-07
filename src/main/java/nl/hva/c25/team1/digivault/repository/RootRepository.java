@@ -32,9 +32,10 @@ methode slaKlantOp(Klant klant--> meegegeven vanuit Postman/Frontend){
 
 Klant nieuweKlant = klantDAO.bewaarKlantMetKey --> key wordt in methode in jdbc al gezet)
 
-In naam en adres ook Klant meegeven? Dan findNaam/AdresOpKlantId?
-Naam naam = naamDAO.bewaarNaamMetKey --> (nieuweKlant.setNaam(naam))
-Adres adres = adresDAO.bewaarAdresMetKey --> (nieuweKlant.setAdres(adres))
+Hoe in JSON? kale objecten los? Of toch met all args constructor?
+
+Naam naam = naamDAO.bewaarNaamMetKey
+Adres adres = adresDAO.bewaarAdresMetKey
 
 accountDAO.updateKlant(klantId) --> email en wachtwoord toevoegen aan klant
 
@@ -44,7 +45,7 @@ nieuweKlant.setRekening
 
 nieuwe lege portefeuille:
 new Portefeuille portefeuille (standaard Map met de 20 assets en aantal op 0)?
-klant.setPortefeuille(portefeuille)
+nieuweKlant.setPortefeuille(portefeuille)
 
 om goed in database te zetten:
 
