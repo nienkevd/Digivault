@@ -35,9 +35,9 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
     }
 
     /**
-     * Slaat EuroKoers op in Database en geeft surrogate key (SK) euroKoersId terug
+     * Slaat EuroKoers met surrogate key (SK) op in Database en geeft EuroKoers terug
      * @param euroKoers de te bewaren EuroKoers
-     * @return de gegenereerde euroKoersId
+     * @return de bewaarde EuroKoers
      */
     @Override
     public EuroKoers bewaarEuroKoersMetSK(EuroKoers euroKoers) {
@@ -47,7 +47,7 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                preparedStatement.setDate(1, java.sql.Date.valueOf(euroKoers.getDatum()));
+                preparedStatement.setDate(1, Date.valueOf(euroKoers.getDatum()));
                 preparedStatement.setDouble(2, euroKoers.getKoers());
                 preparedStatement.setInt(3, euroKoers.getAssetId());
                 return preparedStatement;

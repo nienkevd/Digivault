@@ -105,6 +105,6 @@ public class Asset {
      */
     @Override
     public String toString() {
-        return "Asset{assetId=" + afkorting + '\'' + ", naam='" + naam + '\'' + ", dagKoers=" + dagKoers + '}';
+        return "Asset{afkorting=" + afkorting + '\'' + ", naam='" + naam + '\'' + ", dagKoers=" + dagKoers + '}';
     }
 }
