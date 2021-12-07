@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-// review door Erwin, 1 december
+// review door Erwin, 6 december
 
 /**
  * Java Database Connectivity voor DB-tabel Account

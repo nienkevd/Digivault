@@ -17,7 +17,7 @@ import java.util.List;
  * Java Database Connectivity voor DB-tabel EuroKoers
  *
  * @author Erwin, studentnummer 500889293
- * @version 2-12-2021
+ * @version 6-12-2021
  */
 
 @Repository
@@ -40,18 +40,21 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
      * @return de gegenereerde euroKoersId
      */
     @Override
-    public int bewaarEuroKoersMetSK(EuroKoers euroKoers) {
-        String sql = "INSERT INTO EuroKoers VALUES (?, ?, ?, ?)";
+    public EuroKoers bewaarEuroKoersMetSK(EuroKoers euroKoers) {
+        String sql = "INSERT INTO EuroKoers (datum, koers, assetId) VALUES (?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setDate(1, java.sql.Date.valueOf(euroKoers.getDatum()));
+                preparedStatement.setDouble(2, euroKoers.getKoers());
+                preparedStatement.setInt(3, euroKoers.getAssetId());
                 return preparedStatement;
             }
         }, keyHolder);
         euroKoers.setEuroKoersId(keyHolder.getKey().intValue());
-        return euroKoers.getEuroKoersId();
+        return euroKoers;
     }
 
     /**
@@ -82,11 +85,11 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
     }
 
     /**
-     * Ververst een bepaalde EuroKoers
-     * @param euroKoers welke ververst moet worden
+     * Updatet een bepaalde EuroKoers
+     * @param euroKoers de te updaten EuroKoers
      */
     @Override
-    public void ververs(EuroKoers euroKoers) {
+    public void update(EuroKoers euroKoers) {
         String sql = "UPDATE EuroKoers SET euroKoersId = ?, datum = ?, koers = ?, assetId = ?";
         jdbcTemplate.update(sql, euroKoers.getEuroKoersId(), euroKoers.getDatum(), euroKoers.getKoers(),
                 euroKoers.getAssetId());

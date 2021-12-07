@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author Erwin, studentnummer 500889293
- * @version 2-12-2021
+ * @version 6-12-2021
  */
 
 @RestController
@@ -34,7 +34,7 @@ public class AssetController {
      * @param asset de te bewaren Asset
      */
     @PostMapping("/assets")
-    public void bewaar(@RequestBody Asset asset) {
+    public void bewaarAssetMetSK(@RequestBody Asset asset) {
         assetService.bewaarAssetMetSK(asset);
     }
 
@@ -58,12 +58,12 @@ public class AssetController {
     }
 
     /**
-     * Ververst een bepaalde Asset
-     * @param asset welke ververst moet worden
+     * Updatet een bepaalde Asset
+     * @param asset de te updaten Asset
      * @return doorgeefluik
      */
     @PutMapping("/assets/{assetId}")
-    public String ververs(@RequestBody Asset asset) {
-        return assetService.verversAsset(asset);
+    public String update(@RequestBody Asset asset) {
+        return assetService.updateAsset(asset);
     }
 }

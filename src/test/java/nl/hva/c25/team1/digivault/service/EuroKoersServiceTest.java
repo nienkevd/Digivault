@@ -2,7 +2,6 @@ package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.model.EuroKoers;
 import nl.hva.c25.team1.digivault.repository.JdbcEuroKoersDAO;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -10,6 +9,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
+
+/**
+ * Testen bij EuroKoersService
+ *
+ * @author Erwin, studentnummer 500889293
+ * @version 6-12-2021
+ */
 
 class EuroKoersServiceTest {
 
@@ -27,9 +33,9 @@ class EuroKoersServiceTest {
     }
 
     @Test
-    void verversEuroKoers() {
+    void updateEuroKoers() {
         Mockito.when(mockDAO.vindEuroKoersOpId(1)).thenReturn(expected);
-        String actual = serviceUnderTest.verversEuroKoers(expected);
-        assertThat(actual).contains("ververst");
+        String actual = serviceUnderTest.updateEuroKoers(expected);
+        assertThat(actual).contains("geüpdatet");
     }
 }

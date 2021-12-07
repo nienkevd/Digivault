@@ -1,6 +1,6 @@
 package nl.hva.c25.team1.digivault.model;
 
-// review door Sezi, 6 december: Zo ver als ik weet is het gebruikelijk dat de id niet meegenomen wordt in toString
+// review door Sezi, 6 december
 
 /**
  * @author Erwin, studentnummer 500889293
@@ -105,7 +105,6 @@ public class Asset {
      */
     @Override
     public String toString() {
-        return "Asset{assetId=" + assetId + ", afkorting='" + afkorting + '\'' + ", naam='" + naam + '\'' +
-                ", dagKoers=" + dagKoers + '}';
+        return "Asset{assetId=" + afkorting + '\'' + ", naam='" + naam + '\'' + ", dagKoers=" + dagKoers + '}';
     }
 }

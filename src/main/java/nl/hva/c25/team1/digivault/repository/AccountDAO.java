@@ -4,7 +4,7 @@ import nl.hva.c25.team1.digivault.model.Account;
 
 import java.util.List;
 
-// review door Erwin, 1 december
+// review door Erwin, 6 december
 
 /**
  * Interface met de te implementeren methodes voor JdbcAccountDAO

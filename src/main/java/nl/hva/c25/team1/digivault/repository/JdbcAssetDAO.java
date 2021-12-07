@@ -19,7 +19,7 @@ import java.util.List;
  * Java Database Connectivity voor DB-tabel Asset
  *
  * @author Erwin, studentnummer 500889293
- * @version 2-12-2021
+ * @version 6-12-2021
  */
 
 @Repository
@@ -42,18 +42,21 @@ public class JdbcAssetDAO implements AssetDAO {
      * @return de gegenereerde assetId
      */
     @Override
-    public int bewaarAssetMetSK(Asset asset) {
+    public Asset bewaarAssetMetSK(Asset asset) {
         String sql = "INSERT INTO Asset (afkorting, naam, dagKoers) VALUES (?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setString(1, asset.getAfkorting());
+                preparedStatement.setString(2, asset.getNaam());
+                preparedStatement.setDouble(3, asset.getDagKoers());
                 return preparedStatement;
             }
         }, keyHolder);
         asset.setAssetId(keyHolder.getKey().intValue());
-        return asset.getAssetId();
+        return asset;
     }
 
     /**
@@ -84,11 +87,11 @@ public class JdbcAssetDAO implements AssetDAO {
     }
 
     /**
-     * Ververst een bepaalde Asset
-     * @param asset welke ververst moet worden
+     * Updatet een bepaalde Asset
+     * @param asset de te updaten Asset
      */
     @Override
-    public void ververs(Asset asset) {
+    public void update(Asset asset) {
         String sql = "UPDATE asset SET assetId = ?, afkorting = ?, naam = ?, dagKoers = ? ";
         jdbcTemplate.update(sql, asset.getAfkorting(), asset.getNaam(), asset.getDagKoers());
     }

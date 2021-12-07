@@ -8,16 +8,16 @@ import java.util.List;
  * Interface met de te implementeren methodes voor JdbcAssetDAO
  *
  * @author Erwin, studentnummer 500889293
- * @version 2-12-2021
+ * @version 6-12-2021
  */
 
 public interface EuroKoersDAO {
 
-    int bewaarEuroKoersMetSK(EuroKoers euroKoers);
+    EuroKoers bewaarEuroKoersMetSK(EuroKoers euroKoers);
 
     EuroKoers vindEuroKoersOpId(int euroKoersId);
 
     List<EuroKoers> geefAlleEuroKoersen();
 
-    void ververs(EuroKoers euroKoers);
+    void update(EuroKoers euroKoers);
 }
