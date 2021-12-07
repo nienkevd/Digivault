@@ -37,9 +37,9 @@ public class JdbcAssetDAO implements AssetDAO {
     }
 
     /**
-     * Slaat Asset op in Database en geeft surrogate key (SK) assetId terug
+     * Slaat Asset met surrogate key (SK) op in Database en geeft Asset terug
      * @param asset de te bewaren Asset
-     * @return de gegenereerde assetId
+     * @return de bewaarde Asset
      */
     @Override
     public Asset bewaarAssetMetSK(Asset asset) {

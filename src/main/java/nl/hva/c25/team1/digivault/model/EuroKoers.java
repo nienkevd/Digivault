@@ -84,7 +84,6 @@ public class EuroKoers {
      */
     @Override
     public String toString() {
-        return "EuroKoers{euroKoersId=" + euroKoersId + ", datum=" + datum + ", koers=" + koers + ", assetId="
-                + assetId + '}';
+        return "EuroKoers{datum=" + datum + ", koers=" + koers + ", assetId=" + assetId + '}';
     }
 }
