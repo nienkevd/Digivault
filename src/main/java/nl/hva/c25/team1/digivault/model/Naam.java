@@ -30,7 +30,7 @@ public class Naam {
     public Naam(RegisterDto dto) {
         this(dto.getVoornaam(), dto.getTussenvoegsel(), dto.getAchternaam());
     }
-
+    
     public Naam(int naamId) {
         this(naamId, "", "", "");
     }
