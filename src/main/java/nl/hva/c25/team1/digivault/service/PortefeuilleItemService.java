@@ -5,6 +5,7 @@ package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.model.PortefeuilleItem;
 import nl.hva.c25.team1.digivault.repository.PortefeuilleItemDAO;
+import nl.hva.c25.team1.digivault.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,11 +17,13 @@ import java.util.List;
 public class PortefeuilleItemService {
 
     private PortefeuilleItemDAO portefeuilleItemDAO;
+    private RootRepository rootRepository;
 
     @Autowired
-    public PortefeuilleItemService(PortefeuilleItemDAO portefeuilleItemDAO) {
+    public PortefeuilleItemService(PortefeuilleItemDAO portefeuilleItemDAO, RootRepository rootRepository) {
         super();
         this.portefeuilleItemDAO = portefeuilleItemDAO;
+        this.rootRepository = rootRepository;
     }
 
     /**
@@ -40,7 +43,7 @@ public class PortefeuilleItemService {
      * @return Het portefeuilleitem.
      */
     public PortefeuilleItem vindItemMetId(int itemId) {
-        return portefeuilleItemDAO.vindItemMetId(itemId);
+        return rootRepository.vindPortefeuilleItemOpId(itemId);
     }
 
 }
