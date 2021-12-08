@@ -11,8 +11,8 @@ import java.util.Random;
 public class IbanService {
     public static String LANDCODE = "NL";
     public static String BANKCODE = "DIVA";
-    public static String CONTROLESTRING_LANDCODE = "207189";       //2321
-    public static String CONTROLESTRING_BANKCODE = "11716227990";  //13183110
+    public static String CONTROLESTRING_LANDCODE = "2321";      //   207189
+    public static String CONTROLESTRING_BANKCODE = "13183110";  //  11716227990
     public static String CONTROLESTRING_SLOT = "00";
     public static int ASCII_MINIMUM = 48;      // waarden vanaf cijfer 0
     public static int ASCII_MAXIMUM = 57;      // waarden tot en met cijfer 9
