@@ -31,7 +31,17 @@ public class RootRepository {
         this.adresDAO = adresDAO;
     }
 
-
+//    public Klant slaKlantOp(Klant klant){
+//        Klant klant = registratieController.regi
+//        naamDAO.bewaarNaamMetSK(klant.getNaam());
+//        adresDAO.bewaarAdresMetSK(klant.getAdres());
+//        //accountdao
+//        rekeningDAO.bewaarRekeningMetSK(klant.getRekening());
+//        for(PortefeuilleItem item : klant.getPortefeuille()){
+//            portefeuilleItemDAO.bewaarPortefeuilleItem(item);
+//        }
+//        klantDAO.bewaarKlantMetSK(klant);
+//    }
 
 
 
