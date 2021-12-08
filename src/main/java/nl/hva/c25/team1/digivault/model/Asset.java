@@ -38,6 +38,7 @@ public class Asset {
         this(assetId, afkorting, naam, 0.0);
     }
 
+    // TODO Aanpassen
     public Asset(int assetId) {
         this(assetId, "", "");
     }
