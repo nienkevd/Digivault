@@ -88,8 +88,7 @@ public class JdbcAccountDAO implements AccountDAO {
     private class AccountRowMapper implements RowMapper<Account> {
         @Override
         public Account mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
-            return new Account(resultSet.getString("emailadres"),
-                    resultSet.getString("wachtwoord"));
+            return new Account(resultSet.getString("emailadres"), resultSet.getString("wachtwoord"));
         }
     }
 }
