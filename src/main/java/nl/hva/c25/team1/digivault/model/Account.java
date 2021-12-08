@@ -7,7 +7,7 @@ import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
 /**
  * @author Sezi, studentnummer 500889525
- * @version 1-12-2021
+ * @version 6-12-2021
  */
 
 public class Account {
@@ -27,7 +27,7 @@ public class Account {
     }
 
     public Account(int accountId, String emailadres, String wachtwoord) {
-        this(accountId, emailadres,wachtwoord, null);
+        this(accountId, emailadres, wachtwoord, null);
     }
 
     public Account(String emailadres, String wachtwoord) {
