@@ -34,8 +34,9 @@ public class AssetController {
      * @param asset de te bewaren Asset
      */
     @PostMapping("/assets")
-    public void bewaarAssetMetSK(@RequestBody Asset asset) {
+    public Asset bewaarAssetMetSK(@RequestBody Asset asset) {
         assetService.bewaarAssetMetSK(asset);
+        return asset;
     }
 
     /**
