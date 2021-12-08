@@ -67,6 +67,6 @@ public class RegistratieService {
     }
 
     public String genereerIban() {
-        return "NL20 DIVA 0001234567";
+        return IbanService.IbanGenerator();
     }
 }

@@ -39,6 +39,7 @@ public class EuroKoers {
         this(euroKoersId, datum, koers, 0);
     }
 
+    // TODO aanpassen
     public EuroKoers(int euroKoersId) {
         this(euroKoersId, null, 0);
     }
