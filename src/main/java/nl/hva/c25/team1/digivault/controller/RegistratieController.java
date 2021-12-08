@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Erwin, studentnummer 500889293
@@ -18,7 +21,7 @@ public class RegistratieController {
     }
 
     @PostMapping("/registratie")
-    public Account registratieHandler(
+    public Klant registratieHandler(
             @RequestParam(name="emailadres") String emailadres,
             @RequestParam(name="wachtwoord") String wachtwoord,
             @RequestParam(name="voornaam") String voornaam,
@@ -41,7 +44,12 @@ public class RegistratieController {
         klant.setNaam(naam);
         klant.setAdres(adres);
         klant.setRekening(rekening);
-        account.setKlant(klant);
-        return account;
+        klant.setAccount(account);
+        return klant;
+    }
+
+    public List<PortefeuilleItem> aanmaakLegePortefeuille() {
+        List<PortefeuilleItem> legePortefeuille = new ArrayList<>();
+        return legePortefeuille;
     }
 }
