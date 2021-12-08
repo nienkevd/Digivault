@@ -43,7 +43,7 @@ public class JdbcAssetDAO implements AssetDAO {
      */
     @Override
     public Asset bewaarAssetMetSK(Asset asset) {
-        String sql = "INSERT INTO Asset (afkorting, naam, dagKoers) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Asset (afkorting, naam, dagkoers) VALUES (?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -92,7 +92,7 @@ public class JdbcAssetDAO implements AssetDAO {
      */
     @Override
     public void update(Asset asset) {
-        String sql = "UPDATE asset SET assetId = ?, afkorting = ?, naam = ?, dagKoers = ? ";
+        String sql = "UPDATE asset SET assetId = ?, afkorting = ?, naam = ?, dagkoers = ? ";
         jdbcTemplate.update(sql, asset.getAfkorting(), asset.getNaam(), asset.getDagKoers());
     }
 
@@ -100,7 +100,8 @@ public class JdbcAssetDAO implements AssetDAO {
         @Override
         public Asset mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
             return new Asset(resultSet.getInt("assetId"), resultSet.getString("afkorting"),
-                    resultSet.getString("naam"));
+                    resultSet.getString("naam"), resultSet.getDouble("dagkoers"));
         }
     }
+
 }
