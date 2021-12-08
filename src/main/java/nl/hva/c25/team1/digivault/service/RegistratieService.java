@@ -7,18 +7,15 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author Erwin, studentnummer 500889293
- * @since 7-12-2021
  */
 
 @Service
 public class RegistratieService {
 
-    private KlantDAO klantDAO;
     private RootRepository rootRepository;
 
-    public RegistratieService(KlantDAO klantDAO, RootRepository rootRepository) {
+    public RegistratieService(RootRepository rootRepository) {
         super();
-        this.klantDAO = klantDAO;
         this.rootRepository = rootRepository;
     }
 }
