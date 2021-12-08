@@ -1,5 +1,7 @@
 package nl.hva.c25.team1.digivault.model;
 
+import nl.hva.c25.team1.digivault.transfer.RegisterDto;
+
 /**
  *
  * @author Anneke, studentnummer 500889251
@@ -17,6 +19,14 @@ public class Naam {
         this.voornaam = voornaam;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
+    }
+
+    public Naam(String voornaam, String tussenvoegsel, String achternaam) {
+        this(0,voornaam,tussenvoegsel,achternaam);
+    }
+
+    public Naam(RegisterDto dto){
+        this(dto.getVoornaam(), dto.getTussenvoegsel(), dto.getAchternaam());
     }
 
     public int getNaamId() {
