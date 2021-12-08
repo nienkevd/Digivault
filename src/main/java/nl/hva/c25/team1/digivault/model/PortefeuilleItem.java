@@ -24,6 +24,10 @@ public class PortefeuilleItem {
         this(portefeuilleItemId, hoeveelheid, null, null);
     }
 
+    public PortefeuilleItem(int portefeuilleItemId) {
+        this(portefeuilleItemId, 0);
+    }
+
     public int getPortefeuilleItemId() {
         return portefeuilleItemId;
     }

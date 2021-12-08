@@ -46,6 +46,9 @@ public class Klant {
         this(dto.getBsn(),dto.getGeboortedatum());
     }
 
+    public Klant(int klantId) {
+        this(klantId, "", null);
+    }
 
     public int getKlantId() {
         return klantId;

@@ -6,6 +6,7 @@ import nl.hva.c25.team1.digivault.transfer.RegisterDto;
  *
  * @author Anneke, studentnummer 500889251
  * @version 1-12-2021
+ *
  */
 
 public class Adres {
@@ -30,8 +31,12 @@ public class Adres {
         this(0,straat,huisnummer,toevoeging,postcode,woonplaats);
     }
 
-    public Adres(RegisterDto dto){
-        this(dto.getStraat(),dto.getHuisnummer(),dto.getToevoeging(),dto.getPostcode(),dto.getWoonplaats());
+    public Adres(RegisterDto dto) {
+        this(dto.getStraat(), dto.getHuisnummer(), dto.getToevoeging(), dto.getPostcode(), dto.getWoonplaats());
+    }
+
+    public Adres(int adresId) {
+        this(adresId, "", 0, "", "", "");
     }
 
     public int getAdresId() {
