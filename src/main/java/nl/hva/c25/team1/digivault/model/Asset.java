@@ -20,7 +20,7 @@ public class Asset {
      * @param naam naam van de Asset
      * @param dagKoers de huidige waarde van een asset
      */
-    private Asset(int assetId, String afkorting, String naam, double dagKoers) {
+    public Asset(int assetId, String afkorting, String naam, double dagKoers) {
         super();
         this.assetId = assetId;
         this.afkorting = afkorting;
