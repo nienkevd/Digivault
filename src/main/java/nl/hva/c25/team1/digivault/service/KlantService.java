@@ -24,7 +24,7 @@ public class KlantService {
      *
      * @param klantDAO interface klantDAO
      */
-    public KlantService(JdbcKlantDAO klantDAO /*, RootRepository rootRepository*/) {
+    public KlantService(JdbcKlantDAO klantDAO /* , RootRepository rootRepository*/) {
         this.klantDAO = klantDAO;
 //        this.rootRepository = rootRepository;
     }
