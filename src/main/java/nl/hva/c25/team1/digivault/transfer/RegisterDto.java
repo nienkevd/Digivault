@@ -39,7 +39,6 @@ public class RegisterDto {
         this.toevoeging = adres.getToevoeging();
         this.postcode = adres.getPostcode();
         this.woonplaats = adres.getWoonplaats();
-
     }
 
     public String getEmailadres() {
