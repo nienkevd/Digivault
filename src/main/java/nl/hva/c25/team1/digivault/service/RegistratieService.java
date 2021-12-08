@@ -28,7 +28,6 @@ public class RegistratieService {
         this.rootRepository = rootRepository;
     }
 
-    @PostMapping("/registratie")
     public Klant registratie(Klant klant) {
         Account account = new Account(klant.getAccount().getEmailadres(), klant.getAccount().getWachtwoord());
         Naam naam = new Naam(0, klant.getNaam().getVoornaam(), klant.getNaam().getTussenvoegsel(),
@@ -41,7 +40,7 @@ public class RegistratieService {
         klant.setAdres(adres);
         klant.setRekening(rekening);
         klant.setPortefeuille(aanmaakLegePortefeuille());
-        return klant;
+        return rootRepository.slaKlantOp(klant);
     }
 
     public List<PortefeuilleItem> aanmaakLegePortefeuille() {

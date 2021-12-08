@@ -1,6 +1,5 @@
 package nl.hva.c25.team1.digivault.repository;
 
-import nl.hva.c25.team1.digivault.controller.RegistratieController;
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.PortefeuilleItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ public class RootRepository {
     PortefeuilleItemDAO portefeuilleItemDAO;
     NaamDAO naamDAO;
     AdresDAO adresDAO;
-    RegistratieController registratieController;
 
     @Autowired
     public RootRepository(JdbcTemplate jdbcTemplate, KlantDAO klantDAO, RekeningDAO rekeningDAO, AccountDAO accountDAO,
@@ -31,17 +29,24 @@ public class RootRepository {
         this.adresDAO = adresDAO;
     }
 
-//    public Klant slaKlantOp(Klant klant){
-//        Klant klant = registratieController.regi
-//        naamDAO.bewaarNaamMetSK(klant.getNaam());
-//        adresDAO.bewaarAdresMetSK(klant.getAdres());
-//        //accountdao
-//        rekeningDAO.bewaarRekeningMetSK(klant.getRekening());
-//        for(PortefeuilleItem item : klant.getPortefeuille()){
-//            portefeuilleItemDAO.bewaarPortefeuilleItem(item);
-//        }
-//        klantDAO.bewaarKlantMetSK(klant);
-//    }
+
+    /**
+     *
+     * Deze methode wordt aangeroepen in registratieservice registratie(Klant klant)
+     * @param klant klant zonder id's
+     * @return volledig geregistreerd klant object
+     */
+    public Klant slaKlantOp(Klant klant){
+        naamDAO.bewaarNaamMetSK(klant.getNaam());
+        adresDAO.bewaarAdresMetSK(klant.getAdres());
+        klant.getAccount().setKlant(klant);
+
+        rekeningDAO.bewaarRekeningMetSK(klant.getRekening());
+        for(PortefeuilleItem item : klant.getPortefeuille()){
+            portefeuilleItemDAO.bewaarPortefeuilleItemMetKey(item);
+        }
+        return klantDAO.bewaarKlantMetSK(klant);
+    }
 
 
 
