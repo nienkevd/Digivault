@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.Random;
 
 /**
+ * Service die volgens de 11-proef IBAN-nummers genereert
+ *
  * @author Erwin, studentnummer 500889293
  * @version 8-12-2021
  */
@@ -11,14 +13,14 @@ import java.util.Random;
 public class IbanService {
     public static String LANDCODE = "NL";
     public static String BANKCODE = "DIVA";
-    public static String CONTROLESTRING_LANDCODE = "2321";      //   207189
-    public static String CONTROLESTRING_BANKCODE = "13183110";  //  11716227990
+    public static String CONTROLESTRING_LANDCODE = "2321";
+    public static String CONTROLESTRING_BANKCODE = "13183110";
     public static String CONTROLESTRING_SLOT = "00";
-    public static int ASCII_MINIMUM = 48;      // waarden vanaf cijfer 0
-    public static int ASCII_MAXIMUM = 57;      // waarden tot en met cijfer 9
-    public static int STRING_LENGTE = 10;
+    public static int ASCII_MINIMUM = 48;      // ASCII-waarden vanaf cijfer 0
+    public static int ASCII_MAXIMUM = 57;      // ASCII-waarden tot en met cijfer 9
+    public static int STRING_LENGTE = 10;      // gewenste lengte van bankrekeningNummer
     public static BigInteger MODULO = BigInteger.valueOf(97);
-    public static BigInteger TOTAAL = BigInteger.valueOf(98);
+    public static BigInteger BRUTO = BigInteger.valueOf(98);
 
     public static void main(String[] args) {    // Om tijdelijk automatisch gegenereerde Ibans te laten zien
         System.out.println(IbanGenerator());
@@ -28,6 +30,11 @@ public class IbanService {
         super();
     }
 
+    /**
+     * Genereert een IBAN die voldoet aan de 11-proef; Eerst wordt een random bankrekeningnummer van 10 cijfers
+     * gegenereerd, hier worden vervolgens de landcode, het gegenereerde controlegetal en de bankcode aan toegevoegd
+     * @return de gegenereerde IBAN als String
+     */
     public static String IbanGenerator() {
         String bankrekeningNummer = genereerRandomBankrekeningNummer();
         String controlegetal = genereerControleGetal(bankrekeningNummer);
@@ -48,13 +55,21 @@ public class IbanService {
         return bankrekeningNummer;
     }
 
-    public static String genereerControleGetal(String controleString) {
-        StringBuilder controleStringBuilderReeks = new StringBuilder(CONTROLESTRING_BANKCODE + controleString +
+    /**
+     * Deze methode voegt een gegenereerd bankrekeningnummer samen met de numerieke waarden van bankcode, de landcode
+     * en twee nullen aan het eind. Deze StringBuilder wordt een String, en daarna omgezet naar een BigInteger om de
+     * bijbehorende modulo 97 berekening te kunnen doen en dit af te trekken van 98. De uitkomst (=controlegetal) wordt
+     * als String teruggegeven
+     * @param bankrekeningNummer het gegenereerde bankrekeningnummer waarvoor een controlegetal berekend wordt
+     * @return controlegetal als String
+     */
+    public static String genereerControleGetal(String bankrekeningNummer) {
+        StringBuilder controleStringBuilderReeks = new StringBuilder(CONTROLESTRING_BANKCODE + bankrekeningNummer +
                 CONTROLESTRING_LANDCODE + CONTROLESTRING_SLOT);
         String controleReeksString = controleStringBuilderReeks.toString();
         BigInteger controleReeksLong = new BigInteger(controleReeksString);
         BigInteger result = controleReeksLong.mod(MODULO);
-        BigInteger controleGetal = TOTAAL.subtract(result);
+        BigInteger controleGetal = BRUTO.subtract(result);
         return controleGetal.toString();
     }
 }
