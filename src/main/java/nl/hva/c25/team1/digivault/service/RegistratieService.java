@@ -28,19 +28,35 @@ public class RegistratieService {
         super();
         this.rootRepository = rootRepository;
     }
+//      andere manier? :
+//    public Klant registratie(RegisterDto registerDto) {
+//        Account account = new Account(0, registerDto.getEmailadres(), registerDto.getWachtwoord());
+//        Naam naam = new Naam(0, registerDto.getVoornaam(), registerDto.getTussenvoegsel(),
+//                registerDto.getAchternaam());
+//        Adres adres = new Adres(0, registerDto.getStraat(), registerDto.getHuisnummer(),
+//                registerDto.getToevoeging(), registerDto.getPostcode(), registerDto.getWoonplaats());
+//        Rekening rekening = new Rekening(0, genereerIban());
+//        Klant klant = new Klant(registerDto.getBsn(), registerDto.getGeboortedatum(), naam, adres, account,
+//                rekening, null);
+//        // aanmaakLegePortefeuille geeft hij foutmelding op
+//        return rootRepository.slaKlantOp(klant);
+//    }
 
-    public Klant registratie(RegisterDto registerDto) {
-        Account account = new Account(0, registerDto.getEmailadres(), registerDto.getWachtwoord());
-        Naam naam = new Naam(0, registerDto.getVoornaam(), registerDto.getTussenvoegsel(),
-                registerDto.getAchternaam());
-        Adres adres = new Adres(0, registerDto.getStraat(), registerDto.getHuisnummer(),
-                registerDto.getToevoeging(), registerDto.getPostcode(), registerDto.getWoonplaats());
+    public Klant registratie(Klant klant) {
+        Account account = new Account(klant.getAccount().getEmailadres(), klant.getAccount().getWachtwoord());
+        Naam naam = new Naam(0, klant.getNaam().getVoornaam(), klant.getNaam().getTussenvoegsel(),
+                klant.getNaam().getAchternaam());
+        Adres adres = new Adres(0, klant.getAdres().getStraat(), klant.getAdres().getHuisnummer(),
+                klant.getAdres().getToevoeging(), klant.getAdres().getPostcode(), klant.getAdres().getWoonplaats());
         Rekening rekening = new Rekening(0, genereerIban());
-        Klant klant = new Klant(registerDto.getBsn(), registerDto.getGeboortedatum(), naam, adres, account,
-                rekening, null);
-        // aanmaakLegePortefeuille geeft hij foutmelding op
+        klant.setAccount(account);
+        klant.setNaam(naam);
+        klant.setAdres(adres);
+        klant.setRekening(rekening);
+        klant.setPortefeuille(aanmaakLegePortefeuille());
         return rootRepository.slaKlantOp(klant);
     }
+
 
     /* of
     oude opzet:

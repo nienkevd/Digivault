@@ -34,7 +34,7 @@ public class RegistratieController {
     public ResponseEntity<Klant> registratieHandler(@RequestBody RegisterDto registerDto) {
         System.out.println("Hoi!!!");
         Klant klant = new Klant(registerDto);
-        registratieService.registratie(registerDto);// was registratieservice.registratie(klant)
+        registratieService.registratie(klant); //of registratieService.registratie(registerDto)
         return ResponseEntity.ok().body(klant);
     }
 
