@@ -11,8 +11,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,11 +31,6 @@ public class JdbcKlantDAO implements KlantDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-//    public void bewaar(Klant klant) {
-//        String sql = "INSERT INTO Klant values(?,?,?);";
-//        jdbcTemplate.update(sql, klant.getKlantId(),klant.getBsn(),klant.getGeboortedatum());
-//    }
-
     /**
      *
      * slaat klant op in database en genereert een surrogate key
@@ -46,7 +39,7 @@ public class JdbcKlantDAO implements KlantDAO {
      */
     @Override
     public Klant bewaarKlantMetSK(Klant klant) {
-        String sql = "INSERT INTO Klant (bsn, geboortedatum) VALUES (?,?);";
+        String sql = "INSERT INTO Klant (bsn, geboortedatum, naamId, adresId, rekeningId, accountId) VALUES (?,?,?,?,?,?);";
         KeyHolder keyholder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -54,6 +47,10 @@ public class JdbcKlantDAO implements KlantDAO {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, klant.getBsn());
                 ps.setDate(2, java.sql.Date.valueOf(klant.getGeboortedatum()));
+                ps.setInt(3, klant.getNaam().getNaamId());
+                ps.setInt(4, klant.getAdres().getAdresId());
+                ps.setInt(5, klant.getRekening().getRekeningId());
+                ps.setInt(6, klant.getAccount().getAccountId());
                 return ps;
             }
         } , keyholder);
