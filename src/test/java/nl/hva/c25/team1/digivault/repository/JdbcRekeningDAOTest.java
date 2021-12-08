@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 class JdbcRekeningDAOTest {
    // private static Rekening expected = new Rekening(1,"AA00ABCD0000000000");
-    private RekeningDAO daoUnderTest;
+/*    private RekeningDAO daoUnderTest;
 
     @Autowired
     public JdbcRekeningDAOTest(RekeningDAO daoUnderTest) {
@@ -49,4 +49,6 @@ class JdbcRekeningDAOTest {
     @Test
     void geefAlleRekeningen() {
     }
+
+ */
 }
