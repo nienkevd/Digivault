@@ -38,7 +38,7 @@ public class JdbcAdresDAO implements AdresDAO {
      */
     @Override
     public Adres bewaarAdresMetSK(Adres adres) {
-        String sql = "INSERT INTO Adres a JOIN Ziphuisnr j ON a.ziphuisnrId = z.ziphuisnrId " +
+        String sql = "INSERT INTO Adres " +
                 "(straat, huisnummer, toevoeging, postcode, woonplaats) VALUES (?,?,?,?,?);";
         KeyHolder keyholder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
@@ -48,7 +48,7 @@ public class JdbcAdresDAO implements AdresDAO {
                 ps.setString(1, adres.getStraat());
                 ps.setInt(2, adres.getHuisnummer());
                 ps.setString(3, adres.getToevoeging());
-                ps.setString(4, adres.getToevoeging());
+                ps.setString(4, adres.getPostcode());
                 ps.setString(5, adres.getWoonplaats() );
                 return ps;
             }
@@ -66,8 +66,7 @@ public class JdbcAdresDAO implements AdresDAO {
     @Override
     public Adres vindAdresOpAdresId(int adresId) {
         String sql = "SELECT (adresId, straat, huisnummer, toevoeging," +
-                "postcode, woonplaats) FROM Adres a JOIN Ziphuisnr z ON a.ziphuisnrId = z.ziphuisnrId" +
-                "WHERE adresId = ?;";
+                "postcode, woonplaats) FROM Adres WHERE adresId = ?;";
         Adres adres;
         try {
             adres = jdbcTemplate.queryForObject(sql, new AdresRowMapper(), adresId);

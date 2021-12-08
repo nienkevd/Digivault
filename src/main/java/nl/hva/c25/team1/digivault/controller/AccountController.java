@@ -26,7 +26,7 @@ public class AccountController {
     }
 
     @PostMapping("/accounts")
-    public int bewaarAccount(@RequestBody Account account) {return accountService.bewaarAccountMetSK(account);}
+    public Account bewaarAccount(@RequestBody Account account) {return accountService.bewaarAccountMetSK(account);}
 
     @PostMapping("/accounts/{accountId}")
     public void updateAccount(@RequestBody Account account) {
