@@ -28,8 +28,9 @@ public class RootRepository {
     }
 
 
+    // checked: Anthon 8-12-2021
     /**
-     * checked: Anthon 8-12-2021
+     *
      * @author Anneke
      * Deze methode wordt aangeroepen in registratieservice registratie(Klant klant)
      * De objecten van de klant worden afzonderlijk opgeslagen en de

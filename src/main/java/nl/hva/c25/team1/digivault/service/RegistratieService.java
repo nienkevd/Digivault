@@ -43,7 +43,7 @@ public class RegistratieService {
 //    }
 
     public Klant registratie(Klant klant) {
-        Account account = new Account(klant.getAccount().getEmailadres(), klant.getAccount().getWachtwoord());
+        Account account = new Account(0, klant.getAccount().getEmailadres(), klant.getAccount().getWachtwoord());
         Naam naam = new Naam(0, klant.getNaam().getVoornaam(), klant.getNaam().getTussenvoegsel(),
                 klant.getNaam().getAchternaam());
         Adres adres = new Adres(0, klant.getAdres().getStraat(), klant.getAdres().getHuisnummer(),

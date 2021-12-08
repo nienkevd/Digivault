@@ -6,9 +6,7 @@ package nl.hva.c25.team1.digivault.service;
 import nl.hva.c25.team1.digivault.model.PortefeuilleItem;
 import nl.hva.c25.team1.digivault.repository.PortefeuilleItemDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
@@ -26,7 +24,7 @@ public class PortefeuilleItemService {
     }
 
     /**
-     * Genereert gehele porteefuille van klant.
+     * Genereert gehele portefeuille van klant.
      *
      * @param klantId KlantId van de betreffende klant.
      * @return De gehele portefeuille.
