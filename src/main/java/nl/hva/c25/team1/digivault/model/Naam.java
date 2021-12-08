@@ -4,6 +4,8 @@ package nl.hva.c25.team1.digivault.model;
  *
  * @author Anneke, studentnummer 500889251
  * @version 1-12-2021
+ *
+ * Review Anthon 8-12-2021
  */
 
 public class Naam {
@@ -17,6 +19,10 @@ public class Naam {
         this.voornaam = voornaam;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
+    }
+
+    public Naam(int naamId) {
+        this(naamId, "", "", "");
     }
 
     public int getNaamId() {

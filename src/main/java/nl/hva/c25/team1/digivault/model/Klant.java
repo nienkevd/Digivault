@@ -38,6 +38,9 @@ public class Klant {
         this(klantId,bsn,geboortedatum, null, null,null, null, null);
     }
 
+    public Klant(int klantId) {
+        this(klantId, "", null);
+    }
 
     public int getKlantId() {
         return klantId;

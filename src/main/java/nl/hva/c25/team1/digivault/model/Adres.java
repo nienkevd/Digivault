@@ -4,6 +4,7 @@ package nl.hva.c25.team1.digivault.model;
  *
  * @author Anneke, studentnummer 500889251
  * @version 1-12-2021
+ *
  */
 
 public class Adres {
@@ -22,6 +23,10 @@ public class Adres {
         this.toevoeging = toevoeging;
         this.postcode = postcode;
         this.woonplaats = woonplaats;
+    }
+
+    public Adres(int adresId) {
+        this(adresId, "", 0, "", "", "");
     }
 
     public int getAdresId() {

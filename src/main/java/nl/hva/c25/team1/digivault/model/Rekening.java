@@ -23,6 +23,10 @@ public class Rekening {
         this(rekeningId, IBAN, 0);
     }
 
+    public Rekening(int rekeningId) {
+        this(rekeningId, "");
+    }
+
     public Rekening() {
         this(0, "onbekend", 0);
     }
