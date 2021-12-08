@@ -57,21 +57,6 @@ public class RegistratieService {
         return rootRepository.slaKlantOp(klant);
     }
 
-
-    /* of
-    oude opzet:
-public Klant registratie(Klant klant){
-Account account = new Account (0, klant.getAccount.getEmailadres, klant.getAccount.getwachtwoord);
-Naam naam = new Naam(0, klant.getNaam.getVoornaam, klant.getNaam.getTussenvoegsel, klant.getNaam.getAchternaam);
-Adres Adres = new Adres(0, klant.getAdres.getStraat, etc.
-klant.setAccount(account);
-klant.setNaam(naam)
-etc.
-klant.setPortefeuille(aanmaaklegePortefeuille);
-return rootRepository.slaKlantOp(klant)
-
-     */
-
     public List<PortefeuilleItem> aanmaakLegePortefeuille() {
         List<PortefeuilleItem> legePortefeuille = new ArrayList<>();
         for (Asset asset: assetService.geefAlleAssets()) {
