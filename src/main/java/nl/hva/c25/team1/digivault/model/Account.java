@@ -7,7 +7,7 @@ import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
 /**
  * @author Sezi, studentnummer 500889525
- * @version 1-12-2021
+ * @version 6-12-2021
  */
 
 public class Account {
@@ -19,23 +19,16 @@ public class Account {
     private Klant klant;
 
     private Account (int accountId,String emailadres, String wachtwoord, Klant klant) {
+        super();
         this.accountId = accountId;
         this.emailadres = emailadres;
         this.wachtwoord = wachtwoord;
         this.klant = klant;
     }
 
-    public Account(String emailadres, String wachtwoord) {
-        this.emailadres = emailadres;
-        this.wachtwoord = wachtwoord;
-        this.klant = null;
-    }
+    public Account(String emailadres, String wachtwoord) { this(0, emailadres, wachtwoord, null);}
 
-    public Account () {
-        this.emailadres = "onbekend";
-        this.wachtwoord = "onbekend";
-        this.klant = null;
-    }
+    public Account () { this(0, "", "", null);}
 
     public Account(RegisterDto dto){
         this(dto.getEmailadres(),dto.getWachtwoord());
