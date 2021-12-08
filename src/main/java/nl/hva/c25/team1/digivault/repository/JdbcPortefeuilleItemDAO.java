@@ -4,6 +4,7 @@
 package nl.hva.c25.team1.digivault.repository;
 
 import nl.hva.c25.team1.digivault.model.Asset;
+import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.PortefeuilleItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -36,6 +37,7 @@ public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
             PortefeuilleItem portefeuilleItem = new PortefeuilleItem(resultSet.getInt("itemId"),
                     resultSet.getDouble("aantal"));
             portefeuilleItem.setAsset(new Asset(resultSet.getInt("assetId")));
+            portefeuilleItem.setKlant(new Klant(resultSet.getInt("klantId")));
             return portefeuilleItem;
         }
     }
@@ -48,13 +50,15 @@ public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
      */
     @Override
     public PortefeuilleItem bewaarPortefeuilleItemMetKey(PortefeuilleItem portefeuilleItem) {
-        String sql = "INSERT INTO portefeuille_item (aantal) VALUES (?)";
+        String sql = "INSERT INTO portefeuille_item (aantal, klantId, assetId) VALUES (?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setDouble(1, portefeuilleItem.getHoeveelheid());
+                ps.setInt(2, portefeuilleItem.getKlant().getKlantId());
+                ps.setInt(3, portefeuilleItem.getAsset().getAssetId());
                 return ps;
             }
         }, keyHolder);

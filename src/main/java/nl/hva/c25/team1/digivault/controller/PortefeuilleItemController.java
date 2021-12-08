@@ -29,10 +29,4 @@ public class PortefeuilleItemController {
         }
     }
 
-    // Tijdelijk uit-gecomment door Erwin, updatePortefeuilleItem bestaat nog niet in Service   // TODO check PI-Controller
-//    @PutMapping("/portefeuilles")
-//    public String updatePortefeuilleItemHandler(@RequestBody PortefeuilleItem portefeuilleItem) {
-//        return portefeuilleItemService.updatePortefeuilleItem(portefeuilleItem);
-//    }
-
 }
