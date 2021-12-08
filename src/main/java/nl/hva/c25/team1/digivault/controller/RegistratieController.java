@@ -37,6 +37,7 @@ public class RegistratieController {
         Naam naam = new Naam(0, voornaam, tussenvoegsel, achternaam);
         Adres adres = new Adres(0, straat, huisnummer, toevoeging, postcode, woonplaats);
         Rekening rekening = new Rekening(0, "");
+        PortefeuilleItem portefeuilleItem = new PortefeuilleItem(0,0);
         klant.setNaam(naam);
         klant.setAdres(adres);
         klant.setRekening(rekening);
