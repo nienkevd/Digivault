@@ -11,14 +11,16 @@ import java.util.Random;
 public class IbanService {
     public static String LANDCODE = "NL";
     public static String BANKCODE = "DIVA";
-    public static String CONTROLESTRING_LANDCODE = "207189";  //2321
+    public static String CONTROLESTRING_LANDCODE = "207189";       //2321
     public static String CONTROLESTRING_BANKCODE = "11716227990";  //13183110
     public static String CONTROLESTRING_SLOT = "00";
     public static int ASCII_MINIMUM = 48;      // waarden vanaf cijfer 0
     public static int ASCII_MAXIMUM = 57;      // waarden tot en met cijfer 9
     public static int STRING_LENGTE = 10;
+    public static BigInteger MODULO = BigInteger.valueOf(97);
+    public static BigInteger TOTAAL = BigInteger.valueOf(98);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {    // Om tijdelijk automatisch gegenereerde Ibans te laten zien
         System.out.println(IbanGenerator());
     }
 
@@ -49,10 +51,10 @@ public class IbanService {
     public static String genereerControleGetal(String controleString) {
         StringBuilder controleStringBuilderReeks = new StringBuilder(CONTROLESTRING_BANKCODE + controleString +
                 CONTROLESTRING_LANDCODE + CONTROLESTRING_SLOT);
-        String controleStringReeks = controleStringBuilderReeks.toString();
-        System.out.println(controleStringReeks);
-//        BigInteger controleLongReeks = BigInteger.valueOf(Long.parseLong(controleStringReeks));
-//        BigInteger controlegetal = (98 - (controleLongReeks %= 97));
-        return "20";    // tijdelijk controlegetal
+        String controleReeksString = controleStringBuilderReeks.toString();
+        BigInteger controleReeksLong = new BigInteger(controleReeksString);
+        BigInteger result = controleReeksLong.mod(MODULO);
+        BigInteger controleGetal = TOTAAL.subtract(result);
+        return controleGetal.toString();
     }
 }
