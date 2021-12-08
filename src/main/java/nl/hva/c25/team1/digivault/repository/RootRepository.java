@@ -29,7 +29,7 @@ public class RootRepository {
 
 
     /**
-     *
+     * checked: Anthon 8-12-2021
      * @author Anneke
      * Deze methode wordt aangeroepen in registratieservice registratie(Klant klant)
      * De objecten van de klant worden afzonderlijk opgeslagen en de
@@ -41,7 +41,7 @@ public class RootRepository {
         naamDAO.bewaarNaamMetSK(klant.getNaam());
         adresDAO.bewaarAdresMetSK(klant.getAdres());
         accountDAO.bewaarAccountMetSK(klant.getAccount());
-        klant.getAccount().setKlant(klant);
+        klant.getAccount().setKlant(klant); //  Anthon: beter naar einde?
         rekeningDAO.bewaarRekeningMetSK(klant.getRekening());
         for(PortefeuilleItem item : klant.getPortefeuille()){
             portefeuilleItemDAO.bewaarPortefeuilleItemMetKey(item);
