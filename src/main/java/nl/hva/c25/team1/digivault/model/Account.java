@@ -26,9 +26,26 @@ public class Account {
         this.klant = klant;
     }
 
+
     public Account(String emailadres, String wachtwoord) { this(0, emailadres, wachtwoord, null);}
 
     public Account () { this(0, "", "", null);}
+
+    public Account(int accountId, String emailadres, String wachtwoord) {
+        this(accountId, emailadres,wachtwoord, null);
+    }
+
+    public Account(String emailadres, String wachtwoord) {
+        this(0, emailadres, wachtwoord);
+    }
+
+    public Account(int accountId) {
+        this(accountId, "onbekend", "onbekend");
+    }
+
+    public Account () {
+        this(0);
+    }
 
     public Account(RegisterDto dto){
         this(dto.getEmailadres(),dto.getWachtwoord());

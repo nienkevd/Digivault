@@ -39,6 +39,10 @@ public class EuroKoers {
         this(euroKoersId, datum, koers, 0);
     }
 
+    public EuroKoers(int euroKoersId) {
+        this(euroKoersId, null, 0);
+    }
+
     /**
      * Lege constructor van de klasse EuroKoers
      */
