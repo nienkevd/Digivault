@@ -19,22 +19,27 @@ public class Account {
     private Klant klant;
 
     private Account (int accountId,String emailadres, String wachtwoord, Klant klant) {
+        super();
         this.accountId = accountId;
         this.emailadres = emailadres;
         this.wachtwoord = wachtwoord;
         this.klant = klant;
     }
 
+    public Account(int accountId, String emailadres, String wachtwoord) {
+        this(accountId, emailadres,wachtwoord, null);
+    }
+
     public Account(String emailadres, String wachtwoord) {
-        this.emailadres = emailadres;
-        this.wachtwoord = wachtwoord;
-        this.klant = null;
+        this(0, emailadres, wachtwoord);
+    }
+
+    public Account(int accountId) {
+        this(accountId, "onbekend", "onbekend");
     }
 
     public Account () {
-        this.emailadres = "onbekend";
-        this.wachtwoord = "onbekend";
-        this.klant = null;
+        this(0);
     }
 
     public Account(RegisterDto dto){

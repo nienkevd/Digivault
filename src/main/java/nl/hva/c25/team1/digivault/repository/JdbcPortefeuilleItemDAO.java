@@ -3,6 +3,7 @@
 
 package nl.hva.c25.team1.digivault.repository;
 
+import nl.hva.c25.team1.digivault.model.Asset;
 import nl.hva.c25.team1.digivault.model.PortefeuilleItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -32,7 +33,10 @@ public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
     private class PortefeuilleItemRowMapper implements RowMapper<PortefeuilleItem> {
         @Override
         public PortefeuilleItem mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
-            return new PortefeuilleItem(resultSet.getInt("itemId"), resultSet.getDouble("aantal"));
+            PortefeuilleItem portefeuilleItem = new PortefeuilleItem(resultSet.getInt("itemId"),
+                    resultSet.getDouble("aantal"));
+            portefeuilleItem.setAsset(new Asset(resultSet.getInt("assetId")));
+            return portefeuilleItem;
         }
     }
 

@@ -6,6 +6,8 @@ import nl.hva.c25.team1.digivault.transfer.RegisterDto;
  *
  * @author Anneke, studentnummer 500889251
  * @version 1-12-2021
+ *
+ * Review Anthon 8-12-2021
  */
 
 public class Naam {
@@ -25,8 +27,12 @@ public class Naam {
         this(0,voornaam,tussenvoegsel,achternaam);
     }
 
-    public Naam(RegisterDto dto){
+    public Naam(RegisterDto dto) {
         this(dto.getVoornaam(), dto.getTussenvoegsel(), dto.getAchternaam());
+    }
+
+    public Naam(int naamId) {
+        this(naamId, "", "", "");
     }
 
     public int getNaamId() {

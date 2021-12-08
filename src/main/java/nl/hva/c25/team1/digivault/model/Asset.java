@@ -38,6 +38,10 @@ public class Asset {
         this(assetId, afkorting, naam, 0.0);
     }
 
+    public Asset(int assetId) {
+        this(assetId, "", "");
+    }
+
     /**
      * Lege constructor van de klasse Asset
      */
