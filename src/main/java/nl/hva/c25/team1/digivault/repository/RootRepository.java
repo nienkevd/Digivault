@@ -15,16 +15,18 @@ public class RootRepository {
     PortefeuilleItemDAO portefeuilleItemDAO;
     NaamDAO naamDAO;
     AdresDAO adresDAO;
+    AssetDAO assetDAO;
 
     @Autowired
     public RootRepository(KlantDAO klantDAO, RekeningDAO rekeningDAO, AccountDAO accountDAO,
-                          PortefeuilleItemDAO portefeuilleItemDAO, NaamDAO naamDAO, AdresDAO adresDAO) {
+                          PortefeuilleItemDAO portefeuilleItemDAO, NaamDAO naamDAO, AdresDAO adresDAO, AssetDAO assetDAO) {
         this.klantDAO = klantDAO;
         this.rekeningDAO = rekeningDAO;
         this.accountDAO = accountDAO;
         this.portefeuilleItemDAO = portefeuilleItemDAO;
         this.naamDAO = naamDAO;
         this.adresDAO = adresDAO;
+        this.assetDAO = assetDAO;
     }
 
 
@@ -50,6 +52,20 @@ public class RootRepository {
         return klantDAO.bewaarKlantMetSK(klant);
     }
 
+    /**
+     * @author Anthon
+     *
+     * Methode gemaakt om functionaliteit rootrepo uit te proberen.
+     *
+     * @param itemId Id van het portefeuilleitem.
+     * @return complete portefeuilleitem.
+     */
+    public PortefeuilleItem vindPortefeuilleItemOpId(int itemId) {
+        PortefeuilleItem portefeuilleItem = portefeuilleItemDAO.vindItemMetId(itemId);
+        portefeuilleItem.setKlant(klantDAO.vindKlantOpKlantId(portefeuilleItem.getKlant().getKlantId()));
+        portefeuilleItem.setAsset(assetDAO.vindAssetOpId(portefeuilleItem.getAsset().getAssetId()));
+        return portefeuilleItem;
+    }
 
 
 

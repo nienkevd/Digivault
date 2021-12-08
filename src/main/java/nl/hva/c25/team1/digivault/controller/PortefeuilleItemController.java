@@ -19,7 +19,7 @@ public class PortefeuilleItemController {
         this.portefeuilleItemService = portefeuilleItemService;
     }
 
-    @GetMapping("/portefeuilles/{id}")
+    @GetMapping("/portefeuilleitems/{id}")
     public ResponseEntity<PortefeuilleItem> vindPortefeuilleItemOpIdHandler(@PathVariable int id) {
         PortefeuilleItem portefeuilleItem = portefeuilleItemService.vindItemMetId(id);
         if (portefeuilleItem == null) {
