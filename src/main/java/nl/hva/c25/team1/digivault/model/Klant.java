@@ -1,5 +1,7 @@
 package nl.hva.c25.team1.digivault.model;
 
+import nl.hva.c25.team1.digivault.transfer.RegisterDto;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -36,6 +38,12 @@ public class Klant {
 
     public Klant(int klantId, String bsn, LocalDate geboortedatum) {
         this(klantId,bsn,geboortedatum, null, null,null, null, null);
+    }
+    public Klant(String bsn, LocalDate geboortedatum) {
+        this(0, bsn, geboortedatum, null, null, null, null, null);
+    }
+    public Klant(RegisterDto dto){
+        this(dto.getBsn(),dto.getGeboortedatum());
     }
 
 

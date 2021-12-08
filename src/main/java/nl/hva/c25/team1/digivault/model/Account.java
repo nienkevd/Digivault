@@ -1,6 +1,7 @@
 package nl.hva.c25.team1.digivault.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
 // review door Erwin, 6 december
 
@@ -34,6 +35,10 @@ public class Account {
         this.emailadres = "onbekend";
         this.wachtwoord = "onbekend";
         this.klant = null;
+    }
+
+    public Account(RegisterDto dto){
+        this(dto.getEmailadres(),dto.getWachtwoord());
     }
 
     public int getAccountId() {

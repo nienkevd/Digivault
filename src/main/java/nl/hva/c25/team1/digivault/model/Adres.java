@@ -1,5 +1,7 @@
 package nl.hva.c25.team1.digivault.model;
 
+import nl.hva.c25.team1.digivault.transfer.RegisterDto;
+
 /**
  *
  * @author Anneke, studentnummer 500889251
@@ -22,6 +24,14 @@ public class Adres {
         this.toevoeging = toevoeging;
         this.postcode = postcode;
         this.woonplaats = woonplaats;
+    }
+
+    public Adres(String straat, int huisnummer, String toevoeging, String postcode, String woonplaats) {
+        this(0,straat,huisnummer,toevoeging,postcode,woonplaats);
+    }
+
+    public Adres(RegisterDto dto){
+        this(dto.getStraat(),dto.getHuisnummer(),dto.getToevoeging(),dto.getPostcode(),dto.getWoonplaats());
     }
 
     public int getAdresId() {
