@@ -31,7 +31,6 @@ public class RegistratieService {
     @PostMapping("/registratie")
     public Klant registratie(Klant klant) {
         Account account = new Account(klant.getAccount().getEmailadres(), klant.getAccount().getWachtwoord());
-        Klant nieuweKlant = new Klant(0, klant.getBsn(), klant.getGeboortedatum());
         Naam naam = new Naam(0, klant.getNaam().getVoornaam(), klant.getNaam().getTussenvoegsel(),
                 klant.getNaam().getAchternaam());
         Adres adres = new Adres(0, klant.getAdres().getStraat(), klant.getAdres().getHuisnummer(),
