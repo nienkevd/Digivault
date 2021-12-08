@@ -1,11 +1,13 @@
 package nl.hva.c25.team1.digivault.controller;
 
 import nl.hva.c25.team1.digivault.model.*;
+import nl.hva.c25.team1.digivault.service.AssetService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +18,11 @@ import java.util.Map;
 
 public class RegistratieController {
 
-    public RegistratieController() {
+    private AssetService assetService;
+
+    public RegistratieController(AssetService assetService) {
         super();
+        this.assetService = assetService;
     }
 
     @PostMapping("/registratie")
@@ -39,17 +44,25 @@ public class RegistratieController {
         Klant klant = new Klant(0, BSN, geboortedatum);
         Naam naam = new Naam(0, voornaam, tussenvoegsel, achternaam);
         Adres adres = new Adres(0, straat, huisnummer, toevoeging, postcode, woonplaats);
-        Rekening rekening = new Rekening(0, "");
-        PortefeuilleItem portefeuilleItem = new PortefeuilleItem(0,0);
+        Rekening rekening = new Rekening(0, genereerIban());
+        klant.setAccount(account);
         klant.setNaam(naam);
         klant.setAdres(adres);
         klant.setRekening(rekening);
-        klant.setAccount(account);
+        klant.setPortefeuille(aanmaakLegePortefeuille());
         return klant;
     }
 
     public List<PortefeuilleItem> aanmaakLegePortefeuille() {
         List<PortefeuilleItem> legePortefeuille = new ArrayList<>();
+        for (Asset asset: assetService.geefAlleAssets()) {
+            PortefeuilleItem portefeuilleItem = new PortefeuilleItem(asset.getAssetId(), 0);
+            legePortefeuille.add(portefeuilleItem);
+        }
         return legePortefeuille;
+    }
+
+    public String genereerIban() {
+        return "NL20 DIVA 0001234567";
     }
 }
