@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @author Sezi, studentnummer 500889525
- * @version 1-12-2021
+ * @version 8-12-2021
  */
 
 public class AccountService {
@@ -23,12 +23,16 @@ public class AccountService {
         //this.rootRepository = rootRepository;
     }
 
-    public void update(Account account) {
-        accountDAO.update(account);
+    public int bewaarAccountMetSK(Account account) {
+        return accountDAO.bewaarAccountMetSK(account);
     }
 
-    public Account vindAccountOpEmailadres(String emailadres) {
-        return accountDAO.vindAccountOpEmailadres(emailadres);
+    public void updateKlant(Account account) {
+        accountDAO.updateAccount(account);
+    }
+
+    public Account vindAccountOpAccountId(int accountId) {
+        return accountDAO.vindAccountOpAccountId(accountId);
     }
 
     public List<Account> geefAlleAccounts() {

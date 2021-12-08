@@ -15,7 +15,7 @@ import java.util.List;
  * Controller van de klasse Account
  *
  * @author Sezi, studentnummer 500889525
- * @version 1-12-2021
+ * @version 8-12-2021
  */
 
 public class AccountController {
@@ -26,18 +26,16 @@ public class AccountController {
     }
 
     @PostMapping("/accounts")
-    public void bewaarAccount(@RequestBody Account account) {
-        accountService.bewaar(account);
+    public int bewaarAccount(@RequestBody Account account) {return accountService.bewaarAccountMetSK(account);}
+
+    @PostMapping("/accounts/{accountId}")
+    public void updateAccount(@RequestBody Account account) {
+        accountService.updateKlant(account);
     }
 
-    @PostMapping("/accounts")
-    public void verversAccount(@RequestBody Account account) {
-        accountService.update(account);
-    }
-
-    @GetMapping("/accounts/{emailadres}")
-    public Account geefAccountOpEmailadres(@PathVariable String emailadres) {
-        return accountService.vindAccountOpEmailadres(emailadres);
+    @GetMapping("/accounts/{accountId}")
+    public Account geefAccountOpAccountId(@PathVariable int accountId) {
+        return accountService.vindAccountOpAccountId(accountId);
     }
 
     @GetMapping("/accounts")
