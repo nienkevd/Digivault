@@ -23,7 +23,7 @@ public class AccountService {
         //this.rootRepository = rootRepository;
     }
 
-    public int bewaarAccountMetSK(Account account) {
+    public Account bewaarAccountMetSK(Account account) {
         return accountDAO.bewaarAccountMetSK(account);
     }
 

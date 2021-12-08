@@ -41,6 +41,10 @@ public class RegisterDto {
         this.woonplaats = adres.getWoonplaats();
     }
 
+    public RegisterDto(){
+
+    }
+
     public String getEmailadres() {
         return emailadres;
     }

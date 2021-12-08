@@ -15,11 +15,11 @@ import java.util.List;
 
 public interface AccountDAO {
 
-    public int bewaarAccountMetSK(Account account);
+    Account bewaarAccountMetSK(Account account);
 
-    public void updateAccount(Account account);
+    void updateAccount(Account account);
 
-    public Account vindAccountOpAccountId(int accountId);
+    Account vindAccountOpAccountId(int accountId);
 
-    public List<Account> geefAlleAccounts();
+    List<Account> geefAlleAccounts();
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class RootRepository {
 
-    JdbcTemplate jdbcTemplate;
     KlantDAO klantDAO;
     RekeningDAO rekeningDAO;
     AccountDAO accountDAO;
@@ -18,9 +17,8 @@ public class RootRepository {
     AdresDAO adresDAO;
 
     @Autowired
-    public RootRepository(JdbcTemplate jdbcTemplate, KlantDAO klantDAO, RekeningDAO rekeningDAO, AccountDAO accountDAO,
+    public RootRepository(KlantDAO klantDAO, RekeningDAO rekeningDAO, AccountDAO accountDAO,
                           PortefeuilleItemDAO portefeuilleItemDAO, NaamDAO naamDAO, AdresDAO adresDAO) {
-        this.jdbcTemplate = jdbcTemplate;
         this.klantDAO = klantDAO;
         this.rekeningDAO = rekeningDAO;
         this.accountDAO = accountDAO;
@@ -32,15 +30,18 @@ public class RootRepository {
 
     /**
      *
+     * @author Anneke
      * Deze methode wordt aangeroepen in registratieservice registratie(Klant klant)
+     * De objecten van de klant worden afzonderlijk opgeslagen en de
+     * klant kan daarna met alle id's volledig worden opgeslagen
      * @param klant klant zonder id's
      * @return volledig geregistreerd klant object
      */
     public Klant slaKlantOp(Klant klant){
         naamDAO.bewaarNaamMetSK(klant.getNaam());
         adresDAO.bewaarAdresMetSK(klant.getAdres());
+        accountDAO.bewaarAccountMetSK(klant.getAccount());
         klant.getAccount().setKlant(klant);
-
         rekeningDAO.bewaarRekeningMetSK(klant.getRekening());
         for(PortefeuilleItem item : klant.getPortefeuille()){
             portefeuilleItemDAO.bewaarPortefeuilleItemMetKey(item);

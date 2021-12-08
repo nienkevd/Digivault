@@ -35,6 +35,17 @@ public class Klant {
         this.portefeuille = portefeuille;
     }
 
+    public Klant(String bsn, LocalDate geboortedatum, Naam naam, Adres adres,
+                  Account account, Rekening rekening, List<PortefeuilleItem> portefeuille) {
+        this.bsn = bsn;
+        this.geboortedatum = geboortedatum;
+        this.naam = naam;
+        this.adres = adres;
+        this.account = account;
+        this.rekening = rekening;
+        this.portefeuille = portefeuille;
+    }
+
 
     public Klant(int klantId, String bsn, LocalDate geboortedatum) {
         this(klantId,bsn,geboortedatum, null, null,null, null, null);
