@@ -41,8 +41,10 @@ public class JdbcAccountDAO implements AccountDAO {
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                return preparedStatement;
+                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, account.getEmailadres());
+                ps.setString(2, account.getWachtwoord());
+                return ps;
             }
         }, keyHolder);
         account.setAccountId(keyHolder.getKey().intValue());
