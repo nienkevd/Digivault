@@ -9,7 +9,6 @@ import java.util.List;
 
 @Repository
 public class RootRepository {
-
     KlantDAO klantDAO;
     RekeningDAO rekeningDAO;
     AccountDAO accountDAO;
@@ -17,7 +16,6 @@ public class RootRepository {
     NaamDAO naamDAO;
     AdresDAO adresDAO;
     AssetDAO assetDAO;
-
 
     @Autowired
     public RootRepository(KlantDAO klantDAO, RekeningDAO rekeningDAO, AccountDAO accountDAO,
@@ -30,7 +28,6 @@ public class RootRepository {
         this.adresDAO = adresDAO;
         this.assetDAO = assetDAO;
     }
-
 
     // checked: Anthon 8-12-2021
     /**
@@ -97,23 +94,35 @@ public class RootRepository {
         return portefeuilleItem;
     }
 
-    public FinancieelOverzicht vindFinancieelOverzichtOpId(int klantId) {
-        System.out.println("root");
+    /**
+     * @author Nienke en Erwin
+     * @param klantId
+     * @return
+     */
+    public FinancieelOverzicht genereerFinancieelOverzichtOpId(int klantId) {
         FinancieelOverzicht financieelOverzicht = new FinancieelOverzicht(klantId);
         Rekening rekening = rekeningDAO.vindRekeningOpId(klantId);
         financieelOverzicht.setIban(rekening.getIBAN());
         financieelOverzicht.setSaldo(rekening.getSaldo());
-        financieelOverzicht.setPortefeuille(genereerPortefeuilleOverzicht(klantId));
+        financieelOverzicht.setAssetMetAantal(genereerPortefeuilleOverzicht(klantId));
         return financieelOverzicht;
     }
 
-    public List<PortefeuilleItemOverzicht> genereerPortefeuilleOverzicht(int klantId) {
-        List<PortefeuilleItemOverzicht> portefeuilleOverzicht = new ArrayList<>();
+    /**
+     * Methode die genereerFinancieelOverzichtOpId() voorziet van lijst met assets + hoeveelheid bij een klantId
+     * @author Erwin
+     * @param klantId het klantId waarop gezocht wordt
+     * @return de lijst met assetparameters + hoeveelheid
+     */
+    public List<AssetMetAantal> genereerPortefeuilleOverzicht(int klantId) {
+        List<AssetMetAantal> portefeuilleOverzicht = new ArrayList<>();
         for (Asset asset: assetDAO.geefAlleAssets()) {
-            PortefeuilleItemOverzicht overzicht = new PortefeuilleItemOverzicht();
+            AssetMetAantal overzicht = new AssetMetAantal();
+            overzicht.setAssetId(asset.getAssetId());
             overzicht.setAfkorting(asset.getAfkorting());
             overzicht.setNaam(asset.getNaam());
             overzicht.setDagkoers(asset.getDagKoers());
+            overzicht.setAantal(portefeuilleItemDAO.vindItemMetId(asset.getAssetId()).getHoeveelheid());
             portefeuilleOverzicht.add(overzicht);
         }
         return portefeuilleOverzicht;

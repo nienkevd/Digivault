@@ -11,14 +11,14 @@ public class FinancieelOverzicht {
     private int klantId;
     private String iban;
     private double saldo;
-    private List<PortefeuilleItemOverzicht> portefeuille;
+    private List<AssetMetAantal> assetMetAantal;
 
-    public FinancieelOverzicht(int klantId, String iban, double saldo, List<PortefeuilleItemOverzicht> portefeuille) {
+    public FinancieelOverzicht(int klantId, String iban, double saldo, List<AssetMetAantal> assetMetAantal) {
         super();
         this.klantId = klantId;
         this.iban = iban;
         this.saldo = saldo;
-        this.portefeuille = portefeuille;
+        this.assetMetAantal = assetMetAantal;
     }
 
     public FinancieelOverzicht(int klantId) {
@@ -53,11 +53,21 @@ public class FinancieelOverzicht {
         this.klantId = klantId;
     }
 
-    public List<PortefeuilleItemOverzicht> getPortefeuille() {
-        return portefeuille;
+    public List<AssetMetAantal> getAssetMetAantal() {
+        return assetMetAantal;
     }
 
-    public void setPortefeuille(List<PortefeuilleItemOverzicht> portefeuille) {
-        this.portefeuille = portefeuille;
+    public void setAssetMetAantal(List<AssetMetAantal> assetMetAantal) {
+        this.assetMetAantal = assetMetAantal;
+    }
+
+    @Override
+    public String toString() {
+        return "FinancieelOverzicht{" +
+                "klantId=" + klantId +
+                ", iban='" + iban + '\'' +
+                ", saldo=" + saldo +
+                ", assetMetAantal=" + assetMetAantal +
+                '}';
     }
 }

@@ -21,8 +21,8 @@ public class FinancieelOverzichtService {
         this.rootRepository = rootRepository;
     }
 
-    public FinancieelOverzicht vindFinancieelOverzicht(int klantId) {
-        FinancieelOverzicht financieelOverzicht = rootRepository.vindFinancieelOverzichtOpId(klantId);
-        return financieelOverzicht;
+    public FinancieelOverzicht genereerFinancieelOverzicht(int klantId) {
+        FinancieelOverzicht overzicht = rootRepository.genereerFinancieelOverzichtOpId(klantId);
+        return overzicht;
     }
 }

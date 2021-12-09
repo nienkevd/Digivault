@@ -5,21 +5,31 @@ package nl.hva.c25.team1.digivault.model;
  * @since 9-12-2021
  */
 
-public class PortefeuilleItemOverzicht {
+public class AssetMetAantal {
+    private int assetId;
     private String afkorting;
     private String naam;
     private double dagkoers;
-    private double hoeveelheid;
+    private double aantal;
 
-    public PortefeuilleItemOverzicht(String afkorting, String naam, double dagkoers, double hoeveelheid) {
+    public AssetMetAantal(int assetId, String afkorting, String naam, double dagkoers, double aantal) {
         super();
+        this.assetId = assetId;
         this.afkorting = afkorting;
         this.naam = naam;
         this.dagkoers = dagkoers;
-        this.hoeveelheid = hoeveelheid;
+        this.aantal = aantal;
     }
 
-    public PortefeuilleItemOverzicht() {
+    public int getAssetId() {
+        return assetId;
+    }
+
+    public void setAssetId(int assetId) {
+        this.assetId = assetId;
+    }
+
+    public AssetMetAantal() {
 
     }
 
@@ -47,21 +57,22 @@ public class PortefeuilleItemOverzicht {
         this.dagkoers = dagkoers;
     }
 
-    public double getHoeveelheid() {
-        return hoeveelheid;
+    public double getAantal() {
+        return aantal;
     }
 
-    public void setHoeveelheid(double hoeveelheid) {
-        this.hoeveelheid = hoeveelheid;
+    public void setAantal(double aantal) {
+        this.aantal = aantal;
     }
 
     @Override
     public String toString() {
-        return "PortefeuilleItemOverzicht{" +
-                "afkorting='" + afkorting + '\'' +
+        return "AssetMetAantal{" +
+                "assetId=" + assetId +
+                ", afkorting='" + afkorting + '\'' +
                 ", naam='" + naam + '\'' +
                 ", dagkoers=" + dagkoers +
-                ", hoeveelheid=" + hoeveelheid +
+                ", aantal=" + aantal +
                 '}';
     }
 }
