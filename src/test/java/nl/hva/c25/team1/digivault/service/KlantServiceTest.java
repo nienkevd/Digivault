@@ -1,5 +1,6 @@
 package nl.hva.c25.team1.digivault.service;
 
+import nl.hva.c25.team1.digivault.model.Account;
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.repository.JdbcKlantDAO;
 import nl.hva.c25.team1.digivault.repository.KlantDAO;
@@ -38,5 +39,13 @@ class KlantServiceTest {
         String actual = serviceUnderTest.updateKlant(bestaandeKlant);
         assertThat(actual).contains("geslaagd");
     }
+
+//    @Test
+//    void bewaarKlant() {
+//        Klant nieuw = new Klant("267827227", LocalDate.now());
+//        Mockito.when(mockDAO.bewaarKlantMetSK(nieuw)).thenReturn(nieuw);
+//        Klant actual = serviceUnderTest.bewaarKlant(nieuw);
+//        assertThat(actual.getKlantId()).isPositive();
+//    }
 
 }
