@@ -2,6 +2,7 @@ package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.repository.JdbcAssetDAO;
 import nl.hva.c25.team1.digivault.repository.JdbcPortefeuilleItemDAO;
+import nl.hva.c25.team1.digivault.transfer.FinancieelOverzichtDto;
 
 /**
  * @author Erwin, studentnummer 500889293
