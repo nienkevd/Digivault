@@ -24,7 +24,6 @@ public class FinancieelOverzichtController {
 
     @GetMapping("/financieeloverzicht/{klantId}")
     public FinancieelOverzicht vindFinancieelOverzicht(@PathVariable int klantId) {
-        System.out.println("conroller");
         return financieelOverzichtService.vindFinancieelOverzicht(klantId);
     }
 }
