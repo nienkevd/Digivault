@@ -44,15 +44,7 @@ public class RegistratieService {
 
     public Klant registratie(Klant klant) {
         System.out.println(klant);
-//        Account account = new Account(0, klant.getAccount().getEmailadres(), klant.getAccount().getWachtwoord());
-//        Naam naam = new Naam(0, klant.getNaam().getVoornaam(), klant.getNaam().getTussenvoegsel(),
-//                klant.getNaam().getAchternaam());
-//        Adres adres = new Adres(0, klant.getAdres().getStraat(), klant.getAdres().getHuisnummer(),
-//                klant.getAdres().getToevoeging(), klant.getAdres().getPostcode(), klant.getAdres().getWoonplaats());
         Rekening rekening = new Rekening(0, genereerIban());
-//        klant.setAccount(account);
-//        klant.setNaam(naam);
-//        klant.setAdres(adres);
         klant.setRekening(rekening);
         System.out.println(klant);
         klant.setPortefeuille(aanmaakLegePortefeuille());
