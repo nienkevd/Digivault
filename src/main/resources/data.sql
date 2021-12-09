@@ -9,19 +9,19 @@ INSERT INTO adres (straat, huisnummer, toevoeging, postcode, woonplaats) VALUES
     ('Van Galenstraat',24,'a','1051NJ','Amsterdam'),
     ('Marcantilaan',354,NULL,'1061BB','Amsterdam'),
     ('Mediapark',1,'b','1837AB','Amsterdam');
-    
+
 INSERT INTO rekening (iban, saldo) VALUES
 	('NL19DIVA0000876951',10000),
     ('NL20DIVA0000876952',10000),
     ('NL21DIVA0000876953',1000),
     ('NL22DIVA0000876954',10000);
-    
+
 INSERT INTO account (emailadres, wachtwoord) VALUES
 	('annie@gmail.com','Annie7890'),
     ('marieke@gmail.com','cryptoMaster77'),
     ('karin@gmail.com','K1'),
     ('klaas@hotmail.com','MIW_77_##');
-    
+
 INSERT INTO asset (afkorting, naam, dagkoers) VALUES
 	('BTC', 'Bitcoin', 45329.81),
     ('ETH', 'Ethereum', 3839.95),
@@ -43,7 +43,7 @@ INSERT INTO asset (afkorting, naam, dagkoers) VALUES
     ('UST', 'TerraUSD', 0.8909),
     ('EGLD', 'Elrond', 261.70),
     ('FIL', 'Filecoin', 35.14);
-    
+
 INSERT INTO eurokoers (datum, koers, assetId) VALUES
 	('2021-12-07', 45329.81, 1),
     ('2021-12-07', 3839.95, 2),
@@ -65,7 +65,7 @@ INSERT INTO eurokoers (datum, koers, assetId) VALUES
     ('2021-12-07', 0.8909, 18),
     ('2021-12-07', 261.70, 19),
     ('2021-12-07', 35.14, 20);
-	
+
 INSERT INTO klant (bsn, geboortedatum, naamId, adresId, rekeningId, accountId) VALUES
 	('123456789','1980-05-27',1,1,1,1),
 	('123789456','1983-07-05',2,2,2,2),
