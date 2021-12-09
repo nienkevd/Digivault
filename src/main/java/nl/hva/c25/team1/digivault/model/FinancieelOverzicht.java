@@ -11,9 +11,9 @@ public class FinancieelOverzicht {
     private int klantId;
     private String iban;
     private double saldo;
-    private List<PortefeuilleItem> portefeuille;
+    private List<PortefeuilleItemOverzicht> portefeuille;
 
-    public FinancieelOverzicht(int klantId, String iban, double saldo, List<PortefeuilleItem> portefeuille) {
+    public FinancieelOverzicht(int klantId, String iban, double saldo, List<PortefeuilleItemOverzicht> portefeuille) {
         super();
         this.klantId = klantId;
         this.iban = iban;
@@ -53,11 +53,11 @@ public class FinancieelOverzicht {
         this.klantId = klantId;
     }
 
-    public List<PortefeuilleItem> getPortefeuille() {
+    public List<PortefeuilleItemOverzicht> getPortefeuille() {
         return portefeuille;
     }
 
-    public void setPortefeuille(List<PortefeuilleItem> portefeuille) {
+    public void setPortefeuille(List<PortefeuilleItemOverzicht> portefeuille) {
         this.portefeuille = portefeuille;
     }
 }

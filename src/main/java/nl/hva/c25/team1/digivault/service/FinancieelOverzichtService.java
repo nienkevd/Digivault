@@ -22,7 +22,6 @@ public class FinancieelOverzichtService {
     }
 
     public FinancieelOverzicht vindFinancieelOverzicht(int klantId) {
-        System.out.println("service");
         FinancieelOverzicht financieelOverzicht = rootRepository.vindFinancieelOverzichtOpId(klantId);
         return financieelOverzicht;
     }

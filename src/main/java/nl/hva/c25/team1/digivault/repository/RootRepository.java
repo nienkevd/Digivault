@@ -1,9 +1,6 @@
 package nl.hva.c25.team1.digivault.repository;
 
-import nl.hva.c25.team1.digivault.model.FinancieelOverzicht;
-import nl.hva.c25.team1.digivault.model.Klant;
-import nl.hva.c25.team1.digivault.model.PortefeuilleItem;
-import nl.hva.c25.team1.digivault.model.Rekening;
+import nl.hva.c25.team1.digivault.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -106,9 +103,19 @@ public class RootRepository {
         Rekening rekening = rekeningDAO.vindRekeningOpId(klantId);
         financieelOverzicht.setIban(rekening.getIBAN());
         financieelOverzicht.setSaldo(rekening.getSaldo());
-//        financieelOverzicht.setRekening(klantDAO.vindKlantOpKlantId(klantId).getRekening());
-
-        financieelOverzicht.setPortefeuille(portefeuilleItemDAO.genereerPortefeuilleVanKlantMetId(klantId));
+        financieelOverzicht.setPortefeuille(genereerPortefeuilleOverzicht(klantId));
         return financieelOverzicht;
+    }
+
+    public List<PortefeuilleItemOverzicht> genereerPortefeuilleOverzicht(int klantId) {
+        List<PortefeuilleItemOverzicht> portefeuilleOverzicht = new ArrayList<>();
+        for (Asset asset: assetDAO.geefAlleAssets()) {
+            PortefeuilleItemOverzicht overzicht = new PortefeuilleItemOverzicht();
+            overzicht.setAfkorting(asset.getAfkorting());
+            overzicht.setNaam(asset.getNaam());
+            overzicht.setDagkoers(asset.getDagKoers());
+            portefeuilleOverzicht.add(overzicht);
+        }
+        return portefeuilleOverzicht;
     }
 }
