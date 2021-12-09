@@ -3,7 +3,6 @@ package nl.hva.c25.team1.digivault.repository;
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.PortefeuilleItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -65,5 +64,10 @@ public class RootRepository {
         portefeuilleItem.setKlant(klantDAO.vindKlantOpKlantId(portefeuilleItem.getKlant().getKlantId()));
         portefeuilleItem.setAsset(assetDAO.vindAssetOpId(portefeuilleItem.getAsset().getAssetId()));
         return portefeuilleItem;
+    }
+
+    public Klant vindFinancieelOverzichtOpId(int klantId) {
+        Klant klant = klantDAO.vindKlantOpKlantId(klantId);
+        return klant;
     }
 }
