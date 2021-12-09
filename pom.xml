@@ -10,7 +10,7 @@
     </parent>
     <groupId>nl.hva.c25.team1</groupId>
     <artifactId>Digivault</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <name>Digivault</name>
     <description>Digivault</description>
     <properties>
