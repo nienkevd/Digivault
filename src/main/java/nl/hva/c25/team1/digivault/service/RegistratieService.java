@@ -38,6 +38,8 @@ public class RegistratieService {
      * Methode voor het registreren van een klant, de klant krijgt een goed gevulde rekening en lege portefeuille mee:
      * een lijst van 20 assets die op 0 zijn gezet
      *
+     * @author Anneke en Erwin
+     *
      * @param klant Klant die geregistreerd moet worden
      * @return de geregistreerde Klant
      */

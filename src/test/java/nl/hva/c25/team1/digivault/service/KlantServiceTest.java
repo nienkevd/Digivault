@@ -15,6 +15,13 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Testen bij KlantService
+ *
+ * @author Anneke, studentnummer 500889251
+ * @since 5-12-2021
+ */
+
 class KlantServiceTest {
 
     @MockBean

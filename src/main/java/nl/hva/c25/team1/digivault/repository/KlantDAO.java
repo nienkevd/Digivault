@@ -8,7 +8,7 @@ import java.util.List;
  * Interface met de te implementeren methodes voor JdbcKlantDAO
  *
  * @author Anneke, studentnummer 500889251
- * @version 1-12-2021
+ * @since 1-12-2021
  *
  * Review Anthon 6-12-2021
  */

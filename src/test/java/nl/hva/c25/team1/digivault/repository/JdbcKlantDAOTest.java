@@ -11,6 +11,13 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
+/**
+ * Testen bij KlantService
+ *
+ * @author Anneke, studentnummer 500889251
+ * @since 9-12-2021
+ */
+
 @SpringBootTest
 @ActiveProfiles("test")
 class JdbcKlantDAOTest {

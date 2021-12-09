@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  *
  * @author Anneke, studentnummer 500889251
- * @version 1-12-2021
+ * @since 1-12-2021
  *
  * Review Anthon 6-12-2021
  */

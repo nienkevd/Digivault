@@ -17,7 +17,7 @@ import java.util.List;
  * Java Database Connectivity voor DB-tabel Adres
  *
  * @author Anneke, studentnummer 500889251
- * @version 3-12-2021
+ * @since 3-12-2021
  */
 
 @Repository
