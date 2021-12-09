@@ -26,7 +26,7 @@ public class RegisterDto {
     private String postcode;
     private String woonplaats;
 
-    public RegisterDto(Account account, Naam naam, Klant klant, Adres adres){
+    public RegisterDto(Klant klant, Naam naam, Adres adres, Account account){
         this.emailadres = account.getEmailadres();
         this.wachtwoord = account.getWachtwoord();
         this.voornaam = naam.getVoornaam();

@@ -43,23 +43,31 @@ public class RegistratieService {
 //    }
 
     public Klant registratie(Klant klant) {
-        Account account = new Account(0, klant.getAccount().getEmailadres(), klant.getAccount().getWachtwoord());
-        Naam naam = new Naam(0, klant.getNaam().getVoornaam(), klant.getNaam().getTussenvoegsel(),
-                klant.getNaam().getAchternaam());
-        Adres adres = new Adres(0, klant.getAdres().getStraat(), klant.getAdres().getHuisnummer(),
-                klant.getAdres().getToevoeging(), klant.getAdres().getPostcode(), klant.getAdres().getWoonplaats());
+        System.out.println(klant);
+//        Account account = new Account(0, klant.getAccount().getEmailadres(), klant.getAccount().getWachtwoord());
+//        Naam naam = new Naam(0, klant.getNaam().getVoornaam(), klant.getNaam().getTussenvoegsel(),
+//                klant.getNaam().getAchternaam());
+//        Adres adres = new Adres(0, klant.getAdres().getStraat(), klant.getAdres().getHuisnummer(),
+//                klant.getAdres().getToevoeging(), klant.getAdres().getPostcode(), klant.getAdres().getWoonplaats());
         Rekening rekening = new Rekening(0, genereerIban());
-        klant.setAccount(account);
-        klant.setNaam(naam);
-        klant.setAdres(adres);
+//        klant.setAccount(account);
+//        klant.setNaam(naam);
+//        klant.setAdres(adres);
         klant.setRekening(rekening);
+        System.out.println(klant);
         klant.setPortefeuille(aanmaakLegePortefeuille());
+        System.out.println(klant);
         return rootRepository.slaKlantOp(klant);
     }
 
     public List<PortefeuilleItem> aanmaakLegePortefeuille() {
+        System.out.println("spot1");
         List<PortefeuilleItem> legePortefeuille = new ArrayList<>();
-        for (Asset asset: assetService.geefAlleAssets()) {
+        System.out.println("spot2");
+        List<Asset> assetlist = new ArrayList<>();
+        assetlist.add(new Asset(1,"A","Anthoncoin", 100));
+        assetlist.add(new Asset(2,"AB","Annekecoin", 200));
+        for (Asset asset: assetlist) {
             PortefeuilleItem portefeuilleItem = new PortefeuilleItem(asset.getAssetId(), 0);
             legePortefeuille.add(portefeuilleItem);
         }

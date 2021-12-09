@@ -78,9 +78,21 @@ public class Account {
         this.klant = klant;
     }
 
+//    @Override
+//    public String toString() {
+//        return String.format("Account of %s %s %s met emailadres : %s en wachtwoord : %s",
+//                klant.getNaam().getVoornaam(), klant.getNaam().getTussenvoegsel(), klant.getNaam().getAchternaam(), this.emailadres, this.wachtwoord);
+//    }
+
+
     @Override
     public String toString() {
-        return String.format("Account of %s %s %s met emailadres : %s en wachtwoord : %s",
-                klant.getNaam().getVoornaam(), klant.getNaam().getTussenvoegsel(), klant.getNaam().getAchternaam(), this.emailadres, this.wachtwoord);
+        return "Account{" +
+                "accountId=" + accountId +
+                ", emailadres='" + emailadres + '\'' +
+                ", wachtwoord='" + wachtwoord + '\'' +
+                ", klant=" + klant +
+                '}';
     }
 }
+
