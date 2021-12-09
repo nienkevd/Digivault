@@ -3,10 +3,7 @@ package nl.hva.c25.team1.digivault.controller;
 
 import nl.hva.c25.team1.digivault.model.Rekening;
 import nl.hva.c25.team1.digivault.service.RekeningService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,7 +29,7 @@ public class RekeningController {
         rekeningService.bewaarRekening(rekening);
     }
 
-    @PostMapping("/rekeningen")
+    @PutMapping("/rekeningen")
     public void verversRekening(@RequestBody Rekening rekening) {
         rekeningService.updateRekening(rekening);
     }
@@ -40,6 +37,16 @@ public class RekeningController {
     @GetMapping("/rekeningen/{IBAN}")
     public Rekening vindRekeningOpIBAN(@PathVariable String IBAN) {
         return rekeningService.vindRekeningOpIBAN(IBAN);
+    }
+
+    /**
+     * rekening ophalen vanaf ID nodig voor financieel overzicht
+     * @param rekeningId
+     * @return
+     */
+    @GetMapping("/rekeningen/{rekeningId}")
+    public Rekening vindRekeningOpID(@PathVariable int rekeningId){
+        return rekeningService.vindRekeningOpId(rekeningId);
     }
 
     @GetMapping("/rekeningen")

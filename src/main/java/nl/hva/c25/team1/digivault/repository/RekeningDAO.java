@@ -22,6 +22,7 @@ public interface RekeningDAO {
     public void updateRekening(Rekening rekening);
 
     public Rekening vindRekeningOpIBAN(String IBAN);
+    public Rekening vindRekeningOpId(int rekeningId);
 
     public List<Rekening> geefAlleRekeningen();
 }

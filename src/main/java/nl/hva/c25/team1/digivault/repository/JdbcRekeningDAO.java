@@ -83,6 +83,13 @@ public class JdbcRekeningDAO implements RekeningDAO{
         return jdbcTemplate.queryForObject(sql, new JdbcRekeningDAO.RekeningRowMapper(), IBAN);
     }
 
+
+    @Override
+    public Rekening vindRekeningOpId(int rekeningId) {
+        String sql = "Select * From rekening Where rekeningId = ?";
+        return jdbcTemplate.queryForObject(sql, new JdbcRekeningDAO.RekeningRowMapper(), rekeningId);
+    }
+
     /**
      *
      * @return List<Rekening> geeft lijst van alle rekeningen uit DB terug
