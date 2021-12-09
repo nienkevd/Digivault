@@ -105,7 +105,7 @@ public class JdbcRekeningDAO implements RekeningDAO{
         @Override
         public Rekening mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
             return new Rekening(resultSet.getInt("RekeningId"),
-                    resultSet.getString("IBAN"));
+                    resultSet.getString("IBAN"), resultSet.getDouble("Saldo"));
         }
     }
 }

@@ -12,7 +12,7 @@ public class Rekening {
     private String IBAN;
     private double saldo;
 
-    private Rekening(int rekeningId, String IBAN, double saldo) {
+    public Rekening(int rekeningId, String IBAN, double saldo) {
         super();
         this.rekeningId = rekeningId;
         this.IBAN = IBAN;
@@ -20,7 +20,7 @@ public class Rekening {
     }
 
     public Rekening (int rekeningId, String IBAN) {
-        this(rekeningId, IBAN, 0);
+        this(rekeningId, IBAN, 7);
     }
 
     public Rekening(int rekeningId) {
