@@ -41,7 +41,7 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
      */
     @Override
     public EuroKoers bewaarEuroKoersMetSK(EuroKoers euroKoers) {
-        String sql = "INSERT INTO EuroKoers (datum, koers, assetId) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO eurokoers (datum, koers, assetId) VALUES (?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -64,7 +64,7 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
      */
     @Override
     public EuroKoers vindEuroKoersOpId(int euroKoersId) {
-        String sql = "SELECT * FROM EuroKoers WHERE euroKoersId = ?";
+        String sql = "SELECT * FROM eurokoers WHERE euroKoersId = ?";
         EuroKoers euroKoers;
         try {
             euroKoers = jdbcTemplate.queryForObject(sql, new EuroKoersRowMapper(), euroKoersId);
@@ -80,7 +80,7 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
      */
     @Override
     public List<EuroKoers> geefAlleEuroKoersen() {
-        String sql = "SELECT * FROM EuroKoers";
+        String sql = "SELECT * FROM eurokoers";
         return jdbcTemplate.query(sql, new EuroKoersRowMapper());
     }
 
@@ -90,7 +90,7 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
      */
     @Override
     public void update(EuroKoers euroKoers) {
-        String sql = "UPDATE EuroKoers SET euroKoersId = ?, datum = ?, koers = ?, assetId = ?";
+        String sql = "UPDATE eurokoers SET eurokoersId = ?, datum = ?, koers = ?, assetId = ?";
         jdbcTemplate.update(sql, euroKoers.getEuroKoersId(), euroKoers.getDatum(), euroKoers.getKoers(),
                 euroKoers.getAssetId());
     }

@@ -39,7 +39,7 @@ public class JdbcNaamDAO implements NaamDAO {
      */
     @Override
     public Naam bewaarNaamMetSK(Naam naam) {
-        String sql = "INSERT INTO Naam (voornaam,tussenvoegsel,achternaam) VALUES (?,?,?);";
+        String sql = "INSERT INTO naam (voornaam,tussenvoegsel,achternaam) VALUES (?,?,?);";
         KeyHolder keyholder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -63,7 +63,7 @@ public class JdbcNaamDAO implements NaamDAO {
      */
     @Override
     public Naam vindNaamOpNaamId(int naamId) {
-        String sql = "SELECT * FROM Naam WHERE naamId = ?;";
+        String sql = "SELECT * FROM naam WHERE naamId = ?;";
         Naam naam;
         try {
             naam = jdbcTemplate.queryForObject(sql, new JdbcNaamDAO.NaamRowMapper(), naamId);
@@ -80,7 +80,7 @@ public class JdbcNaamDAO implements NaamDAO {
      */
     @Override
     public List<Naam> vindAlleNamen() {
-        String sql = "SELECT * FROM Naam;";
+        String sql = "SELECT * FROM naam;";
         return jdbcTemplate.query(sql, new JdbcNaamDAO.NaamRowMapper());
     }
 
@@ -91,7 +91,7 @@ public class JdbcNaamDAO implements NaamDAO {
      */
     @Override
     public void update(Naam naam) {
-        String sql = "UPDATE Naam SET naamId = ?, voornaam = ?, tussenvoegsel = ?, achternaam = ?;";
+        String sql = "UPDATE naam SET naamId = ?, voornaam = ?, tussenvoegsel = ?, achternaam = ?;";
         jdbcTemplate.update(sql, naam.getNaamId(),naam.getVoornaam(),naam.getTussenvoegsel(),
                 naam.getAchternaam());
     }

@@ -38,7 +38,7 @@ public class JdbcAdresDAO implements AdresDAO {
      */
     @Override
     public Adres bewaarAdresMetSK(Adres adres) {
-        String sql = "INSERT INTO Adres " +
+        String sql = "INSERT INTO adres " +
                 "(straat, huisnummer, toevoeging, postcode, woonplaats) VALUES (?,?,?,?,?);";
         KeyHolder keyholder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
@@ -66,7 +66,7 @@ public class JdbcAdresDAO implements AdresDAO {
     @Override
     public Adres vindAdresOpAdresId(int adresId) {
         String sql = "SELECT (adresId, straat, huisnummer, toevoeging," +
-                "postcode, woonplaats) FROM Adres WHERE adresId = ?;";
+                "postcode, woonplaats) FROM adres WHERE adresId = ?;";
         Adres adres;
         try {
             adres = jdbcTemplate.queryForObject(sql, new AdresRowMapper(), adresId);
@@ -83,7 +83,7 @@ public class JdbcAdresDAO implements AdresDAO {
     @Override
     public List<Adres> vindAlleAdressen() {
         String sql = "SELECT (adresId, straat, huisnummer, toevoeging, postcode, woonplaats)" +
-                "FROM Adres;";
+                "FROM adres;";
         return jdbcTemplate.query(sql, new JdbcAdresDAO.AdresRowMapper());
     }
 
@@ -93,7 +93,7 @@ public class JdbcAdresDAO implements AdresDAO {
      */
     @Override
     public void update(Adres adres) {
-        String sql = "UPDATE Adres SET adresId =?, straat = ?, huisnummer = ?, toevoeging = ?," +
+        String sql = "UPDATE adres SET adresId =?, straat = ?, huisnummer = ?, toevoeging = ?," +
                 "postcode = ?, woonplaats = ?,";
         jdbcTemplate.update(sql, adres.getAdresId(), adres.getStraat(),adres.getHuisnummer(),
                 adres.getToevoeging(),adres.getPostcode(),adres.getWoonplaats());

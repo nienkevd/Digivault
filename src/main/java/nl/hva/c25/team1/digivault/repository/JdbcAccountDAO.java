@@ -36,7 +36,7 @@ public class JdbcAccountDAO implements AccountDAO {
 
     @Override
     public Account bewaarAccountMetSK(Account account) {
-        String sql = "INSERT INTO Account (emailadres, wachtwoord) VALUES (?, ?)";
+        String sql = "INSERT INTO account (emailadres, wachtwoord) VALUES (?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override

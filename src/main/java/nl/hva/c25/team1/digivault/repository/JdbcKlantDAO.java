@@ -41,7 +41,7 @@ public class JdbcKlantDAO implements KlantDAO {
      */
     @Override
     public Klant bewaarKlantMetSK(Klant klant) {
-        String sql = "INSERT INTO Klant (bsn, geboortedatum, naamId, adresId, rekeningId, accountId) VALUES (?,?,?,?,?,?);";
+        String sql = "INSERT INTO klant (bsn, geboortedatum, naamId, adresId, rekeningId, accountId) VALUES (?,?,?,?,?,?);";
         KeyHolder keyholder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -67,7 +67,7 @@ public class JdbcKlantDAO implements KlantDAO {
      * @return Klant
      */
     public Klant vindKlantOpKlantId(int klantId) {
-        String sql = "SELECT * FROM Klant WHERE klantId = ? ;";
+        String sql = "SELECT * FROM klant WHERE klantId = ? ;";
         Klant klant;
         try {
             klant = jdbcTemplate.queryForObject(sql, new KlantRowMapper(), klantId);
@@ -83,7 +83,7 @@ public class JdbcKlantDAO implements KlantDAO {
      */
     @Override
     public List<Klant> vindAlleKlanten() {
-        String sql = "SELECT * FROM Klant;";
+        String sql = "SELECT * FROM klant;";
         return jdbcTemplate.query(sql, new KlantRowMapper());
     }
 
@@ -94,7 +94,7 @@ public class JdbcKlantDAO implements KlantDAO {
      */
     @Override
     public void update(Klant klant) {
-        String sql = "UPDATE Klant SET bsn = ?, geboortedatum = ? WHERE klantId = ?;";
+        String sql = "UPDATE klant SET bsn = ?, geboortedatum = ? WHERE klantId = ?;";
         jdbcTemplate.update(sql, klant.getBsn(),klant.getGeboortedatum(), klant.getKlantId());
     }
 
