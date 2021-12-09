@@ -55,10 +55,6 @@ public class RootRepository {
         return klant;
     }
 
-//    public List<PortefeuilleItem> maakItemLijstOpKlantId(int klantId){
-//        return portefeuilleItemDAO.genereerPortefeuilleVanKlantMetId(klantId);
-//    }
-
     public Klant vindKlantOpId(int klantId) {
         Klant klant = klantDAO.vindKlantOpKlantId(klantId);
         if (klant == null) {

@@ -24,7 +24,6 @@ public class KlantController {
 
     @PostMapping("/klanten")
     public Klant bewaarKlant(@RequestBody Klant klant) {
-        System.out.println("*** " + klant.getNaam().getAchternaam() + " ***");
         klantService.bewaarKlant(klant);
         return klant;
     }

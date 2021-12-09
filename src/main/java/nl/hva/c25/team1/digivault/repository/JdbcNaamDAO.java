@@ -31,12 +31,6 @@ public class JdbcNaamDAO implements NaamDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-//    public void bewaar(Naam naam) {
-//        String sql = "INSERT INTO Naam VALUES(?,?,?,?);";
-//        jdbcTemplate.update(sql, naam.getNaamId(),naam.getVoornaam(),naam.getTussenvoegsel(),
-//                naam.getAchternaam());
-//    }
-
     /**
      *
      * slaat naam op in database en genereert een surrogate key

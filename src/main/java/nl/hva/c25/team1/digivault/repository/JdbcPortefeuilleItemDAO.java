@@ -19,6 +19,7 @@ import java.util.List;
 
 /**
  * @author Anthon van Dijk (studentnummer 500889247)
+ * 09-12-21 review Anneke
  */
 @Repository
 public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
@@ -35,8 +36,6 @@ public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
         public PortefeuilleItem mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
             PortefeuilleItem portefeuilleItem = new PortefeuilleItem(resultSet.getInt("itemId"),
                     resultSet.getDouble("aantal"));
-//            portefeuilleItem.setAsset(new Asset(resultSet.getInt("assetId")));
-//            portefeuilleItem.setKlant(new Klant(resultSet.getInt("klantId")));
             return portefeuilleItem;
         }
     }

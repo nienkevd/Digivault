@@ -35,10 +35,6 @@ public class Adres {
         this(dto.getStraat(), dto.getHuisnummer(), dto.getToevoeging(), dto.getPostcode(), dto.getWoonplaats());
     }
 
-    public Adres(int adresId) {
-        this(adresId, "", 0, "", "", "");
-    }
-
     public int getAdresId() {
         return adresId;
     }

@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * @author Anthon van Dijk (studentnummer 500889247)
+ * 09-12-2021 review Anneke
  */
 public interface PortefeuilleItemDAO {
 

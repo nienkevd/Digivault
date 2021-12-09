@@ -4,6 +4,7 @@ import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -139,5 +140,4 @@ public class Klant {
                 ", portefeuille=" + portefeuille +
                 '}';
     }
-
 }
