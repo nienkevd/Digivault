@@ -47,6 +47,7 @@ public class Klant {
     public Klant(int klantId, String bsn, LocalDate geboortedatum) {
         this(klantId,bsn,geboortedatum, null, null,null, null, null);
     }
+
     public Klant(String bsn, LocalDate geboortedatum) {
         this(0, bsn, geboortedatum, null, null, null, null, null);
     }
@@ -63,6 +64,7 @@ public class Klant {
 // als object erin staat. voor nu laten staan.
     public Klant(int klantId, String iban, double saldo, List<PortefeuilleItem> portefeuille) {
     }
+
     public Klant(FinancieelOverzichtDto dto){
         this(dto.getKlantId(),dto.getIBAN(),dto.getSaldo(),dto.getPortefeuille());
     }

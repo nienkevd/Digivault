@@ -1,7 +1,7 @@
 package nl.hva.c25.team1.digivault.service;
 
-import nl.hva.c25.team1.digivault.repository.JdbcAssetDAO;
-import nl.hva.c25.team1.digivault.repository.JdbcPortefeuilleItemDAO;
+import nl.hva.c25.team1.digivault.model.Klant;
+import nl.hva.c25.team1.digivault.repository.RootRepository;
 import nl.hva.c25.team1.digivault.transfer.FinancieelOverzichtDto;
 
 /**
@@ -11,12 +11,16 @@ import nl.hva.c25.team1.digivault.transfer.FinancieelOverzichtDto;
 
 public class FinancieelOverzichtService {
 
-    private JdbcAssetDAO assetDAO;
-    private JdbcPortefeuilleItemDAO portefeuilleItemDAO;
+    private RootRepository rootRepository;
 
-    public FinancieelOverzichtService(JdbcAssetDAO jdbcAssetDAO, JdbcPortefeuilleItemDAO jdbcPortefeuilleItemDAO) {
+    public FinancieelOverzichtService(RootRepository rootRepository) {
         super();
-        this.assetDAO = jdbcAssetDAO;
-        this.portefeuilleItemDAO = jdbcPortefeuilleItemDAO;
+        this.rootRepository = rootRepository;
+    }
+
+    public Klant vindFinancieelOverzicht(FinancieelOverzichtDto overzichtDto) {
+        Klant klant = new Klant(overzichtDto.getKlantId(), overzichtDto.getIBAN(), overzichtDto.getSaldo(),
+                overzichtDto.getPortefeuille());
+        return klant;
     }
 }

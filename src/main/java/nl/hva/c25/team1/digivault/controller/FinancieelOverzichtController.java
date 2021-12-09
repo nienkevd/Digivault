@@ -18,16 +18,16 @@ public class FinancieelOverzichtController {
 
     private FinancieelOverzichtService fincancieelOverzichtService;
 
-
     @Autowired
     public FinancieelOverzichtController(FinancieelOverzichtService fincancieelOverzichtService) {
         super();
         this.fincancieelOverzichtService = fincancieelOverzichtService;
     }
 
-    @GetMapping("/financieeloverzicht/{klantId}")
-    public ResponseEntity<Klant> overzichtHanlder(@RequestBody FinancieelOverzichtDto financieelOverzichtDto) {
+    @GetMapping("/financieleoverzichten/{klantId}")
+    public ResponseEntity<Klant> vindFinancieelOverzicht(@RequestBody FinancieelOverzichtDto financieelOverzichtDto) {
         Klant klant = new Klant(financieelOverzichtDto);
+        fincancieelOverzichtService.vindFinancieelOverzicht(financieelOverzichtDto);
         return ResponseEntity.ok().body(klant);
     }
 }
