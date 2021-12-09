@@ -47,7 +47,7 @@ public class Asset {
      * Lege constructor van de klasse Asset
      */
     public Asset() {
-        this(0,"", "");
+        this(0, "", "");
     }
 
     public int getAssetId() {

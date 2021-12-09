@@ -29,7 +29,6 @@ public class RekeningController {
 
     @PostMapping("/rekeningen")
     public void bewaarRekening(@RequestBody Rekening rekening) {
-
         rekeningService.bewaarRekening(rekening);
     }
 

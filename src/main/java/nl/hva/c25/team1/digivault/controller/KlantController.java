@@ -43,6 +43,4 @@ public class KlantController {
     public String updateKlant(@RequestBody Klant klant) {
         return klantService.updateKlant(klant);
     }
-
-
 }
