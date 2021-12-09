@@ -8,6 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 class AccountServiceTest {
 
     private static  Account expected = new Account(1, "annie@gmail.com", "Annie7890");
@@ -22,7 +23,6 @@ class AccountServiceTest {
         Mockito.when(mockDAO.bewaarAccountMetSK(newAccount)).thenReturn(newAccount);
         Account actual = serviceUnderTest.bewaarAccountMetSK(newAccount);
         assertThat(actual.getAccountId()).isPositive();
-
     }
 
     @Test
