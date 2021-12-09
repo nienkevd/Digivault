@@ -43,7 +43,7 @@ public class JdbcAssetDAO implements AssetDAO {
      */
     @Override
     public Asset bewaarAssetMetSK(Asset asset) {
-        String sql = "INSERT INTO Asset (afkorting, naam, dagkoers) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO asset (afkorting, naam, dagkoers) VALUES (?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -66,7 +66,7 @@ public class JdbcAssetDAO implements AssetDAO {
      */
     @Override
     public Asset vindAssetOpId(int assetId) {
-        String sql = "SELECT * FROM Asset WHERE assetId = ?";
+        String sql = "SELECT * FROM asset WHERE assetId = ?";
         Asset asset;
         try {
             asset = jdbcTemplate.queryForObject(sql, new AssetRowMapper(), assetId);
@@ -82,7 +82,7 @@ public class JdbcAssetDAO implements AssetDAO {
      */
     @Override
     public List<Asset> geefAlleAssets() {
-        String sql = "SELECT * FROM Asset";
+        String sql = "SELECT * FROM asset";
         return jdbcTemplate.query(sql, new AssetRowMapper());
     }
 
