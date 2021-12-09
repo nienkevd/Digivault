@@ -17,7 +17,7 @@ import java.util.List;
  * Java Database Connectivity voor DB-tabel EuroKoers
  *
  * @author Erwin, studentnummer 500889293
- * @version 6-12-2021
+ * @since 2-12-2021
  */
 
 @Repository

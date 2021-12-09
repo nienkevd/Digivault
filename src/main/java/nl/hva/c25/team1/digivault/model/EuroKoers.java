@@ -1,11 +1,10 @@
 package nl.hva.c25.team1.digivault.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * @author Erwin, studentnummer 500889293
- * @version 2-12-2021
+ * @since 2-12-2021
  */
 
 public class EuroKoers {
@@ -39,7 +38,10 @@ public class EuroKoers {
         this(euroKoersId, datum, koers, 0);
     }
 
-    // TODO aanpassen
+    /**
+     * Kale constructor van klasse Asset met alleen euroKoersId
+     * @param euroKoersId id van de EuroKoers
+     */
     public EuroKoers(int euroKoersId) {
         this(euroKoersId, null, 0);
     }
@@ -89,6 +91,11 @@ public class EuroKoers {
      */
     @Override
     public String toString() {
-        return "EuroKoers{datum=" + datum + ", koers=" + koers + ", assetId=" + assetId + '}';
+        return "EuroKoers{" +
+                "euroKoersId=" + euroKoersId +
+                ", datum=" + datum +
+                ", koers=" + koers +
+                ", assetId=" + assetId +
+                '}';
     }
 }

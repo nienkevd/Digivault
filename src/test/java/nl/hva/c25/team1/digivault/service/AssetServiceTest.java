@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Testen bij AssetService
  *
  * @author Erwin, studentnummer 500889293
- * @version 6-12-2021
+ * @since 5-12-2021
  */
 
 

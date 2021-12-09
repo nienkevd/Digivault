@@ -14,7 +14,7 @@ import java.util.List;
  * Service van de klasse Asset
  *
  * @author Erwin, studentnummer 500889293
- * @version 6-12-2021
+ * @since 1-12-2021
  */
 
 @Service

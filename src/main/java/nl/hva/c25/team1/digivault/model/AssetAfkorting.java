@@ -6,7 +6,7 @@ package nl.hva.c25.team1.digivault.model;
  * Enum met de afkortingen van de top 20 populairste assets, peildatum 1 december 2021
  *
  * @author Erwin, studentnummer 500889293
- * @version 2-12-2021
+ * @since 1-12-2021
  */
 
 public enum AssetAfkorting {

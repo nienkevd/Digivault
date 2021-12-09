@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
+ * Controller van de klasse Asset
+ *
  * @author Erwin, studentnummer 500889293
- * @version 6-12-2021
+ * @since 2-12-2021
  */
 
 @RestController

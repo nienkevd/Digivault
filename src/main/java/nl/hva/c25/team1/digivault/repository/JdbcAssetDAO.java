@@ -19,7 +19,7 @@ import java.util.List;
  * Java Database Connectivity voor DB-tabel Asset
  *
  * @author Erwin, studentnummer 500889293
- * @version 6-12-2021
+ * @since 1-12-2021
  */
 
 @Repository
@@ -103,5 +103,4 @@ public class JdbcAssetDAO implements AssetDAO {
                     resultSet.getString("naam"), resultSet.getDouble("dagkoers"));
         }
     }
-
 }

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * @author Erwin, studentnummer 500889293
+ * Controller van de klasse FinancieelOverzicht
+ *
+ * @author Erwin en Nienke
  * @since 9-12-2021
  */
 
@@ -17,11 +19,20 @@ public class FinancieelOverzichtController {
 
     private FinancieelOverzichtService financieelOverzichtService;
 
+    /**
+     * Constructor van de FinancieelOverzichtController
+     * @param financieelOverzichtService FinancieelOverzichtService
+     */
     public FinancieelOverzichtController(FinancieelOverzichtService financieelOverzichtService) {
         super();
         this.financieelOverzichtService = financieelOverzichtService;
     }
 
+    /**
+     * Genereren van een financieel overzicht (rekening/portefeuille) op klantId
+     * @param klantId id waarop gezocht wordt
+     * @return een FinancieelOverzicht
+     */
     @GetMapping("/financieeloverzicht/{klantId}")
     public FinancieelOverzicht vindFinancieelOverzicht(@PathVariable int klantId) {
         return financieelOverzichtService.genereerFinancieelOverzicht(klantId);
