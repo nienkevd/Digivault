@@ -1,5 +1,6 @@
 package nl.hva.c25.team1.digivault.model;
 
+import nl.hva.c25.team1.digivault.transfer.FinancieelOverzichtDto;
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
 import java.time.LocalDate;
@@ -40,7 +41,7 @@ public class Klant {
     }
 
     public Klant(RegisterDto dto){
-        this(dto.getBsn(), dto.getGeboortedatum(), new Naam(dto), new Adres(dto), new Account(dto));
+        this(dto.getBsn(), dto.getGeboortedatum(), new Naam(dto), new Adres(dto), new Account(dto) );
     }
 
     public Klant(int klantId, String bsn, LocalDate geboortedatum) {
@@ -55,12 +56,20 @@ public class Klant {
         this.geboortedatum = geboortedatum;
         this.naam = naam;
     }
-
-
-
+    public Klant (int klantId,Rekening rekening,List<PortefeuilleItem> portefeuille){
+        this(klantId,"",null,null,null,null,rekening,portefeuille);
+    }
+    //InteliJ wilde dat we deze constructor aan maakte, hij pakte mijn eigen cnstr niet wanneer rekening nog b
+// als object erin staat. voor nu laten staan.
+    public Klant(int klantId, String iban, double saldo, List<PortefeuilleItem> portefeuille) {
+    }
+    public Klant(FinancieelOverzichtDto dto){
+        this(dto.getKlantId(),dto.getIBAN(),dto.getSaldo(),dto.getPortefeuille());
+    }
     public Klant(int klantId) {
         this(klantId, "", null);
     }
+
 
     public int getKlantId() {
         return klantId;
