@@ -31,6 +31,13 @@ public class AssetMetAantal {
         this.aantal = aantal;
     }
 
+    /**
+     * Lege constructor
+     */
+    public AssetMetAantal() {
+
+    }
+
     public int getAssetId() {
         return assetId;
     }
@@ -39,9 +46,6 @@ public class AssetMetAantal {
         this.assetId = assetId;
     }
 
-    public AssetMetAantal() {
-
-    }
 
     public String getAfkorting() {
         return afkorting;
