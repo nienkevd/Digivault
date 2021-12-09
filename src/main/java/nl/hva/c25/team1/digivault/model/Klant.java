@@ -35,17 +35,13 @@ public class Klant {
         this.portefeuille = portefeuille;
     }
 
-    public Klant(String bsn, LocalDate geboortedatum, Naam naam, Adres adres,
-                  Account account, Rekening rekening, List<PortefeuilleItem> portefeuille) {
-        this.bsn = bsn;
-        this.geboortedatum = geboortedatum;
-        this.naam = naam;
-        this.adres = adres;
-        this.account = account;
-        this.rekening = rekening;
-        this.portefeuille = portefeuille;
+    public Klant(String bsn, LocalDate geboortedatum, Naam naam, Adres adres, Account account) {
+        this(0, bsn, geboortedatum, naam, adres, account, null, null);
     }
 
+    public Klant(RegisterDto dto){
+        this(dto.getBsn(), dto.getGeboortedatum(), new Naam(dto), new Adres(dto), new Account(dto));
+    }
 
     public Klant(int klantId, String bsn, LocalDate geboortedatum) {
         this(klantId,bsn,geboortedatum, null, null,null, null, null);
@@ -53,9 +49,14 @@ public class Klant {
     public Klant(String bsn, LocalDate geboortedatum) {
         this(0, bsn, geboortedatum, null, null, null, null, null);
     }
-    public Klant(RegisterDto dto){
-        this(dto.getBsn(),dto.getGeboortedatum());
+
+    public Klant(String bsn, LocalDate geboortedatum, Naam naam) {
+        this.bsn = bsn;
+        this.geboortedatum = geboortedatum;
+        this.naam = naam;
     }
+
+
 
     public Klant(int klantId) {
         this(klantId, "", null);
@@ -138,4 +139,9 @@ public class Klant {
                 ", portefeuille=" + portefeuille +
                 '}';
     }
+//    @Override
+//    public String toString() {
+//        return String.format("%s %s %s", klantId, bsn, geboortedatum);
+//    }
+
 }
