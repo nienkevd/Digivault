@@ -2,6 +2,8 @@ package nl.hva.c25.team1.digivault.model;
 
 // review door Erwin, 1 december
 
+import nl.hva.c25.team1.digivault.transfer.FinancieelOverzichtDto;
+
 /**
  * @author Sezi, studentnummer 500889525
  * @version 4-12-2021
@@ -25,6 +27,12 @@ public class Rekening {
 
     public Rekening(int rekeningId) {
         this(rekeningId, "");
+    }
+    public Rekening (String IBAN, double saldo){
+        this(0,IBAN,saldo);
+    }
+    public Rekening (FinancieelOverzichtDto dto){
+    this(dto.getIBAN(),dto.getSaldo());
     }
 
     public Rekening() {
