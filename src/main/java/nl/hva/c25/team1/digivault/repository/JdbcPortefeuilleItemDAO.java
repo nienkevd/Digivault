@@ -35,8 +35,8 @@ public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
         public PortefeuilleItem mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
             PortefeuilleItem portefeuilleItem = new PortefeuilleItem(resultSet.getInt("itemId"),
                     resultSet.getDouble("aantal"));
-            portefeuilleItem.setAsset(new Asset(resultSet.getInt("assetId")));
-            portefeuilleItem.setKlant(new Klant(resultSet.getInt("klantId")));
+//            portefeuilleItem.setAsset(new Asset(resultSet.getInt("assetId")));
+//            portefeuilleItem.setKlant(new Klant(resultSet.getInt("klantId")));
             return portefeuilleItem;
         }
     }
@@ -106,4 +106,9 @@ public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
         return portefeuilleItem;
     }
 
+    @Override
+    public int vindKlantIdVanPortefeuilleitem(PortefeuilleItem portefeuilleItem) {
+        String sql = "SELECT klantId FROM portefeuille_item WHERE itemId = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, portefeuilleItem.getPortefeuilleItemId());
+    }
 }

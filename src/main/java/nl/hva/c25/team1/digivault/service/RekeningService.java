@@ -16,11 +16,11 @@ import java.util.List;
 public class RekeningService {
 
     private JdbcRekeningDAO jdbcRekeningDAO;
-    private RootRepository rootRepository;
+//    private RootRepository rootRepository;
 
     public RekeningService(JdbcRekeningDAO rekeningDAO/*, RootRepository rootRepository*/) {
         this.jdbcRekeningDAO = rekeningDAO;
-        this.rootRepository = rootRepository;
+//        this.rootRepository = rootRepository;
     }
 
     public void bewaarRekening(Rekening rekening) {

@@ -38,7 +38,7 @@ public class IbanService {
     public static String IbanGenerator() {
         String bankrekeningNummer = genereerRandomBankrekeningNummer();
         String controlegetal = genereerControleGetal(bankrekeningNummer);
-        StringBuilder iban = new StringBuilder(LANDCODE + controlegetal + " " + BANKCODE + " " + bankrekeningNummer);
+        StringBuilder iban = new StringBuilder(LANDCODE + controlegetal  + BANKCODE +  bankrekeningNummer);
         return iban.toString();
     }
 
