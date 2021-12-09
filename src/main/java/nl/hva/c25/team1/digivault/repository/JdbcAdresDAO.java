@@ -83,7 +83,7 @@ public class JdbcAdresDAO implements AdresDAO {
     @Override
     public List<Adres> vindAlleAdressen() {
         String sql = "SELECT (adresId, straat, huisnummer, toevoeging, postcode, woonplaats)" +
-                "FROM Adres a JOIN Ziphuisnr z ON a.ziphuisnrId = z.ziphuisnrId;";
+                "FROM Adres;";
         return jdbcTemplate.query(sql, new JdbcAdresDAO.AdresRowMapper());
     }
 

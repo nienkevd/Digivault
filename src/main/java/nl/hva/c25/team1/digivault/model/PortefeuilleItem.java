@@ -5,6 +5,7 @@ package nl.hva.c25.team1.digivault.model;
 
 /**
  * @author Anthon van Dijk (studentnummer 500889247)
+ * 09-12-2021 review Anneke
  */
 public class PortefeuilleItem {
 

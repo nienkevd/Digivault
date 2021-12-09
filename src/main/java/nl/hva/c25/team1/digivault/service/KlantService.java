@@ -2,7 +2,6 @@ package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.repository.JdbcKlantDAO;
-import nl.hva.c25.team1.digivault.repository.RootRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,15 +17,13 @@ import java.util.List;
 public class KlantService {
 
     private JdbcKlantDAO klantDAO;
-    private RootRepository rootRepository;
 
     /**
      *
      * @param klantDAO interface klantDAO
      */
-    public KlantService(JdbcKlantDAO klantDAO /* , RootRepository rootRepository*/) {
+    public KlantService(JdbcKlantDAO klantDAO) {
         this.klantDAO = klantDAO;
-//        this.rootRepository = rootRepository;
     }
 
     /**
