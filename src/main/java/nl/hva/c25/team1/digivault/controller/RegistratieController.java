@@ -31,10 +31,10 @@ public class RegistratieController {
     }
 
     @PostMapping("/registratie")
-    public ResponseEntity<Klant> registratieHandler(@RequestBody RegisterDto registerDto) {
-        System.out.println("Hoi!!!");   // TODO aanpassen
+    public String registratieHandler(@RequestBody RegisterDto registerDto) {
         Klant klant = new Klant(registerDto);
-        registratieService.registratie(klant); //of registratieService.registratie(registerDto)
-        return ResponseEntity.ok().body(klant);
+        registratieService.registratie(klant);
+        return String.format("Registratie geslaagd!\nNaam: %s\nE-mailadres: %s\nIBAN: %s", klant.getNaam(),
+                klant.getAccount().getEmailadres(), klant.getRekening().getIBAN());
     }
 }

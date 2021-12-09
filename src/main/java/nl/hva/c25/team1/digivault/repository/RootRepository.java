@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 public class RootRepository {
 
@@ -16,6 +19,7 @@ public class RootRepository {
     NaamDAO naamDAO;
     AdresDAO adresDAO;
     AssetDAO assetDAO;
+
 
     @Autowired
     public RootRepository(KlantDAO klantDAO, RekeningDAO rekeningDAO, AccountDAO accountDAO,
@@ -34,6 +38,7 @@ public class RootRepository {
     /**
      *
      * @author Anneke
+     * @author Anthon
      * Deze methode wordt aangeroepen in registratieservice registratie(Klant klant)
      * De objecten van de klant worden afzonderlijk opgeslagen en de
      * klant kan daarna met alle id's volledig worden opgeslagen
@@ -44,13 +49,47 @@ public class RootRepository {
         naamDAO.bewaarNaamMetSK(klant.getNaam());
         adresDAO.bewaarAdresMetSK(klant.getAdres());
         accountDAO.bewaarAccountMetSK(klant.getAccount());
-        klant.getAccount().setKlant(klant); //  Anthon: beter naar einde?
         rekeningDAO.bewaarRekeningMetSK(klant.getRekening());
+        klantDAO.bewaarKlantMetSK(klant);
+        klant.getAccount().setKlant(klant);//java
+
         for(PortefeuilleItem item : klant.getPortefeuille()){
+            item.getKlant().setKlantId(klant.getKlantId());
             portefeuilleItemDAO.bewaarPortefeuilleItemMetKey(item);
         }
-        return klantDAO.bewaarKlantMetSK(klant);
+
+
+
+
+
+        return klant;
     }
+
+//    public List<PortefeuilleItem> maakItemLijstOpKlantId(int klantId){
+//        return portefeuilleItemDAO.genereerPortefeuilleVanKlantMetId(klantId);
+//    }
+
+    public Klant vindKlantOpId(int klantId) {
+        Klant klant = klantDAO.vindKlantOpKlantId(klantId);
+        if (klant == null) {
+            return klant;
+        }
+        List<PortefeuilleItem> itemsKlant = portefeuilleItemDAO.genereerPortefeuilleVanKlantMetId(klantId);
+        for (PortefeuilleItem portefeuilleItem: itemsKlant) {
+            portefeuilleItem.setKlant(klant);
+        }
+        klant.setPortefeuille(itemsKlant);
+        return klant;
+    }
+
+    public PortefeuilleItem vindItemOpId(int itemId) {
+        PortefeuilleItem portefeuilleItem = portefeuilleItemDAO.vindItemMetId(itemId);
+        Klant klant = klantDAO.vindKlantOpKlantId(portefeuilleItemDAO.vindKlantIdVanPortefeuilleitem(portefeuilleItem));
+        portefeuilleItem.setKlant(klant);
+        return portefeuilleItem;
+    }
+
+
 
     /**
      * @author Anthon

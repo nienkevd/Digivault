@@ -24,43 +24,26 @@ public class RegistratieService {
     private AssetService assetService;
 
     @Autowired
-    public RegistratieService(RootRepository rootRepository) {
+    public RegistratieService(RootRepository rootRepository, AssetService assetService) {
         super();
         this.rootRepository = rootRepository;
+        this.assetService = assetService;
     }
-//      andere manier? :
-//    public Klant registratie(RegisterDto registerDto) {
-//        Account account = new Account(0, registerDto.getEmailadres(), registerDto.getWachtwoord());
-//        Naam naam = new Naam(0, registerDto.getVoornaam(), registerDto.getTussenvoegsel(),
-//                registerDto.getAchternaam());
-//        Adres adres = new Adres(0, registerDto.getStraat(), registerDto.getHuisnummer(),
-//                registerDto.getToevoeging(), registerDto.getPostcode(), registerDto.getWoonplaats());
-//        Rekening rekening = new Rekening(0, genereerIban());
-//        Klant klant = new Klant(registerDto.getBsn(), registerDto.getGeboortedatum(), naam, adres, account,
-//                rekening, null);
-//        // aanmaakLegePortefeuille geeft hij foutmelding op
-//        return rootRepository.slaKlantOp(klant);
-//    }
 
     public Klant registratie(Klant klant) {
-        System.out.println(klant);
         Rekening rekening = new Rekening(0, genereerIban());
+        rekening.setSaldo(100000);
         klant.setRekening(rekening);
-        System.out.println(klant);
         klant.setPortefeuille(aanmaakLegePortefeuille());
-        System.out.println(klant);
         return rootRepository.slaKlantOp(klant);
     }
 
     public List<PortefeuilleItem> aanmaakLegePortefeuille() {
-        System.out.println("spot1");
         List<PortefeuilleItem> legePortefeuille = new ArrayList<>();
-        System.out.println("spot2");
-        List<Asset> assetlist = new ArrayList<>();
-        assetlist.add(new Asset(1,"A","Anthoncoin", 100));
-        assetlist.add(new Asset(2,"AB","Annekecoin", 200));
-        for (Asset asset: assetlist) {
-            PortefeuilleItem portefeuilleItem = new PortefeuilleItem(asset.getAssetId(), 0);
+        for (Asset asset: assetService.geefAlleAssets()) {
+            PortefeuilleItem portefeuilleItem = new PortefeuilleItem(0);
+            portefeuilleItem.setAsset(asset);
+            portefeuilleItem.setKlant(new Klant(0));
             legePortefeuille.add(portefeuilleItem);
         }
         return legePortefeuille;

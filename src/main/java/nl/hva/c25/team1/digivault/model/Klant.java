@@ -139,9 +139,5 @@ public class Klant {
                 ", portefeuille=" + portefeuille +
                 '}';
     }
-//    @Override
-//    public String toString() {
-//        return String.format("%s %s %s", klantId, bsn, geboortedatum);
-//    }
 
 }

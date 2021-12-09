@@ -57,7 +57,6 @@ public class AssetService {
      * @return lijst met alle Assets
      */
     public List<Asset> geefAlleAssets() {
-        System.out.println("spot3");
         return jdbcAssetDAO.geefAlleAssets();
     }
 

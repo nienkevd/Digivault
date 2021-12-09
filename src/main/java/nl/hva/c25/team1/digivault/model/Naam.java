@@ -69,11 +69,6 @@ public class Naam {
 
     @Override
     public String toString() {
-        return "Naam{" +
-                "naamId=" + naamId +
-                ", voornaam='" + voornaam + '\'' +
-                ", tussenvoegsel='" + tussenvoegsel + '\'' +
-                ", achternaam='" + achternaam + '\'' +
-                '}';
+        return String.format("%s %s %s", voornaam, tussenvoegsel, achternaam);
     }
 }

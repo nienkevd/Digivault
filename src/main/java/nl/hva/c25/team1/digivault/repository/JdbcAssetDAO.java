@@ -82,7 +82,6 @@ public class JdbcAssetDAO implements AssetDAO {
      */
     @Override
     public List<Asset> geefAlleAssets() {
-        System.out.println("spot4");
         String sql = "SELECT * FROM Asset";
         return jdbcTemplate.query(sql, new AssetRowMapper());
     }
