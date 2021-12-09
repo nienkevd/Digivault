@@ -1,7 +1,8 @@
 package nl.hva.c25.team1.digivault.service;
 
-import nl.hva.c25.team1.digivault.model.Klant;
+import nl.hva.c25.team1.digivault.model.FinancieelOverzicht;
 import nl.hva.c25.team1.digivault.repository.RootRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,13 +15,15 @@ public class FinancieelOverzichtService {
 
     private RootRepository rootRepository;
 
-    public FinancieelOverzichtService(RootRepository rootRepository) {
+    @Autowired
+        public FinancieelOverzichtService(RootRepository rootRepository) {
         super();
         this.rootRepository = rootRepository;
     }
 
-    public Klant vindFinancieelOverzicht(int klantId) {
-        Klant klant = rootRepository.vindFinancieelOverzichtOpId(klantId);
-        return klant;
+    public FinancieelOverzicht vindFinancieelOverzicht(int klantId) {
+        System.out.println("service");
+        FinancieelOverzicht financieelOverzicht = rootRepository.vindFinancieelOverzichtOpId(klantId);
+        return financieelOverzicht;
     }
 }

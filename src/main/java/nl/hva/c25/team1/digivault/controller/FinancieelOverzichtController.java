@@ -1,6 +1,6 @@
 package nl.hva.c25.team1.digivault.controller;
 
-import nl.hva.c25.team1.digivault.model.Klant;
+import nl.hva.c25.team1.digivault.model.FinancieelOverzicht;
 import nl.hva.c25.team1.digivault.service.FinancieelOverzichtService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,15 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FinancieelOverzichtController {
 
-    private FinancieelOverzichtService fincancieelOverzichtService;
+    private FinancieelOverzichtService financieelOverzichtService;
 
-    public FinancieelOverzichtController() {
+    public FinancieelOverzichtController(FinancieelOverzichtService financieelOverzichtService) {
         super();
-        this.fincancieelOverzichtService = fincancieelOverzichtService;
+        this.financieelOverzichtService = financieelOverzichtService;
     }
 
     @GetMapping("/financieeloverzicht/{klantId}")
-    public Klant vindFinancieelOverzicht(@PathVariable int klantId) {
-        return fincancieelOverzichtService.vindFinancieelOverzicht(klantId);
+    public FinancieelOverzicht vindFinancieelOverzicht(@PathVariable int klantId) {
+        System.out.println("conroller");
+        return financieelOverzichtService.vindFinancieelOverzicht(klantId);
     }
 }

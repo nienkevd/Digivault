@@ -1,7 +1,9 @@
 package nl.hva.c25.team1.digivault.repository;
 
+import nl.hva.c25.team1.digivault.model.FinancieelOverzicht;
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.PortefeuilleItem;
+import nl.hva.c25.team1.digivault.model.Rekening;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -66,8 +68,15 @@ public class RootRepository {
         return portefeuilleItem;
     }
 
-    public Klant vindFinancieelOverzichtOpId(int klantId) {
-        Klant klant = klantDAO.vindKlantOpKlantId(klantId);
-        return klant;
+    public FinancieelOverzicht vindFinancieelOverzichtOpId(int klantId) {
+        System.out.println("root");
+        FinancieelOverzicht financieelOverzicht = new FinancieelOverzicht(klantId);
+        Rekening rekening = rekeningDAO.vindRekeningOpId(klantId);
+        financieelOverzicht.setIban(rekening.getIBAN());
+        financieelOverzicht.setSaldo(rekening.getSaldo());
+//        financieelOverzicht.setRekening(klantDAO.vindKlantOpKlantId(klantId).getRekening());
+
+        financieelOverzicht.setPortefeuille(portefeuilleItemDAO.genereerPortefeuilleVanKlantMetId(klantId));
+        return financieelOverzicht;
     }
 }
