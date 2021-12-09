@@ -66,7 +66,4 @@ public class RootRepository {
         portefeuilleItem.setAsset(assetDAO.vindAssetOpId(portefeuilleItem.getAsset().getAssetId()));
         return portefeuilleItem;
     }
-
-
-
 }
