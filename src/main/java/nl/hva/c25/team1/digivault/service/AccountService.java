@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @author Sezi, studentnummer 500889525
- * @version 8-12-2021
+ * @version 9-12-2021
  */
 
 public class AccountService {
@@ -27,8 +27,13 @@ public class AccountService {
         return accountDAO.bewaarAccountMetSK(account);
     }
 
-    public void updateAccount(Account account) {
-        accountDAO.updateAccount(account);
+    public String updateAccount(Account account) {
+        if (accountDAO.vindAccountOpAccountId(account.getAccountId()) == null ) {
+            return "Account bestaat niet, update mislukt.";
+        } else {
+            accountDAO.updateAccount(account);
+            return "Update geslaagd";
+        }
     }
 
     public Account vindAccountOpAccountId(int accountId) {
