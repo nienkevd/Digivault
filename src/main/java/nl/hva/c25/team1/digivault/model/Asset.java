@@ -3,8 +3,9 @@ package nl.hva.c25.team1.digivault.model;
 // review door Sezi, 6 december
 
 /**
+ *
  * @author Erwin, studentnummer 500889293
- * @version 2-12-2021
+ * @since 30-11-2021
  */
 
 public class Asset {
@@ -29,7 +30,7 @@ public class Asset {
     }
 
     /**
-     * Kale constructor van de klasse Asset zonder dagkoers
+     * Constructor van de klasse Asset met lege dagkoers
      * @param assetId id van de Asset
      * @param afkorting afkorting van de Asset
      * @param naam naam van de Asset
@@ -38,13 +39,16 @@ public class Asset {
         this(assetId, afkorting, naam, 0.0);
     }
 
-    // TODO Aanpassen
+    /**
+     * Kale constructor van klasse Asset met alleen assetId
+     * @param assetId id van de Asset
+     */
     public Asset(int assetId) {
         this(assetId, "", "");
     }
 
     /**
-     * Lege constructor van de klasse Asset
+     * Lege constructor van klasse Asset
      */
     public Asset() {
         this(0, "", "");
@@ -110,6 +114,11 @@ public class Asset {
      */
     @Override
     public String toString() {
-        return "Asset{afkorting=" + afkorting + '\'' + ", naam='" + naam + '\'' + ", dagKoers=" + dagKoers + '}';
+        return "Asset{" +
+                "assetId=" + assetId +
+                ", afkorting='" + afkorting + '\'' +
+                ", naam='" + naam + '\'' +
+                ", dagKoers=" + dagKoers +
+                '}';
     }
 }

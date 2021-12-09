@@ -3,7 +3,9 @@ package nl.hva.c25.team1.digivault.model;
 import java.util.List;
 
 /**
- * @author Erwin, studentnummer 500889293
+ * Klasse FinancieelOverzicht die helpt om een financieel overzicht weer te geven
+ *
+ * @author Erwin en Nienke
  * @since 9-12-2021
  */
 
@@ -13,6 +15,13 @@ public class FinancieelOverzicht {
     private double saldo;
     private List<AssetMetAantal> assetMetAantal;
 
+    /**
+     * Constructor van de klasse FinancieelOverzicht
+     * @param klantId id van de Klant
+     * @param iban IBAN van de Klant
+     * @param saldo saldo van de Klant
+     * @param assetMetAantal lijst met alle Assets met aantal van de Klant
+     */
     public FinancieelOverzicht(int klantId, String iban, double saldo, List<AssetMetAantal> assetMetAantal) {
         super();
         this.klantId = klantId;
@@ -21,6 +30,10 @@ public class FinancieelOverzicht {
         this.assetMetAantal = assetMetAantal;
     }
 
+    /**
+     * Kale constructor met alleen klantId
+     * @param klantId id van de Klant
+     */
     public FinancieelOverzicht(int klantId) {
         this(klantId, "", 0, null);
     }

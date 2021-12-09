@@ -10,8 +10,10 @@ import java.util.List;
 // review door Sezi, 6 december
 
 /**
+ * Controller van de klasse Asset
+ *
  * @author Erwin, studentnummer 500889293
- * @version 6-12-2021
+ * @since 1-12-2021
  */
 
 @RestController

@@ -1,6 +1,8 @@
 package nl.hva.c25.team1.digivault.model;
 
 /**
+ * Klasse AssetMetAantal die helpt om Portefeuilleoverzicht per klant te geven
+ *
  * @author Erwin, studentnummer 500889293
  * @since 9-12-2021
  */
@@ -12,6 +14,14 @@ public class AssetMetAantal {
     private double dagkoers;
     private double aantal;
 
+    /**
+     * Constructor van de klasse AssetMetAantal
+     * @param assetId assetId id van de Asset
+     * @param afkorting afkorting van de Asset
+     * @param naam naam van de Asset
+     * @param dagkoers de huidige waarde van een asset
+     * @param aantal aantal Assets van Klant
+     */
     public AssetMetAantal(int assetId, String afkorting, String naam, double dagkoers, double aantal) {
         super();
         this.assetId = assetId;
@@ -65,6 +75,10 @@ public class AssetMetAantal {
         this.aantal = aantal;
     }
 
+    /**
+     * ToString-methode AssetMetAantal
+     * @return toString van klasse AssetMetAantal
+     */
     @Override
     public String toString() {
         return "AssetMetAantal{" +

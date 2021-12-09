@@ -4,10 +4,10 @@ import java.math.BigInteger;
 import java.util.Random;
 
 /**
- * Service die volgens de 11-proef IBAN-nummers genereert
+ * Service die volgens de 11-proef DIVA-IBAN-nummers genereert
  *
  * @author Erwin, studentnummer 500889293
- * @version 8-12-2021
+ * @since 8-12-2021
  */
 
 public class IbanService {
@@ -26,6 +26,9 @@ public class IbanService {
         System.out.println(IbanGenerator());
     }
 
+    /**
+     * Constructor van de IbanService
+     */
     public IbanService() {
         super();
     }

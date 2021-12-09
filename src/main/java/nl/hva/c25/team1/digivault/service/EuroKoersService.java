@@ -12,7 +12,7 @@ import java.util.List;
  * Service van de klasse EuroKoers
  *
  * @author Erwin, studentnummer 500889293
- * @version 6-12-2021
+ * @since 2-12-2021
  */
 
 @Service

@@ -8,7 +8,7 @@ import java.util.List;
  * Interface met de te implementeren methodes voor JdbcAssetDAO
  *
  * @author Erwin, studentnummer 500889293
- * @version 6-12-2021
+ * @since 2-12-2021
  */
 
 public interface EuroKoersDAO {
