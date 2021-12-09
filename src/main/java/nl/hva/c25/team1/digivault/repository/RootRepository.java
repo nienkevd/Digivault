@@ -57,11 +57,6 @@ public class RootRepository {
             item.getKlant().setKlantId(klant.getKlantId());
             portefeuilleItemDAO.bewaarPortefeuilleItemMetKey(item);
         }
-
-
-
-
-
         return klant;
     }
 
@@ -88,8 +83,6 @@ public class RootRepository {
         portefeuilleItem.setKlant(klant);
         return portefeuilleItem;
     }
-
-
 
     /**
      * @author Anthon
