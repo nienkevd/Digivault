@@ -1,0 +1,14 @@
+// Created by antho
+// Creation date 13-12-2021
+
+package nl.hva.c25.team1.digivault.authentication;
+
+public class PepperService {
+
+    private static final String PEPPER = "ToBeOrNotToBeThoseAreTheOptions";
+
+    public String getPepper() {
+        return PEPPER;
+    }
+
+}
