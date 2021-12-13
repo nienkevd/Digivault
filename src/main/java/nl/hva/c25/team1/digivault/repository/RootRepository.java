@@ -118,7 +118,7 @@ public class RootRepository {
             overzicht.setAfkorting(asset.getAfkorting());
             overzicht.setNaam(asset.getNaam());
             overzicht.setDagkoers(asset.getDagKoers());
-            overzicht.setAantal(portefeuilleItemDAO.vindItemMetId(asset.getAssetId()).getHoeveelheid());
+            overzicht.setAantal(portefeuilleItemDAO.vindItemMetId(klantId).getHoeveelheid());
             portefeuilleOverzicht.add(overzicht);
         }
         return portefeuilleOverzicht;
