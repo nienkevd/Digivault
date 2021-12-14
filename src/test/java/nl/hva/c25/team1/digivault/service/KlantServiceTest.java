@@ -1,6 +1,7 @@
 package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.model.Account;
+import nl.hva.c25.team1.digivault.model.Adres;
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.repository.JdbcKlantDAO;
 import nl.hva.c25.team1.digivault.repository.KlantDAO;
@@ -28,7 +29,6 @@ class KlantServiceTest {
     private static JdbcKlantDAO mockDAO = Mockito.mock(JdbcKlantDAO.class);
     KlantService serviceUnderTest = new KlantService(mockDAO);
 
-
     @Test
     void vindKlantOpKlantID() {
         Klant expected = new Klant(5,"132456789", LocalDate.parse("1955-01-01"));
@@ -45,6 +45,18 @@ class KlantServiceTest {
 
         String actual = serviceUnderTest.updateKlant(bestaandeKlant);
         assertThat(actual).contains("geslaagd");
+    }
+
+    @Test
+    void validatieMailadres() {
+        Account bestaandAccount = new Account("gwkroeze@outlook.com", null);
+
+    }
+
+    @Test
+    void validatiePostcode() {
+        Adres adres = new Adres(null, 0, null, "2717HH", null);
+        String postcode = adres.getPostcode();
     }
 
 //    @Test
