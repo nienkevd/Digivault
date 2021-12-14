@@ -91,9 +91,11 @@ public class RootRepository {
     }
 
     /**
+     * Methode die een financieel overzicht (overzicht rekening + portefeuille) genereert op basis van klantId
+     *
      * @author Nienke en Erwin
-     * @param klantId
-     * @return
+     * @param klantId klantId waarop gezocht wordt
+     * @return het gegenereerde financiële overzicht
      */
     public FinancieelOverzicht genereerFinancieelOverzichtOpId(int klantId) {
         FinancieelOverzicht financieelOverzicht = new FinancieelOverzicht(klantId);
@@ -105,22 +107,24 @@ public class RootRepository {
     }
 
     /**
-     * Methode die genereerFinancieelOverzichtOpId() voorziet van lijst met assets + hoeveelheid bij een klantId
+     * Methode die genereerFinancieelOverzichtOpId() voorziet van een lijst met assets en bijbehorende hoeveelheid
+     *
      * @author Erwin
-     * @param klantId het klantId waarop gezocht wordt
-     * @return de lijst met assetparameters + hoeveelheid
+     * @param klantId klantId waarop gezocht wordt
+     * @return de lijst met asset-parameters + hoeveelheid
      */
     public List<AssetMetAantal> genereerPortefeuilleOverzicht(int klantId) {
         List<AssetMetAantal> portefeuilleOverzicht = new ArrayList<>();
-        for (Asset asset: assetDAO.geefAlleAssets()) {
+        for (PortefeuilleItem portefeuilleItem : portefeuilleItemDAO.genereerPortefeuilleVanKlantMetId(klantId)) {
             AssetMetAantal overzicht = new AssetMetAantal();
-            overzicht.setAssetId(asset.getAssetId());
-            overzicht.setAfkorting(asset.getAfkorting());
-            overzicht.setNaam(asset.getNaam());
-            overzicht.setDagkoers(asset.getDagKoers());
-            overzicht.setAantal(portefeuilleItemDAO.vindItemMetId(klantId).getHoeveelheid());
+            overzicht.setAssetId(portefeuilleItem.getAsset().getAssetId());
+            overzicht.setAfkorting(portefeuilleItem.getAsset().getAfkorting());
+            overzicht.setNaam(portefeuilleItem.getAsset().getNaam());
+            overzicht.setDagkoers(portefeuilleItem.getAsset().getDagKoers());
+            overzicht.setAantal(portefeuilleItem.getHoeveelheid());
             portefeuilleOverzicht.add(overzicht);
         }
+        System.out.println(portefeuilleOverzicht);
         return portefeuilleOverzicht;
     }
 }

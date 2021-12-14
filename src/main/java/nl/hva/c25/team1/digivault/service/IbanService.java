@@ -56,10 +56,10 @@ public class IbanService {
 
     /**
      * Deze methode voegt een gegenereerd bankrekeningnummer samen met de numerieke waarden van bankcode, de landcode
-     * en twee nullen aan het eind. Deze zo gevormde controleReeks wordt een String, en daarna omgezet naar een
+     * en twee nullen aan het eind. Deze zo gevormde controleReeks is een String, die wordt omgezet naar een
      * BigInteger om de bijbehorende modulo 97 berekening te kunnen doen en dit af te trekken van 98 (= bruto). De
-     * uitkomst (=controlegetal) wordt als String teruggegeven, en via de methode vulControleGetalAan eventueel
-     * aangevuld tot twee tekens door het toevoegen van een nul
+     * uitkomst (=controlegetal) wordt als String teruggegeven, en indien nodig via de methode vulControleGetalAan
+     * aangevuld tot twee tekens
      * @param bankrekeningNummer het gegenereerde bankrekeningnummer waarvoor een controlegetal berekend wordt
      * @return controlegetal als String
      */
@@ -73,7 +73,7 @@ public class IbanService {
     }
 
     /**
-     * Methode vult de controlegetallen die uit één teken bestaan aan tot twee tekens door een nul toe te voegen
+     * Methode vult de controlegetallen die uit één teken bestaan aan tot twee tekens door er een nul aan toe te voegen
      * @param controleGetal het controlegetal dat mogelijk aangevuld moet worden als String
      * @return het correcte en eventueel aangevulde controlegetal als String
      */
