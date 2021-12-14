@@ -101,7 +101,8 @@ public class RootRepository {
     public List<AssetMetAantal> genereerPortefeuilleOverzicht(int klantId) {
         List<AssetMetAantal> portefeuilleOverzicht = new ArrayList<>();
         for (PortefeuilleItem portefeuilleItem : portefeuilleItemDAO.genereerPortefeuilleVanKlantMetId(klantId)) {
-//            portefeuilleItem.setAsset(portefeuilleItem.getAsset());
+            portefeuilleItem.setAsset(assetDAO.vindAssetOpId(portefeuilleItemDAO.vindAssetIdVanPortefeuilleItem
+                    (portefeuilleItem)));
             AssetMetAantal overzicht = new AssetMetAantal();
             overzicht.setAssetId(portefeuilleItem.getAsset().getAssetId());
             overzicht.setAfkorting(portefeuilleItem.getAsset().getAfkorting());
@@ -110,7 +111,6 @@ public class RootRepository {
             overzicht.setAantal(portefeuilleItem.getHoeveelheid());
             portefeuilleOverzicht.add(overzicht);
         }
-        System.out.println(portefeuilleOverzicht);
         return portefeuilleOverzicht;
     }
 }

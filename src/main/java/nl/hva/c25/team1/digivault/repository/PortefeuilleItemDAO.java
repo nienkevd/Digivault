@@ -20,4 +20,5 @@ public interface PortefeuilleItemDAO {
 
     int vindKlantIdVanPortefeuilleitem(PortefeuilleItem portefeuilleItem);
 
+    int vindAssetIdVanPortefeuilleItem(PortefeuilleItem portefeuilleItem);
 }
