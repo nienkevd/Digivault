@@ -1,10 +1,15 @@
 package nl.hva.c25.team1.digivault.service;
 
+import nl.hva.c25.team1.digivault.model.Account;
 import nl.hva.c25.team1.digivault.model.Klant;
+import nl.hva.c25.team1.digivault.repository.JdbcAccountDAO;
 import nl.hva.c25.team1.digivault.repository.JdbcKlantDAO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Service van de klasse Klant
@@ -17,6 +22,7 @@ import java.util.List;
 public class KlantService {
 
     private JdbcKlantDAO klantDAO;
+    private JdbcAccountDAO accountDAO;
 
     /**
      *
@@ -31,9 +37,14 @@ public class KlantService {
      * @param klant opslaan
      */
     public Klant bewaarKlant(Klant klant) {
+        if (!validatiePostcode(klant.getAdres().getPostcode())) {
+            System.out.println("Er is een onjuiste postcode ingevoerd");
+            return null;
+        } else if (!validatieMailadres(klant.getAccount().getEmailadres())) {
+            return null;
+        }
         return klantDAO.bewaarKlantMetSK(klant);
     }
-
 
     /**
      *
@@ -68,9 +79,19 @@ public class KlantService {
         }
     }
 
+    public boolean validatieMailadres(String emailadres) {
+        for (Account account : accountDAO.geefAlleAccounts()) {
+            if (Objects.equals(account.getEmailadres(), emailadres)) {
+                return false;
+            }
+        }
+        String patroon = "^.+@.+\\..+$";
+        Pattern pattern = java.util.regex.Pattern.compile(patroon);
+        Matcher matcher = pattern.matcher(emailadres);
+        return matcher.matches();
+    }
 
-
-
-
-
+    public boolean validatiePostcode(String postcode) {
+        return postcode.matches("[1-9]{1}[0-9]{3}[a-zA-Z]{2}");
+    }
 }
