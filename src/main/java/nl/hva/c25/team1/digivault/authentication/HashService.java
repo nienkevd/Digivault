@@ -12,8 +12,9 @@ public class HashService {
     }
 
     public String hash(String value) {
-        final int NUMBER_OF_ROUNDS = 10;
-        // TODO: met peper
+        // maak instantie bcrypt klasse (no args)
+        // TODO: singleton voor bcrypt klasse
+        // hash mbv bcrypt en use pepper
         return "";
     }
 
