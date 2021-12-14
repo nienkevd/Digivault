@@ -3,6 +3,8 @@
 
 package nl.hva.c25.team1.digivault.authentication;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class HashService {
 
     private final PepperService pepperService;
@@ -12,10 +14,7 @@ public class HashService {
     }
 
     public String hash(String value) {
-        // maak instantie bcrypt klasse (no args)
-        // TODO: singleton voor bcrypt klasse
-        // hash mbv bcrypt en use pepper
-        return "";
+        return new BCryptPasswordEncoder().encode(value + pepperService.getPepper());
     }
 
 }
