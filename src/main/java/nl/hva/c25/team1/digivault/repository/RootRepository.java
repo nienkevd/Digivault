@@ -76,21 +76,6 @@ public class RootRepository {
     }
 
     /**
-     * @author Anthon
-     *
-     * Methode gemaakt om functionaliteit rootrepo uit te proberen.
-     *
-     * @param itemId Id van het portefeuilleitem.
-     * @return complete portefeuilleitem.
-     */
-    public PortefeuilleItem vindPortefeuilleItemOpId(int itemId) {
-        PortefeuilleItem portefeuilleItem = portefeuilleItemDAO.vindItemMetId(itemId);
-        portefeuilleItem.setKlant(klantDAO.vindKlantOpKlantId(portefeuilleItem.getKlant().getKlantId()));
-        portefeuilleItem.setAsset(assetDAO.vindAssetOpId(portefeuilleItem.getAsset().getAssetId()));
-        return portefeuilleItem;
-    }
-
-    /**
      * Methode die een financieel overzicht (overzicht rekening + portefeuille) genereert op basis van klantId
      *
      * @author Nienke en Erwin

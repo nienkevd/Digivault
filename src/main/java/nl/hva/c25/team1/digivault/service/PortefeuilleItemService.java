@@ -44,7 +44,7 @@ public class PortefeuilleItemService {
      * @return Het portefeuilleitem.
      */
     public PortefeuilleItem vindItemMetId(int itemId) {
-        return rootRepository.vindPortefeuilleItemOpId(itemId);
+        return rootRepository.vindItemOpId(itemId);
     }
 
 }
