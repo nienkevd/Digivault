@@ -24,7 +24,6 @@ public class RekeningService {
     }
 
     public void bewaarRekening(Rekening rekening) {
-
         jdbcRekeningDAO.bewaar(rekening);
     }
 
