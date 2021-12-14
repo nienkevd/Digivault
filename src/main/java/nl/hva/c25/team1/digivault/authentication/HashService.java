@@ -5,8 +5,6 @@ package nl.hva.c25.team1.digivault.authentication;
 
 public class HashService {
 
-    private static final int NUMBER_OF_ROUNDS = 10;
-
     private final PepperService pepperService;
 
     public HashService(PepperService pepperService) {
@@ -14,6 +12,7 @@ public class HashService {
     }
 
     public String hash(String value) {
+        final int NUMBER_OF_ROUNDS = 10;
         // TODO: met peper
         return "";
     }
