@@ -49,8 +49,9 @@ class KlantServiceTest {
 
     @Test
     void validatieMailadres() {
-        Account bestaandAccount = new Account("gwkroeze@outlook.com", null);
-
+        String mailadres = "2717HH";
+        boolean expected = false;
+//        boolean actual = validatiePostcode(mailadres);
     }
 
     @Test
