@@ -22,35 +22,35 @@ import static org.assertj.core.api.Assertions.*;
 @ActiveProfiles("test")
 class JdbcKlantDAOTest {
 //
-//    private JdbcKlantDAO daoUnderTest;
-//
-//    @Autowired
-//    public JdbcKlantDAOTest(JdbcKlantDAO daoUnderTest) {
-//        super();
-//        this.daoUnderTest = daoUnderTest;
-//    }
-//
-//    @Test
-//    public void setupTest() {
-//        assertThat(daoUnderTest).isNotNull();
-//    }
-//
-//    @Test
-//    void bewaarKlantMetSK() {
-//    }
-//
-//    @Test
-//    void vindKlantOpKlantId() {
-//        Klant actual = daoUnderTest.vindKlantOpKlantId(1);
-//        Klant expected = new Klant(1,"345276182", LocalDate.parse("2000-01-01"));
-//        assertThat(expected).isEqualTo(actual);
-//
-//    }
-//    @Test
-//    void vindAlleKlanten() {
-//    }
-//
-//    @Test
-//    void update() {
-//    }
+    private JdbcKlantDAO daoUnderTest;
+
+    @Autowired
+    public JdbcKlantDAOTest(JdbcKlantDAO daoUnderTest) {
+        super();
+        this.daoUnderTest = daoUnderTest;
+    }
+
+    @Test
+    public void setupTest() {
+        assertThat(daoUnderTest).isNotNull();
+    }
+
+    @Test
+    void bewaarKlantMetSK() {
+    }
+
+    @Test
+    void vindKlantOpKlantId() {
+        Klant actual = daoUnderTest.vindKlantOpKlantId(1);
+        Klant expected = new Klant(1,"345276182", LocalDate.parse("2000-01-01"));
+        assertThat(expected).isEqualTo(actual);
+
+    }
+    @Test
+    void vindAlleKlanten() {
+    }
+
+    @Test
+    void update() {
+    }
 }
