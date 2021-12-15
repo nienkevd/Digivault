@@ -82,16 +82,17 @@ public class TokenService {
     }       // if false: vraag klant om refreshtoken en valideer deze
     // check refresh en als correct --> geef klant nieuwe JWT en nieuwe refresh
 
-    public String genereerNieuweTokens(UUID token){
+    public void genereerNieuweTokens(UUID token, Klant klant){
         // JWT is verlopen, klant krijgt 401
         // vanuit de controller wordt om refresh token van klant gevraagd
         // valideer deze refresh token, als hij niet leeg terug komt dan krijgt klant 2 nieuwe tokens
         if (!(valideer(token).isEmpty())){
-
+            // maak nieuwe jwt:
+            String jwt = maakJWT(klant.getKlantId());
+            // maak nieuwe refresh
+            TokenKlantPaar tokenKlantPaar = authoriseer(klant);
         }
-
-
-        return "Hoi";
+        //TODO: geeft deze methode iets terug?
     }
 
     public TokenKlantPaar authoriseer(Klant klant) {
