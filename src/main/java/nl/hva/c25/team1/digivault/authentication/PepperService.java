@@ -10,6 +10,10 @@ public class PepperService {
 
     private static final String PEPPER = "ToBeOrNotToBeThoseAreTheOptions";
 
+    public PepperService() {
+        super();
+    }
+
     public String getPepper() {
         return PEPPER;
     }
