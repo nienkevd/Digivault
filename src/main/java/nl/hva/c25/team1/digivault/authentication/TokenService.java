@@ -44,7 +44,7 @@ public class TokenService {
     private final String TYP = "JWT";
     private Instant now;
 
-    public String maakJWT(int klantId) {
+    public String maakJWT(String emailadres) {
         now = Instant.now();
         headerClaims.put("alg", ALG);
         headerClaims.put("typ", TYP);
@@ -52,13 +52,13 @@ public class TokenService {
             token = JWT.create()
                     .withIssuer(ISSUER)
                     .withAudience(AUDIENCE)
-                    .withClaim("klantId", klantId)
+                    .withClaim("emailadres", emailadres)
                     .withIssuedAt(Date.from(now))
                     .withExpiresAt(Date.from(now.plus(1,ChronoUnit.HOURS)))
                     .withHeader(headerClaims)
                     .sign(algorithm);
         } catch (JWTCreationException exception){
-            throw new RuntimeException("Error tijdens het maken van een token voor: " + klantId);
+            throw new RuntimeException("Error tijdens het maken van een token voor: " + emailadres);
         }
         return token;
     }
@@ -88,7 +88,7 @@ public class TokenService {
         // valideer deze refresh token, als hij niet leeg terug komt dan krijgt klant 2 nieuwe tokens
         if (!(valideer(token).isEmpty())){
             // maak nieuwe jwt:
-            String jwt = maakJWT(klant.getKlantId());
+            String jwt = maakJWT(klant.getAccount().getEmailadres());
             // maak nieuwe refresh
             TokenKlantPaar tokenKlantPaar = authoriseer(klant);
         }
