@@ -3,6 +3,9 @@
 
 package nl.hva.c25.team1.digivault.authentication;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class PepperService {
 
     private static final String PEPPER = "ToBeOrNotToBeThoseAreTheOptions";

@@ -25,10 +25,8 @@ import java.util.*;
 
 @Service
 public class TokenService {
-    protected SecretKeyService secretKeyService;
+    private SecretKeyService secretKeyService;
     protected final TokenKlantPaarDAO tokenKlantPaarDAO;
-    private Klant klant;
-    private KlantDAO klantDAO;
 
     @Autowired
     public TokenService(SecretKeyService secretKeyService, TokenKlantPaarDAO tokenKlantPaarDAO) {
@@ -37,7 +35,7 @@ public class TokenService {
     }
 
     private String token;
-    private final String KEY = secretKeyService.getSecret();
+    private final String KEY = SecretKeyService.getSecret();
     private Algorithm algorithm = Algorithm.HMAC256(KEY);
     private final String ISSUER = "Digivault";
     private final String AUDIENCE = "https://www.digivault.com";
@@ -75,21 +73,28 @@ public class TokenService {
             Date expirationTime = jwt.getExpiresAt();
             Date now = Date.from(Instant.now());
             if (expirationTime != null && now.after(expirationTime)) {
-//                Map<String,Integer> klantIdMap = jwt.getClaim("klantId");
-//                Klant klant = klantDAO.vindKlantOpKlantId(klantIdMap.get(0));
-                // vraag klant om refreshtoken en valideer deze
-                // methode authoriseer(Klant klant)? --> waar haal ik klant vandaan?
-                // of gaat dit via de controller?
-                // if refresh = correct --> geef klant nieuwe JWT en nieuwe refresh
-//                return false;
+                return false;
             }
             return true;
         } catch (JWTVerificationException exception){
             return false;
         }
+    }       // if false: vraag klant om refreshtoken en valideer deze
+    // check refresh en als correct --> geef klant nieuwe JWT en nieuwe refresh
+
+    public String genereerNieuweTokens(UUID token){
+        // JWT is verlopen, klant krijgt 401
+        // vanuit de controller wordt om refresh token van klant gevraagd
+        // valideer deze refresh token, als hij niet leeg terug komt dan krijgt klant 2 nieuwe tokens
+        if (!(valideer(token).isEmpty())){
+
+        }
+
+
+        return "Hoi";
     }
 
-    public TokenKlantPaar authoriseer (Klant klant) {
+    public TokenKlantPaar authoriseer(Klant klant) {
         Optional<TokenKlantPaar> paarOptie = tokenKlantPaarDAO.vindPaarOpKlant(klant);
         if (paarOptie.isPresent()) {
             tokenKlantPaarDAO.delete(paarOptie.get().getKey());
@@ -107,6 +112,8 @@ public class TokenService {
         }
         return Optional.empty();
     }
+
+
 
 }
 
