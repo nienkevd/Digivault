@@ -42,7 +42,7 @@ class JdbcKlantDAOTest {
     @Test
     void vindKlantOpKlantId() {
         Klant actual = daoUnderTest.vindKlantOpKlantId(1);
-        Klant expected = new Klant(1,"345276182", LocalDate.parse("2000-01-01"));
+        Klant expected = new Klant(1,"123456789", LocalDate.parse("1980-05-27"));
         assertThat(expected).isEqualTo(actual);
 
     }
