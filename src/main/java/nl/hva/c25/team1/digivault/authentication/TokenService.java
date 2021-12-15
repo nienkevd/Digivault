@@ -92,7 +92,7 @@ public class TokenService {
             // maak nieuwe refresh
             TokenKlantPaar tokenKlantPaar = authoriseer(klant);
         }
-        //TODO: geeft deze methode iets terug?
+        /* TODO: geeft deze methode iets terug? TokenKlantPaar? JWT komt in header getPortefeuille */
     }
 
     public TokenKlantPaar authoriseer(Klant klant) {
