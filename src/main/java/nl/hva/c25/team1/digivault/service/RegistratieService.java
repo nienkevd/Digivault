@@ -1,5 +1,6 @@
 package nl.hva.c25.team1.digivault.service;
 
+import nl.hva.c25.team1.digivault.authentication.HashService;
 import nl.hva.c25.team1.digivault.model.*;
 import nl.hva.c25.team1.digivault.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.List;
 public class RegistratieService {
     private RootRepository rootRepository;
     private AssetService assetService;
+    private HashService hashService;
 
     public static int BEGINSALDO = 100000;      // Saldo dat een nieuwe klant meekrijgt op zijn rekening
 
@@ -26,12 +28,14 @@ public class RegistratieService {
      * Constructor van de RegistratieService
      * @param rootRepository RootRepository
      * @param assetService AssetService
+     * @param hashService HashService
      */
     @Autowired
-    public RegistratieService(RootRepository rootRepository, AssetService assetService) {
+    public RegistratieService(RootRepository rootRepository, AssetService assetService, HashService hashService) {
         super();
         this.rootRepository = rootRepository;
         this.assetService = assetService;
+        this.hashService = hashService;
     }
 
     /**
@@ -48,6 +52,8 @@ public class RegistratieService {
         rekening.setSaldo(BEGINSALDO);
         klant.setRekening(rekening);
         klant.setPortefeuille(aanmaakLegePortefeuille());
+        Account account = klant.getAccount();
+        account.setWachtwoord(hashService.hash(account.getWachtwoord()));
         return rootRepository.slaKlantOp(klant);
     }
 
