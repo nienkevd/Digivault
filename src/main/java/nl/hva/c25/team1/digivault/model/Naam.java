@@ -2,6 +2,9 @@ package nl.hva.c25.team1.digivault.model;
 
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 /**
  *
  * @author Anneke, studentnummer 500889251
@@ -12,8 +15,12 @@ import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
 public class Naam {
     private int naamId;
+    @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige voornaam in")
+    @NotNull(message = "Vul een voornaam in")
     private String voornaam;
     private String tussenvoegsel;
+    @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige achternaam in")
+    @NotNull(message = "Vul een achternaam in")
     private String achternaam;
 
     public Naam(int naamId, String voornaam, String tussenvoegsel, String achternaam) {
