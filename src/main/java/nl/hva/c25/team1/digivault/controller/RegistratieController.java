@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * Controller voor de registratie van een Klant
  *
@@ -34,7 +36,7 @@ public class RegistratieController {
      * @return String met info over het slagen van de registratie
      */
     @PostMapping("/registratie")
-    public String registratieHandler(@RequestBody RegisterDto registerDto) {
+    public String registratieHandler(@Valid @RequestBody RegisterDto registerDto) {
         Klant klant = new Klant(registerDto);
         registratieService.registratie(klant);
         return String.format("Registratie geslaagd!\nNaam: %s\nE-mailadres: %s\nIBAN: %s", klant.getNaam(),
