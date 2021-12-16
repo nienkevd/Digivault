@@ -2,10 +2,7 @@ package nl.hva.c25.team1.digivault.controller;
 
 import nl.hva.c25.team1.digivault.model.Account;
 import nl.hva.c25.team1.digivault.service.AccountService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,7 +14,7 @@ import java.util.List;
  * @author Sezi, studentnummer 500889525
  * @version 8-12-2021
  */
-
+@RestController
 public class AccountController {
     private AccountService accountService;
 

@@ -3,6 +3,7 @@ package nl.hva.c25.team1.digivault.controller;
 import nl.hva.c25.team1.digivault.model.*;
 import nl.hva.c25.team1.digivault.service.RegistratieService;
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
  * @since 8-12-2021
  */
 
+@Validated
 @RestController
 public class RegistratieController {
 
