@@ -3,6 +3,7 @@ package nl.hva.c25.team1.digivault.service;
 import nl.hva.c25.team1.digivault.model.Account;
 import nl.hva.c25.team1.digivault.repository.JdbcAccountDAO;
 import nl.hva.c25.team1.digivault.repository.RootRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @version 9-12-2021
  */
 
+@Service
 public class AccountService {
 
     private JdbcAccountDAO accountDAO;

@@ -110,4 +110,16 @@ public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
         String sql = "SELECT klantId FROM portefeuille_item WHERE itemId = ?";
         return jdbcTemplate.queryForObject(sql, Integer.class, portefeuilleItem.getPortefeuilleItemId());
     }
+
+    /**
+     * Deze methode geeft het assetId behorend bij het meegegeven portefeuilleItem
+     *
+     * @param portefeuilleItem het meegegeven portefeuilleItem
+     * @return de bijbehorende assetId
+     */
+    @Override
+    public int vindAssetIdVanPortefeuilleItem(PortefeuilleItem portefeuilleItem) {
+        String sql = "SELECT assetId FROM portefeuille_item WHERE itemId = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, portefeuilleItem.getPortefeuilleItemId());
+    }
 }

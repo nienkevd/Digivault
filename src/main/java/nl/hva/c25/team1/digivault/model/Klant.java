@@ -2,6 +2,7 @@ package nl.hva.c25.team1.digivault.model;
 
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +17,12 @@ import java.util.Objects;
 
 public class Klant {
     private int klantId;
+    @Size(min = 8, max = 9, message = "Het bsn-nummer bestaat uit 8 of 9 cijfers")
+    @Pattern(regexp = "[0-9]+", message = "Vul een geldige bsn-nummer in")
+    @NotEmpty(message = "Het bsn-nummer mag niet leeg zijn")
     private String bsn;
+    @Past(message = "De geboortedatum moet in het verleden liggen")
+    @NotEmpty(message = "De geboortedatum mag niet leeg zijn")
     private LocalDate geboortedatum;
     private Naam naam;
     private Adres adres;
@@ -139,5 +145,23 @@ public class Klant {
                 ", rekening=" + rekening +
                 ", portefeuille=" + portefeuille +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Klant klant = (Klant) o;
+        return klantId == klant.klantId && Objects.equals(bsn, klant.bsn)
+                && Objects.equals(geboortedatum, klant.geboortedatum)
+                && Objects.equals(naam, klant.naam) && Objects.equals(adres, klant.adres)
+                && Objects.equals(account, klant.account)
+                && Objects.equals(rekening, klant.rekening)
+                && Objects.equals(portefeuille, klant.portefeuille);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(klantId, bsn, geboortedatum, naam, adres, account, rekening, portefeuille);
     }
 }

@@ -76,6 +76,11 @@ public class JdbcAccountDAO implements AccountDAO {
         return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), accountId);
     }
 
+    @Override
+    public Account vindAccountOpEmailAdres(String emailAdres) {
+        return new Account();
+    }
+
     /**
      *
      * @return List<Account> geeft lijst van alle accounts uit DB terug

@@ -49,14 +49,40 @@ class KlantServiceTest {
 
     @Test
     void validatieMailadres() {
-        Account bestaandAccount = new Account("gwkroeze@outlook.com", null);
-
+        System.out.println();
+        boolean expected = false;
+        boolean actual = validatieMailadres("gwkroeze@outlook.com");
+        assertEquals(expected, actual);
     }
 
     @Test
-    void validatiePostcode() {
-        Adres adres = new Adres(null, 0, null, "2717HH", null);
-        String postcode = adres.getPostcode();
+    boolean validatieMailadres(String mailadres) {
+//        boolean expected = false;
+//        boolean actual = validatieMailadres("gwkroeze@outlook.com");
+//        assertEquals(expected, actual);
+        return false;
+    }
+
+    @Test
+    boolean validatiePostcode(String postcode) {
+        String postcode1 = "2717HH";
+        String postcode2 = "2717 HH";
+        String postcode3 = "A123AA";
+        String postcode4 = "@234HH";
+        String postcode5 = "2717#H";
+        boolean expected1 = true;
+        boolean expected2 = false;
+        boolean actual1 = validatiePostcode(postcode1);
+        boolean actual2 = validatiePostcode(postcode2);
+        boolean actual3 = validatiePostcode(postcode3);
+        boolean actual4 = validatiePostcode(postcode4);
+        boolean actual5 = validatiePostcode(postcode5);
+        assertEquals(expected1, actual1);
+        assertEquals(expected2, actual2);
+        assertEquals(expected2, actual3);
+        assertEquals(expected2, actual4);
+        assertEquals(expected2, actual5);
+        return false;
     }
 
 //    @Test
