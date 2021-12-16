@@ -2,6 +2,7 @@ package nl.hva.c25.team1.digivault.repository;
 
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.Transactie;
+import nl.hva.c25.team1.digivault.model.TransactiePartij;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,6 +13,7 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Author Nienke
@@ -59,6 +61,32 @@ public class JdbcTransactieDAO implements TransactieDAO {
             transactie = null;
         }
         return transactie;
+    }
+// geprobeerd te maken; geeft een verkoper mee, en krijgt terug een lijst met transacites,
+    //snap niet hoe hij een lijst kan terug geven/of lijst maken... help..
+    @Override
+    public List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper){
+        String sql = "SELECT * FROM transactie WHERE verkoper = ? ";
+        Transactie transactie;
+        try {
+            transactie = jdbcTemplate.queryForObject(sql, new TransactieRowMapper(), verkoper);
+        } catch (EmptyResultDataAccessException noResult) {
+            transactie = null;
+        }
+       return null;
+    }
+    // geprobeerd te maken; geeft een koper mee, en krijgt terug een lijst met transacites,
+    //snap niet hoe hij een lijst kan terug geven. help..
+    @Override
+    public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper){
+        String sql = "SELECT * FROM transactie WHERE koper = ? ";
+        Transactie transactie;
+        try {
+            transactie = jdbcTemplate.queryForObject(sql, new TransactieRowMapper(), koper);
+        } catch (EmptyResultDataAccessException noResult) {
+            transactie = null;
+        }
+        return null;
     }
 
 
