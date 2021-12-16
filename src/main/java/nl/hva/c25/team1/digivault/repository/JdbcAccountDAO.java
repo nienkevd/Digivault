@@ -78,7 +78,8 @@ public class JdbcAccountDAO implements AccountDAO {
 
     @Override
     public Account vindAccountOpEmailAdres(String emailAdres) {
-        return new Account();
+        String sql = "Select * From account Where emailadres = ?";
+        return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), emailAdres);
     }
 
     /**
