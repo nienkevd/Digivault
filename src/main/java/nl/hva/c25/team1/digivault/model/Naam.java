@@ -16,12 +16,8 @@ import javax.validation.constraints.Pattern;
 
 public class Naam {
     private int naamId;
-    @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige voornaam in")
-    @NotEmpty(message = "Vul een voornaam in")
     private String voornaam;
     private String tussenvoegsel;
-    @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige achternaam in")
-    @NotEmpty(message = "Vul een achternaam in")
     private String achternaam;
 
     public Naam(int naamId, String voornaam, String tussenvoegsel, String achternaam) {

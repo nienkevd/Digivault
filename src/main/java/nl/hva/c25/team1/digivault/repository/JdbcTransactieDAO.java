@@ -90,7 +90,6 @@ public class JdbcTransactieDAO implements TransactieDAO {
         return null;
     }
 
-
         private class TransactieRowMapper implements RowMapper<Transactie> {
             @Override
             public Transactie mapRow(ResultSet resultSet, int RowNumber) throws SQLException {
