@@ -22,7 +22,7 @@ public class Adres {
     @NotEmpty(message = "Vul een huisnummer in")
     private int huisnummer;
     private String toevoeging;
-    @Pattern(regexp = "/^\\d{4}[a-z]{2}$/i", message = "Vul een geldige postcode in")
+    @Pattern(regexp = "^[1-9][0-9]{3}[A-Za-z]{2}", message = "Vul een geldige postcode in")
     @NotEmpty(message = "Vul een postcode in")
     private String postcode;
     @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige woonplaats in")
