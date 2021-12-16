@@ -77,6 +77,7 @@ public class JdbcTransactieDAO implements TransactieDAO {
     }
     // geprobeerd te maken; geeft een koper mee, en krijgt terug een lijst met transacites,
     //snap niet hoe hij een lijst kan terug geven. help..
+
     @Override
     public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper){
         String sql = "SELECT * FROM transactie WHERE koper = ? ";
