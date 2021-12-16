@@ -18,10 +18,10 @@ public class Klant {
     private int klantId;
     @Size(min = 8, max = 9, message = "Het bsn-nummer bestaat uit 8 of 9 cijfers")
     @Pattern(regexp = "[0-9]+", message = "Vul een geldige bsn-nummer in")
-    @NotNull(message = "Het bsn-nummer mag niet leeg zijn")
+    @NotEmpty(message = "Het bsn-nummer mag niet leeg zijn")
     private String bsn;
     @Past(message = "De geboortedatum moet in het verleden liggen")
-    @NotNull(message = "De geboortedatum mag niet leeg zijn")
+    @NotEmpty(message = "De geboortedatum mag niet leeg zijn")
     private LocalDate geboortedatum;
     private Naam naam;
     private Adres adres;
