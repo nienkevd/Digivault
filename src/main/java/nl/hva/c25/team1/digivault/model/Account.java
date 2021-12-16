@@ -3,7 +3,6 @@ package nl.hva.c25.team1.digivault.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
-import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 // review door Erwin, 6 december
@@ -16,10 +15,10 @@ import javax.validation.constraints.*;
 public class Account {
     private int accountId;
     @Email(message = "Vul een geldig e-mailadres in")
-    @NotNull(message = "Vul een e-mailadres in")
+    @NotEmpty(message = "Vul een e-mailadres in")
     private String emailadres;
     @Size(min = 10, message = "Het wachtwoord moet uit minimaal 10 tekens bestaan")
-    @NotNull(message = "Vul een wachtwoord in")
+    @NotEmpty(message = "Vul een wachtwoord in")
     private String wachtwoord;
 
     @JsonBackReference

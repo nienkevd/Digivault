@@ -2,7 +2,7 @@ package nl.hva.c25.team1.digivault.model;
 
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -16,17 +16,17 @@ import javax.validation.constraints.Pattern;
 public class Adres {
     private int adresId;
     @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige straatnaam in")
-    @NotNull(message = "Vul een straat in")
+    @NotEmpty(message = "Vul een straat in")
     private String straat;
     @Pattern(regexp = "\\d+", message = "Vul een geldig huisnummer in")
-    @NotNull(message = "Vul een huisnummer in")
+    @NotEmpty(message = "Vul een huisnummer in")
     private int huisnummer;
     private String toevoeging;
-    @Pattern(regexp = "/^\\d{4}[a-z]{2}$/i", message = "Vul een geldige postcode in")
-    @NotNull(message = "Vul een postcode in")
+    @Pattern(regexp = "^[1-9][0-9]{3}[A-Za-z]{2}", message = "Vul een geldige postcode in")
+    @NotEmpty(message = "Vul een postcode in")
     private String postcode;
     @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige woonplaats in")
-    @NotNull(message = "Vul een woonplaats in")
+    @NotEmpty(message = "Vul een woonplaats in")
     private String woonplaats;
 
     public Adres(int adresId, String straat, int huisnummer, String toevoeging,
