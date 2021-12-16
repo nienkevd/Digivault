@@ -11,14 +11,20 @@ import org.springframework.stereotype.Service;
 public class HashService {
 
     private final PepperService pepperService;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public HashService(PepperService pepperService) {
         this.pepperService = pepperService;
+        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
     }
 
     public String hash(String value) {
-        return new BCryptPasswordEncoder().encode(value + pepperService.getPepper());
+        return bCryptPasswordEncoder.encode(value + pepperService.getPepper());
+    }
+
+    public boolean matches(CharSequence rawPassword, String encodedPassword) {
+        return bCryptPasswordEncoder.matches(rawPassword, encodedPassword);
     }
 
 }

@@ -24,9 +24,8 @@ public class LoginService {
 
     public String login(String emailAdres, String password) {
         String token = null;
-        String hash = hashService.hash(password);
         String storedHash = accountDAO.vindAccountOpEmailAdres(emailAdres).getWachtwoord();
-        if(hash.equals(storedHash)) token = tokenService.maakJWT(emailAdres);
+        if(hashService.matches(password, storedHash)) token = tokenService.maakJWT(emailAdres);
         return token;
     }
 
