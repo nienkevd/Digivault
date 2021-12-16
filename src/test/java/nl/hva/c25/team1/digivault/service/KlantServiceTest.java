@@ -85,6 +85,38 @@ class KlantServiceTest {
         return false;
     }
 
+    @Test
+    void validateBsn() {
+        //checken voor minder dan 8 digits
+        String bsn = "1234567";
+        boolean actual = serviceUnderTest.validateBsn(bsn);
+        assertThat(actual).isFalse();
+
+        //checken voor meer dan 9 digits
+        String bsn1 = "1234567890";
+        boolean actual1 = serviceUnderTest.validateBsn(bsn1);
+        assertThat(actual1).isFalse();
+
+        //checken voor een bestaande bsn
+        String bsn2 = "635569139";
+        boolean actual2 = serviceUnderTest.validateBsn(bsn2);
+        assertThat(actual2).isTrue();
+
+        //checken voor een niet bestaande bsn die niet voldoet aan elf-proef
+        String bsn3 = "635569138";
+        boolean actual3 = serviceUnderTest.validateBsn(bsn3);
+        assertThat(actual3).isFalse();
+
+    }
+
+    @Test
+    void validatieGeboortedatum() {
+    }
+
+    @Test
+    void validatieWachtwoord() {
+    }
+
 //    @Test
 //    void bewaarKlant() {
 //        Klant nieuw = new Klant("267827227", LocalDate.now());

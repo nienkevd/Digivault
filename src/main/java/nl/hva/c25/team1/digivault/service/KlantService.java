@@ -6,6 +6,8 @@ import nl.hva.c25.team1.digivault.repository.JdbcAccountDAO;
 import nl.hva.c25.team1.digivault.repository.JdbcKlantDAO;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -93,5 +95,44 @@ public class KlantService {
 
     public boolean validatiePostcode(String postcode) {
         return postcode.matches("[1-9]{1}[0-9]{3}[a-zA-Z]{2}");
+    }
+
+    /**
+     * methode om te checken of de ingevoerde bsn correct is
+     * @param bsn
+     */
+
+    public boolean validateBsn (String bsn ){
+        int bsnInt = Integer.valueOf(bsn);
+
+        if (bsnInt <= 9999999 || bsnInt > 999999999) {
+            return false;
+        }
+        int sum = -1 * bsnInt % 10;
+
+        for (int multiplier = 2; bsnInt > 0; multiplier++) {
+            int val = (bsnInt /= 10) % 10;
+            sum += multiplier * val;
+        }
+
+        return sum != 0 && sum % 11 == 0;
+    }
+
+    /**
+     * methode om te checken of de klant 18 jaar of ouder is
+     * @param geboortedatum
+     */
+
+    public boolean validatieGeboortedatum (LocalDate geboortedatum) {
+        return Period.between(geboortedatum, LocalDate.now()).getYears()>=18;
+    }
+
+    /**
+     * methode om te checken of het wachtwoord aan de eisen voldoet
+     * @param wachtwoord
+     */
+
+    public boolean validatieWachtwoord (String wachtwoord) {
+        return wachtwoord.matches("(?=\\S+$).{10,}");
     }
 }
