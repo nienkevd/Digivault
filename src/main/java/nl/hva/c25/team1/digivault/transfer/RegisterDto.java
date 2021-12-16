@@ -18,34 +18,35 @@ public class RegisterDto {
     @NotEmpty(message = "Vul een e-mailadres in")
     private String emailadres;
     @Size(min = 10, message = "Het wachtwoord moet uit minimaal 10 tekens bestaan")
+    @Pattern(regexp = "(?=\\S+$).{10,}")
     @NotEmpty(message = "Vul een wachtwoord in")
     private String wachtwoord;
-    @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige voornaam in")
-    @NotEmpty(message = "Vul een voornaam in")
+//    @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige voornaam in")
+//    @NotEmpty(message = "Vul een voornaam in")
     private String voornaam;
     private String tussenvoegsel;
-    @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige achternaam in")
-    @NotEmpty(message = "Vul een achternaam in")
+//    @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige achternaam in")
+//    @NotEmpty(message = "Vul een achternaam in")
     private String achternaam;
-    @Past(message = "De geboortedatum moet in het verleden liggen")
-    @NotEmpty(message = "De geboortedatum mag niet leeg zijn")
+//    @Past(message = "De geboortedatum moet in het verleden liggen")
+//    @NotEmpty(message = "De geboortedatum mag niet leeg zijn")
     private LocalDate geboortedatum;
-    @Size(min = 8, max = 9, message = "Het bsn-nummer bestaat uit 8 of 9 cijfers")
-    @Pattern(regexp = "[0-9]+", message = "Vul een geldige bsn-nummer in")
-    @NotEmpty(message = "Het bsn-nummer mag niet leeg zijn")
+//    @Size(min = 8, max = 9, message = "Het bsn-nummer bestaat uit 8 of 9 cijfers")
+//    @Pattern(regexp = "[0-9]+", message = "Vul een geldige bsn-nummer in")
+//    @NotEmpty(message = "Het bsn-nummer mag niet leeg zijn")
     private String bsn;
-    @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige straatnaam in")
-    @NotEmpty(message = "Vul een straat in")
+//    @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige straatnaam in")
+//    @NotEmpty(message = "Vul een straat in")
     private String straat;
-    @Pattern(regexp = "\\d+", message = "Vul een geldig huisnummer in")
-    @NotEmpty(message = "Vul een huisnummer in")
+//    @Pattern(regexp = "\\d+", message = "Vul een geldig huisnummer in")
+//    @NotEmpty(message = "Vul een huisnummer in")
     private int huisnummer;
     private String toevoeging;
-    @Pattern(regexp = "^[1-9][0-9]{3}[A-Za-z]{2}", message = "Vul een geldige postcode in")
-    @NotEmpty(message = "Vul een postcode in")
+//    @Pattern(regexp = "^[1-9][0-9]{3}[A-Za-z]{2}", message = "Vul een geldige postcode in")
+//    @NotEmpty(message = "Vul een postcode in")
     private String postcode;
-    @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige woonplaats in")
-    @NotEmpty(message = "Vul een woonplaats in")
+//    @Pattern(regexp = "[a-zA-Z_]+", message = "Vul een geldige woonplaats in")
+//    @NotEmpty(message = "Vul een woonplaats in")
     private String woonplaats;
 
     public RegisterDto(Klant klant, Naam naam, Adres adres, Account account){
