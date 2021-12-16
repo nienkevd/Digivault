@@ -17,10 +17,10 @@ INSERT INTO rekening (iban, saldo) VALUES
     ('NL22DIVA0000876954',10000);
 
 INSERT INTO account (emailadres, wachtwoord) VALUES
-	('annie@gmail.com','Annie7890'),
-    ('marieke@gmail.com','cryptoMaster77'),
-    ('karin@gmail.com','K1'),
-    ('klaas@hotmail.com','MIW_77_##');
+	('annie@gmail.com','$2a$10$.2TNjKLf6FxIECt6C6jsb.66Gc.k60eHSnTyFn24QgL7j1v22OTLm'),
+    ('marieke@gmail.com','$2a$10$FdzlhHHLg2ciuK6WMK21TudBBzDu9ybfWdQVH96sko/AjvkhBa53.'),
+    ('karin@gmail.com','$2a$10$lIfec2ciQfvZ/uR.9/dy2O6l.NgzCmgdgrudKI6DjBnOO4GWGeAKK'),
+    ('klaas@hotmail.com','$2a$10$dXYCL5Uspuo6xTG1twG4Ee0venM7DnKRUxNOtFjS71rvZSUlrwyHS');
 
 INSERT INTO asset (afkorting, naam, dagkoers) VALUES
 	('BTC', 'Bitcoin', 45329.81),

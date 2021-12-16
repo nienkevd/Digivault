@@ -21,7 +21,7 @@ CREATE TABLE if not exists rekening (
 CREATE TABLE if not exists account (
   accountId INT NOT NULL AUTO_INCREMENT,
   emailadres VARCHAR(45) NOT NULL,
-  wachtwoord VARCHAR(45) NOT NULL);
+  wachtwoord CHAR(60) NOT NULL);
 
 CREATE TABLE if not exists asset (
   assetId INT NOT NULL AUTO_INCREMENT,
