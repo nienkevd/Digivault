@@ -10,8 +10,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Service van de klasse Klant
@@ -48,7 +46,6 @@ public class KlantService {
      * @return Klant
      */
     public Klant vindKlantOpKlantID(int klandId) {
-
         return klantDAO.vindKlantOpKlantId(klandId);
     }
 
