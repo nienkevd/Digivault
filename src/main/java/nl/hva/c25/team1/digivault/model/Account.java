@@ -14,11 +14,7 @@ import javax.validation.constraints.*;
 
 public class Account {
     private int accountId;
-    @Email(message = "Vul een geldig e-mailadres in")
-    @NotEmpty(message = "Vul een e-mailadres in")
     private String emailadres;
-    @Size(min = 10, message = "Het wachtwoord moet uit minimaal 10 tekens bestaan")
-    @NotEmpty(message = "Vul een wachtwoord in")
     private String wachtwoord;
 
     @JsonBackReference
