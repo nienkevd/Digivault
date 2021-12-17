@@ -30,6 +30,7 @@ public class JdbcTransactieDAO implements TransactieDAO {
     }
 
 /*sla een transactie op met koper en verkoper die nummer krijgen van transactiepartij.*/
+
     @Override
     public Transactie bewaarTransacktieMetSK(Transactie transactie) {
         String sql = "INSERT INTO transactie(koper, verkoper, tijdstip, asset, aantalCryptos) " +
