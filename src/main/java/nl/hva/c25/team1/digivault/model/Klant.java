@@ -130,6 +130,7 @@ public class Klant {
         this.portefeuille = portefeuille;
     }
 
+
     @Override
     public String toString() {
         return "Klant{" +
