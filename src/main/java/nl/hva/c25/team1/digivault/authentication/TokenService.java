@@ -26,12 +26,10 @@ import java.util.*;
 @Service
 public class TokenService {
     private SecretKeyService secretKeyService;
-    protected final TokenKlantPaarDAO tokenKlantPaarDAO;
 
     @Autowired
-    public TokenService(SecretKeyService secretKeyService, TokenKlantPaarDAO tokenKlantPaarDAO) {
+    public TokenService(SecretKeyService secretKeyService) {
         this.secretKeyService = secretKeyService;
-        this.tokenKlantPaarDAO = tokenKlantPaarDAO;
     }
 
     private String token;
@@ -54,7 +52,7 @@ public class TokenService {
                     .withAudience(AUDIENCE)
                     .withClaim("emailadres", emailadres)
                     .withIssuedAt(Date.from(now))
-                    .withExpiresAt(Date.from(now.plus(1,ChronoUnit.HOURS)))
+                    .withExpiresAt(Date.from(now.plus(2 ,ChronoUnit.MINUTES)))
                     .withHeader(headerClaims)
                     .sign(algorithm);
         } catch (JWTCreationException exception){
@@ -82,37 +80,37 @@ public class TokenService {
     }       // if false: vraag klant om refreshtoken en valideer deze
     // check refresh en als correct --> geef klant nieuwe JWT en nieuwe refresh
 
-    public void genereerNieuweTokens(UUID token, Klant klant){
-        // JWT is verlopen, klant krijgt 401
-        // vanuit de controller wordt om refresh token van klant gevraagd
-        // valideer deze refresh token, als hij niet leeg terug komt dan krijgt klant 2 nieuwe tokens
-        if (!(valideer(token).isEmpty())){
-            // maak nieuwe jwt:
-            String jwt = maakJWT(klant.getAccount().getEmailadres());
-            // maak nieuwe refresh
-            TokenKlantPaar tokenKlantPaar = authoriseer(klant);
-        }
-        /* TODO: geeft deze methode iets terug? TokenKlantPaar? JWT komt in header getPortefeuille */
-    }
+//    public void genereerNieuweTokens(UUID token, Klant klant){
+//        // JWT is verlopen, klant krijgt 401
+//        // vanuit de controller wordt om refresh token van klant gevraagd
+//        // valideer deze refresh token, als hij niet leeg terug komt dan krijgt klant 2 nieuwe tokens
+//        if (!(valideer(token).isEmpty())){
+//            // maak nieuwe jwt:
+//            String jwt = maakJWT(klant.getAccount().getEmailadres());
+//            // maak nieuwe refresh
+//            TokenKlantPaar tokenKlantPaar = authoriseer(klant);
+//        }
+//        /* TODO: geeft deze methode iets terug? TokenKlantPaar? JWT komt in header getPortefeuille */
+//    }
 
-    public TokenKlantPaar authoriseer(Klant klant) {
-        Optional<TokenKlantPaar> paarOptie = tokenKlantPaarDAO.vindPaarOpKlant(klant);
-        if (paarOptie.isPresent()) {
-            tokenKlantPaarDAO.delete(paarOptie.get().getKey());
-        }
-        UUID token = UUID.randomUUID();
-        TokenKlantPaar tokenKlantPaar = new TokenKlantPaar(token, klant);
-        tokenKlantPaarDAO.save(tokenKlantPaar);
-        return tokenKlantPaar;
-    }
-
-    public Optional<Klant> valideer(UUID token) {
-        Optional<TokenKlantPaar> paarOptie = tokenKlantPaarDAO.vindOpKey(token);
-        if (paarOptie.isPresent()) {
-            return Optional.of(paarOptie.get().getKlant());
-        }
-        return Optional.empty();
-    }
+//    public TokenKlantPaar authoriseer(Klant klant) {
+//        Optional<TokenKlantPaar> paarOptie = tokenKlantPaarDAO.vindPaarOpKlant(klant);
+//        if (paarOptie.isPresent()) {
+//            tokenKlantPaarDAO.delete(paarOptie.get().getKey());
+//        }
+//        UUID token = UUID.randomUUID();
+//        TokenKlantPaar tokenKlantPaar = new TokenKlantPaar(token, klant);
+//        tokenKlantPaarDAO.save(tokenKlantPaar);
+//        return tokenKlantPaar;
+//    }
+//
+//    public Optional<Klant> valideer(UUID token) {
+//        Optional<TokenKlantPaar> paarOptie = tokenKlantPaarDAO.vindOpKey(token);
+//        if (paarOptie.isPresent()) {
+//            return Optional.of(paarOptie.get().getKlant());
+//        }
+//        return Optional.empty();
+//    }
 
 
 
