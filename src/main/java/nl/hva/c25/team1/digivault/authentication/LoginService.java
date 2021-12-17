@@ -16,7 +16,7 @@ public class LoginService {
     private AccountDAO accountDAO;
 
     @Autowired
-    public LoginService(HashService hashService, TokenKlantPaarDAO tokenKlantPaarDAO, AccountDAO accountDAO) {
+    public LoginService(HashService hashService, TokenService tokenService, AccountDAO accountDAO) {
         this.hashService = hashService;
         this.tokenService = tokenService;
         this.accountDAO = accountDAO;
@@ -25,7 +25,9 @@ public class LoginService {
     public String login(String emailAdres, String password) {
         String token = null;
         String storedHash = accountDAO.vindAccountOpEmailAdres(emailAdres).getWachtwoord();
-        if(hashService.matches(password, storedHash)) token = tokenService.maakJWT(emailAdres);
+        if (hashService.matches(password, storedHash)) {
+            token = tokenService.maakJWT(emailAdres);
+        }
         return token;
     }
 

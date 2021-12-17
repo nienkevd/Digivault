@@ -24,7 +24,7 @@ public class HashService {
     }
 
     public boolean matches(CharSequence rawPassword, String encodedPassword) {
-        return bCryptPasswordEncoder.matches(rawPassword, encodedPassword);
+        return bCryptPasswordEncoder.matches(rawPassword + pepperService.getPepper(), encodedPassword);
     }
 
 }
