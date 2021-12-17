@@ -43,7 +43,7 @@ public class FinancieelOverzichtController {
     @GetMapping("/financieeloverzicht/{klantId}")
     public ResponseEntity<FinancieelOverzicht> vindFinancieelOverzicht(@PathVariable int klantId,
                                                                        @RequestHeader("Authorization") String token) {
-        boolean authorized = true;
+        boolean authorized = tokenService.getEmailadresToken(token).equals("");
         if (tokenService.valideerJWT(token) || authorized) {
             return ResponseEntity.ok(financieelOverzichtService.genereerFinancieelOverzicht(klantId));
         } else {
