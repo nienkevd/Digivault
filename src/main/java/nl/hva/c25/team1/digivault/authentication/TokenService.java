@@ -80,7 +80,7 @@ public class TokenService {
         }
     }
 
-    public static String getEmailadresToken(String token) {
+    public String getEmailadresToken(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
             return jwt.getClaim("emailadres").asString();
