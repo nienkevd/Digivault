@@ -1,6 +1,8 @@
 package nl.hva.c25.team1.digivault.model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Objects;
 
 /**
  * Author Nienke
@@ -11,28 +13,32 @@ public class Transactie extends TransactiePartij {
     private int transactieId;
     private TransactiePartij koper;
     private TransactiePartij verkoper;
-    private LocalDate tijdstip;
+    private LocalDate transactieDatum;
+    private LocalTime transactieTijd;
     private Asset asset;
     private double aantalCryptos;
 
     public Transactie(int transactieId, TransactiePartij koper, TransactiePartij verkoper,
-                      LocalDate tijdstip, Asset asset, double aantalCryptos) {
+                      LocalDate transactieDatum, LocalTime transactieTijd, Asset asset, double aantalCryptos) {
         this.transactieId = transactieId;
         this.koper = koper;
         this.verkoper = verkoper;
-        this.tijdstip = tijdstip;
+        this.transactieDatum = transactieDatum;
+        this.transactieTijd = transactieTijd;
         this.asset = asset;
         this.aantalCryptos = aantalCryptos;
     }
 
-    public Transactie(TransactiePartij koper, TransactiePartij verkoper, LocalDate tijdstip,
+    public Transactie(TransactiePartij koper, TransactiePartij verkoper, LocalDate transactieDatum, LocalTime transactieTijd,
                       Asset asset, double aantalCryptos) {
-        this(0,koper,verkoper,tijdstip,asset,aantalCryptos);
+        this(0,koper,verkoper,transactieDatum, transactieTijd,asset,aantalCryptos);
     }
 
-    public Transactie(int transactieId, LocalDate tijdstip, double aantalCryptos){
-        this(transactieId, null, null, tijdstip, null, aantalCryptos);
+    public Transactie(int transactieId, LocalDate transactieDatum, LocalTime transactieTijd, double aantalCryptos){
+        this(transactieId, null, null, transactieDatum, transactieTijd, null, aantalCryptos);
     }
+
+
 
     public int getTransactieId() {
         return transactieId;
@@ -58,13 +64,17 @@ public class Transactie extends TransactiePartij {
         this.verkoper = verkoper;
     }
 
-    public LocalDate getTijdstip() {
-        return tijdstip;
+    public LocalDate getTransactieDatum() {
+        return transactieDatum;
     }
 
-    public void setTijdstip(LocalDate tijdstip) {
-        this.tijdstip = tijdstip;
+    public void setTransactieDatum(LocalDate transactieDatum) {
+        this.transactieDatum = transactieDatum;
     }
+
+    public LocalTime getTransactieTijd() { return transactieTijd;}
+
+    public void setTransactieTijd(LocalTime transactieTijd) { this.transactieTijd = transactieTijd;}
 
     public Asset getAsset() {
         return asset;
@@ -88,9 +98,23 @@ public class Transactie extends TransactiePartij {
                 "transactieId=" + transactieId +
                 ", koper=" + koper +
                 ", verkoper=" + verkoper +
-                ", tijdstip=" + tijdstip +
+                ", transactieDatum=" + transactieDatum +
+                ", transactieTijd=" + transactieTijd +
                 ", asset=" + asset +
                 ", aantalCryptos=" + aantalCryptos +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transactie that = (Transactie) o;
+        return transactieId == that.transactieId && Double.compare(that.aantalCryptos, aantalCryptos) == 0 && Objects.equals(koper, that.koper) && Objects.equals(verkoper, that.verkoper) && Objects.equals(transactieDatum, that.transactieDatum) && Objects.equals(transactieTijd, that.transactieTijd) && Objects.equals(asset, that.asset);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactieId, koper, verkoper, transactieDatum, transactieTijd, asset, aantalCryptos);
     }
 }

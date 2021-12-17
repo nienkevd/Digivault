@@ -1,6 +1,5 @@
 package nl.hva.c25.team1.digivault.repository;
 
-import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.Transactie;
 import nl.hva.c25.team1.digivault.model.TransactiePartij;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -32,8 +32,8 @@ public class JdbcTransactieDAO implements TransactieDAO {
 /*sla een transactie op met koper en verkoper die nummer krijgen van transactiepartij.*/
     @Override
     public Transactie bewaarTransacktieMetSK(Transactie transactie) {
-        String sql = "INSERT INTO transactie(koper, verkoper, tijdstip, asset, aantalCryptos) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO transactie(koper, verkoper, transactieDatum, transactieTijd, asset, aantalCryptos) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -41,9 +41,10 @@ public class JdbcTransactieDAO implements TransactieDAO {
                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, transactie.getKoper().getTransactiePartijId());
                 ps.setInt(2,transactie.getVerkoper().getTransactiePartijId());
-                ps.setDate(3, Date.valueOf(transactie.getTijdstip()));
-                ps.setInt(4,transactie.getAsset().getAssetId());
-                ps.setDouble(5,transactie.getAantalCryptos());
+                ps.setDate(3, Date.valueOf(transactie.getTransactieDatum()));
+                ps.setTime(4,Time.valueOf(transactie.getTransactieTijd()));
+                ps.setInt(5,transactie.getAsset().getAssetId());
+                ps.setDouble(6,transactie.getAantalCryptos());
                 return ps;
             }
         } , keyHolder);
@@ -94,7 +95,8 @@ public class JdbcTransactieDAO implements TransactieDAO {
             @Override
             public Transactie mapRow(ResultSet resultSet, int RowNumber) throws SQLException {
                 return new Transactie(resultSet.getInt("transactieId"),
-                        LocalDate.parse(resultSet.getString("tijdstip")),
+                        LocalDate.parse(resultSet.getString("transactieDatum")),
+                        LocalTime.parse(resultSet.getString("transactieTijd")),
                                 resultSet.getDouble("aantalCryptos"));
             }
         }
