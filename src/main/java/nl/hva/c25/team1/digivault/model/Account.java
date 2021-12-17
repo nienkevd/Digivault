@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
 import javax.validation.constraints.*;
+import java.util.Objects;
 
 // review door Erwin, 6 december
 
@@ -95,6 +96,19 @@ public class Account {
                 ", wachtwoord='" + wachtwoord + '\'' +
                 ", klant=" + klant +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return accountId == account.accountId && emailadres.equals(account.emailadres) && wachtwoord.equals(account.wachtwoord) && klant.equals(account.klant);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountId, emailadres, wachtwoord, klant);
     }
 }
 
