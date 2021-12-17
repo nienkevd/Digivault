@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -77,8 +78,16 @@ public class TokenService {
         } catch (JWTVerificationException exception){
             return false;
         }
-    }       // if false: vraag klant om refreshtoken en valideer deze
-    // check refresh en als correct --> geef klant nieuwe JWT en nieuwe refresh
+    }
+
+    public static String getEmailadresToken(String token) {
+        try {
+            DecodedJWT jwt = JWT.decode(token);
+            return jwt.getClaim("emailadres").asString();
+        } catch (JWTDecodeException e) {
+            return null;
+        }
+    }
 
 //    public void genereerNieuweTokens(UUID token, Klant klant){
 //        // JWT is verlopen, klant krijgt 401
