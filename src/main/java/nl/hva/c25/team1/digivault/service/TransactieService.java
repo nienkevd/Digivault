@@ -35,4 +35,7 @@ public class TransactieService {
     public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper) {
         return jdbcTransactieDAO.vindAlleTransactiesOpVerkoper(koper);
     }
+    public double berekenWaardeTransactie (Transactie transactie) {
+        return transactie.getAsset().getDagKoers() * transactie.getAantalCryptos();
+    }
 }

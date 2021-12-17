@@ -4,6 +4,7 @@
 package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.model.PortefeuilleItem;
+import nl.hva.c25.team1.digivault.model.Transactie;
 import nl.hva.c25.team1.digivault.repository.PortefeuilleItemDAO;
 import nl.hva.c25.team1.digivault.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +48,19 @@ public class PortefeuilleItemService {
         return rootRepository.vindItemOpId(itemId);
     }
 
+    public void verlaagPortefeuilleItem (Transactie transactie) {
+       for (PortefeuilleItem portefeuilleItem : transactie.getVerkoper().getPortefeuille()) {
+           if (portefeuilleItem.getAsset() == transactie.getAsset()) {
+               portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid()-transactie.getAantalCryptos());
+           }
+       }
+    }
+
+    public void verhoogPortefeuilleItem (Transactie transactie) {
+        for (PortefeuilleItem portefeuilleItem : transactie.getKoper().getPortefeuille()) {
+            if (portefeuilleItem.getAsset() == transactie.getAsset()) {
+                portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid()+ transactie.getAantalCryptos());
+            }
+        }
+    }
 }
