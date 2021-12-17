@@ -45,4 +45,8 @@ public class AccountService {
     public List<Account> geefAlleAccounts() {
         return accountDAO.geefAlleAccounts();
     }
+
+    public Account vindAccountOpKlantId(int klantId){
+        return accountDAO.vindAccountOpKlantId(klantId);
+    }
 }

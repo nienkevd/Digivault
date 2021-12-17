@@ -77,6 +77,12 @@ public class JdbcAccountDAO implements AccountDAO {
     }
 
     @Override
+    public Account vindAccountOpKlantId(int klantId) {
+        String sql = "Select * From account a JOIN klant k ON a.accountId = k.accountId Where klantId = ?";
+        return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), klantId);
+    }
+
+    @Override
     public Account vindAccountOpEmailAdres(String emailAdres) {
         String sql = "Select * From account Where emailadres = ?";
         return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), emailAdres);

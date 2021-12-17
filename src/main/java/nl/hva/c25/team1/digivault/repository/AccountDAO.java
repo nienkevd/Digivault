@@ -24,4 +24,6 @@ public interface AccountDAO {
     Account vindAccountOpEmailAdres(String emailAdres);
 
     List<Account> geefAlleAccounts();
+
+    Account vindAccountOpKlantId(int klantId);
 }
