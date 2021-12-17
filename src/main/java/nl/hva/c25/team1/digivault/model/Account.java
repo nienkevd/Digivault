@@ -3,8 +3,6 @@ package nl.hva.c25.team1.digivault.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
-import javax.validation.constraints.*;
-
 // review door Erwin, 6 december
 
 /**

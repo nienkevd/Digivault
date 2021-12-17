@@ -2,7 +2,6 @@ package nl.hva.c25.team1.digivault.model;
 
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
-import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -17,9 +16,7 @@ import java.util.Objects;
 
 public class Klant {
     private int klantId;
-
     private String bsn;
-
     private LocalDate geboortedatum;
     private Naam naam;
     private Adres adres;
