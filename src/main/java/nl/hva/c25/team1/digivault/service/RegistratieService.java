@@ -58,20 +58,26 @@ public class RegistratieService {
      */
     public Klant registratie(Klant klant) {
         try {
-            validateBsn(klant.getBsn());
-            validatieGeboortedatum(klant.getGeboortedatum());
-            validatieMailadres(klant.getAccount().getEmailadres());
             Rekening rekening = new Rekening(0, genereerIban());
             rekening.setSaldo(BEGINSALDO);
             klant.setRekening(rekening);
             klant.setPortefeuille(aanmaakLegePortefeuille());
             Account account = klant.getAccount();
             account.setWachtwoord(hashService.hash(account.getWachtwoord()));
-            return rootRepository.slaKlantOp(klant);
-        } catch (HttpClientErrorException e){
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+            if (
+                    validateBsn(klant.getBsn()) &&
+                    validatieGeboortedatum(klant.getGeboortedatum())  &&
+                    validatieMailadres(klant.getAccount().getEmailadres())
+            ) {
+                return rootRepository.slaKlantOp(klant);
+            } else {
+                throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+            }
         }
-    }
+            catch(HttpClientErrorException e){
+                throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+            }
+        }
 
     /**
      * Methode die een lege portefeuille aanmaakt: een lijst van 20 assets die op 0 zijn gezet
