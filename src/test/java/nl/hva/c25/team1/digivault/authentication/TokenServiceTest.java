@@ -43,20 +43,20 @@ class TokenServiceTest {
         assertThat(verified).isNotNull();
     }
 
-    @Test
-    void valideerAccessTokenMetVerkeerdEmailadres() {
-        testToken= tokenServiceTest.maakJWT("anneke@hva.nl");
-        boolean returnedBooleanValue = tokenServiceTest.valideerJWT(testToken);
-        // print alle eigenschappen van het token
-        DecodedJWT decodedJwt = JWT.decode(testToken);
-//        printOutComesTokenValidation(decodedJwt);
-        // als de boolean false is is de test geslaagd
-        if(!returnedBooleanValue){
-            System.out.println("test geslaagd");
-        } else {
-            fail("Moet een JWTVerificationException gooien met InvalidClaimException en false teruggeven");
-        }
-    }
+//    @Test
+//    void valideerAccessTokenMetVerkeerdEmailadres() {
+//        testToken= tokenServiceTest.maakJWT("anneke@hva.nl");
+//        boolean returnedBooleanValue = tokenServiceTest.valideerJWT(testToken);
+//        // print alle eigenschappen van het token
+//        DecodedJWT decodedJwt = JWT.decode(testToken);
+////        printOutComesTokenValidation(decodedJwt);
+//        // als de boolean false is is de test geslaagd
+//        if(!returnedBooleanValue){
+//            System.out.println("test geslaagd");
+//        } else {
+//            fail("Moet een JWTVerificationException gooien met InvalidClaimException en false teruggeven");
+//        }
+//    }
 
 
 

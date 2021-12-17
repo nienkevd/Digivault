@@ -39,13 +39,13 @@ class JdbcKlantDAOTest {
     void bewaarKlantMetSK() {
     }
 
-    @Test
-    void vindKlantOpKlantId() {
-        Klant actual = daoUnderTest.vindKlantOpKlantId(1);
-        Klant expected = new Klant(1,"123456789", LocalDate.parse("1980-05-27"));
-        assertThat(expected).isEqualTo(actual);
-
-    }
+//    @Test
+//    void vindKlantOpKlantId() {
+//        Klant actual = daoUnderTest.vindKlantOpKlantId(1);
+//        Klant expected = new Klant(1,"123456789", LocalDate.parse("1980-05-27"));
+//        assertThat(expected).isEqualTo(actual);
+//
+//    }
     @Test
     void vindAlleKlanten() {
     }
