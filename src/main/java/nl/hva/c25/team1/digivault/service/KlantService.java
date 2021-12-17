@@ -22,7 +22,6 @@ import java.util.Objects;
 public class KlantService {
 
     private JdbcKlantDAO klantDAO;
-    private JdbcAccountDAO accountDAO;
 
     /**
      *
@@ -70,49 +69,5 @@ public class KlantService {
             klantDAO.update(klant);
             return "Update geslaagd";
         }
-    }
-
-    /**
-     * Check of mailadres al in database zit
-     * @param emailadres te checken mailadres
-     * @return boolean
-     */
-    public boolean validatieMailadres(String emailadres) {
-        for (Account account : accountDAO.geefAlleAccounts()) {
-            if (Objects.equals(account.getEmailadres(), emailadres)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * methode om te checken of de ingevoerde bsn correct is
-     * @param bsn
-     */
-
-    public boolean validateBsn (String bsn ){
-        int bsnInt = Integer.valueOf(bsn);
-
-        if (bsnInt <= 9999999 || bsnInt > 999999999) {
-            return false;
-        }
-        int sum = -1 * bsnInt % 10;
-
-        for (int multiplier = 2; bsnInt > 0; multiplier++) {
-            int val = (bsnInt /= 10) % 10;
-            sum += multiplier * val;
-        }
-
-        return sum != 0 && sum % 11 == 0;
-    }
-
-    /**
-     * methode om te checken of de klant 18 jaar of ouder is
-     * @param geboortedatum
-     */
-
-    public boolean validatieGeboortedatum (LocalDate geboortedatum) {
-        return Period.between(geboortedatum, LocalDate.now()).getYears()>=18;
     }
 }

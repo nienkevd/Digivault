@@ -1,6 +1,7 @@
 package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.model.Rekening;
+import nl.hva.c25.team1.digivault.model.Transactie;
 import nl.hva.c25.team1.digivault.repository.JdbcRekeningDAO;
 import nl.hva.c25.team1.digivault.repository.RootRepository;
 
@@ -48,4 +49,15 @@ public class RekeningService {
 
         return jdbcRekeningDAO.geefAlleRekeningen();
     }
+//    public Rekening verlaagRekening(Transactie transactie) {
+//        for(Klant klant : jdbcRekeningDAO.geefAlleRekeningen()) {
+//            if(rekening.get)
+//        }
+//        if ( ) {
+//            return "Rekening bestaat niet, update mislukt.";
+//        } else {
+//            jdbcRekeningDAO.updateRekening(rekening);
+//            return "Update geslaagd";
+//        }
+//    }
 }
