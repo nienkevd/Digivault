@@ -13,6 +13,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -69,13 +70,11 @@ public class JdbcTransactieDAO implements TransactieDAO {
     @Override
     public List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper){
         String sql = "SELECT * FROM transactie WHERE verkoper = ? ";
-        Transactie transactie;
         try {
-            transactie = jdbcTemplate.queryForObject(sql, new TransactieRowMapper(), verkoper);
+            return jdbcTemplate.query(sql, new TransactieRowMapper(), verkoper);
         } catch (EmptyResultDataAccessException noResult) {
-            transactie = null;
+            return null;
         }
-       return null;
     }
     // geprobeerd te maken; geeft een koper mee, en krijgt terug een lijst met transacites,
     //snap niet hoe hij een lijst kan terug geven. help..
@@ -83,13 +82,12 @@ public class JdbcTransactieDAO implements TransactieDAO {
     @Override
     public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper){
         String sql = "SELECT * FROM transactie WHERE koper = ? ";
-        Transactie transactie;
+
         try {
-            transactie = jdbcTemplate.queryForObject(sql, new TransactieRowMapper(), koper);
+            return jdbcTemplate.query(sql, new TransactieRowMapper(), koper);
         } catch (EmptyResultDataAccessException noResult) {
-            transactie = null;
+            return null;
         }
-        return null;
     }
 
         private class TransactieRowMapper implements RowMapper<Transactie> {
