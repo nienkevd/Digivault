@@ -1,5 +1,6 @@
 package nl.hva.c25.team1.digivault.service;
 
+import nl.hva.c25.team1.digivault.model.Bank;
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.Rekening;
 import nl.hva.c25.team1.digivault.repository.JdbcRekeningDAO;
@@ -14,8 +15,9 @@ class RekeningServiceTest {
 
     @MockBean
     private static JdbcRekeningDAO mockDAO = Mockito.mock(JdbcRekeningDAO.class);
+    private static Bank mockBank = Mockito.mock(Bank.class);
     private static TransactieService mockTransactieService = Mockito.mock(TransactieService.class);
-    RekeningService serviceUnderTest = new RekeningService(mockDAO,mockTransactieService );
+    RekeningService serviceUnderTest = new RekeningService(mockDAO,mockTransactieService, mockBank);
 
     @Test
     void bewaarRekening() {

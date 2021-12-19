@@ -1,5 +1,6 @@
 package nl.hva.c25.team1.digivault.service;
 
+import nl.hva.c25.team1.digivault.model.Bank;
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.Rekening;
 import nl.hva.c25.team1.digivault.model.Transactie;
@@ -20,11 +21,14 @@ public class RekeningService {
     private JdbcRekeningDAO jdbcRekeningDAO;
     //    private RootRepository rootRepository;
     private TransactieService transactieService;
+    private Object Bank;
+    private Bank bank;
 
-    public RekeningService(JdbcRekeningDAO rekeningDAO/*, RootRepository rootRepository*/, TransactieService transactieService) {
+    public RekeningService(JdbcRekeningDAO rekeningDAO/*, RootRepository rootRepository*/, TransactieService transactieService, Bank bank) {
         this.jdbcRekeningDAO = rekeningDAO;
 //        this.rootRepository = rootRepository;
         this.transactieService = transactieService;
+        this.bank = bank;
     }
 
     public void bewaarRekening(Rekening rekening) {
@@ -55,14 +59,24 @@ public class RekeningService {
     }
 
     public void verlaagRekening(Transactie transactie) {
-        double voorSaldo = transactie.getVerkoper().getRekening().getSaldo();
+        double voorSaldoKoper = transactie.getKoper().getRekening().getSaldo();
         double transactieWaarde = transactieService.berekenWaardeTransactie(transactie);
-        transactie.getVerkoper().getRekening().setSaldo(voorSaldo - transactieWaarde);
+        if (transactie.getVerkoper().getClass() == Bank) {
+            transactie.getKoper().getRekening().setSaldo(voorSaldoKoper - transactieWaarde -
+                    transactieWaarde * bank.getTransactiePercentage());
+        } else {
+            transactie.getKoper().getRekening().setSaldo(voorSaldoKoper - transactieWaarde);
+        }
     }
 
     public void verhoogRekening(Transactie transactie) {
-        double voorSaldo = transactie.getKoper().getRekening().getSaldo();
+        double voorSaldoVerkoper = transactie.getVerkoper().getRekening().getSaldo();
         double transactieWaarde = transactieService.berekenWaardeTransactie(transactie);
-        transactie.getKoper().getRekening().setSaldo(voorSaldo + transactieWaarde);
+        if (transactie.getKoper().getClass() == Bank) {
+            transactie.getVerkoper().getRekening().setSaldo(voorSaldoVerkoper + transactieWaarde -
+                    transactieWaarde * bank.getTransactiePercentage());
+        } else {
+            transactie.getVerkoper().getRekening().setSaldo(voorSaldoVerkoper + transactieWaarde);
+        }
     }
 }
