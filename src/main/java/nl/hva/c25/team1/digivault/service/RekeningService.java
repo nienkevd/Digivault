@@ -1,5 +1,6 @@
 package nl.hva.c25.team1.digivault.service;
 
+import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.Rekening;
 import nl.hva.c25.team1.digivault.model.Transactie;
 import nl.hva.c25.team1.digivault.repository.JdbcRekeningDAO;
@@ -17,11 +18,13 @@ import java.util.List;
 public class RekeningService {
 
     private JdbcRekeningDAO jdbcRekeningDAO;
-//    private RootRepository rootRepository;
+    //    private RootRepository rootRepository;
+    private TransactieService transactieService;
 
-    public RekeningService(JdbcRekeningDAO rekeningDAO/*, RootRepository rootRepository*/) {
+    public RekeningService(JdbcRekeningDAO rekeningDAO/*, RootRepository rootRepository*/, TransactieService transactieService) {
         this.jdbcRekeningDAO = rekeningDAO;
 //        this.rootRepository = rootRepository;
+        this.transactieService = transactieService;
     }
 
     public void bewaarRekening(Rekening rekening) {
@@ -29,18 +32,19 @@ public class RekeningService {
     }
 
     public String updateRekening(Rekening rekening) {
-            if (jdbcRekeningDAO.vindRekeningOpIBAN(rekening.getIBAN()) == null ) {
-                return "Rekening bestaat niet, update mislukt.";
-            } else {
-                jdbcRekeningDAO.updateRekening(rekening);
-                return "Update geslaagd";
-            }
+        if (jdbcRekeningDAO.vindRekeningOpIBAN(rekening.getIBAN()) == null) {
+            return "Rekening bestaat niet, update mislukt.";
+        } else {
+            jdbcRekeningDAO.updateRekening(rekening);
+            return "Update geslaagd";
+        }
     }
 
     public Rekening vindRekeningOpIBAN(String IBAN) {
 
         return jdbcRekeningDAO.vindRekeningOpIBAN(IBAN);
     }
+
     public Rekening vindRekeningOpId(int rekeningId) {
         return jdbcRekeningDAO.vindRekeningOpId(rekeningId);
     }
@@ -49,15 +53,16 @@ public class RekeningService {
 
         return jdbcRekeningDAO.geefAlleRekeningen();
     }
-//    public Rekening verlaagRekening(Transactie transactie) {
-//        for(Klant klant : jdbcRekeningDAO.geefAlleRekeningen()) {
-//            if(rekening.get)
-//        }
-//        if ( ) {
-//            return "Rekening bestaat niet, update mislukt.";
-//        } else {
-//            jdbcRekeningDAO.updateRekening(rekening);
-//            return "Update geslaagd";
-//        }
-//    }
+
+    public void verlaagRekening(Transactie transactie) {
+        double voorSaldo = transactie.getVerkoper().getRekening().getSaldo();
+        double transactieWaarde = transactieService.berekenWaardeTransactie(transactie);
+        transactie.getVerkoper().getRekening().setSaldo(voorSaldo - transactieWaarde);
+    }
+
+    public void verhoogRekening(Transactie transactie) {
+        double voorSaldo = transactie.getKoper().getRekening().getSaldo();
+        double transactieWaarde = transactieService.berekenWaardeTransactie(transactie);
+        transactie.getKoper().getRekening().setSaldo(voorSaldo + transactieWaarde);
+    }
 }

@@ -14,7 +14,8 @@ class RekeningServiceTest {
 
     @MockBean
     private static JdbcRekeningDAO mockDAO = Mockito.mock(JdbcRekeningDAO.class);
-    RekeningService serviceUnderTest = new RekeningService(mockDAO);
+    private static TransactieService mockTransactieService = Mockito.mock(TransactieService.class);
+    RekeningService serviceUnderTest = new RekeningService(mockDAO,mockTransactieService );
 
     @Test
     void bewaarRekening() {
