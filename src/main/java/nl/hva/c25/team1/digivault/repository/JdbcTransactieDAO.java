@@ -54,18 +54,17 @@ public class JdbcTransactieDAO implements TransactieDAO {
     }
 /*haal een transactie op aan de hand van transactieId*/
     @Override
-    public Transactie vindTrasactieopTransactieId(int transactieId) {
+    public Transactie vindTransactieOpTransactieId(int transactieId) {
         String sql = "SELECT * FROM transactie WHERE transactieId = ? ";
         Transactie transactie;
         try {
             transactie = jdbcTemplate.queryForObject(sql, new TransactieRowMapper(), transactieId);
-        } catch (EmptyResultDataAccessException noRestult) {
+        } catch (EmptyResultDataAccessException noResult) {
             transactie = null;
         }
         return transactie;
     }
-// geprobeerd te maken; geeft een verkoper mee, en krijgt terug een lijst met transacites,
-    //snap niet hoe hij een lijst kan terug geven/of lijst maken... help..
+
     @Override
     public List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper){
         String sql = "SELECT * FROM transactie WHERE verkoper = ? ";
@@ -75,13 +74,10 @@ public class JdbcTransactieDAO implements TransactieDAO {
             return null;
         }
     }
-    // geprobeerd te maken; geeft een koper mee, en krijgt terug een lijst met transacites,
-    //snap niet hoe hij een lijst kan terug geven. help..
 
     @Override
     public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper){
         String sql = "SELECT * FROM transactie WHERE koper = ? ";
-
         try {
             return jdbcTemplate.query(sql, new TransactieRowMapper(), koper);
         } catch (EmptyResultDataAccessException noResult) {
