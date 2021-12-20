@@ -66,8 +66,8 @@ public class JdbcRekeningDAO implements RekeningDAO{
 
     @Override
     public void updateRekening(Rekening rekening) {
-        String sql = "Update rekening Set IBAN = ?, saldo = ? ;";
-        jdbcTemplate.update(sql, rekening.getIBAN(), rekening.getSaldo());
+        String sql = "Update rekening Set saldo = ? WHERE rekeningId = ? ;";
+        jdbcTemplate.update(sql, rekening.getSaldo(), rekening.getRekeningId());
     }
 
     /**

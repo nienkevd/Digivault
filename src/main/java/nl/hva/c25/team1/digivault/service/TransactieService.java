@@ -32,8 +32,8 @@ public class TransactieService {
         return jdbcTransactieDAO.bewaarTransacktieMetSK(transactie);
     }
 
-    public Transactie vindTrasactieopTransactieId(int transactieId) {
-        return jdbcTransactieDAO.vindTrasactieopTransactieId(transactieId);
+    public Transactie vindTrasanctieOpTransactieId(int transactieId) {
+        return jdbcTransactieDAO.vindTransactieOpTransactieId(transactieId);
     }
 
     public List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper) {

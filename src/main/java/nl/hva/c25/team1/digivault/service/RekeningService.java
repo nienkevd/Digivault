@@ -67,6 +67,7 @@ public class RekeningService {
         } else {
             transactie.getKoper().getRekening().setSaldo(voorSaldoKoper - transactieWaarde);
         }
+        jdbcRekeningDAO.updateRekening(transactie.getKoper().getRekening());
     }
 
     public void verhoogRekening(Transactie transactie) {
@@ -78,5 +79,6 @@ public class RekeningService {
         } else {
             transactie.getVerkoper().getRekening().setSaldo(voorSaldoVerkoper + transactieWaarde);
         }
+        jdbcRekeningDAO.updateRekening(transactie.getVerkoper().getRekening());
     }
 }

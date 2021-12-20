@@ -14,7 +14,7 @@ public interface TransactieDAO {
 
     Transactie bewaarTransacktieMetSK(Transactie transactie);
 
-    Transactie vindTrasactieopTransactieId(int transactieId);
+    Transactie vindTransactieOpTransactieId(int transactieId);
 
     List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper);
 
