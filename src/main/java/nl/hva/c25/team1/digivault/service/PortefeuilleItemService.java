@@ -52,6 +52,7 @@ public class PortefeuilleItemService {
        for (PortefeuilleItem portefeuilleItem : transactie.getVerkoper().getPortefeuille()) {
            if (portefeuilleItem.getAsset() == transactie.getAsset()) {
                portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid()-transactie.getAantalCryptos());
+               portefeuilleItemDAO.updatePortefeuilleItem(portefeuilleItem);
            }
        }
     }
@@ -60,6 +61,7 @@ public class PortefeuilleItemService {
         for (PortefeuilleItem portefeuilleItem : transactie.getKoper().getPortefeuille()) {
             if (portefeuilleItem.getAsset() == transactie.getAsset()) {
                 portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid()+ transactie.getAantalCryptos());
+                portefeuilleItemDAO.updatePortefeuilleItem(portefeuilleItem);
             }
         }
     }
