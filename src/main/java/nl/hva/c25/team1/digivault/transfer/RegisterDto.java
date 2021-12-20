@@ -58,11 +58,9 @@ public class RegisterDto {
         this.achternaam = naam.getAchternaam();
         this.geboortedatum = klant.getGeboortedatum();
         this.bsn = klant.getBsn();
-        this.straat = adres.getStraat();
         this.huisnummer = adres.getHuisnummer();
         this.toevoeging = adres.getToevoeging();
         this.postcode = adres.getPostcode();
-        this.woonplaats = adres.getWoonplaats();
     }
 
     public RegisterDto(){

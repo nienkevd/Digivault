@@ -11,28 +11,23 @@ import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
 public class Adres {
     private int adresId;
-    private String straat;
+    private String postcode;
     private int huisnummer;
     private String toevoeging;
-    private String postcode;
-    private String woonplaats;
 
-    public Adres(int adresId, String straat, int huisnummer, String toevoeging,
-                 String postcode, String woonplaats) {
+    public Adres(int adresId, String postcode, int huisnummer, String toevoeging) {
         this.adresId = adresId;
-        this.straat = straat;
+        this.postcode = postcode;
         this.huisnummer = huisnummer;
         this.toevoeging = toevoeging;
-        this.postcode = postcode;
-        this.woonplaats = woonplaats;
     }
 
-    public Adres(String straat, int huisnummer, String toevoeging, String postcode, String woonplaats) {
-        this(0,straat,huisnummer,toevoeging,postcode,woonplaats);
+    public Adres(String postcode, int huisnummer, String toevoeging) {
+        this(0, postcode, huisnummer, toevoeging);
     }
 
     public Adres(RegisterDto dto) {
-        this(dto.getStraat(), dto.getHuisnummer(), dto.getToevoeging(), dto.getPostcode(), dto.getWoonplaats());
+        this(dto.getPostcode(), dto.getHuisnummer(), dto.getToevoeging());
     }
 
     public int getAdresId() {
@@ -43,12 +38,12 @@ public class Adres {
         this.adresId = adresId;
     }
 
-    public String getStraat() {
-        return straat;
+    public String getPostcode() {
+        return postcode;
     }
 
-    public void setStraat(String straat) {
-        this.straat = straat;
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 
     public int getHuisnummer() {
@@ -67,31 +62,13 @@ public class Adres {
         this.toevoeging = toevoeging;
     }
 
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public String getWoonplaats() {
-        return woonplaats;
-    }
-
-    public void setWoonplaats(String woonplaats) {
-        this.woonplaats = woonplaats;
-    }
-
     @Override
     public String toString() {
         return "Adres{" +
                 "adresId=" + adresId +
-                ", straat='" + straat + '\'' +
+                ", postcode='" + postcode + '\'' +
                 ", huisnummer=" + huisnummer +
                 ", toevoeging='" + toevoeging + '\'' +
-                ", postcode='" + postcode + '\'' +
-                ", woonplaats='" + woonplaats + '\'' +
                 '}';
     }
 }

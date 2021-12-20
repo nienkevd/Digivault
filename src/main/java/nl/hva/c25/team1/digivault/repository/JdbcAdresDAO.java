@@ -39,17 +39,15 @@ public class JdbcAdresDAO implements AdresDAO {
     @Override
     public Adres bewaarAdresMetSK(Adres adres) {
         String sql = "INSERT INTO adres " +
-                "(straat, huisnummer, toevoeging, postcode, woonplaats) VALUES (?,?,?,?,?);";
+                "(postcode, huisnummer, toevoeging) VALUES (?, ?, ?);";
         KeyHolder keyholder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, adres.getStraat());
+                ps.setString(1, adres.getPostcode());
                 ps.setInt(2, adres.getHuisnummer());
                 ps.setString(3, adres.getToevoeging());
-                ps.setString(4, adres.getPostcode());
-                ps.setString(5, adres.getWoonplaats() );
                 return ps;
             }
         } , keyholder);
@@ -65,8 +63,7 @@ public class JdbcAdresDAO implements AdresDAO {
      */
     @Override
     public Adres vindAdresOpAdresId(int adresId) {
-        String sql = "SELECT (adresId, straat, huisnummer, toevoeging," +
-                "postcode, woonplaats) FROM adres WHERE adresId = ?;";
+        String sql = "SELECT * FROM adres WHERE adresId = ?";
         Adres adres;
         try {
             adres = jdbcTemplate.queryForObject(sql, new AdresRowMapper(), adresId);
@@ -82,8 +79,7 @@ public class JdbcAdresDAO implements AdresDAO {
      */
     @Override
     public List<Adres> vindAlleAdressen() {
-        String sql = "SELECT (adresId, straat, huisnummer, toevoeging, postcode, woonplaats)" +
-                "FROM adres;";
+        String sql = "SELECT * FROM adres";
         return jdbcTemplate.query(sql, new JdbcAdresDAO.AdresRowMapper());
     }
 
@@ -93,19 +89,16 @@ public class JdbcAdresDAO implements AdresDAO {
      */
     @Override
     public void update(Adres adres) {
-        String sql = "UPDATE adres SET adresId =?, straat = ?, huisnummer = ?, toevoeging = ?," +
-                "postcode = ?, woonplaats = ?,";
-        jdbcTemplate.update(sql, adres.getAdresId(), adres.getStraat(),adres.getHuisnummer(),
-                adres.getToevoeging(),adres.getPostcode(),adres.getWoonplaats());
+        String sql = "UPDATE adres SET postcode = ?, huisnummer = ?, toevoeging = ? WHERE adresId = ?";
+        jdbcTemplate.update(sql, adres.getPostcode(), adres.getHuisnummer(), adres.getToevoeging(), adres.getAdresId());
     }
 
 
     private class AdresRowMapper implements RowMapper<Adres> {
         @Override
         public Adres mapRow(ResultSet resultSet, int RowNumber) throws SQLException {
-            return new Adres(resultSet.getInt("adresId"), resultSet.getString("straat"),
-                    resultSet.getInt("huisnummer"), resultSet.getString("toevoeging"),
-                    resultSet.getString("postcode"), resultSet.getString("woonplaats"));
+            return new Adres(resultSet.getInt("adresId"),  resultSet.getString("postcode"),
+                    resultSet.getInt("huisnummer"), resultSet.getString("toevoeging"));
         }
     }
 }

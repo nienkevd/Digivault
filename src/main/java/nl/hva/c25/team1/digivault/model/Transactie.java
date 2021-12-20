@@ -9,7 +9,7 @@ import java.util.Objects;
  * Version 14-12-2021
  */
 
-public class Transactie extends TransactiePartij {
+public class Transactie {
     private int transactieId;
     private TransactiePartij koper;
     private TransactiePartij verkoper;
