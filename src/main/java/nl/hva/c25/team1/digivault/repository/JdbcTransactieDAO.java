@@ -13,7 +13,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,8 +40,8 @@ public class JdbcTransactieDAO implements TransactieDAO {
             @Override
             public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setInt(1, transactie.getKoper().getTransactiePartijId());
-                ps.setInt(2,transactie.getVerkoper().getTransactiePartijId());
+                ps.setInt(1, transactie.getKoper().getTransactiepartijId());
+                ps.setInt(2,transactie.getVerkoper().getTransactiepartijId());
                 ps.setDate(3, Date.valueOf(transactie.getTransactieDatum()));
                 ps.setTime(4,Time.valueOf(transactie.getTransactieTijd()));
                 ps.setInt(5,transactie.getAsset().getAssetId());

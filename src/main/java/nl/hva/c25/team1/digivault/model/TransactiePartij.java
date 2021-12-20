@@ -8,18 +8,22 @@ import java.util.List;
  */
 
 public abstract class TransactiePartij {
-    private int transactiePartijId;
+    private int transactiepartijId;
     private Rekening rekening;
     private List<PortefeuilleItem> portefeuille;
 
-
-
-    public int getTransactiePartijId() {
-        return transactiePartijId;
+    protected TransactiePartij(int transactiepartijId, Rekening rekening, List<PortefeuilleItem> portefeuille) {
+        this.transactiepartijId = transactiepartijId;
+        this.rekening = rekening;
+        this.portefeuille = portefeuille;
     }
 
-    public void setTransactiePartijId(int transactiePartijId) {
-        this.transactiePartijId = transactiePartijId;
+    public int getTransactiepartijId() {
+        return transactiepartijId;
+    }
+
+    public void setTransactiepartijId(int transactiepartijId) {
+        this.transactiepartijId = transactiepartijId;
     }
 
     public Rekening getRekening() {
