@@ -13,47 +13,29 @@ import java.util.Objects;
  */
 
 public class Account {
-    private int accountId;
     private String emailadres;
     private String wachtwoord;
 
     @JsonBackReference
     private Klant klant;
 
-    private Account (int accountId,String emailadres, String wachtwoord, Klant klant) {
+    private Account (String emailadres, String wachtwoord, Klant klant) {
         super();
-        this.accountId = accountId;
         this.emailadres = emailadres;
         this.wachtwoord = wachtwoord;
         this.klant = klant;
     }
 
-    public Account(int accountId, String emailadres, String wachtwoord) {
-        this(accountId, emailadres, wachtwoord, null);
-    }
-
     public Account(String emailadres, String wachtwoord) {
-        this(0, emailadres, wachtwoord);
+        this(emailadres, wachtwoord, null);
     }
 
-    public Account(int accountId) {
-        this(accountId, "onbekend", "onbekend");
-    }
-
-    public Account () {
-        this(0);
+    public Account() {
+        this("onbekend", "onbekend");
     }
 
     public Account(RegisterDto dto){
         this(dto.getEmailadres(),dto.getWachtwoord());
-    }
-
-    public int getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
     }
 
     public String getEmailadres() {
@@ -90,7 +72,6 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "accountId=" + accountId +
                 ", emailadres='" + emailadres + '\'' +
                 ", wachtwoord='" + wachtwoord + '\'' +
                 ", klant=" + klant +
@@ -102,12 +83,12 @@ public class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return accountId == account.accountId && emailadres.equals(account.emailadres) && wachtwoord.equals(account.wachtwoord) && klant.equals(account.klant);
+        return emailadres.equals(account.emailadres) && wachtwoord.equals(account.wachtwoord) && klant.equals(account.klant);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountId, emailadres, wachtwoord, klant);
+        return Objects.hash(emailadres, wachtwoord, klant);
     }
 }
 

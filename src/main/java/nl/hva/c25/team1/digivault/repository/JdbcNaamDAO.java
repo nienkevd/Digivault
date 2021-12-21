@@ -1,6 +1,7 @@
 package nl.hva.c25.team1.digivault.repository;
 
 
+import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.Naam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -37,36 +38,36 @@ public class JdbcNaamDAO implements NaamDAO {
      * @param naam die opgeslagen moet worden
      * @return int naamID, de automatisch gegenereerde surrogate key
      */
-    @Override
-    public Naam bewaarNaamMetSK(Naam naam) {
-        String sql = "INSERT INTO naam (voornaam,tussenvoegsel,achternaam) VALUES (?,?,?);";
-        KeyHolder keyholder = new GeneratedKeyHolder();
-        jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, naam.getVoornaam());
-                ps.setString(2, naam.getTussenvoegsel());
-                ps.setString(3, naam.getAchternaam());
-                return ps;
-            }
-        } , keyholder);
-        naam.setNaamId(keyholder.getKey().intValue());
-        return naam;
-    }
+//    @Override
+//    public Naam bewaarNaamMetSK(Naam naam) {
+//        String sql = "INSERT INTO naam (voornaam,tussenvoegsel,achternaam) VALUES (?,?,?);";
+//        KeyHolder keyholder = new GeneratedKeyHolder();
+//        jdbcTemplate.update(new PreparedStatementCreator() {
+//            @Override
+//            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+//                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//                ps.setString(1, naam.getVoornaam());
+//                ps.setString(2, naam.getTussenvoegsel());
+//                ps.setString(3, naam.getAchternaam());
+//                return ps;
+//            }
+//        } , keyholder);
+//        naam.setNaamId(keyholder.getKey().intValue());
+//        return naam;
+//    }
 
     /**
      *
      * vindt een klant in database adhv klantID
-     * @param naamId van klant
+     * @param klantId van klant
      * @return Naam
      */
     @Override
-    public Naam vindNaamOpNaamId(int naamId) {
-        String sql = "SELECT * FROM naam WHERE naamId = ?;";
+    public Naam vindNaamOpKlantId(int klantId) {
+        String sql = "SELECT * FROM transactiepartij WHERE tpId = ?;";
         Naam naam;
         try {
-            naam = jdbcTemplate.queryForObject(sql, new JdbcNaamDAO.NaamRowMapper(), naamId);
+            naam = jdbcTemplate.queryForObject(sql, new JdbcNaamDAO.NaamRowMapper(), klantId);
         } catch (EmptyResultDataAccessException noResult) {
             naam = null;
         }
@@ -80,26 +81,26 @@ public class JdbcNaamDAO implements NaamDAO {
      */
     @Override
     public List<Naam> vindAlleNamen() {
-        String sql = "SELECT * FROM naam;";
+        String sql = "SELECT * FROM transactiepartij;";
         return jdbcTemplate.query(sql, new JdbcNaamDAO.NaamRowMapper());
     }
 
     /**
      *
      * update gegevens van naam
-     * @param naam van klant die geupdate moet worden
+     * @param  klant die geupdate moet worden
      */
     @Override
-    public void update(Naam naam) {
-        String sql = "UPDATE naam SET naamId = ?, voornaam = ?, tussenvoegsel = ?, achternaam = ?;";
-        jdbcTemplate.update(sql, naam.getNaamId(),naam.getVoornaam(),naam.getTussenvoegsel(),
-                naam.getAchternaam());
+    public void update(Klant klant) {
+        String sql = "UPDATE transactiepartij SET  voornaam = ?, tussenvoegsel = ?, achternaam = ?;";
+        jdbcTemplate.update(sql, klant.getNaam().getVoornaam(), klant.getNaam().getTussenvoegsel(),
+                klant.getNaam().getAchternaam());
     }
 
     private class NaamRowMapper implements RowMapper<Naam> {
         @Override
         public Naam mapRow(ResultSet resultSet, int RowNumber) throws SQLException {
-            return new Naam(resultSet.getInt("naamId"), resultSet.getString("voornaam"),
+            return new Naam(resultSet.getString("voornaam"),
                     resultSet.getString("tussenvoegsel"), resultSet.getString("achternaam"));
         }
     }

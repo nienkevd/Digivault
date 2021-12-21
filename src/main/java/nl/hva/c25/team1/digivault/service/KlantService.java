@@ -63,7 +63,7 @@ public class KlantService {
      * @return String melding die aangeeft of update geslaagd is
      */
     public String updateKlant(Klant klant) {
-        if (klantDAO.vindKlantOpKlantId(klant.getKlantId()) == null ) {
+        if (klantDAO.vindKlantOpKlantId(klant.getTransactiepartijId()) == null ) {
             return "Klant bestaat niet, update mislukt.";
         } else {
             klantDAO.update(klant);

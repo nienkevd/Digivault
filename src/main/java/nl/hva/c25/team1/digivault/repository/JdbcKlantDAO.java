@@ -41,22 +41,27 @@ public class JdbcKlantDAO implements KlantDAO {
      */
     @Override
     public Klant bewaarKlantMetSK(Klant klant) {
-        String sql = "INSERT INTO klant (bsn, geboortedatum, naamId, adresId, rekeningId, accountId) VALUES (?,?,?,?,?,?);";
+        String sql = "INSERT INTO transactiepartij (rekeningId,adresId,tpType, emailadres, wachtwoord," +
+                "voornaam, tussenvoegsel, achternaam, bsn, geboortedatum) VALUES (?,?,?,?,?,?,?,?,?,?);";
         KeyHolder keyholder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, klant.getBsn());
-                ps.setDate(2, java.sql.Date.valueOf(klant.getGeboortedatum()));
-                ps.setInt(3, klant.getNaam().getNaamId());
-                ps.setInt(4, klant.getAdres().getAdresId());
-                ps.setInt(5, klant.getRekening().getRekeningId());
-                ps.setInt(6, klant.getAccount().getAccountId());
+                ps.setInt(1, klant.getRekening().getRekeningId());
+                ps.setInt(2, klant.getAdres().getAdresId());
+                ps.setString(3, "klant");
+                ps.setString(4, klant.getAccount().getEmailadres());
+                ps.setString(5, klant.getAccount().getWachtwoord());
+                ps.setString(6, klant.getNaam().getVoornaam());
+                ps.setString(7, klant.getNaam().getTussenvoegsel());
+                ps.setString(8, klant.getNaam().getAchternaam());
+                ps.setString(9, klant.getBsn());
+                ps.setDate(10, java.sql.Date.valueOf(klant.getGeboortedatum()));
                 return ps;
             }
         } , keyholder);
-        klant.setKlantId(keyholder.getKey().intValue());
+        klant.setTransactiepartijId(keyholder.getKey().intValue());
         return klant;
     }
 
@@ -67,7 +72,7 @@ public class JdbcKlantDAO implements KlantDAO {
      * @return Klant
      */
     public Klant vindKlantOpKlantId(int klantId) {
-        String sql = "SELECT * FROM klant WHERE klantId = ? ;";
+        String sql = "SELECT * FROM transactiepartij  WHERE tpId = ? ;";
         Klant klant;
         try {
             klant = jdbcTemplate.queryForObject(sql, new KlantRowMapper(), klantId);
@@ -77,13 +82,15 @@ public class JdbcKlantDAO implements KlantDAO {
         return klant;
     }
 
+
+
     /**
      *
      * @return List<Klant> geeft lijst van alle klanten uit DB terug
      */
     @Override
     public List<Klant> vindAlleKlanten() {
-        String sql = "SELECT * FROM klant;";
+        String sql = "SELECT * FROM transactiepartij;";
         return jdbcTemplate.query(sql, new KlantRowMapper());
     }
 
@@ -94,15 +101,16 @@ public class JdbcKlantDAO implements KlantDAO {
      */
     @Override
     public void update(Klant klant) {
-        String sql = "UPDATE klant SET bsn = ?, geboortedatum = ? WHERE klantId = ?;";
-        jdbcTemplate.update(sql, klant.getBsn(),klant.getGeboortedatum(), klant.getKlantId());
+        String sql = "UPDATE transactiepartij SET bsn = ?, geboortedatum = ? WHERE tpId= ?;";
+        jdbcTemplate.update(sql, klant.getBsn(),klant.getGeboortedatum(), klant.getTransactiepartijId());
     }
 
     private class KlantRowMapper implements RowMapper<Klant> {
         @Override
         public Klant mapRow(ResultSet resultSet, int RowNumber) throws SQLException {
-            return new Klant(resultSet.getInt("klantId"), resultSet.getString("bsn"),
+            return new Klant(resultSet.getInt("tpId"), resultSet.getString("bsn"),
                     LocalDate.parse(resultSet.getString("geboortedatum")));
         }
     }
+
 }

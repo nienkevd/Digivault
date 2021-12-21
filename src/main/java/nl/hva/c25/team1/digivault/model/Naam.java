@@ -11,32 +11,18 @@ import nl.hva.c25.team1.digivault.transfer.RegisterDto;
  */
 
 public class Naam {
-    private int naamId;
     private String voornaam;
     private String tussenvoegsel;
     private String achternaam;
 
-    public Naam(int naamId, String voornaam, String tussenvoegsel, String achternaam) {
-        this.naamId = naamId;
+    public Naam(String voornaam, String tussenvoegsel, String achternaam) {
         this.voornaam = voornaam;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
     }
 
-    public Naam(String voornaam, String tussenvoegsel, String achternaam) {
-        this(0,voornaam,tussenvoegsel,achternaam);
-    }
-
     public Naam(RegisterDto dto) {
         this(dto.getVoornaam(), dto.getTussenvoegsel(), dto.getAchternaam());
-    }
-
-    public int getNaamId() {
-        return naamId;
-    }
-
-    public void setNaamId(int naamId) {
-        this.naamId = naamId;
     }
 
     public String getVoornaam() {

@@ -1,6 +1,7 @@
 package nl.hva.c25.team1.digivault.repository;
 
 
+import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.model.Naam;
 
 import java.util.List;
@@ -14,13 +15,13 @@ import java.util.List;
 
 public interface NaamDAO {
 
-    Naam bewaarNaamMetSK(Naam naam);
+//    Naam bewaarNaamMetSK(Naam naam);
 
-    Naam vindNaamOpNaamId(int naamId);
+    Naam vindNaamOpKlantId(int klantId);
 
     List<Naam> vindAlleNamen();
 
-    void update(Naam naam);
+    void update(Klant klant);
 
 
 

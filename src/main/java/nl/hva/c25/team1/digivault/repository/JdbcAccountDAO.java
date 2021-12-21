@@ -1,6 +1,7 @@
 package nl.hva.c25.team1.digivault.repository;
 
 import nl.hva.c25.team1.digivault.model.Account;
+import nl.hva.c25.team1.digivault.model.Klant;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -34,57 +35,58 @@ public class JdbcAccountDAO implements AccountDAO {
      * @return de gegenereerde accountId
      */
 
-    @Override
-    public Account bewaarAccountMetSK(Account account) {
-        String sql = "INSERT INTO account (emailadres, wachtwoord) VALUES (?, ?)";
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, account.getEmailadres());
-                ps.setString(2, account.getWachtwoord());
-                return ps;
-            }
-        }, keyHolder);
-        account.setAccountId(keyHolder.getKey().intValue());
-        return account;
-    }
+//    @Override
+//    public Account bewaarAccountMetSK(Account account) {
+//        String sql = "INSERT INTO transactiepartij (emailadres, wachtwoord) VALUES (?, ?)";
+//        KeyHolder keyHolder = new GeneratedKeyHolder();
+//        jdbcTemplate.update(new PreparedStatementCreator() {
+//            @Override
+//            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+//                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//                ps.setString(1, account.getEmailadres());
+//                ps.setString(2, account.getWachtwoord());
+//                return ps;
+//            }
+//        }, keyHolder);
+//        account.setAccountId(keyHolder.getKey().intValue());
+//        return account;
+//    }
 
     /**
      *
      * update emailadres en wachtwoord van de account
-     * @param account
+     * @param klant
      */
 
     @Override
-    public void updateAccount(Account account) {
-        String sql = "Update account Set emailadres = ?, wachtwoord = ? WHERE assetId = ?;";
-        jdbcTemplate.update(sql, account.getEmailadres(), account.getWachtwoord(), account.getAccountId());
+    public void updateAccount(Klant klant) {
+        String sql = "UPDATE transactiepartij SET emailadres = ?, wachtwoord = ? WHERE tpId = ?;";
+        jdbcTemplate.update(sql, klant.getAccount().getEmailadres(), klant.getAccount().getWachtwoord(),
+        klant.getTransactiepartijId());
     }
 
-    /**
-     *
-     * vindt een account in database adhv accountId
-     * @param accountId
-     * @return Account
-     */
-
-    @Override
-    public Account vindAccountOpAccountId(int accountId) {
-        String sql = "Select * From account Where accountId = ?";
-        return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), accountId);
-    }
+//    /**
+//     *
+//     * vindt een account in database adhv accountId
+//     * @param accountId
+//     * @return Account
+//     */
+//
+//    @Override
+//    public Account vindAccountOpAccountId(int accountId) {
+//        String sql = "Select * From account Where accountId = ?";
+//        return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), accountId);
+//    }
 
     @Override
     public Account vindAccountOpKlantId(int klantId) {
-        String sql = "Select * From account a JOIN klant k ON a.accountId = k.accountId Where klantId = ?";
+        String sql = "SELECT emailadres, wachtwoord FROM transactiepartij WHERE tpId = ?";
         return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), klantId);
     }
 
     @Override
     public Account vindAccountOpEmailAdres(String emailAdres) {
-        String sql = "Select * From account Where emailadres = ?";
+        String sql = "SELECT emailadres, wachtwoord FROM transactiepartij WHERE emailadres = ?";
         return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), emailAdres);
     }
 
@@ -95,7 +97,7 @@ public class JdbcAccountDAO implements AccountDAO {
 
     @Override
     public List<Account> geefAlleAccounts() {
-        String sql = "Select * From account";
+        String sql = "SELECT emailadres, wachtwoord FROM transactiepartij";
         return jdbcTemplate.query(sql, new AccountRowMapper());
     }
 

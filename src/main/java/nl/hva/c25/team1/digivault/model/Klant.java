@@ -14,26 +14,22 @@ import java.util.Objects;
  * Review Anthon 6-12-2021
  */
 
-public class Klant {
-    private int klantId;
+public class Klant extends TransactiePartij {
     private String bsn;
     private LocalDate geboortedatum;
     private Naam naam;
     private Adres adres;
     private Account account;
-    private Rekening rekening;
-    private List<PortefeuilleItem> portefeuille;
 
     private Klant(int klantId, String bsn, LocalDate geboortedatum, Naam naam, Adres adres,
                  Account account, Rekening rekening, List<PortefeuilleItem> portefeuille) {
-        this.klantId = klantId;
+        super(klantId,rekening, portefeuille);
         this.bsn = bsn;
         this.geboortedatum = geboortedatum;
         this.naam = naam;
         this.adres = adres;
         this.account = account;
-        this.rekening = rekening;
-        this.portefeuille = portefeuille;
+
     }
 
     public Klant(String bsn, LocalDate geboortedatum, Naam naam, Adres adres, Account account) {
@@ -48,27 +44,19 @@ public class Klant {
         this(klantId,bsn,geboortedatum, null, null,null, null, null);
     }
 
+//    public Klant(String bsn, LocalDate geboortedatum, Naam naam) {
+//        this.bsn = bsn;
+//        this.geboortedatum = geboortedatum;
+//        this.naam = naam;
+//    }
+
     public Klant(String bsn, LocalDate geboortedatum) {
         this(0, bsn, geboortedatum, null, null, null, null, null);
     }
 
-    public Klant(String bsn, LocalDate geboortedatum, Naam naam) {
-        this.bsn = bsn;
-        this.geboortedatum = geboortedatum;
-        this.naam = naam;
-    }
 
     public Klant(int klantId) {
         this(klantId, "", null);
-    }
-
-
-    public int getKlantId() {
-        return klantId;
-    }
-
-    public void setKlantId(int klantId) {
-        this.klantId = klantId;
     }
 
     public String getBsn() {
@@ -111,34 +99,14 @@ public class Klant {
         this.account = account;
     }
 
-    public Rekening getRekening() {
-        return rekening;
-    }
-
-    public void setRekening(Rekening rekening) {
-        this.rekening = rekening;
-    }
-
-    public List<PortefeuilleItem> getPortefeuille() {
-        return portefeuille;
-    }
-
-    public void setPortefeuille(List<PortefeuilleItem> portefeuille) {
-        this.portefeuille = portefeuille;
-    }
-
-
     @Override
     public String toString() {
         return "Klant{" +
-                "klantId=" + klantId +
                 ", bsn='" + bsn + '\'' +
                 ", geboortedatum=" + geboortedatum +
                 ", naam=" + naam +
                 ", adres=" + adres +
                 ", account=" + account +
-                ", rekening=" + rekening +
-                ", portefeuille=" + portefeuille +
                 '}';
     }
 
@@ -147,16 +115,11 @@ public class Klant {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Klant klant = (Klant) o;
-        return klantId == klant.klantId && Objects.equals(bsn, klant.bsn)
-                && Objects.equals(geboortedatum, klant.geboortedatum)
-                && Objects.equals(naam, klant.naam) && Objects.equals(adres, klant.adres)
-                && Objects.equals(account, klant.account)
-                && Objects.equals(rekening, klant.rekening)
-                && Objects.equals(portefeuille, klant.portefeuille);
+        return Objects.equals(bsn, klant.bsn) && Objects.equals(geboortedatum, klant.geboortedatum) && Objects.equals(naam, klant.naam) && Objects.equals(adres, klant.adres) && Objects.equals(account, klant.account);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(klantId, bsn, geboortedatum, naam, adres, account, rekening, portefeuille);
+        return Objects.hash(bsn, geboortedatum, naam, adres, account);
     }
 }

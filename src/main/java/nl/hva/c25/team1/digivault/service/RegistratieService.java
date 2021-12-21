@@ -64,10 +64,15 @@ public class RegistratieService {
             klant.setPortefeuille(aanmaakLegePortefeuille());
             Account account = klant.getAccount();
             account.setWachtwoord(hashService.hash(account.getWachtwoord()));
-            if (
-                    validateBsn(klant.getBsn()) &&
-                    validatieGeboortedatum(klant.getGeboortedatum())  &&
-                    validatieMailadres(klant.getAccount().getEmailadres())
+            boolean b1 = validateBsn(klant.getBsn());
+            boolean b2 = validatieGeboortedatum(klant.getGeboortedatum());
+
+            boolean b3 = validatieMailadres(klant.getAccount().getEmailadres());
+
+            if (b1
+                     && b2
+//                      && b3 TODO Erwin: deze check werkt niet
+
             ) {
                 return rootRepository.slaKlantOp(klant);
             } else {

@@ -41,15 +41,13 @@ public class RootRepository {
      * @return volledig geregistreerd klant object
      */
     public Klant slaKlantOp(Klant klant){
-        naamDAO.bewaarNaamMetSK(klant.getNaam());
         adresDAO.bewaarAdresMetSK(klant.getAdres());
-        accountDAO.bewaarAccountMetSK(klant.getAccount());
         rekeningDAO.bewaarRekeningMetSK(klant.getRekening());
         klantDAO.bewaarKlantMetSK(klant);
         klant.getAccount().setKlant(klant);//java
 
         for(PortefeuilleItem item : klant.getPortefeuille()){
-            item.getKlant().setKlantId(klant.getKlantId());
+            item.getKlant().setTransactiepartijId(klant.getTransactiepartijId());
             portefeuilleItemDAO.bewaarPortefeuilleItemMetKey(item);
         }
         return klant;
