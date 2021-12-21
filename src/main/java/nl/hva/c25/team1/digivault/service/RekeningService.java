@@ -6,6 +6,7 @@ import nl.hva.c25.team1.digivault.model.Rekening;
 import nl.hva.c25.team1.digivault.model.Transactie;
 import nl.hva.c25.team1.digivault.repository.JdbcRekeningDAO;
 import nl.hva.c25.team1.digivault.repository.RootRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,18 +16,16 @@ import java.util.List;
  * @author Sezi, studentnummer 500889525
  * @version 1-12-2021
  */
-
+@Service
 public class RekeningService {
 
     private JdbcRekeningDAO jdbcRekeningDAO;
-    //    private RootRepository rootRepository;
     private TransactieService transactieService;
     private Object Bank;
     private Bank bank;
 
-    public RekeningService(JdbcRekeningDAO rekeningDAO/*, RootRepository rootRepository*/, TransactieService transactieService, Bank bank) {
+    public RekeningService(JdbcRekeningDAO rekeningDAO, TransactieService transactieService, Bank bank) {
         this.jdbcRekeningDAO = rekeningDAO;
-//        this.rootRepository = rootRepository;
         this.transactieService = transactieService;
         this.bank = bank;
     }

@@ -6,6 +6,7 @@ import nl.hva.c25.team1.digivault.model.PortefeuilleItem;
 import nl.hva.c25.team1.digivault.model.Transactie;
 import nl.hva.c25.team1.digivault.model.TransactiePartij;
 import nl.hva.c25.team1.digivault.repository.JdbcTransactieDAO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * Version 14-12-2021
  */
 
+@Service
 public class TransactieService {
     private JdbcTransactieDAO jdbcTransactieDAO;
     private RekeningService rekeningService;
@@ -32,7 +34,8 @@ public class TransactieService {
         return jdbcTransactieDAO.bewaarTransacktieMetSK(transactie);
     }
 
-    public Transactie vindTrasanctieOpTransactieId(int transactieId) {
+    public Transactie vindTransactieOpTransactieId(int transactieId) {
+        System.out.println("transactieservice");
         return jdbcTransactieDAO.vindTransactieOpTransactieId(transactieId);
     }
 

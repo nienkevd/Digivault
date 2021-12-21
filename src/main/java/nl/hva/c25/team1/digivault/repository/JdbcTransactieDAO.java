@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -20,7 +21,7 @@ import java.util.List;
  * Version 14-12-2021
  */
 
-
+@Repository
 public class JdbcTransactieDAO implements TransactieDAO {
     JdbcTemplate jdbcTemplate;
 
@@ -57,11 +58,13 @@ public class JdbcTransactieDAO implements TransactieDAO {
     public Transactie vindTransactieOpTransactieId(int transactieId) {
         String sql = "SELECT * FROM transactie WHERE transactieId = ? ";
         Transactie transactie;
+        System.out.println("transactie start");
         try {
             transactie = jdbcTemplate.queryForObject(sql, new TransactieRowMapper(), transactieId);
         } catch (EmptyResultDataAccessException noResult) {
             transactie = null;
         }
+        System.out.println("transactie eind");
         return transactie;
     }
 

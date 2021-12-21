@@ -19,8 +19,8 @@ window.onload = function () {
     submitButton.addEventListener('click', login);
 
     function login() {
-        submitButton.addEventListener("click", (e) => {
-            e.preventDefault();
+        // submitButton.addEventListener("click", (e) => {
+        //     e.preventDefault();
             const login = 'localhost:8080/login';
 
             fetch(login, {
@@ -47,7 +47,7 @@ window.onload = function () {
                 .catch((err) => {
                     console.log(err);
                 });
-        });
+        // });
     };
 }
 
