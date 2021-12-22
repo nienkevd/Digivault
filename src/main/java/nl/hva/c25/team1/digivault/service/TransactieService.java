@@ -14,7 +14,6 @@ import java.util.List;
  * Author Nienke
  * Version 14-12-2021
  */
-
 @Service
 public class TransactieService {
     private JdbcTransactieDAO jdbcTransactieDAO;
@@ -35,7 +34,6 @@ public class TransactieService {
     }
 
     public Transactie vindTransactieOpTransactieId(int transactieId) {
-        System.out.println("transactieservice");
         return jdbcTransactieDAO.vindTransactieOpTransactieId(transactieId);
     }
 
@@ -48,7 +46,7 @@ public class TransactieService {
     }
 
     public double berekenWaardeTransactie(Transactie transactie) {
-            return transactie.getAsset().getDagKoers() * transactie.getAantalCryptos();
+        return transactie.getAsset().getDagKoers() * transactie.getAantalCryptos();
     }
 
     public boolean checkKoper(Transactie transactie) {
