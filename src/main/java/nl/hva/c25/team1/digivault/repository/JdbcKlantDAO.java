@@ -82,6 +82,12 @@ public class JdbcKlantDAO implements KlantDAO {
         return klant;
     }
 
+    @Override
+    public int vindRekeningIdVanKlant(Klant klant) {
+        String sql = "SELECT rekeningID FROM transactiepartij WHERE tpID = ?;";
+        return jdbcTemplate.queryForObject(sql, Integer.class, klant.getTransactiepartijId());
+    }
+
 
 
     /**
@@ -105,10 +111,6 @@ public class JdbcKlantDAO implements KlantDAO {
         jdbcTemplate.update(sql, klant.getBsn(),klant.getGeboortedatum(), klant.getTransactiepartijId());
     }
 
-    @Override
-    public int vindRekeningIdVanKlant(Klant klant) {
-        return 0; // TODO: implement
-    }
 
     private class KlantRowMapper implements RowMapper<Klant> {
         @Override
