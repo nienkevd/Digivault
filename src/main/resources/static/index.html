@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>DIGIVAULT</title>
+        <title>DIGIVAULT - capital growth by default</title>
         <link rel="icon" type="image/x-icon" href="images/favicon.png">
         <link rel="stylesheet" href="css/style.css">
-        <script src="script.js"></script>
+        <script src="js/script.js"></script>
     </head>
 
     <body>
@@ -15,23 +15,62 @@
     <img src="images/logo.png" height="125" width="250">
 
     <!-- Opzet loginPagina -->
-    <div class="loginbox">
-        <img src="images/diva_logo.jpg" class="avatar" width="100" height="100">
+    <div class="standaard loginPagina">
+        <img class="avatar" src="images/diva_avatar.jpg">
         <h1>Inloggen</h1>
         <form>
-            <p>Gebruikersnaam</p>
-            <input type ="veld" name="" placeholder="gebruikersnaam">
+            <p>E-mailadres</p>
+            <input type ="text" name="" placeholder="e-mailadres">
             <p>Wachtwoord</p>
-            <input type="veld" name="" placeholder="wachtwoord">
-            <input type="knop" name="" value="Login">
-            <a href="#"> Wacchtwoord vergeten?</a> <br>
-            <a href="#"> Registreren? </a>
+            <input type="text" name="" placeholder="wachtwoord">
+            <input type="button" name="" value="Login">
+            <a type="text" href="#">Wachtwoord vergeten?</a> <br>
+            <a id="registratie" onclick="on()" href="#">Registreren? </a>
         </form>
     </div>
 
     <!-- Opzet registratieLaag -->
-    <div class="registratieLaag">
+    <div id="overlay" class="standaard registratieLaag" onclick="off()">
+        <img class="avatar" src="images/registratie_avatar.jpg">
+        <h1>Registreren</h1>
+        <h4>Vul hieronder je gegevens in en loop binnen als DIVA</h4>
+        <form class="grid_4">
+            <p class="registratie">Inloggegevens:</p>
+            <input type="email" placeholder="e-mailadres">
+            <input type="text" placeholder="wachtwoord" required="">
+            <br>
+            <p class="registratie">Persoonsgegevens: </p>
+            <input type="text" placeholder="voornaam">
+            <input type="text" placeholder="tussenvoegsel">
+            <input type="text" placeholder="achternaam">
+            <br>
+            <input type="text" placeholder="geboortedatum">
+            <input type="text" placeholder="bsn">
+            <br>
+            <p class="registratie">Adresgegevens:</p>
+            <input type="text" placeholder="postcode">
+            <input type="text" placeholder="huisnummer">
+            <input type="text" placeholder="toevoeging">
+            <p class="registratie"></p>
+            <input type="text" placeholder="straat">
+            <input type="text" placeholder="woonplaats">
+        </form>
+        <form class="grid_3">
+            <br>
+            <input type="button" name="" value="Registreren">
+            <br>
+        </form>
     </div>
+
+    <script>
+        function on() {
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function off() {
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
 
     </body>
 </html>
