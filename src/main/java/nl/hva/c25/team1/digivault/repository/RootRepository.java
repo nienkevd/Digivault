@@ -117,9 +117,20 @@ public class RootRepository {
     }
 
     public Transactie voerTransactieUit(Transactie transactie) {
-        rekeningDAO.updateRekening(transactie.getVerkoper().getRekening());
-        rekeningDAO.updateRekening(transactie.getKoper().getRekening());
-        // TODO: portefeuilles!!!
+        TransactiePartij koper = transactie.getKoper();
+        TransactiePartij verkoper = transactie.getVerkoper();
+        rekeningDAO.updateRekening(verkoper.getRekening());
+        rekeningDAO.updateRekening(koper.getRekening());
+        for (PortefeuilleItem portefeuilleItem : koper.getPortefeuille()) {
+            if (portefeuilleItem.getAsset().getAfkorting().equals(transactie.getAsset().getAfkorting())) {
+                portefeuilleItemDAO.updatePortefeuilleItem(portefeuilleItem);
+            }
+        }
+        for (PortefeuilleItem portefeuilleItem : verkoper.getPortefeuille()) {
+            if (portefeuilleItem.getAsset().getAfkorting().equals(transactie.getAsset().getAfkorting())) {
+                portefeuilleItemDAO.updatePortefeuilleItem(portefeuilleItem);
+            }
+        }
         return transactieDAO.bewaarTransacktieMetSK(transactie);
     }
 
