@@ -105,6 +105,11 @@ public class JdbcKlantDAO implements KlantDAO {
         jdbcTemplate.update(sql, klant.getBsn(),klant.getGeboortedatum(), klant.getTransactiepartijId());
     }
 
+    @Override
+    public int vindRekeningIdVanKlant(Klant klant) {
+        return 0; // TODO: implement
+    }
+
     private class KlantRowMapper implements RowMapper<Klant> {
         @Override
         public Klant mapRow(ResultSet resultSet, int RowNumber) throws SQLException {

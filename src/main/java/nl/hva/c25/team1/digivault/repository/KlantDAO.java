@@ -23,4 +23,6 @@ public interface KlantDAO {
 
     void update(Klant klant);
 
+    int vindRekeningIdVanKlant(Klant klant);
+
 }

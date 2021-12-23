@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Author Nienke
- * Version 14-12-2021
+ * @author Nienke
+ * @author Anthon
  */
 @Service
 public class TransactieService {
@@ -37,7 +37,6 @@ public class TransactieService {
 
     public Transactie voerTransactieUit(TransactieDTO transactieDTO) {
         Transactie transactie = zetDtoOm(transactieDTO);
-        // TODO: in object transactie: rekeningen / dagkoers
         if (checkKoper(transactie) && checkVerkoper(transactie) && checkAccounts(transactie)) {
             TransactiePartij koper = transactie.getKoper();
             TransactiePartij verkoper = transactie.getVerkoper();
