@@ -3,8 +3,10 @@ package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.model.*;
 import nl.hva.c25.team1.digivault.repository.JdbcTransactieDAO;
+import nl.hva.c25.team1.digivault.repository.RootRepository;
 import nl.hva.c25.team1.digivault.repository.TransactieDAO;
 import nl.hva.c25.team1.digivault.transfer.TransactieDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,22 +24,30 @@ public class TransactieService {
     private KlantService klantService;
     private AssetService assetService;
     private BankService bankService;
+    private RootRepository rootRepository;
 
 
+    @Autowired
     public TransactieService(TransactieDAO transactieDAO, RekeningService rekeningService,
                              PortefeuilleItemService portefeuilleItemService, KlantService klantService,
-                             AssetService assetService, BankService bankService) {
+                             AssetService assetService, BankService bankService, RootRepository rootRepository) {
         this.transactieDAO = transactieDAO;
         this.rekeningService = rekeningService;
         this.portefeuilleItemService = portefeuilleItemService;
         this.klantService = klantService;
         this.assetService = assetService;
         this.bankService = bankService;
+        this.rootRepository = rootRepository;
     }
 
     public Transactie voerTransactieUit(TransactieDTO transactieDTO) {
         Transactie transactie = zetDtoOm(transactieDTO);
-        return null; // null als niet gelukt!
+        // TODO: checkmoment moet later als alle RELEVANTE data in object transactie staan
+        if (checkKoper(transactie) && checkVerkoper(transactie) && checkAccounts(transactie)) {
+            // TODO: voer hier de mutaties uit in het transactieobject
+            return rootRepository.voerTransactieUit(transactie);
+        }
+        return null;
     }
 
     private Transactie zetDtoOm(TransactieDTO transactieDTO) {
@@ -61,23 +71,6 @@ public class TransactieService {
         return transactie;
     }
 
-
-    public Transactie bewaarTransactie(Transactie transactie) {
-        return transactieDAO.bewaarTransacktieMetSK(transactie);
-    }
-
-    public Transactie vindTransactieOpTransactieId(int transactieId) {
-        return transactieDAO.vindTransactieOpTransactieId(transactieId);
-    }
-
-    public List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper) {
-        return transactieDAO.vindAlleTransactiesOpVerkoper(verkoper);
-    }
-
-    public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper) {
-        return transactieDAO.vindAlleTransactiesOpVerkoper(koper);
-    }
-
     public double berekenWaardeTransactie(Transactie transactie) {
         return transactie.getAsset().getDagKoers() * transactie.getAantalCryptos();
     }
@@ -94,17 +87,23 @@ public class TransactieService {
         }
         return false;
     }
+
     public boolean checkAccounts (Transactie transactie) {
         return !(transactie.getVerkoper().getRekening() == transactie.getKoper().getRekening());
     }
-    public void maakTransactie(Transactie transactie) {
-        if (checkKoper(transactie) && checkVerkoper(transactie) && checkAccounts(transactie)) {
-            rekeningService.verhoogRekening(transactie);
-            rekeningService.verlaagRekening(transactie);
-            portefeuilleItemService.verhoogPortefeuilleItem(transactie);
-            portefeuilleItemService.verlaagPortefeuilleItem(transactie);
-        }
+
+    public Transactie vindTransactieOpTransactieId(int transactieId) {
+        return transactieDAO.vindTransactieOpTransactieId(transactieId);
     }
+
+    public List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper) {
+        return transactieDAO.vindAlleTransactiesOpVerkoper(verkoper);
+    }
+
+    public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper) {
+        return transactieDAO.vindAlleTransactiesOpVerkoper(koper);
+    }
+
 }
 
 

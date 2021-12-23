@@ -1,6 +1,7 @@
 package nl.hva.c25.team1.digivault.repository;
 
 import nl.hva.c25.team1.digivault.model.*;
+import nl.hva.c25.team1.digivault.service.RekeningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,10 +17,12 @@ public class RootRepository {
     NaamDAO naamDAO;
     AdresDAO adresDAO;
     AssetDAO assetDAO;
+    TransactieDAO transactieDAO;
 
     @Autowired
     public RootRepository(KlantDAO klantDAO, RekeningDAO rekeningDAO, AccountDAO accountDAO,
-                          PortefeuilleItemDAO portefeuilleItemDAO, NaamDAO naamDAO, AdresDAO adresDAO, AssetDAO assetDAO) {
+                          PortefeuilleItemDAO portefeuilleItemDAO, NaamDAO naamDAO, AdresDAO adresDAO,
+                          AssetDAO assetDAO, TransactieDAO transactieDAO) {
         this.klantDAO = klantDAO;
         this.rekeningDAO = rekeningDAO;
         this.accountDAO = accountDAO;
@@ -27,6 +30,7 @@ public class RootRepository {
         this.naamDAO = naamDAO;
         this.adresDAO = adresDAO;
         this.assetDAO = assetDAO;
+        this.transactieDAO = transactieDAO;
     }
 
     // checked: Anthon 8-12-2021
@@ -111,4 +115,12 @@ public class RootRepository {
         }
         return portefeuilleOverzicht;
     }
+
+    public Transactie voerTransactieUit(Transactie transactie) {
+        rekeningDAO.updateRekening(transactie.getVerkoper().getRekening());
+        rekeningDAO.updateRekening(transactie.getKoper().getRekening());
+        // TODO: portefeuilles!!!
+        return transactieDAO.bewaarTransacktieMetSK(transactie);
+    }
+
 }
