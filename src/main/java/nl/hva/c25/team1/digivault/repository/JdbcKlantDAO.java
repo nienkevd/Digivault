@@ -87,9 +87,7 @@ public class JdbcKlantDAO implements KlantDAO {
         String sql = "SELECT rekeningID FROM transactiepartij WHERE tpID = ?;";
         return jdbcTemplate.queryForObject(sql, Integer.class, klant.getTransactiepartijId());
     }
-
-
-
+    
     /**
      *
      * @return List<Klant> geeft lijst van alle klanten uit DB terug
