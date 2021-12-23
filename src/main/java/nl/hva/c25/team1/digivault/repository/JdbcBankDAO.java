@@ -20,7 +20,7 @@ public class JdbcBankDAO implements BankDAO {
 
     @Override
     public Bank vindBankOpId(int bankId) {
-        return null;
+        return null; // TODO: implement
     }
 
 }

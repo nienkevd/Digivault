@@ -42,9 +42,30 @@ public class TransactieService {
 
     public Transactie voerTransactieUit(TransactieDTO transactieDTO) {
         Transactie transactie = zetDtoOm(transactieDTO);
-        // TODO: checkmoment moet later als alle RELEVANTE data in object transactie staan
+        // TODO: in object transactie: rekeningen / portefeuilles(items?) / dagkoers
         if (checkKoper(transactie) && checkVerkoper(transactie) && checkAccounts(transactie)) {
-            // TODO: voer hier de mutaties uit in het transactieobject
+            TransactiePartij koper = transactie.getKoper();
+            TransactiePartij verkoper = transactie.getVerkoper();
+            Rekening koperRekening = koper.getRekening();
+            Rekening verkoperRekening = verkoper.getRekening();
+            double saldoKoperRekening = koperRekening.getSaldo();
+            double saldoVerkoperRekening = verkoperRekening.getSaldo();
+            boolean verkoperIsBank = (verkoper instanceof Bank);
+            double kostenPercentage;
+            if (verkoperIsBank) {
+                kostenPercentage = ((Bank) verkoper).getTransactiePercentage();
+                verkoperRekening.setSaldo(saldoVerkoperRekening + berekenWaardeTransactie(transactie) *
+                        (1 + kostenPercentage / 100));
+            } else {
+                kostenPercentage = ((Bank) koper).getTransactiePercentage();
+                verkoperRekening.setSaldo(saldoVerkoperRekening + berekenWaardeTransactie(transactie) *
+                        (1 - kostenPercentage / 100));
+            }
+            // TODO: voer hier de mutaties uit in het transactieobject 3x
+
+            // verlaag rekening koper
+            // verhoog portefeuilleitem koper
+            // verlaag portefeuilleitem verkoper
             return rootRepository.voerTransactieUit(transactie);
         }
         return null;

@@ -6,6 +6,7 @@ import nl.hva.c25.team1.digivault.model.Rekening;
 import nl.hva.c25.team1.digivault.model.Transactie;
 import nl.hva.c25.team1.digivault.repository.JdbcRekeningDAO;
 import nl.hva.c25.team1.digivault.repository.RootRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class RekeningService {
 
     private JdbcRekeningDAO jdbcRekeningDAO;
 
+    @Autowired
     public RekeningService(JdbcRekeningDAO rekeningDAO) {
         this.jdbcRekeningDAO = rekeningDAO;
     }
