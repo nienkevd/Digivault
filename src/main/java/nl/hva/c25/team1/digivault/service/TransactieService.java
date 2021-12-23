@@ -51,19 +51,18 @@ public class TransactieService {
             double saldoKoperRekening = koperRekening.getSaldo();
             double saldoVerkoperRekening = verkoperRekening.getSaldo();
             boolean verkoperIsBank = (verkoper instanceof Bank);
-            double kostenPercentage;
+            double mutatieBedrag;
             if (verkoperIsBank) {
-                kostenPercentage = ((Bank) verkoper).getTransactiePercentage();
-                verkoperRekening.setSaldo(saldoVerkoperRekening + berekenWaardeTransactie(transactie) *
-                        (1 + kostenPercentage / 100));
+                mutatieBedrag = berekenWaardeTransactie(transactie) *
+                        (1 + ((Bank) verkoper).getTransactiePercentage() / 100);
             } else {
-                kostenPercentage = ((Bank) koper).getTransactiePercentage();
-                verkoperRekening.setSaldo(saldoVerkoperRekening + berekenWaardeTransactie(transactie) *
-                        (1 - kostenPercentage / 100));
+                mutatieBedrag = berekenWaardeTransactie(transactie) *
+                        (1 - ((Bank) verkoper).getTransactiePercentage() / 100);
             }
-            // TODO: voer hier de mutaties uit in het transactieobject 3x
+            verkoperRekening.setSaldo(saldoVerkoperRekening + mutatieBedrag);
+            koperRekening.setSaldo(saldoKoperRekening - mutatieBedrag);
+            // TODO: voer hier de mutaties uit in het transactieobject 2x
 
-            // verlaag rekening koper
             // verhoog portefeuilleitem koper
             // verlaag portefeuilleitem verkoper
             return rootRepository.voerTransactieUit(transactie);
