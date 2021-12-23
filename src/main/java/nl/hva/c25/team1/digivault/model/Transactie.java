@@ -1,5 +1,7 @@
 package nl.hva.c25.team1.digivault.model;
 
+import nl.hva.c25.team1.digivault.transfer.TransactieDTO;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -38,7 +40,9 @@ public class Transactie {
         this(transactieId, null, null, transactieDatum, transactieTijd, null, aantalCryptos);
     }
 
-
+    public Transactie(TransactieDTO transactieDTO){
+        this(0, LocalDate.now(), LocalTime.now(), transactieDTO.getAantal());
+    }
 
     public int getTransactieId() {
         return transactieId;

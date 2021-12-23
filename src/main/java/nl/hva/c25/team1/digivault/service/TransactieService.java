@@ -22,11 +22,15 @@ public class TransactieService {
     private Object Bank;
     private Bank bank;
 
-    public TransactieService(JdbcTransactieDAO jdbcTransactieDAO, RekeningService rekeningService, PortefeuilleItemService portefeuilleItemService, Bank bank) {
+    public TransactieService(JdbcTransactieDAO jdbcTransactieDAO, RekeningService rekeningService, PortefeuilleItemService portefeuilleItemService) {
         this.jdbcTransactieDAO = jdbcTransactieDAO;
         this.rekeningService = rekeningService;
         this.portefeuilleItemService = portefeuilleItemService;
         this.bank = bank;
+    }
+
+    public Transactie voerTransactieUit(Transactie transactie) {
+        return null;
     }
 
     public Transactie bewaarTransactie(Transactie transactie) {
