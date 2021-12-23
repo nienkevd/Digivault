@@ -1,11 +1,10 @@
 package nl.hva.c25.team1.digivault.service;
 
 
-import nl.hva.c25.team1.digivault.model.Bank;
-import nl.hva.c25.team1.digivault.model.PortefeuilleItem;
-import nl.hva.c25.team1.digivault.model.Transactie;
-import nl.hva.c25.team1.digivault.model.TransactiePartij;
+import nl.hva.c25.team1.digivault.model.*;
 import nl.hva.c25.team1.digivault.repository.JdbcTransactieDAO;
+import nl.hva.c25.team1.digivault.repository.TransactieDAO;
+import nl.hva.c25.team1.digivault.transfer.TransactieDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,37 +15,67 @@ import java.util.List;
  */
 @Service
 public class TransactieService {
-    private JdbcTransactieDAO jdbcTransactieDAO;
+
+    private TransactieDAO transactieDAO;
     private RekeningService rekeningService;
     private PortefeuilleItemService portefeuilleItemService;
-    private Object Bank;
-    private Bank bank;
+    private KlantService klantService;
+    private AssetService assetService;
+    private BankService bankService;
 
-    public TransactieService(JdbcTransactieDAO jdbcTransactieDAO, RekeningService rekeningService, PortefeuilleItemService portefeuilleItemService) {
-        this.jdbcTransactieDAO = jdbcTransactieDAO;
+
+    public TransactieService(TransactieDAO transactieDAO, RekeningService rekeningService,
+                             PortefeuilleItemService portefeuilleItemService, KlantService klantService,
+                             AssetService assetService, BankService bankService) {
+        this.transactieDAO = transactieDAO;
         this.rekeningService = rekeningService;
         this.portefeuilleItemService = portefeuilleItemService;
-        this.bank = bank;
+        this.klantService = klantService;
+        this.assetService = assetService;
+        this.bankService = bankService;
     }
 
-    public Transactie voerTransactieUit(Transactie transactie) { // null als niet gelukt!
-        return null;
+    public Transactie voerTransactieUit(TransactieDTO transactieDTO) {
+        Transactie transactie = zetDtoOm(transactieDTO);
+        return null; // null als niet gelukt!
     }
+
+    private Transactie zetDtoOm(TransactieDTO transactieDTO) {
+        Transactie transactie = new Transactie(transactieDTO);
+        int koperId = transactieDTO.getKoperId();
+        int verkoperId = transactieDTO.getVerkoperId();
+        TransactiePartij koper, verkoper;
+        if (koperId < 10) { // bank is koper
+            koper = bankService.vindBankOpId(koperId);
+            verkoper = klantService.vindKlantOpKlantID(verkoperId);
+        } else if (verkoperId < 10) { // bank is verkoper
+            koper = klantService.vindKlantOpKlantID(koperId);
+            verkoper = bankService.vindBankOpId(verkoperId);
+        } else { // transactie tussen 2 klanten
+            koper = klantService.vindKlantOpKlantID(koperId);
+            verkoper = klantService.vindKlantOpKlantID(verkoperId);
+        }
+        transactie.setKoper(koper);
+        transactie.setVerkoper(verkoper);
+        transactie.setAsset(assetService.vindAssetOpId(transactieDTO.getAssetId()));
+        return transactie;
+    }
+
 
     public Transactie bewaarTransactie(Transactie transactie) {
-        return jdbcTransactieDAO.bewaarTransacktieMetSK(transactie);
+        return transactieDAO.bewaarTransacktieMetSK(transactie);
     }
 
     public Transactie vindTransactieOpTransactieId(int transactieId) {
-        return jdbcTransactieDAO.vindTransactieOpTransactieId(transactieId);
+        return transactieDAO.vindTransactieOpTransactieId(transactieId);
     }
 
     public List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper) {
-        return jdbcTransactieDAO.vindAlleTransactiesOpVerkoper(verkoper);
+        return transactieDAO.vindAlleTransactiesOpVerkoper(verkoper);
     }
 
     public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper) {
-        return jdbcTransactieDAO.vindAlleTransactiesOpVerkoper(koper);
+        return transactieDAO.vindAlleTransactiesOpVerkoper(koper);
     }
 
     public double berekenWaardeTransactie(Transactie transactie) {

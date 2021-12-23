@@ -23,15 +23,13 @@ public class TransactieController {
     private TransactieService transactieService;
     private TokenService tokenService;
     private AccountService accountService;
-    private AssetService assetService;
 
     @Autowired
     public TransactieController(TransactieService transactieService, TokenService tokenService,
-                                AccountService accountService, AssetService assetService) {
+                                AccountService accountService) {
         this.transactieService = transactieService;
         this.tokenService = tokenService;
         this.accountService = accountService;
-        this.assetService = assetService;
     }
 
     @PostMapping("/transactie/{klantId}")
@@ -41,8 +39,7 @@ public class TransactieController {
         boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
                 getEmailadres());
         if (tokenService.valideerJWT(token) && authorized) {
-            Transactie transactie = zetDtoOm(transactieDTO);
-            transactieService.voerTransactieUit(transactie);
+            Transactie transactie = transactieService.voerTransactieUit(transactieDTO);
             if (transactie == null) {
                 return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).build();
             } else {
@@ -51,27 +48,6 @@ public class TransactieController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-    }
-
-    private Transactie zetDtoOm(TransactieDTO transactieDTO) {
-        Transactie transactie = new Transactie(transactieDTO);
-        int koperId = transactieDTO.getKoperId();
-        int verkoperId = transactieDTO.getVerkoperId();
-        TransactiePartij koper, verkoper;
-        if (koperId < 10) { // bank is koper
-            koper = new Bank(koperId);
-            verkoper = new Klant(verkoperId);
-        } else if (verkoperId < 10) { // bank is verkoper
-            koper = new Klant(koperId);
-            verkoper = new Bank(verkoperId);
-        } else { // transactie tussen 2 klanten
-            koper = new Klant(koperId);
-            verkoper = new Klant(verkoperId);
-        }
-        transactie.setKoper(koper);
-        transactie.setVerkoper(verkoper);
-        transactie.setAsset(new Asset(transactieDTO.getAssetId()));
-        return transactie;
     }
 
     @GetMapping("/transactie/{transactieId}")
