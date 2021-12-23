@@ -5,6 +5,7 @@ package nl.hva.c25.team1.digivault.repository;
 
 import nl.hva.c25.team1.digivault.model.Bank;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -31,7 +32,14 @@ public class JdbcBankDAO implements BankDAO {
 
     @Override
     public Bank vindBankOpId(int bankId) {
-        return null; // TODO: implement
+        String sql = "SELECT * FROM transactiepartij  WHERE tpId = ? ;";
+        Bank bank;
+        try {
+            bank = jdbcTemplate.queryForObject(sql, new BankRowMapper(), bankId);
+        } catch (EmptyResultDataAccessException noResult) {
+            bank = null;
+        }
+        return bank;
     }
 
 }
