@@ -20,14 +20,9 @@ import java.util.List;
 public class RekeningService {
 
     private JdbcRekeningDAO jdbcRekeningDAO;
-    private TransactieService transactieService;
-    private Object Bank;
-    private Bank bank;
 
-    public RekeningService(JdbcRekeningDAO rekeningDAO, TransactieService transactieService, Bank bank) {
+    public RekeningService(JdbcRekeningDAO rekeningDAO) {
         this.jdbcRekeningDAO = rekeningDAO;
-        this.transactieService = transactieService;
-        this.bank = bank;
     }
 
     public void bewaarRekening(Rekening rekening) {
@@ -44,7 +39,6 @@ public class RekeningService {
     }
 
     public Rekening vindRekeningOpIBAN(String IBAN) {
-
         return jdbcRekeningDAO.vindRekeningOpIBAN(IBAN);
     }
 
@@ -53,31 +47,7 @@ public class RekeningService {
     }
 
     public List<Rekening> geefAlleRekeningen() {
-
         return jdbcRekeningDAO.geefAlleRekeningen();
     }
 
-    public void verlaagRekening(Transactie transactie) {
-        double voorSaldoKoper = transactie.getKoper().getRekening().getSaldo();
-        double transactieWaarde = transactieService.berekenWaardeTransactie(transactie);
-        if (transactie.getVerkoper().getClass() == Bank) {
-            transactie.getKoper().getRekening().setSaldo(voorSaldoKoper - transactieWaarde -
-                    transactieWaarde * bank.getTransactiePercentage());
-        } else {
-            transactie.getKoper().getRekening().setSaldo(voorSaldoKoper - transactieWaarde);
-        }
-        jdbcRekeningDAO.updateRekening(transactie.getKoper().getRekening());
-    }
-
-    public void verhoogRekening(Transactie transactie) {
-        double voorSaldoVerkoper = transactie.getVerkoper().getRekening().getSaldo();
-        double transactieWaarde = transactieService.berekenWaardeTransactie(transactie);
-        if (transactie.getKoper().getClass() == Bank) {
-            transactie.getVerkoper().getRekening().setSaldo(voorSaldoVerkoper + transactieWaarde -
-                    transactieWaarde * bank.getTransactiePercentage());
-        } else {
-            transactie.getVerkoper().getRekening().setSaldo(voorSaldoVerkoper + transactieWaarde);
-        }
-        jdbcRekeningDAO.updateRekening(transactie.getVerkoper().getRekening());
-    }
 }
