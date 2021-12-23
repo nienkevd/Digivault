@@ -3,26 +3,29 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>DIGIVAULT - capital growth by default</title>
+        <title>DIGIVAULT - sterrenstatus by default</title>
         <link rel="icon" type="image/x-icon" href="images/favicon.png">
         <link rel="stylesheet" href="css/style.css">
-        <script src="js/script.js"></script>
+        <script src="js/script.js" defer></script>
+        <script defer src="js/adresAanvulling.js"></script>
+        <!-- Ajax-plugin ivm aanvullen adresgegevens -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
 
     <body>
 
     <!-- Opzet logo -->
-    <img src="images/logo.png" height="125" width="250">
+    <img src="images/logo.png" alt="logo van Digivault" height="125" width="250">
 
     <!-- Opzet loginPagina -->
     <div class="standaard loginPagina">
-        <img class="avatar" src="images/diva_avatar.jpg">
+        <img class="avatar" alt="Diva-avatar" src="images/diva_avatar.jpg">
         <h1>Inloggen</h1>
         <form>
             <p>E-mailadres</p>
-            <input type ="text" name="" placeholder="e-mailadres">
+            <input type ="text" name="" placeholder="e-mailadres" required="" title="vul je e-mailadres in">
             <p>Wachtwoord</p>
-            <input type="text" name="" placeholder="wachtwoord">
+            <input type="text" name="" placeholder="wachtwoord" required="" title="vul je wachtwoord in">
             <input type="button" name="" value="Login">
             <a type="text" href="#">Wachtwoord vergeten?</a> <br>
             <a id="registratie" onclick="on()" href="#">Registreren? </a>
@@ -30,47 +33,59 @@
     </div>
 
     <!-- Opzet registratieLaag -->
-    <div id="overlay" class="standaard registratieLaag" onclick="off()">
-        <img class="avatar" src="images/registratie_avatar.jpg">
+    <div id="overlay" class="standaard registratieLaag">
+        <img class="avatar" alt="registratie-avatar" src="images/registratie_avatar.jpg">
         <h1>Registreren</h1>
-        <h4>Vul hieronder je gegevens in en loop binnen als DIVA</h4>
+        <pre>Vul hieronder je gegevens in en loop binnen als DIVA!  Velden met een sterretje zijn verplicht.</pre>
         <form class="grid_4">
             <p class="registratie">Inloggegevens:</p>
-            <input type="email" placeholder="e-mailadres">
-            <input type="text" placeholder="wachtwoord" required="">
+            <input type="email" placeholder="e-mailadres *" id="emailadres" required=""
+                   title="vul een geldig e-mailadres in">
+            <input type="text" placeholder="wachtwoord *" id="wachtwoord" required="" minlength="10" maxlength="65"
+                   title="gebruik 10 tot 65 tekens">
             <br>
             <p class="registratie">Persoonsgegevens: </p>
-            <input type="text" placeholder="voornaam">
-            <input type="text" placeholder="tussenvoegsel">
-            <input type="text" placeholder="achternaam">
+            <input type="text" placeholder="voornaam *" id="voornaam" required="" title="vul je voornaam in">
+            <input type="text" placeholder="voorvoegsel" id="voorvoegsel" required="" title="je eventuele voorvoegsel">
+            <input type="text" placeholder="achternaam *" id="achternaam" required="" title="vul je achternaam in">
             <br>
-            <input type="text" placeholder="geboortedatum">
-            <input type="text" placeholder="bsn">
+            <input type="text" placeholder="geboortedatum *" id="geboortedatum" required=""
+                   title="selecteer je geboortedatum">
+            <input type="text" placeholder="bsn *" id="bsn" required="" minlength="8" maxlength="9"
+                   title="vul je geldige BSN in">
             <br>
             <p class="registratie">Adresgegevens:</p>
-            <input type="text" placeholder="postcode">
-            <input type="text" placeholder="huisnummer">
-            <input type="text" placeholder="toevoeging">
+            <input type="text" placeholder="postcode *" id="postcode" required="" title="vul je postcode in">
+            <input type="text" placeholder="huisnummer *" id="huisnummer" required="" title="vul je huisnummer in">
+            <input type="text" placeholder="toevoeging" id="toevoeging" required=""
+                   title="je eventuele huisnummertoevoeging">
             <p class="registratie"></p>
-            <input type="text" placeholder="straat">
-            <input type="text" placeholder="woonplaats">
+            <input type="text" placeholder="straatnaam" id="straatnaam" required=""
+                   title="straat wordt automatisch ingevuld">
+            <input type="text" placeholder="woonplaats" id="woonplaats" required=""
+                   title="woonplaats wordt automatisch ingevuld">
         </form>
         <form class="grid_3">
             <br>
-            <input type="button" name="" value="Registreren">
+            <input type="button" onclick="off()" name="" value="Registreren">
             <br>
         </form>
     </div>
 
+    <!-- Tijdelijk javascript om de registratieLaag te tonen -->
     <script>
         function on() {
             document.getElementById("overlay").style.display = "block";
         }
-
         function off() {
             document.getElementById("overlay").style.display = "none";
         }
     </script>
+
+    <!-- Nog te verwijderen foutmelding -->
+    <div id="error" hidden>
+        <p>postcode, huisnummer combinatie is onbekend</p>
+    </div>
 
     </body>
 </html>
