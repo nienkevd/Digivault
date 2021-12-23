@@ -48,6 +48,8 @@ public class TransactieService {
             TransactiePartij verkoper = transactie.getVerkoper();
             Rekening koperRekening = koper.getRekening();
             Rekening verkoperRekening = verkoper.getRekening();
+            List<PortefeuilleItem> koperPortefeuille = koper.getPortefeuille();
+            List<PortefeuilleItem> verkoperPortefeuille = verkoper.getPortefeuille();
             double saldoKoperRekening = koperRekening.getSaldo();
             double saldoVerkoperRekening = verkoperRekening.getSaldo();
             boolean verkoperIsBank = (verkoper instanceof Bank);
@@ -57,14 +59,24 @@ public class TransactieService {
                         (1 + ((Bank) verkoper).getTransactiePercentage() / 100);
             } else {
                 mutatieBedrag = berekenWaardeTransactie(transactie) *
-                        (1 - ((Bank) verkoper).getTransactiePercentage() / 100);
+                        (1 - ((Bank) koper).getTransactiePercentage() / 100);
             }
+            // verhoog rekening verkoper
             verkoperRekening.setSaldo(saldoVerkoperRekening + mutatieBedrag);
+            // verlaag rekening koper
             koperRekening.setSaldo(saldoKoperRekening - mutatieBedrag);
-            // TODO: voer hier de mutaties uit in het transactieobject 2x
-
             // verhoog portefeuilleitem koper
+            for (PortefeuilleItem portefeuilleItem : transactie.getKoper().getPortefeuille()) {
+                if (portefeuilleItem.getAsset().getAfkorting().equals(transactie.getAsset().getAfkorting())) {
+                    portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid() + transactie.getAantalCryptos());
+                }
+            }
             // verlaag portefeuilleitem verkoper
+            for (PortefeuilleItem portefeuilleItem : transactie.getVerkoper().getPortefeuille()) {
+                if (portefeuilleItem.getAsset().getAfkorting().equals(transactie.getAsset().getAfkorting())) {
+                    portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid() - transactie.getAantalCryptos());
+                }
+            }
             return rootRepository.voerTransactieUit(transactie);
         }
         return null;
