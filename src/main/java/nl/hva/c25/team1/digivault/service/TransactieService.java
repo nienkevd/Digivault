@@ -19,8 +19,6 @@ import java.util.List;
 public class TransactieService {
 
     private TransactieDAO transactieDAO;
-    private RekeningService rekeningService;
-    private PortefeuilleItemService portefeuilleItemService;
     private KlantService klantService;
     private AssetService assetService;
     private BankService bankService;
@@ -28,12 +26,9 @@ public class TransactieService {
 
 
     @Autowired
-    public TransactieService(TransactieDAO transactieDAO, RekeningService rekeningService,
-                             PortefeuilleItemService portefeuilleItemService, KlantService klantService,
-                             AssetService assetService, BankService bankService, RootRepository rootRepository) {
+    public TransactieService(TransactieDAO transactieDAO, KlantService klantService, AssetService assetService,
+                             BankService bankService, RootRepository rootRepository) {
         this.transactieDAO = transactieDAO;
-        this.rekeningService = rekeningService;
-        this.portefeuilleItemService = portefeuilleItemService;
         this.klantService = klantService;
         this.assetService = assetService;
         this.bankService = bankService;
@@ -42,7 +37,7 @@ public class TransactieService {
 
     public Transactie voerTransactieUit(TransactieDTO transactieDTO) {
         Transactie transactie = zetDtoOm(transactieDTO);
-        // TODO: in object transactie: rekeningen / portefeuilles(items?) / dagkoers
+        // TODO: in object transactie: rekeningen / dagkoers
         if (checkKoper(transactie) && checkVerkoper(transactie) && checkAccounts(transactie)) {
             TransactiePartij koper = transactie.getKoper();
             TransactiePartij verkoper = transactie.getVerkoper();
@@ -65,13 +60,13 @@ public class TransactieService {
             verkoperRekening.setSaldo(saldoVerkoperRekening + mutatieBedrag);
             // verlaag rekening koper
             koperRekening.setSaldo(saldoKoperRekening - mutatieBedrag);
-            // verhoog portefeuilleitem koper
+            // verhoog portefeuilleItem koper
             for (PortefeuilleItem portefeuilleItem : transactie.getKoper().getPortefeuille()) {
                 if (portefeuilleItem.getAsset().getAfkorting().equals(transactie.getAsset().getAfkorting())) {
                     portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid() + transactie.getAantalCryptos());
                 }
             }
-            // verlaag portefeuilleitem verkoper
+            // verlaag portefeuilleItem verkoper
             for (PortefeuilleItem portefeuilleItem : transactie.getVerkoper().getPortefeuille()) {
                 if (portefeuilleItem.getAsset().getAfkorting().equals(transactie.getAsset().getAfkorting())) {
                     portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid() - transactie.getAantalCryptos());

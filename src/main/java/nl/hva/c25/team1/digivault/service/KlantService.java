@@ -5,6 +5,8 @@ import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.repository.JdbcAccountDAO;
 import nl.hva.c25.team1.digivault.repository.JdbcKlantDAO;
 import nl.hva.c25.team1.digivault.repository.KlantDAO;
+import nl.hva.c25.team1.digivault.repository.RootRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,13 +25,12 @@ import java.util.Objects;
 public class KlantService {
 
     private KlantDAO klantDAO;
+    private RootRepository rootRepository;
 
-    /**
-     *
-     * @param klantDAO interface klantDAO
-     */
-    public KlantService(JdbcKlantDAO klantDAO) {
+    @Autowired
+    public KlantService(JdbcKlantDAO klantDAO, RootRepository rootRepository) {
         this.klantDAO = klantDAO;
+        this.rootRepository = rootRepository;
     }
 
     /**
@@ -42,11 +43,11 @@ public class KlantService {
 
     /**
      *
-     * @param klandId van klant die gevonden moet worden
+     * @param klantId van klant die gevonden moet worden
      * @return Klant
      */
-    public Klant vindKlantOpKlantID(int klandId) {
-        return klantDAO.vindKlantOpKlantId(klandId);
+    public Klant vindKlantOpKlantID(int klantId) {
+        return rootRepository.vindKlantOpId(klantId);
     }
 
     /**
