@@ -4,6 +4,7 @@ import nl.hva.c25.team1.digivault.model.Account;
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.repository.JdbcAccountDAO;
 import nl.hva.c25.team1.digivault.repository.JdbcKlantDAO;
+import nl.hva.c25.team1.digivault.repository.KlantDAO;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,7 +22,7 @@ import java.util.Objects;
 @Service
 public class KlantService {
 
-    private JdbcKlantDAO klantDAO;
+    private KlantDAO klantDAO;
 
     /**
      *
