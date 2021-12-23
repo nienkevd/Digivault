@@ -5,14 +5,13 @@ package nl.hva.c25.team1.digivault.transfer;
 
 public class TransactieDTO {
 
-    private int koperId, verkoperId;
-    private String cryptoAfkorting;
+    private int koperId, verkoperId, assetId;
     private double aantal;
 
-    public TransactieDTO(int koperId, int verkoperId, String cryptoAfkorting, double aantal) {
+    public TransactieDTO(int koperId, int verkoperId, int assetId, double aantal) {
         this.koperId = koperId;
         this.verkoperId = verkoperId;
-        this.cryptoAfkorting = cryptoAfkorting;
+        this.assetId = assetId;
         this.aantal = aantal;
     }
 
@@ -32,12 +31,12 @@ public class TransactieDTO {
         this.verkoperId = verkoperId;
     }
 
-    public String getCryptoAfkorting() {
-        return cryptoAfkorting;
+    public int getAssetId() {
+        return assetId;
     }
 
-    public void setCryptoAfkorting(String cryptoAfkorting) {
-        this.cryptoAfkorting = cryptoAfkorting;
+    public void setAssetId(int assetId) {
+        this.assetId = assetId;
     }
 
     public double getAantal() {
