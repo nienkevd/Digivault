@@ -17,13 +17,16 @@
 
             document.getElementById('btnLogin').addEventListener("click", (e) => {
                 e.preventDefault();
-                const login = "localhost:8080/login";
+                const login = 'http://localhost:8080/login';
 
                 fetch(login, {
                     method: "POST",
+                    // mode: 'cors',
                     headers: {
-                        // Accept: "application/json, text/plain, */*",
-                        // "Content-Type": "application/json",
+                        'Content-Type': 'application/json',
+                        'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJodHRwczovL3d3dy5kaWdpdmF1bHQuY29tIiwiaXNzIjoiRGlnaXZhdWx0IiwiZXhwIjoxNjQwMjY5NTM2LCJpYXQiOjE2NDAyNjk0MTYsImVtYWlsYWRyZXMiOiJtYXJpZWtlQGdtYWlsLmNvbSJ9.zSmj4jMYM3elm8D2DhneHx7Ai4dqZ_k-nWY9aZdlNEc',
+                        // 'Content-Type': 'application/x-www-form-urlencoded'
+                        'Access-Control-Allow-Origin': 'http://localhost:8080'
                     },
                     body: JSON.stringify(
                 {accountId: 0, 'emailadres': email, 'wachtwoord': wachtwoord},
@@ -36,9 +39,6 @@
                         if (data.error) {
                             alert("Error Password or Username"); /*displays error message*/
                         } else {
-                            // window.open(
-                            //     "target.html"
-                            // ); /*opens the target page while Id & password matches*/
                             body.style.backgroundColor = 'white';
                         }
                     })
@@ -73,7 +73,7 @@
         <p> Username </p>
         <input id = "emailadres_veld" type = "text" name="" placeholder="Enter Username">
         <p>Password</p>
-        <input id = "wachtwoord_veld"type="password" name="" placeholder="Enter Password">
+        <input id = "wachtwoord_veld" type="password" name="" placeholder="Enter Password">
         <input id = "btnLogin" type="submit" name="" value="Login">
         <a href="#"> Wachtwoord vergeten?</a> <br>
         <a href="#"> Registreren? </a>

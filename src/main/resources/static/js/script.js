@@ -21,7 +21,7 @@ window.onload = function () {
     function login() {
         // submitButton.addEventListener("click", (e) => {
         //     e.preventDefault();
-            const login = 'localhost:8080/login';
+            const login = 'http://localhost:8080/login';
 
             fetch(login, {
                 method: 'POST',
