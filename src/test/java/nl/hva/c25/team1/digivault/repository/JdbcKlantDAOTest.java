@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles("test")
 class JdbcKlantDAOTest {
-//
+
     private JdbcKlantDAO daoUnderTest;
 
     @Autowired
@@ -41,8 +41,8 @@ class JdbcKlantDAOTest {
 
 //    @Test
 //    void vindKlantOpKlantId() {
-//        Klant actual = daoUnderTest.vindKlantOpKlantId(1);
-//        Klant expected = new Klant(1,"123456789", LocalDate.parse("1980-05-27"));
+//        Klant actual = daoUnderTest.vindKlantOpKlantId(2);
+//        Klant expected = new Klant(2,"080772547", LocalDate.parse("1983-07-05"));
 //        assertThat(expected).isEqualTo(actual);
 //
 //    }
