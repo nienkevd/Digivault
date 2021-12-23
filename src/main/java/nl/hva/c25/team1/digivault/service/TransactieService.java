@@ -29,7 +29,7 @@ public class TransactieService {
         this.bank = bank;
     }
 
-    public Transactie voerTransactieUit(Transactie transactie) {
+    public Transactie voerTransactieUit(Transactie transactie) { // null als niet gelukt!
         return null;
     }
 

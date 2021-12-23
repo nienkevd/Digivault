@@ -18,8 +18,16 @@ public class Bank extends TransactiePartij {
         this.transactiePercentage = transactiePercentage;
     }
 
+    public Bank(int bankId, String bankNaam, double transactiePercentage) {
+        this(bankId, null, null, bankNaam, transactiePercentage);
+    }
+
     public Bank(String bankNaam, double transactiePercentage) {
-        this(0, null, null, bankNaam, transactiePercentage);
+        this(0, bankNaam, transactiePercentage);
+    }
+
+    public Bank(int bankId) {
+        this(bankId, "", 0);
     }
 
     public String getBankNaam() {
