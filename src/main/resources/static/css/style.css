@@ -36,19 +36,18 @@ h1 {    /* Header 1 */
 
 pre {    /* Preformatted text, neemt spaties mee */
     font-family: diva, sans-serif;
-    margin-top: -25px;
-    margin-bottom: 40px;
     text-align: center;
     font-weight: normal;
+    margin-top: -25px;
+    margin-bottom: 40px;
 }
 
-p {    /* Paragraph */
+p {    /* Paragraph (=alinea's) */
     margin: 0;
     padding: 0;
-    font-weight: normal;
 }
 
-p[class="registratie"] {    /* Aanpassingen voor paragrafen in de registratieLaag */
+p[class="registratie"] {    /* Aanpassingen voor alinea's in de registratieLaag */
     margin-top: 10px;
     margin-right: 12px;
 }
@@ -60,7 +59,6 @@ a {    /* Standaardstijl voor linkjes */
     color: ivory;
     text-decoration: none;
     line-height: 20px;
-
 }
 
 a:hover {    /* Standaardstijl voor gehoverde linkjes */
@@ -156,6 +154,10 @@ input[type="date"] {    /* Aanpassingen invoervelden van type button bij hover *
 
 /* ----- CSS SCRIPTS ----- */
 
-::-webkit-calendar-picker-indicator{    /* Aanpassing kalendericoon registratielaag */
+::-webkit-calendar-picker-indicator{    /* Aanpassing kalendericoon registratieLaag */
+    filter: invert(1);
+}
+
+::-ms-reveal {    /* Aanpassing wachtwoord-iconen registratieLaag */
     filter: invert(1);
 }
