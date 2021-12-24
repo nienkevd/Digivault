@@ -78,20 +78,20 @@ input {    /* Standaardstijl invoerveld */
     color: ivory;
 }
 
-input[type="button"] {    /* Aanpassingen invoervelden van type button */
+input[type="submit"] {    /* Aanpassingen invoervelden van type button */
     margin-top: 30px;
     text-align: center;
     border: none;
     outline: none;
     height: 40px;
-    background: #faefdc;
+    background: #f7eebc;
     color: black;
     font-size: 18px;
     font-weight: bold;
     border-radius: 20px;
 }
 
-input[type="button"]:hover {    /* Aanpassingen invoervelden van type button bij hover */
+input[type="submit"]:hover {    /* Aanpassingen invoervelden van type button bij hover */
     cursor: pointer;
     background: gold;
     color: black;
@@ -109,7 +109,7 @@ input[type="date"] {    /* Aanpassingen invoervelden van type button bij hover *
     margin-top: 1%;
     border-radius: 40px;
     padding: 70px 30px;
-    border:1px solid #160e01;
+    border: none;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -130,13 +130,13 @@ input[type="date"] {    /* Aanpassingen invoervelden van type button bij hover *
     height: 655px;
 }
 
-.grid_3 {   /* Standaardstijl voor gebruik grid van 3 cellen */
+.grid_3 {   /* Standaardstijl voor gebruik grid van 3 grid-cellen */
     display: grid;
     grid-gap: 15px;
     grid-template-columns: auto auto auto;
 }
 
-.grid_4 {   /* Standaardstijl voor gebruik grid van 4 cellen */
+.grid_4 {   /* Standaardstijl voor gebruik grid van 4 grid-cellen */
     display: grid;
     grid-gap: 10px;
     grid-column-gap: 30px;

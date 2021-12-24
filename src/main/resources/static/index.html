@@ -6,16 +6,17 @@
         <title>DIGIVAULT - sterrenstatus by default</title>
         <link rel="icon" type="image/x-icon" href="images/favicon.png">
         <link rel="stylesheet" href="css/style.css">
-        <script src="js/script.js" defer></script>
-        <script defer src="js/adresAanvulling.js"></script>
-        <!-- Ajax-plugin ivm aanvullen adresgegevens -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- algemeen javascript -->
+        <script defer src="js/script.js"></script>
+        <!-- javascript ivm aanvullen adresgegevens -->
+        <script src="js/adresAanvulling.js"></script>
+        <script src="js/jquery.js"></script>
     </head>
 
     <body>
 
     <!-- Opzet logo -->
-    <img src="images/logo.png" alt="logo van Digivault" height="125" width="250">
+    <img src="images/logo.png" href="index.html" alt="logo van Digivault" height="125" width="250">
 
     <!-- Opzet loginPagina -->
     <div class="standaard loginPagina">
@@ -26,7 +27,7 @@
             <input type ="text" name="" placeholder="e-mailadres" required="" title="vul je e-mailadres in">
             <p>Wachtwoord</p>
             <input type="password" name="" placeholder="wachtwoord" required="" title="vul je wachtwoord in">
-            <input type="button" name="" value="Login">
+            <input type="submit" name="" value="Login">
             <a type="text" href="#">Wachtwoord vergeten?</a> <br>
             <a id="registratie" onclick="on()" href="#">Registreren? </a>
         </form>
@@ -40,11 +41,11 @@
         <form class="grid_4">
             <p class="registratie">Inloggegevens:</p>
             <input type="email" placeholder="e-mailadres *" id="emailadres" required=""
-                   title="je geldig e-mailadres">
-            <input type="password" placeholder="wachtwoord *" id="wachtwoord" required="" minlength="10" maxlength="65"
-                   title="gebruik 10 tot 65 tekens">
+                   title="je e-mailadres">
+            <input type="password" placeholder="wachtwoord *" id="wachtwoord" name="password" required="" minlength="10" maxlength="65"
+                   title="je wachtwoord (10 tot 65 tekens)">
             <input type="password" placeholder="wachtwoord (check) *" id="wachtwoord_check" required="" minlength="10"
-                   maxlength="65" title="gebruik 10 tot 65 tekens">
+                   maxlength="65" title="herhaal je wachtwoord">
             <p class="registratie">Persoonsgegevens: </p>
             <input type="text" placeholder="voornaam *" id="voornaam" required="" title="je voornaam">
             <input type="text" placeholder="voorvoegsel" id="voorvoegsel" required="" title="je eventuele voorvoegsel">
@@ -52,7 +53,7 @@
             <br>
             <input type="date" placeholder="geboortedatum *" id="geboortedatum" required="" title="je geboortedatum">
             <input type="text" placeholder="bsn *" id="bsn" required="" minlength="8" maxlength="9"
-                   title="je geldige BSN (8 of 9 cijfers)">
+                   title="je BSN (8 of 9 cijfers)">
             <br>
             <p class="registratie">Adresgegevens:</p>
             <input type="text" placeholder="postcode *" id="postcode" required="" title="je postcode">
@@ -65,7 +66,7 @@
         </form>
         <form class="grid_3">
             <br>
-            <input type="button" onclick="off()" name="" value="Registreren">
+            <input type="submit" onclick="off()" name="" value="Registreren">
             <br>
         </form>
     </div>
