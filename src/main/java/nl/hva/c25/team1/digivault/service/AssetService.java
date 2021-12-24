@@ -49,7 +49,7 @@ public class AssetService {
      * @return de bijbehorende Asset
      */
     public Asset vindAssetOpId(int assetId) {
-        return jdbcAssetDAO.vindAssetOpId(assetId);
+        return rootRepository.vindAssetOpId(assetId);
     }
 
     /**

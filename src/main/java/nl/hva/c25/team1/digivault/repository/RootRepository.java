@@ -78,6 +78,12 @@ public class RootRepository {
         return bank;
     }
 
+    public Asset vindAssetOpId(int assetId) {
+        Asset asset = assetDAO.vindAssetOpId(assetId);
+        if (asset == null) return null;
+        return asset;
+    }
+
     public PortefeuilleItem vindItemOpId(int itemId) {
         PortefeuilleItem portefeuilleItem = portefeuilleItemDAO.vindItemMetId(itemId);
         Klant klant = klantDAO.vindKlantOpKlantId(portefeuilleItemDAO.vindKlantIdVanPortefeuilleitem(portefeuilleItem));

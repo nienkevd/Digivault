@@ -60,13 +60,13 @@ public class TransactieService {
             // verlaag rekening koper
             koperRekening.setSaldo(saldoKoperRekening - mutatieBedrag);
             // verhoog portefeuilleItem koper
-            for (PortefeuilleItem portefeuilleItem : transactie.getKoper().getPortefeuille()) {
+            for (PortefeuilleItem portefeuilleItem : koperPortefeuille) {
                 if (portefeuilleItem.getAsset().getAfkorting().equals(transactie.getAsset().getAfkorting())) {
                     portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid() + transactie.getAantalCryptos());
                 }
             }
             // verlaag portefeuilleItem verkoper
-            for (PortefeuilleItem portefeuilleItem : transactie.getVerkoper().getPortefeuille()) {
+            for (PortefeuilleItem portefeuilleItem : verkoperPortefeuille) {
                 if (portefeuilleItem.getAsset().getAfkorting().equals(transactie.getAsset().getAfkorting())) {
                     portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid() - transactie.getAantalCryptos());
                 }
