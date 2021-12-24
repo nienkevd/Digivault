@@ -5,6 +5,7 @@ package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.model.Bank;
 import nl.hva.c25.team1.digivault.repository.BankDAO;
+import nl.hva.c25.team1.digivault.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,16 @@ import org.springframework.stereotype.Service;
 public class BankService {
 
     private BankDAO bankDAO;
+    private RootRepository rootRepository;
 
     @Autowired
-    public BankService(BankDAO bankDAO) {
+    public BankService(BankDAO bankDAO, RootRepository rootRepository) {
         this.bankDAO = bankDAO;
+        this.rootRepository = rootRepository;
     }
 
     public Bank vindBankOpId(int bankId) {
-        return bankDAO.vindBankOpId(bankId);
+        return rootRepository.vindBankOpId(bankId);
     }
 
 }

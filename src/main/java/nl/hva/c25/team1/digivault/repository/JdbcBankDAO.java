@@ -42,4 +42,10 @@ public class JdbcBankDAO implements BankDAO {
         return bank;
     }
 
+    @Override
+    public int vindRekeningIdVanBank(Bank bank) {
+        String sql = "SELECT rekeningID FROM transactiepartij WHERE tpID = ?;";
+        return jdbcTemplate.queryForObject(sql, Integer.class, bank.getTransactiepartijId());
+    }
+
 }

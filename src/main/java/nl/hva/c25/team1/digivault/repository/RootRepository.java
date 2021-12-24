@@ -1,7 +1,6 @@
 package nl.hva.c25.team1.digivault.repository;
 
 import nl.hva.c25.team1.digivault.model.*;
-import nl.hva.c25.team1.digivault.service.RekeningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,27 +9,25 @@ import java.util.List;
 
 @Repository
 public class RootRepository {
-    KlantDAO klantDAO;
-    RekeningDAO rekeningDAO;
-    AccountDAO accountDAO;
-    PortefeuilleItemDAO portefeuilleItemDAO;
-    NaamDAO naamDAO;
-    AdresDAO adresDAO;
-    AssetDAO assetDAO;
-    TransactieDAO transactieDAO;
+
+    private KlantDAO klantDAO;
+    private RekeningDAO rekeningDAO;
+    private PortefeuilleItemDAO portefeuilleItemDAO;
+    private AdresDAO adresDAO;
+    private AssetDAO assetDAO;
+    private TransactieDAO transactieDAO;
+    private BankDAO bankDAO;
 
     @Autowired
-    public RootRepository(KlantDAO klantDAO, RekeningDAO rekeningDAO, AccountDAO accountDAO,
-                          PortefeuilleItemDAO portefeuilleItemDAO, NaamDAO naamDAO, AdresDAO adresDAO,
-                          AssetDAO assetDAO, TransactieDAO transactieDAO) {
+    public RootRepository(KlantDAO klantDAO, RekeningDAO rekeningDAO, PortefeuilleItemDAO portefeuilleItemDAO,
+                          AdresDAO adresDAO, AssetDAO assetDAO, TransactieDAO transactieDAO, BankDAO bankDAO) {
         this.klantDAO = klantDAO;
         this.rekeningDAO = rekeningDAO;
-        this.accountDAO = accountDAO;
         this.portefeuilleItemDAO = portefeuilleItemDAO;
-        this.naamDAO = naamDAO;
         this.adresDAO = adresDAO;
         this.assetDAO = assetDAO;
         this.transactieDAO = transactieDAO;
+        this.bankDAO = bankDAO;
     }
 
     // checked: Anthon 8-12-2021
@@ -51,7 +48,7 @@ public class RootRepository {
         klant.getAccount().setKlant(klant);//java
 
         for(PortefeuilleItem item : klant.getPortefeuille()){
-            item.getKlant().setTransactiepartijId(klant.getTransactiepartijId());
+            item.getTransactiePartij().setTransactiepartijId(klant.getTransactiepartijId());
             portefeuilleItemDAO.bewaarPortefeuilleItemMetKey(item);
         }
         return klant;
@@ -59,22 +56,32 @@ public class RootRepository {
 
     public Klant vindKlantOpId(int klantId) {
         Klant klant = klantDAO.vindKlantOpKlantId(klantId);
-        if (klant == null) {
-            return klant;
-        }
-        List<PortefeuilleItem> itemsKlant = portefeuilleItemDAO.genereerPortefeuilleVanKlantMetId(klantId);
+        if (klant == null) return null;
+        List<PortefeuilleItem> itemsKlant = portefeuilleItemDAO.genereerPortefeuilleVanTransactiepartijMetId(klantId);
         for (PortefeuilleItem portefeuilleItem: itemsKlant) {
-            portefeuilleItem.setKlant(klant);
+            portefeuilleItem.setTransactiePartij(klant);
         }
         klant.setPortefeuille(itemsKlant);
         klant.setRekening(rekeningDAO.vindRekeningOpId(klantDAO.vindRekeningIdVanKlant(klant)));
         return klant;
     }
 
+    public Bank vindBankOpId(int bankId) {
+        Bank bank = bankDAO.vindBankOpId(bankId);
+        if (bank == null) return null;
+        List<PortefeuilleItem> itemsBank = portefeuilleItemDAO.genereerPortefeuilleVanTransactiepartijMetId(bankId);
+        for (PortefeuilleItem portefeuilleItem: itemsBank) {
+            portefeuilleItem.setTransactiePartij(bank);
+        }
+        bank.setPortefeuille(itemsBank);
+        bank.setRekening(rekeningDAO.vindRekeningOpId(bankDAO.vindRekeningIdVanBank(bank)));
+        return bank;
+    }
+
     public PortefeuilleItem vindItemOpId(int itemId) {
         PortefeuilleItem portefeuilleItem = portefeuilleItemDAO.vindItemMetId(itemId);
         Klant klant = klantDAO.vindKlantOpKlantId(portefeuilleItemDAO.vindKlantIdVanPortefeuilleitem(portefeuilleItem));
-        portefeuilleItem.setKlant(klant);
+        portefeuilleItem.setTransactiePartij(klant);
         return portefeuilleItem;
     }
 
@@ -103,7 +110,7 @@ public class RootRepository {
      */
     public List<AssetMetAantal> genereerPortefeuilleOverzicht(int klantId) {
         List<AssetMetAantal> portefeuilleOverzicht = new ArrayList<>();
-        for (PortefeuilleItem portefeuilleItem : portefeuilleItemDAO.genereerPortefeuilleVanKlantMetId(klantId)) {
+        for (PortefeuilleItem portefeuilleItem : portefeuilleItemDAO.genereerPortefeuilleVanTransactiepartijMetId(klantId)) {
             portefeuilleItem.setAsset(assetDAO.vindAssetOpId(portefeuilleItemDAO.vindAssetIdVanPortefeuilleItem
                     (portefeuilleItem)));
             AssetMetAantal overzicht = new AssetMetAantal();

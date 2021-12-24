@@ -35,7 +35,7 @@ public class PortefeuilleItemService {
      * @return De gehele portefeuille.
      */
     public List<PortefeuilleItem> genereerPortefeuilleVanKlantMetId(int klantId) {
-        return portefeuilleItemDAO.genereerPortefeuilleVanKlantMetId(klantId);
+        return portefeuilleItemDAO.genereerPortefeuilleVanTransactiepartijMetId(klantId);
     }
 
     /**

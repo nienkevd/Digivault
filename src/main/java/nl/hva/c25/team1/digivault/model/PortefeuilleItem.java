@@ -11,13 +11,13 @@ public class PortefeuilleItem {
 
     private int portefeuilleItemId;
     private double hoeveelheid;
-    private Klant klant;
+    private TransactiePartij transactiePartij;
     private Asset asset;
 
-    private PortefeuilleItem(int portefeuilleItemId, double hoeveelheid, Klant klant, Asset asset) {
+    private PortefeuilleItem(int portefeuilleItemId, double hoeveelheid, TransactiePartij transactiePartij, Asset asset) {
         this.portefeuilleItemId = portefeuilleItemId;
         this.hoeveelheid = hoeveelheid;
-        this.klant = klant;
+        this.transactiePartij = transactiePartij;
         this.asset = asset;
     }
 
@@ -45,12 +45,12 @@ public class PortefeuilleItem {
         this.hoeveelheid = hoeveelheid;
     }
 
-    public Klant getKlant() {
-        return klant;
+    public TransactiePartij getTransactiePartij() {
+        return transactiePartij;
     }
 
-    public void setKlant(Klant klant) {
-        this.klant = klant;
+    public void setTransactiePartij(TransactiePartij transactiePartij) {
+        this.transactiePartij = transactiePartij;
     }
 
     public Asset getAsset() {

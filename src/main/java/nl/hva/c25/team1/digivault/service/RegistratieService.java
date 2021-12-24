@@ -93,7 +93,7 @@ public class RegistratieService {
         for (Asset asset: assetService.geefAlleAssets()) {
             PortefeuilleItem portefeuilleItem = new PortefeuilleItem(0);
             portefeuilleItem.setAsset(asset);
-            portefeuilleItem.setKlant(new Klant(0));
+            portefeuilleItem.setTransactiePartij(new Klant(0));
             legePortefeuille.add(portefeuilleItem);
         }
         return legePortefeuille;

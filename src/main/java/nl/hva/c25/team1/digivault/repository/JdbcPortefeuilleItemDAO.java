@@ -55,7 +55,7 @@ public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setDouble(1, portefeuilleItem.getHoeveelheid());
-                ps.setInt(2, portefeuilleItem.getKlant().getTransactiepartijId());
+                ps.setInt(2, portefeuilleItem.getTransactiePartij().getTransactiepartijId());
                 ps.setInt(3, portefeuilleItem.getAsset().getAssetId());
                 return ps;
             }
@@ -67,13 +67,13 @@ public class JdbcPortefeuilleItemDAO implements PortefeuilleItemDAO {
     /**
      * Deze methode geeft de lijst terug van alle items uit de portefeuille van de klant met opgegeven Id.
      *
-     * @param klantId Het Id van de betreffende klant.
+     * @param tpId Het Id van de betreffende transactiepartij.
      * @return De complete portefeuille als lijst van items.
      */
     @Override
-    public List<PortefeuilleItem> genereerPortefeuilleVanKlantMetId(int klantId) {
+    public List<PortefeuilleItem> genereerPortefeuilleVanTransactiepartijMetId(int tpId) {
         String sql = "SELECT * FROM portefeuille_item WHERE tpId = ?";
-        return jdbcTemplate.query(sql, new PortefeuilleItemRowMapper(), klantId);
+        return jdbcTemplate.query(sql, new PortefeuilleItemRowMapper(), tpId);
     }
 
     /**

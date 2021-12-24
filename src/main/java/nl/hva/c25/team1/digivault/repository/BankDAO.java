@@ -6,4 +6,6 @@ public interface BankDAO {
 
     Bank vindBankOpId(int bankId);
 
+    int vindRekeningIdVanBank(Bank bank);
+
 }
