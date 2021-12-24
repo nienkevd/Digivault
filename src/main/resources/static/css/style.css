@@ -25,7 +25,7 @@ body {    /* Opzet body */
 }
 
 h1 {    /* Header 1 */
-    font-family: bling, serif;
+    font-family: bling, sans-serif;
     font-size: 38px;
     font-weight: bold;
     color: gold;
@@ -53,6 +53,7 @@ p[class="registratie"] {    /* Aanpassingen voor alinea's in de registratieLaag 
 }
 
 a {    /* Standaardstijl voor linkjes */
+    transition-duration: 0.4s;
     font-family: diva, sans-serif;
     font-weight: initial;
     font-size: 13px;
@@ -62,6 +63,7 @@ a {    /* Standaardstijl voor linkjes */
 }
 
 a:hover {    /* Standaardstijl voor gehoverde linkjes */
+
     color: gold;
 }
 
@@ -79,25 +81,27 @@ input {    /* Standaardstijl invoerveld */
 }
 
 input[type="submit"] {    /* Aanpassingen invoervelden van type button */
-    margin-top: 30px;
+    transition-duration: 0.6s;
+    margin-top: 25px;
     text-align: center;
     border: none;
     outline: none;
     height: 40px;
-    background: #f7eebc;
+    background: #f9e36e;
     color: black;
     font-size: 18px;
     font-weight: bold;
     border-radius: 20px;
 }
 
-input[type="submit"]:hover {    /* Aanpassingen invoervelden van type button bij hover */
+input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij hover */
+    box-shadow: 0 3px 9px 0 rgba(0,0,0,0.24), 0 7px 20px 0 rgba(0,0,0,0.19);
     cursor: pointer;
-    background: gold;
+    background: #f27ddd;
     color: black;
 }
 
-input[type="date"] {    /* Aanpassingen invoervelden van type button bij hover */
+input[type="date"] {    /* Aanpassingen invoervelden van type submit bij hover */
     color: ivory;
     font-weight: normal;
 }
@@ -120,7 +124,7 @@ input[type="date"] {    /* Aanpassingen invoervelden van type button bij hover *
 
 .loginPagina {    /* Aanpassingen voor loginPagina */
     width: 350px;
-    height: 490px;
+    height: 480px;
 }
 
 .registratieLaag {    /* Aanpassingen voor registratieLaag */
