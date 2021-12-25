@@ -1,5 +1,6 @@
 package nl.hva.c25.team1.digivault.repository;
 
+import nl.hva.c25.team1.digivault.model.Asset;
 import nl.hva.c25.team1.digivault.model.EuroKoers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -11,6 +12,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -93,6 +95,19 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
         String sql = "UPDATE eurokoers SET eurokoersId = ?, datum = ?, koers = ?, assetId = ?";
         jdbcTemplate.update(sql, euroKoers.getEuroKoersId(), euroKoers.getDatum(), euroKoers.getKoers(),
                 euroKoers.getAssetId());
+    }
+
+    @Override
+    public EuroKoers vindMeestRecenteKoersAsset(Asset asset) {
+        String sql = "SELECT * FROM eurokoers WHERE assetId=? AND datum=?";
+        return jdbcTemplate.queryForObject(sql, new EuroKoersRowMapper(), asset.getAssetId(),
+                vindDatumMeestRecenteKoersAsset(asset).toString());
+    }
+
+    private LocalDate vindDatumMeestRecenteKoersAsset(Asset asset) {
+        String sql = "SELECT max(datum) FROM eurokoers WHERE assetId=?";
+        String datumString = jdbcTemplate.queryForObject(sql, String.class, asset.getAssetId());
+        return LocalDate.parse(datumString);
     }
 
     private class EuroKoersRowMapper implements RowMapper<EuroKoers> {

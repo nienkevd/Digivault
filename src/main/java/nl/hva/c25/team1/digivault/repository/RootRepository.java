@@ -17,10 +17,12 @@ public class RootRepository {
     private AssetDAO assetDAO;
     private TransactieDAO transactieDAO;
     private BankDAO bankDAO;
+    private EuroKoersDAO euroKoersDAO;
 
     @Autowired
     public RootRepository(KlantDAO klantDAO, RekeningDAO rekeningDAO, PortefeuilleItemDAO portefeuilleItemDAO,
-                          AdresDAO adresDAO, AssetDAO assetDAO, TransactieDAO transactieDAO, BankDAO bankDAO) {
+                          AdresDAO adresDAO, AssetDAO assetDAO, TransactieDAO transactieDAO, BankDAO bankDAO,
+                          EuroKoersDAO euroKoersDAO) {
         this.klantDAO = klantDAO;
         this.rekeningDAO = rekeningDAO;
         this.portefeuilleItemDAO = portefeuilleItemDAO;
@@ -28,6 +30,7 @@ public class RootRepository {
         this.assetDAO = assetDAO;
         this.transactieDAO = transactieDAO;
         this.bankDAO = bankDAO;
+        this.euroKoersDAO = euroKoersDAO;
     }
 
     // checked: Anthon 8-12-2021
@@ -81,6 +84,7 @@ public class RootRepository {
     public Asset vindAssetOpId(int assetId) {
         Asset asset = assetDAO.vindAssetOpId(assetId);
         if (asset == null) return null;
+        asset.setDagKoers(euroKoersDAO.vindMeestRecenteKoersAsset(asset).getKoers());
         return asset;
     }
 
