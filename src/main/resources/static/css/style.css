@@ -10,13 +10,14 @@
     src: url("../fonts/bling.otf");
 }
 
-/* ----- CSS UNITS ----- */
+/* ----- HTML ELEMENTEN ----- */
 
 body {    /* Opzet body */
     background: url("../images/background.jpg");
     background-size: cover;
-    font-family: diva, serif;
+    font-family: diva, Verdana, serif;
     font-size: 17px;
+    overflow: hidden;
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -25,7 +26,7 @@ body {    /* Opzet body */
 }
 
 h1 {    /* Header 1 */
-    font-family: bling, sans-serif;
+    font-family: bling, Verdana, sans-serif;
     font-size: 38px;
     font-weight: bold;
     color: gold;
@@ -35,7 +36,7 @@ h1 {    /* Header 1 */
 }
 
 pre {    /* Preformatted text, neemt spaties mee */
-    font-family: diva, sans-serif;
+    font-family: diva, Verdana, sans-serif;
     text-align: center;
     font-weight: normal;
     margin-top: -25px;
@@ -54,25 +55,24 @@ p[class="registratie"] {    /* Aanpassingen voor alinea's in de registratieLaag 
 
 a {    /* Standaardstijl voor linkjes */
     transition-duration: 0.4s;
-    font-family: diva, sans-serif;
-    font-weight: initial;
+    font-family: diva, Verdana, sans-serif;
     font-size: 13px;
+    font-weight: initial;
     color: ivory;
     text-decoration: none;
     line-height: 20px;
 }
 
 a:hover {    /* Standaardstijl voor gehoverde linkjes */
-
     color: gold;
 }
 
 input {    /* Standaardstijl invoerveld */
     width: 100%;
     margin-bottom: 20px;
-    border: none;
-    font-family: diva, serif;
     font-size: 17px;
+    font-family: diva, serif;
+    border: none;
     border-bottom: 1px solid;
     background: transparent;
     outline: none;
@@ -80,14 +80,14 @@ input {    /* Standaardstijl invoerveld */
     color: ivory;
 }
 
-input[type="submit"] {    /* Aanpassingen invoervelden van type button */
-    transition-duration: 0.6s;
+input[type="submit"] {    /* Aanpassingen invoervelden van type submit */
+    transition-duration: 1.2s;
+    background: #f9e36e;
     margin-top: 25px;
     text-align: center;
     border: none;
     outline: none;
     height: 40px;
-    background: #f9e36e;
     color: black;
     font-size: 18px;
     font-weight: bold;
@@ -96,17 +96,11 @@ input[type="submit"] {    /* Aanpassingen invoervelden van type button */
 
 input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij hover */
     box-shadow: 0 3px 9px 0 rgba(0,0,0,0.24), 0 7px 20px 0 rgba(0,0,0,0.19);
-    cursor: pointer;
     background: #f27ddd;
-    color: black;
+    cursor: pointer;
 }
 
-input[type="date"] {    /* Aanpassingen invoervelden van type submit bij hover */
-    color: ivory;
-    font-weight: normal;
-}
-
-/* ----- CSS CLASSES ----- */
+/* ----- CLASSES ----- */
 
 .standaard {    /* Standaardstijl van pagina of laag */
     background: #131313;
@@ -153,7 +147,37 @@ input[type="date"] {    /* Aanpassingen invoervelden van type submit bij hover *
     border-radius: 50%;
     position: absolute;
     top: -55px;
-    left: calc(50% - 55px)
+    left: calc(50% - 55px);
+}
+
+/* ----- ID'S ----- */
+
+#logo {    /* Stijl Digivault-icoon */
+    width: 250px;
+    height: 125px;
+}
+
+#logo:hover {    /* Stijl Digivault-icoon bij hover */
+    transform: scale(1.03);
+}
+
+#label {    /* Stijl registratieLabel */
+    position: absolute;
+    opacity: 0.9;
+    top: 20px;
+    right: 0px;
+    width: 225px;
+    height: 150px;
+    margin-right: -5px;
+    margin-top: -5px;
+    transition: .3s ease-in-out;
+}
+
+#label:hover {    /* Stijl registratieLabel bij hover */
+    opacity: 1;
+    transform: scale(1.08);
+    margin-right: 0px;
+    margin-top: 0px;
 }
 
 /* ----- CSS SCRIPTS ----- */

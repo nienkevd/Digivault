@@ -10,13 +10,14 @@
         <script defer src="js/script.js"></script>
         <!-- javascript ivm aanvullen adresgegevens -->
         <script defer src="js/adresAanvulling.js"></script>
-        <script src="js/jquery.js"></script>
+        <script src="js/jQueryMin.js"></script>
     </head>
 
     <body>
 
     <!-- Opzet logo -->
-    <img src="images/logo.png" href="index.html" alt="logo van Digivault" height="125" width="250">
+    <img id="logo" src="images/logo.png" alt="logo van Digivault">
+    <a onclick="on()"><img id="label" src="images/label.png" alt="label met registratieaanbieding"></a>
 
     <!-- Opzet loginPagina -->
     <div class="standaard loginPagina">
@@ -24,7 +25,7 @@
         <h1>Inloggen</h1>
         <form>
             <p>E-mailadres</p>
-            <input type ="text" name="" placeholder="e-mailadres" required="" title="vul je e-mailadres in">
+            <input type ="email" name="" placeholder="e-mailadres" required="" title="vul je e-mailadres in">
             <p>Wachtwoord</p>
             <input type="password" name="" placeholder="wachtwoord" required="" title="vul je wachtwoord in">
             <input type="submit" name="" value="Login">
