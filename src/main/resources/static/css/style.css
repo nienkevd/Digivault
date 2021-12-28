@@ -17,7 +17,7 @@ body {    /* Opzet body */
     background-size: cover;
     font-family: diva, Verdana, serif;
     font-size: 17px;
-    overflow: hidden;
+    /*overflow: hidden;*/
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -100,7 +100,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     cursor: pointer;
 }
 
-/* ----- CLASSES ----- */
+/* ----- KLASSEN ----- */
 
 .standaard {    /* Standaardstijl van pagina of laag */
     background: #131313;
@@ -162,8 +162,8 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 }
 
 #label {    /* Stijl registratieLabel */
-    position: absolute;
-    opacity: 0.9;
+    position: fixed;
+    cursor: pointer;
     top: 20px;
     right: 0px;
     width: 225px;
@@ -180,7 +180,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     margin-top: 0px;
 }
 
-/* ----- CSS SCRIPTS ----- */
+/* ----- SCRIPTS ----- */
 
 ::-webkit-calendar-picker-indicator{    /* Aanpassing kalendericoon registratieLaag */
     filter: invert(1);
