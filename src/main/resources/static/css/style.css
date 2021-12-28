@@ -49,8 +49,8 @@ p {    /* Paragraph (=alinea's) */
 }
 
 p[class="registratie"] {    /* Aanpassingen voor alinea's in de registratieLaag */
-    margin-top: 10px;
-    margin-right: 12px;
+    margin-top: 9px;
+    margin-right: -13px;
 }
 
 a {    /* Standaardstijl voor linkjes */
@@ -70,7 +70,8 @@ a:hover {    /* Standaardstijl voor gehoverde linkjes */
 input {    /* Standaardstijl invoerveld */
     width: 100%;
     margin-bottom: 20px;
-    font-size: 17px;
+    margin-left: -5px;
+    font-size: 16px;
     font-family: diva, serif;
     border: none;
     border-bottom: 1px solid;
@@ -124,13 +125,13 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 .registratieLaag {    /* Aanpassingen voor registratieLaag */
     display: none;
     padding: 70px 50px;
-    width: 940px;
+    width: 950px;
     height: 655px;
 }
 
 .grid_3 {   /* Standaardstijl voor gebruik grid van 3 grid-cellen */
     display: grid;
-    grid-gap: 15px;
+    grid-gap: 12px;
     grid-template-columns: auto auto auto;
 }
 
@@ -178,6 +179,18 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     transform: scale(1.08);
     margin-right: 0px;
     margin-top: 0px;
+}
+
+#registratieFormulier {    /* Creëert ruimte voor wachtwoordInfo */
+    padding-right: 45px;
+}
+
+#wachtwoordInfo {    /* Stijl info over overeenkomen wachtwoorden */
+    position: absolute;
+    font-size: 12pt;
+    line-height: 0.95em;
+    left: calc(50% + 385px);
+    top: 188px;
 }
 
 /* ----- SCRIPTS ----- */
