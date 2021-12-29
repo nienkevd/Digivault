@@ -33,20 +33,21 @@ public class TransactieController {
     }
 
     @PostMapping("/transactie/{klantId}")
-    public ResponseEntity<Transactie> transactieHandler(@PathVariable int klantId,
+    public String transactieHandler(@PathVariable int klantId,
                                                         @RequestHeader("Authorization") String token,
                                                         @RequestBody TransactieDTO transactieDTO) {
-        boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
-                getEmailadres());
-        if (tokenService.valideerJWT(token) && authorized) {
+//        boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
+//                getEmailadres());
+        if (true) { //tokenService.valideerJWT(token) && authorized
             Transactie transactie = transactieService.voerTransactieUit(transactieDTO);
+            System.out.println(transactie);
             if (transactie == null) {
-                return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).build();
+                return "failed";
             } else {
-                return ResponseEntity.ok(transactie);
+                return "geslaagd";
             }
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return "not authorized";
         }
     }
 

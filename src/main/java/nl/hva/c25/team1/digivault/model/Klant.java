@@ -101,8 +101,7 @@ public class Klant extends TransactiePartij {
 
     @Override
     public String toString() {
-        return "Klant{" +
-                ", bsn='" + bsn + '\'' +
+        return "Klant{ bsn='" + bsn + '\'' +
                 ", geboortedatum=" + geboortedatum +
                 ", naam=" + naam +
                 ", adres=" + adres +

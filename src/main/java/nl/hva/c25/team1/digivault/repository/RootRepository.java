@@ -60,7 +60,7 @@ public class RootRepository {
     public Klant vindKlantOpId(int klantId) {
         Klant klant = klantDAO.vindKlantOpKlantId(klantId);
         if (klant == null) return null;
-        List<PortefeuilleItem> itemsKlant = portefeuilleItemDAO.genereerPortefeuilleVanTransactiepartijMetId(klantId);
+        List<PortefeuilleItem> itemsKlant = genereerPortefeuilleVanTransactiepartijMetId(klantId);
         for (PortefeuilleItem portefeuilleItem: itemsKlant) {
             portefeuilleItem.setTransactiePartij(klant);
         }
@@ -69,10 +69,21 @@ public class RootRepository {
         return klant;
     }
 
+    public List<PortefeuilleItem> genereerPortefeuilleVanTransactiepartijMetId(int tpId) {
+        List<PortefeuilleItem> itemsTransactiepartij = portefeuilleItemDAO
+                .genereerPortefeuilleVanTransactiepartijMetId(tpId);
+        for (PortefeuilleItem item: itemsTransactiepartij) {
+            Asset asset = assetDAO.vindAssetOpId(portefeuilleItemDAO.vindAssetIdVanPortefeuilleItem(item));
+            asset.setDagKoers(euroKoersDAO.vindMeestRecenteKoersAsset(asset).getKoers());
+            item.setAsset(asset);
+        }
+        return itemsTransactiepartij;
+    }
+
     public Bank vindBankOpId(int bankId) {
         Bank bank = bankDAO.vindBankOpId(bankId);
         if (bank == null) return null;
-        List<PortefeuilleItem> itemsBank = portefeuilleItemDAO.genereerPortefeuilleVanTransactiepartijMetId(bankId);
+        List<PortefeuilleItem> itemsBank = genereerPortefeuilleVanTransactiepartijMetId(bankId);
         for (PortefeuilleItem portefeuilleItem: itemsBank) {
             portefeuilleItem.setTransactiePartij(bank);
         }

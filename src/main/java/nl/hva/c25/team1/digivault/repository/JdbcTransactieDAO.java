@@ -34,7 +34,7 @@ public class JdbcTransactieDAO implements TransactieDAO {
 
     @Override
     public Transactie bewaarTransacktieMetSK(Transactie transactie) {
-        String sql = "INSERT INTO transactie(koper, verkoper, transactieDatum, transactieTijd, asset, aantalCryptos) " +
+        String sql = "INSERT INTO transactie(koperId, verkoperId, assetId, aantal, datum, tijdstip) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
@@ -43,10 +43,10 @@ public class JdbcTransactieDAO implements TransactieDAO {
                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, transactie.getKoper().getTransactiepartijId());
                 ps.setInt(2,transactie.getVerkoper().getTransactiepartijId());
-                ps.setDate(3, Date.valueOf(transactie.getTransactieDatum()));
-                ps.setTime(4,Time.valueOf(transactie.getTransactieTijd()));
-                ps.setInt(5,transactie.getAsset().getAssetId());
-                ps.setDouble(6,transactie.getAantalCryptos());
+                ps.setInt(3,transactie.getAsset().getAssetId());
+                ps.setDouble(4,transactie.getAantalCryptos());
+                ps.setDate(5, Date.valueOf(transactie.getTransactieDatum()));
+                ps.setTime(6,Time.valueOf(transactie.getTransactieTijd()));
                 return ps;
             }
         } , keyHolder);

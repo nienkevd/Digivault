@@ -23,16 +23,11 @@ public class AssetService {
     private JdbcAssetDAO jdbcAssetDAO;
     private RootRepository rootRepository;
 
-    /**
-     * Constructor van de AssetService
-     * @param jdbcAssetDAO JDBC Asset-DAO
-//     * @param rootRepository RootRepository
-     */
     @Autowired
-    public AssetService(JdbcAssetDAO jdbcAssetDAO /*, RootRepository rootRepository*/) {
+    public AssetService(JdbcAssetDAO jdbcAssetDAO, RootRepository rootRepository) {
         super();
         this.jdbcAssetDAO = jdbcAssetDAO;
-//        this.rootRepository = rootRepository;
+        this.rootRepository = rootRepository;
     }
 
     /**
