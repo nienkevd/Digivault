@@ -1,10 +1,7 @@
 package nl.hva.c25.team1.digivault.service;
 
-
 import nl.hva.c25.team1.digivault.model.*;
-import nl.hva.c25.team1.digivault.repository.JdbcTransactieDAO;
-import nl.hva.c25.team1.digivault.repository.RootRepository;
-import nl.hva.c25.team1.digivault.repository.TransactieDAO;
+import nl.hva.c25.team1.digivault.repository.*;
 import nl.hva.c25.team1.digivault.transfer.TransactieDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,9 +32,8 @@ public class TransactieService {
         this.rootRepository = rootRepository;
     }
 
-    public Transactie voerTransactieUit(TransactieDTO transactieDTO) {
-        Transactie transactie = zetDtoOm(transactieDTO);
-//        System.out.println(transactie);
+    public Transactie voerTransactieUit(Transactie transactie) {
+        vulTransactie(transactie);
         boolean transactieOk = checkKoper(transactie) && checkVerkoper(transactie) && checkAccounts(transactie);
 //        System.out.println(transactieOk);
         if (true) { // TODO: kijken naar voorwaarden!!!
@@ -79,24 +75,22 @@ public class TransactieService {
         return null;
     }
 
-    private Transactie zetDtoOm(TransactieDTO transactieDTO) {
-        Transactie transactie = new Transactie(transactieDTO);
-        int koperId = transactieDTO.getKoperId();
-        int verkoperId = transactieDTO.getVerkoperId();
-        TransactiePartij koper, verkoper;
-        if (koperId < 10) { // bank is koper
-            koper = bankService.vindBankOpId(koperId);
-            verkoper = klantService.vindKlantOpKlantID(verkoperId);
-        } else if (verkoperId < 10) { // bank is verkoper
-            koper = klantService.vindKlantOpKlantID(koperId);
-            verkoper = bankService.vindBankOpId(verkoperId);
-        } else { // transactie tussen 2 klanten
-            koper = klantService.vindKlantOpKlantID(koperId);
-            verkoper = klantService.vindKlantOpKlantID(verkoperId);
+    private Transactie vulTransactie(Transactie transactie) {
+        TransactiePartij koper = transactie.getKoper();
+        TransactiePartij verkoper = transactie.getVerkoper();
+        int koperId = koper.getTransactiepartijId();
+        int verkoperId = verkoper.getTransactiepartijId();
+        if (koper instanceof Bank) {
+            transactie.setKoper(bankService.vindBankOpId(koperId));
+        } else {
+            transactie.setKoper(klantService.vindKlantOpKlantID(koperId));
         }
-        transactie.setKoper(koper);
-        transactie.setVerkoper(verkoper);
-        transactie.setAsset(assetService.vindAssetOpId(transactieDTO.getAssetId()));
+        if (verkoper instanceof Bank) {
+            transactie.setVerkoper(bankService.vindBankOpId(verkoperId));
+        } else {
+            transactie.setVerkoper(klantService.vindKlantOpKlantID(verkoperId));
+        }
+        transactie.setAsset(assetService.vindAssetOpId(transactie.getAsset().getAssetId()));
         return transactie;
     }
 

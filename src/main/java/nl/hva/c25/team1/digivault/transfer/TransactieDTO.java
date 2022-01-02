@@ -3,6 +3,9 @@
 
 package nl.hva.c25.team1.digivault.transfer;
 
+/**
+ * @author Anthon
+ */
 public class TransactieDTO {
 
     private int koperId, verkoperId, assetId;
@@ -19,16 +22,8 @@ public class TransactieDTO {
         return koperId;
     }
 
-    public void setKoperId(int koperId) {
-        this.koperId = koperId;
-    }
-
     public int getVerkoperId() {
         return verkoperId;
-    }
-
-    public void setVerkoperId(int verkoperId) {
-        this.verkoperId = verkoperId;
     }
 
     public int getAssetId() {
@@ -43,8 +38,9 @@ public class TransactieDTO {
         return aantal;
     }
 
-    public void setAantal(double aantal) {
-        this.aantal = aantal;
+    @Override
+    public String toString() {
+        return String.format("%5d%5d%5d%15.5f", koperId, verkoperId, assetId, aantal);
     }
 
 }

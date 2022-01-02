@@ -2,22 +2,19 @@ package nl.hva.c25.team1.digivault.controller;
 
 import nl.hva.c25.team1.digivault.authentication.TokenService;
 import nl.hva.c25.team1.digivault.model.*;
-import nl.hva.c25.team1.digivault.service.AccountService;
-import nl.hva.c25.team1.digivault.service.AssetService;
-import nl.hva.c25.team1.digivault.service.TransactieService;
+import nl.hva.c25.team1.digivault.service.*;
 import nl.hva.c25.team1.digivault.transfer.TransactieDTO;
+import nl.hva.c25.team1.digivault.transfer.TransactieMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Author Nienke
- * Version 14-12-2021
+ * @author Nienke
+ * @author Anthon
  */
-
 @RestController
+@RequestMapping("/transactie/")
 public class TransactieController {
 
     private TransactieService transactieService;
@@ -32,37 +29,37 @@ public class TransactieController {
         this.accountService = accountService;
     }
 
-    @PostMapping("/transactie/{klantId}")
-    public String transactieHandler(@PathVariable int klantId,
-                                                        @RequestHeader("Authorization") String token,
-                                                        @RequestBody TransactieDTO transactieDTO) {
-//        boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
-//                getEmailadres());
-        if (true) { //tokenService.valideerJWT(token) && authorized
-            Transactie transactie = transactieService.voerTransactieUit(transactieDTO);
-            System.out.println(transactie);
+    @PostMapping("{klantId}")
+    public String transactieHandler(
+            @PathVariable int klantId, @RequestHeader("Authorization") String token,
+            @RequestBody TransactieDTO transactieDTO) {
+        boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
+                getEmailadres());
+        if (tokenService.valideerJWT(token) && authorized) {
+            Transactie transactie = transactieService.voerTransactieUit(TransactieMapper.toObject(transactieDTO));
             if (transactie == null) {
-                return "failed";
+                return "transaction failed";
             } else {
-                return "geslaagd";
+                return "transaction executed";
             }
         } else {
             return "not authorized";
         }
     }
 
-    @GetMapping("/transactie/{transactieId}")
-    public Transactie vindTransactieopTransactieIdHandler(@PathVariable int transactieId) {
-        System.out.println("controller");
-        return transactieService.vindTransactieOpTransactieId(transactieId);
-    }
+//    @GetMapping("/transactie/{transactieId}")
+//    public Transactie vindTransactieopTransactieIdHandler(@PathVariable int transactieId) {
+//        System.out.println("controller");
+//        return transactieService.vindTransactieOpTransactieId(transactieId);
+//    }
+//
+//    @GetMapping("/transactie/{verkoper}")
+//    public List<Transactie> vindAlleTransactiesOpVerkoperHandler(@PathVariable TransactiePartij verkoper){
+//        return transactieService.vindAlleTransactiesOpVerkoper(verkoper);
+//    }
+//    @GetMapping("/transactie/{koper}")
+//    public List<Transactie> vindAlleTransactiesOpKoperHandler(@PathVariable TransactiePartij koper){
+//        return transactieService.vindAlleTransactiesOpKoper(koper);
+//    }
 
-    @GetMapping("/transactie/{verkoper}")
-    public List<Transactie> vindAlleTransactiesOpVerkoperHandler(@PathVariable TransactiePartij verkoper){
-        return transactieService.vindAlleTransactiesOpVerkoper(verkoper);
-    }
-    @GetMapping("/transactie/{koper}")
-    public List<Transactie> vindAlleTransactiesOpKoperHandler(@PathVariable TransactiePartij koper){
-        return transactieService.vindAlleTransactiesOpKoper(koper);
-    }
 }

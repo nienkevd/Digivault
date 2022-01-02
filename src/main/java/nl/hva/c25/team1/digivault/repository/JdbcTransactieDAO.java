@@ -10,15 +10,14 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
 /**
- * Author Nienke
- * Version 14-12-2021
+ * @author Nienke
+ * @author Anthon
  */
 
 @Repository
@@ -91,10 +90,12 @@ public class JdbcTransactieDAO implements TransactieDAO {
         private class TransactieRowMapper implements RowMapper<Transactie> {
             @Override
             public Transactie mapRow(ResultSet resultSet, int RowNumber) throws SQLException {
-                return new Transactie(resultSet.getInt("transactieId"),
+                Transactie transactie = new Transactie(
                         LocalDate.parse(resultSet.getString("transactieDatum")),
                         LocalTime.parse(resultSet.getString("transactieTijd")),
-                                resultSet.getDouble("aantalCryptos"));
+                        resultSet.getDouble("aantalCryptos"));
+                transactie.setTransactieId(resultSet.getInt("transactieId"));
+                return transactie;
             }
         }
     }
