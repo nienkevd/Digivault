@@ -2,20 +2,23 @@ package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.model.*;
 import nl.hva.c25.team1.digivault.repository.*;
-import nl.hva.c25.team1.digivault.transfer.TransactieDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
+ * Deze klasse verzorgt de verwerking van een transactie op de service-laag. Het Java-object wordt vanuit de DB gevuld
+ * met de juiste gegevens. Vervolgens worden, na een check of de transactie daadwerkelijk uitgevoerd kan worden, de
+ * mutaties in de Java-objecten uitgevoerd. Vervolgens wordt de gevulde en gemuteerde transactie doorgezet naar de
+ * repository-laag om de persistentie te regelen.
+ *
  * @author Nienke
  * @author Anthon
  */
 @Service
 public class TransactieService {
 
-    private TransactieDAO transactieDAO;
     private KlantService klantService;
     private AssetService assetService;
     private BankService bankService;
@@ -23,85 +26,90 @@ public class TransactieService {
 
 
     @Autowired
-    public TransactieService(TransactieDAO transactieDAO, KlantService klantService, AssetService assetService,
-                             BankService bankService, RootRepository rootRepository) {
-        this.transactieDAO = transactieDAO;
+    public TransactieService(KlantService klantService, AssetService assetService, BankService bankService,
+                             RootRepository rootRepository) {
         this.klantService = klantService;
         this.assetService = assetService;
         this.bankService = bankService;
         this.rootRepository = rootRepository;
     }
 
+    /**
+     * Deze methode:
+     * 1. vult het transactie-object met gegevens uit de DB.
+     * 2. checkt of het een geldige transactie betreft.
+     * 3. voert de mutaties in het transactie-object uit.
+     * 4. geeft dit gemuteerde object door aan de repo-laag voor de persistentie.
+     *
+     * @param transactie De transactie met alleen de gegevens uit de DTO (en actuele datum/tijd).
+     * @return Geeft de transactie terug indien succesvol, anders null.
+     */
     public Transactie voerTransactieUit(Transactie transactie) {
         vulTransactie(transactie);
-        boolean transactieOk = checkKoper(transactie) && checkVerkoper(transactie) && checkAccounts(transactie);
-//        System.out.println(transactieOk);
-        if (true) { // TODO: kijken naar voorwaarden!!!
-            TransactiePartij koper = transactie.getKoper();
-            TransactiePartij verkoper = transactie.getVerkoper();
-            Rekening koperRekening = koper.getRekening();
-            Rekening verkoperRekening = verkoper.getRekening();
-            List<PortefeuilleItem> koperPortefeuille = koper.getPortefeuille();
-            List<PortefeuilleItem> verkoperPortefeuille = verkoper.getPortefeuille();
-            double saldoKoperRekening = koperRekening.getSaldo();
-            double saldoVerkoperRekening = verkoperRekening.getSaldo();
-            boolean verkoperIsBank = (verkoper instanceof Bank);
-            double mutatieBedrag;
-            if (verkoperIsBank) {
-                mutatieBedrag = berekenWaardeTransactie(transactie) *
-                        (1 + ((Bank) verkoper).getTransactiePercentage() / 100);
-            } else {
-                mutatieBedrag = berekenWaardeTransactie(transactie) *
-                        (1 - ((Bank) koper).getTransactiePercentage() / 100);
-            }
-            // verhoog rekening verkoper
-            verkoperRekening.setSaldo(saldoVerkoperRekening + mutatieBedrag);
-            // verlaag rekening koper
-            koperRekening.setSaldo(saldoKoperRekening - mutatieBedrag);
-            // verhoog portefeuilleItem koper
-            for (PortefeuilleItem portefeuilleItem : koperPortefeuille) {
-                if (portefeuilleItem.getAsset().getAfkorting().equals(transactie.getAsset().getAfkorting())) {
-                    portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid() + transactie.getAantalCryptos());
-                }
-            }
-            // verlaag portefeuilleItem verkoper
-            for (PortefeuilleItem portefeuilleItem : verkoperPortefeuille) {
-                if (portefeuilleItem.getAsset().getAfkorting().equals(transactie.getAsset().getAfkorting())) {
-                    portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid() - transactie.getAantalCryptos());
-                }
-            }
+        if (checkKoper(transactie) && checkVerkoper(transactie) && checkAccounts(transactie)) {
+            doeTransactieMutaties(transactie);
             return rootRepository.voerTransactieUit(transactie);
         }
         return null;
     }
 
-    private Transactie vulTransactie(Transactie transactie) {
+    // Deze methode voert de mutaties van deze transactie uit in de Java-objecten.
+    void doeTransactieMutaties(Transactie transactie) {
         TransactiePartij koper = transactie.getKoper();
         TransactiePartij verkoper = transactie.getVerkoper();
-        int koperId = koper.getTransactiepartijId();
-        int verkoperId = verkoper.getTransactiepartijId();
-        if (koper instanceof Bank) {
-            transactie.setKoper(bankService.vindBankOpId(koperId));
-        } else {
-            transactie.setKoper(klantService.vindKlantOpKlantID(koperId));
-        }
+        double mutatieBedrag;
         if (verkoper instanceof Bank) {
-            transactie.setVerkoper(bankService.vindBankOpId(verkoperId));
+            mutatieBedrag = berekenWaardeTransactie(transactie) *
+                    (1 + ((Bank) verkoper).getTransactiePercentage() / 100);
         } else {
-            transactie.setVerkoper(klantService.vindKlantOpKlantID(verkoperId));
+            mutatieBedrag = berekenWaardeTransactie(transactie) * (1 - ((Bank) koper).getTransactiePercentage() / 100);
         }
-        transactie.setAsset(assetService.vindAssetOpId(transactie.getAsset().getAssetId()));
-        return transactie;
+        muteerRekening(verkoper.getRekening(), mutatieBedrag);
+        muteerRekening(koper.getRekening(), 0 - mutatieBedrag);
+        muteerPortefeuille(koper.getPortefeuille(), transactie.getAsset(), transactie.getAantalCryptos());
+        muteerPortefeuille(verkoper.getPortefeuille(), transactie.getAsset(), 0 - transactie.getAantalCryptos());
     }
 
+    // Deze methode muteert de portefeuilles
+    void muteerPortefeuille(List<PortefeuilleItem> portefeuille, Asset asset, double aantal) {
+        for (PortefeuilleItem portefeuilleItem : portefeuille) {
+            if (portefeuilleItem.getAsset().getAfkorting().equals(asset.getAfkorting())) {
+                portefeuilleItem.setHoeveelheid(portefeuilleItem.getHoeveelheid() + aantal);
+            }
+        }
+    }
+
+    // Deze methode muteert de rekeningen
+    void muteerRekening(Rekening rekening, double bedrag) {
+        rekening.setSaldo(rekening.getSaldo() + bedrag);
+    }
+
+    // Deze methode vult de kale transactie met de gegevens uit de DB.
+    void vulTransactie(Transactie transactie) {
+        if (transactie.getKoper() instanceof Bank) {
+            transactie.setKoper(bankService.vindBankOpId(transactie.getKoper().getTransactiepartijId()));
+        } else {
+            transactie.setKoper(klantService.vindKlantOpKlantID(transactie.getKoper().getTransactiepartijId()));
+        }
+        if (transactie.getVerkoper() instanceof Bank) {
+            transactie.setVerkoper(bankService.vindBankOpId(transactie.getVerkoper().getTransactiepartijId()));
+        } else {
+            transactie.setVerkoper(klantService.vindKlantOpKlantID(transactie.getVerkoper().getTransactiepartijId()));
+        }
+        transactie.setAsset(assetService.vindAssetOpId(transactie.getAsset().getAssetId()));
+    }
+
+    // Deze methode berekent de bruto transactie-waarde. D.w.z. zonder transactiekosten.
     public double berekenWaardeTransactie(Transactie transactie) {
         return transactie.getAsset().getDagKoers() * transactie.getAantalCryptos();
     }
 
+    // Deze methode checkt of de koper voldoende geld heeft.
     public boolean checkKoper(Transactie transactie) {
         return transactie.getKoper().getRekening().getSaldo() >= berekenWaardeTransactie(transactie);
     }
 
+    // Deze methode checkt of de verkoper voldoende crypto heeft.
     public boolean checkVerkoper(Transactie transactie) {
         for (PortefeuilleItem portefeuilleItem : transactie.getVerkoper().getPortefeuille()) {
             if (portefeuilleItem.getAsset() == transactie.getAsset()) {
@@ -111,22 +119,9 @@ public class TransactieService {
         return false;
     }
 
-    public boolean checkAccounts (Transactie transactie) {
+    // Deze methode checkt of de koper en verkoper accounts van elkaar verschillen.
+    boolean checkAccounts (Transactie transactie) {
         return !(transactie.getVerkoper().getRekening() == transactie.getKoper().getRekening());
     }
 
-    public Transactie vindTransactieOpTransactieId(int transactieId) {
-        return transactieDAO.vindTransactieOpTransactieId(transactieId);
-    }
-
-    public List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper) {
-        return transactieDAO.vindAlleTransactiesOpVerkoper(verkoper);
-    }
-
-    public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper) {
-        return transactieDAO.vindAlleTransactiesOpVerkoper(koper);
-    }
-
 }
-
-
