@@ -3,6 +3,8 @@ package nl.hva.c25.team1.digivault.transfer;
 import nl.hva.c25.team1.digivault.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
 import java.time.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,6 +13,7 @@ class TransactieMapperTest {
     TransactieMapper transactieMapper;
     Transactie transactie1, transactie2, transactie3;
     int id1, id2, id3;
+    TransactiePartij expected1, expected2;
 
     @BeforeEach
     void setUp() {
@@ -21,18 +24,22 @@ class TransactieMapperTest {
         id1 = 1; // id van een bank
         id2 = 10; // id van een klant
         id3 = 0; // ongeldige id
+        expected1 = Mockito.mock(Bank.class);
+        Mockito.when(expected1.getTransactiepartijId()).thenReturn(id1);
+        expected2 = Mockito.mock(Klant.class);
+        Mockito.when(expected2.getTransactiepartijId()).thenReturn(id2);
     }
 
     @Test
     void setKoper() {
         transactieMapper.setKoper(transactie1, id1);
         TransactiePartij koper = transactie1.getKoper();
-        assertEquals(1, koper.getTransactiepartijId()); // check de id
+        assertEquals(expected1.getTransactiepartijId(), koper.getTransactiepartijId()); // check de id
         assertTrue(koper instanceof Bank); // check of van type Bank
 
         transactieMapper.setKoper(transactie2, id2);
         koper = transactie2.getKoper();
-        assertEquals(10, koper.getTransactiepartijId()); // check de id
+        assertEquals(expected2.getTransactiepartijId(), koper.getTransactiepartijId()); // check de id
         assertTrue(koper instanceof Klant); // check of van type Klant
 
         try {
@@ -49,12 +56,12 @@ class TransactieMapperTest {
     void setVerkoper() {
         transactieMapper.setVerkoper(transactie1, id1);
         TransactiePartij verkoper = transactie1.getVerkoper();
-        assertEquals(1, verkoper.getTransactiepartijId()); // check de id
+        assertEquals(expected1.getTransactiepartijId(), verkoper.getTransactiepartijId()); // check de id
         assertTrue(verkoper instanceof Bank); // check of van type Bank
 
         transactieMapper.setVerkoper(transactie2, id2);
         verkoper = transactie2.getVerkoper();
-        assertEquals(10, verkoper.getTransactiepartijId()); // check de id
+        assertEquals(expected2.getTransactiepartijId(), verkoper.getTransactiepartijId()); // check de id
         assertTrue(verkoper instanceof Klant); // check of van type Klant
 
         try {
