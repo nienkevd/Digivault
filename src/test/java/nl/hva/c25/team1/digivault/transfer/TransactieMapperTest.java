@@ -37,6 +37,7 @@ class TransactieMapperTest {
 
         try {
             transactieMapper.setKoper(transactie3, id3);
+            fail();
         }
         catch(IllegalArgumentException illegalArgumentException) {
             System.out.println("testSetKoper: " + illegalArgumentException.getMessage());
@@ -58,6 +59,7 @@ class TransactieMapperTest {
 
         try {
             transactieMapper.setVerkoper(transactie3, id3);
+            fail();
         }
         catch(IllegalArgumentException illegalArgumentException) {
             System.out.println("testSetVerkoper: " + illegalArgumentException.getMessage());
@@ -81,6 +83,7 @@ class TransactieMapperTest {
         transactieDTO = new TransactieDTO(id3, id2, 1, 5); // ongeldige koperId
         try {
             transactie = transactieMapper.toObject(transactieDTO);
+            fail();
         }
         catch(IllegalArgumentException illegalArgumentException) {
             System.out.println("testToObject: " + illegalArgumentException.getMessage());
@@ -90,6 +93,7 @@ class TransactieMapperTest {
         transactieDTO = new TransactieDTO(id1, id3, 1, 5); // ongeldige verkoperId
         try {
             transactie = transactieMapper.toObject(transactieDTO);
+            fail();
         }
         catch(IllegalArgumentException illegalArgumentException) {
             System.out.println("testToObject: " + illegalArgumentException.getMessage());
@@ -99,6 +103,7 @@ class TransactieMapperTest {
         transactieDTO = new TransactieDTO(id1, id2, 1, 0); // ongeldig aantal
         try {
             transactie = transactieMapper.toObject(transactieDTO);
+            fail();
         }
         catch(IllegalArgumentException illegalArgumentException) {
             System.out.println("testToObject: " + illegalArgumentException.getMessage());
@@ -108,6 +113,7 @@ class TransactieMapperTest {
         transactieDTO = new TransactieDTO(id1, id2, 0, 5); // ongeldige assetId
         try {
             transactie = transactieMapper.toObject(transactieDTO);
+            fail();
         }
         catch(IllegalArgumentException illegalArgumentException) {
             System.out.println("testToObject: " + illegalArgumentException.getMessage());
