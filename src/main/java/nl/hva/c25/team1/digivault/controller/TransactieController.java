@@ -3,13 +3,13 @@ package nl.hva.c25.team1.digivault.controller;
 import nl.hva.c25.team1.digivault.authentication.TokenService;
 import nl.hva.c25.team1.digivault.model.*;
 import nl.hva.c25.team1.digivault.service.*;
-import nl.hva.c25.team1.digivault.transfer.TransactieDTO;
-import nl.hva.c25.team1.digivault.transfer.TransactieMapper;
+import nl.hva.c25.team1.digivault.transfer.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 /**
+ * Deze controller handelt requests af met betrekking tot transacties.
+ *
  * @author Nienke
  * @author Anthon
  */
@@ -29,38 +29,37 @@ public class TransactieController {
         this.accountService = accountService;
     }
 
+    /*
+     * Deze request-handler verwerkt een transactie. Eerst worden authenticatie en autorisatie gecheckt; vervolgens
+     * wordt de DTO doorgezet voor verwerking.
+     */
     @PostMapping("{klantId}")
     public String transactieHandler(
             @PathVariable int klantId, @RequestHeader("Authorization") String token,
             @RequestBody TransactieDTO transactieDTO) {
         boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
                 getEmailadres());
-        if (tokenService.valideerJWT(token) && authorized) {
-            TransactieMapper transactieMapper = new TransactieMapper();
-            Transactie transactie = transactieService.voerTransactieUit(transactieMapper.toObject(transactieDTO));
-            if (transactie == null) {
-                return "transaction failed";
-            } else {
-                return "transaction executed";
-            }
-        } else {
-            return "not authorized";
-        }
+        if (tokenService.valideerJWT(token) && authorized)
+            return probeerTransactieOmTeZettenEnUitTeVoeren(transactieDTO);
+        return "not authorized";
     }
 
-//    @GetMapping("/transactie/{transactieId}")
-//    public Transactie vindTransactieopTransactieIdHandler(@PathVariable int transactieId) {
-//        System.out.println("controller");
-//        return transactieService.vindTransactieOpTransactieId(transactieId);
-//    }
-//
-//    @GetMapping("/transactie/{verkoper}")
-//    public List<Transactie> vindAlleTransactiesOpVerkoperHandler(@PathVariable TransactiePartij verkoper){
-//        return transactieService.vindAlleTransactiesOpVerkoper(verkoper);
-//    }
-//    @GetMapping("/transactie/{koper}")
-//    public List<Transactie> vindAlleTransactiesOpKoperHandler(@PathVariable TransactiePartij koper){
-//        return transactieService.vindAlleTransactiesOpKoper(koper);
-//    }
+    /*
+     * Deze methode probeert de DTO om te zetten naar een transactie-object. Vervolgens wordt deze transactie
+     * doorgegeven aan de service-laag.
+     */
+    String probeerTransactieOmTeZettenEnUitTeVoeren(TransactieDTO transactieDTO) {
+        TransactieMapper transactieMapper = new TransactieMapper();
+        Transactie transactie;
+        try {
+            transactie = transactieMapper.toObject(transactieDTO);
+        }
+        catch(IllegalArgumentException illegalArgumentException) {
+            return illegalArgumentException.getMessage();
+        }
+        transactieService.voerTransactieUit(transactie);
+        if (transactie == null) return "transaction failed";
+        return "transaction executed";
+    }
 
 }

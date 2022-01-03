@@ -25,7 +25,7 @@ public class Transactie {
         this.transactieDatum = transactieDatum;
         this.transactieTijd = transactieTijd;
         this.asset = asset;
-        this.aantalCryptos = aantalCryptos;
+        setAantalCryptos(aantalCryptos);
     }
 
     public Transactie(LocalDate transactieDatum, LocalTime transactieTijd, double aantalCryptos){
@@ -70,6 +70,14 @@ public class Transactie {
 
     public double getAantalCryptos() {
         return aantalCryptos;
+    }
+
+    public void setAantalCryptos(double aantalCryptos) throws IllegalArgumentException {
+        if (aantalCryptos > 0) {
+            this.aantalCryptos = aantalCryptos;
+        } else {
+            throw new IllegalArgumentException("Aantal cryptomunten moet een positief getal zijn!");
+        }
     }
 
     @Override

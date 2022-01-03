@@ -13,7 +13,7 @@ public abstract class TransactiePartij {
     private List<PortefeuilleItem> portefeuille;
 
     protected TransactiePartij(int transactiepartijId, Rekening rekening, List<PortefeuilleItem> portefeuille) {
-        this.transactiepartijId = transactiepartijId;
+        setTransactiepartijId(transactiepartijId);
         this.rekening = rekening;
         this.portefeuille = portefeuille;
     }
@@ -22,8 +22,12 @@ public abstract class TransactiePartij {
         return transactiepartijId;
     }
 
-    public void setTransactiepartijId(int transactiepartijId) {
-        this.transactiepartijId = transactiepartijId;
+    public void setTransactiepartijId(int transactiepartijId) throws IllegalArgumentException {
+        if (transactiepartijId > 0) {
+            this.transactiepartijId = transactiepartijId;
+        } else {
+            throw new IllegalArgumentException("Het ID van een transactiepartij moet een positief geheel getal zijn!");
+        }
     }
 
     public Rekening getRekening() {

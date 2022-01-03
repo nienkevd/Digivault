@@ -23,7 +23,7 @@ public class Asset {
      */
     public Asset(int assetId, String afkorting, String naam, double dagKoers) {
         super();
-        this.assetId = assetId;
+        setAssetId(assetId);
         this.afkorting = afkorting;
         this.naam = naam;
         this.dagKoers = dagKoers;
@@ -58,8 +58,12 @@ public class Asset {
         return assetId;
     }
 
-    public void setAssetId(int assetId) {
-        this.assetId = assetId;
+    public void setAssetId(int assetId) throws IllegalArgumentException {
+        if (assetId > 0) {
+            this.assetId = assetId;
+        } else {
+            throw new IllegalArgumentException("Het ID van een asset moet een positief geheel getal zijn!");
+        }
     }
 
     public String getAfkorting() {
