@@ -36,7 +36,8 @@ public class TransactieController {
         boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
                 getEmailadres());
         if (tokenService.valideerJWT(token) && authorized) {
-            Transactie transactie = transactieService.voerTransactieUit(TransactieMapper.toObject(transactieDTO));
+            TransactieMapper transactieMapper = new TransactieMapper();
+            Transactie transactie = transactieService.voerTransactieUit(transactieMapper.toObject(transactieDTO));
             if (transactie == null) {
                 return "transaction failed";
             } else {

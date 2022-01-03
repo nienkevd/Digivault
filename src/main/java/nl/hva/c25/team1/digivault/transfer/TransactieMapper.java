@@ -10,24 +10,36 @@ import java.time.LocalTime;
 /**
  * @author Anthon
  */
-public final class TransactieMapper {
+public class TransactieMapper {
 
-    public static Transactie toObject(TransactieDTO transactieDTO) {
+    private static final int LOWEST_ID_CUSTOMER = 10;
+
+    public TransactieMapper() {
+        super();
+    }
+
+    public Transactie toObject(TransactieDTO transactieDTO) {
         Transactie transactie = new Transactie(LocalDate.now(), LocalTime.now(), transactieDTO.getAantal());
         transactie.setAsset(new Asset(transactieDTO.getAssetId()));
-        int koperId = transactieDTO.getKoperId();
-        int verkoperId = transactieDTO.getVerkoperId();
-        if (koperId < 10) { // koper is bank
+        setKoper(transactie, transactieDTO.getKoperId());
+        setVerkoper(transactie, transactieDTO.getVerkoperId());
+        return transactie;
+    }
+
+    void setKoper(Transactie transactie, int koperId) {
+        if (koperId < LOWEST_ID_CUSTOMER) { // koper is bank
             transactie.setKoper(new Bank(koperId));
         } else { // koper is klant
             transactie.setKoper(new Klant(koperId));
         }
-        if (verkoperId < 10) { // verkoper is bank
+    }
+
+    void setVerkoper(Transactie transactie, int verkoperId) {
+        if (verkoperId < LOWEST_ID_CUSTOMER) { // verkoper is bank
             transactie.setVerkoper(new Bank(verkoperId));
         } else { // verkoper is klant
             transactie.setVerkoper(new Klant(verkoperId));
         }
-        return transactie;
     }
 
 }
