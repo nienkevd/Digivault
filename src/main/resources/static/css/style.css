@@ -164,7 +164,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     transform: scale(1.03);
 }
 
-#label {    /* Stijl registratieLabel */
+#registratieLabel {    /* Stijl registratieLabel */
     position: fixed;
     cursor: pointer;
     top: 20px;
@@ -176,7 +176,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     transition: .3s ease-in-out;
 }
 
-#label:hover {    /* Stijl registratieLabel bij hover */
+#registratieLabel:hover {    /* Stijl registratieLabel bij hover */
     opacity: 1;
     transform: scale(1.08);
     margin-right: 0px;

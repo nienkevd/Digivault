@@ -15,9 +15,9 @@
 
     <body>
 
-    <!-- Opzet logo -->
+    <!-- Opzet logo en registratieLabel-->
     <img onclick="location.reload()" id="logo" src="images/logo.png" alt="logo van Digivault">
-    <a onclick="registratieLaagAan()"><img id="label" src="images/label.png" alt="label met registratieaanbieding"></a>
+    <a><img id="registratieLabel" src="images/label.png" alt="label met registratieaanbieding"></a>
 
     <!-- Opzet loginPagina -->
     <div class="standaard loginPagina">
@@ -32,54 +32,58 @@
                    required="" type="password">
             <input id="login" name="login" type="submit" value="Login">
             <a type="text" href="#">Wachtwoord vergeten?</a> <br>
-            <a id="registratie" onclick="registratieLaagAan()" href="#">Registreren? </a>
+            <a id="registratie" href="#">Registreren? </a>
         </form>
     </div>
 
     <!-- Opzet registratieLaag -->
-    <div id="overlay" class="standaard registratieLaag">
+    <div id="registratieLaag" class="standaard registratieLaag">
         <img class="avatar" alt="registratie-avatar" src="images/registratie_avatar.jpg">
         <h1>Registreren</h1>
         <pre>Vul hieronder je gegevens in en loop binnen als DIVA!  Velden met een sterretje zijn verplicht.</pre>
         <form id="registratieFormulier">
             <div class="grid_4">
-            <p class="registratie">Inloggegevens:</p>
-            <input id="email_reg" name="email_reg" placeholder="e-mailadres *" title="je e-mailadres" required=""
-                   type="email"> <!-- /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i -->
-            <input id="wachtwoord_reg" maxlength="65" minlength="10" name="wachtwoord_reg" placeholder="wachtwoord *"
-                   title="je wachtwoord (10 tot 65 tekens)" required="" onkeyup='check()' type="password">
-            <input id="wachtwoord_check" maxlength="65" minlength="10" name="wachtwoord_check"
-                   placeholder="wachtwoord (check) *" title="herhaal je wachtwoord" required="" onkeyup='check()'
-                   type="password">
+                <p class="registratie">Inloggegevens:</p>
+                <input id="email_reg" name="email_reg" placeholder="e-mailadres *" title="je e-mailadres" required=""
+                       type="email"> <!-- /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i -->
+                <input id="wachtwoord_reg" maxlength="65" minlength="10" name="wachtwoord_reg"
+                       placeholder="wachtwoord *"
+                       title="je wachtwoord (10 tot 65 tekens)" required="" onkeyup='check()' type="password">
+                <input id="wachtwoord_check" maxlength="65" minlength="10" name="wachtwoord_check"
+                       placeholder="wachtwoord (check) *" title="herhaal je wachtwoord" required="" onkeyup='check()'
+                       type="password">
                 <span id='wachtwoordInfo'></span>
-            <p class="registratie">Persoonsgegevens: </p>
-            <input id="voornaam" name="voornaam" placeholder="voornaam *" title="je voornaam" required="" type="text">
-            <input id="voorvoegsel" name="voorvoegsel" placeholder="voorvoegsel" title="je eventuele voorvoegsel"
-                   type="text">
-            <input id="achternaam" name="achternaam" placeholder="achternaam *" title="je achternaam" required=""
-                   type="text">
-            <br>
-            <input id="geboortedatum" name="geboortedatum" placeholder="geboortedatum *" title="je geboortedatum"
-                   required="" type="date">
-            <input id="bsn" maxlength="9" minlength="8" name="bsn" placeholder="bsn *" title="je BSN (8 of 9 cijfers)"
-                   required="" type="text">
-            <br>
-            <p class="registratie">Adresgegevens:</p>
-            <input id="postcode" name="postcode" placeholder="postcode *" title="je postcode" required="" type="text">
-            <input id="huisnummer" name="huisnummer" placeholder="huisnummer *" title="je huisnummer" required=""
-                   type="text">
-            <input id="toevoeging" name="toevoeging" placeholder="toevoeging" title="je eventuele huisnummertoevoeging"
-                   type="text">
-            <p class="registratie"></p>
-            <input id="straatnaam" name="straatnaam" placeholder="straatnaam" title="wordt automatisch ingevuld"
-                   required="" type="text">
-            <input id="woonplaats" name="woonplaats" placeholder="woonplaats" title="wordt automatisch ingevuld"
-                   required="" type="text">
+                <p class="registratie">Persoonsgegevens: </p>
+                <input id="voornaam" name="voornaam" placeholder="voornaam *" title="je voornaam" required=""
+                       type="text">
+                <input id="voorvoegsel" name="voorvoegsel" placeholder="voorvoegsel" title="je eventuele voorvoegsel"
+                       type="text">
+                <input id="achternaam" name="achternaam" placeholder="achternaam *" title="je achternaam" required=""
+                       type="text">
+                <br>
+                <input id="geboortedatum" name="geboortedatum" placeholder="geboortedatum *" title="je geboortedatum"
+                       required="" type="date">
+                <input id="bsn" maxlength="9" minlength="8" name="bsn" placeholder="bsn *"
+                       title="je BSN (8 of 9 cijfers)"
+                       required="" type="text">
+                <br>
+                <p class="registratie">Adresgegevens:</p>
+                <input id="postcode" name="postcode" placeholder="postcode *" title="je postcode" required=""
+                       type="text">
+                <input id="huisnummer" name="huisnummer" placeholder="huisnummer *" title="je huisnummer" required=""
+                       type="text">
+                <input id="toevoeging" name="toevoeging" placeholder="toevoeging"
+                       title="je eventuele huisnummertoevoeging"
+                       type="text">
+                <p class="registratie"></p>
+                <input id="straatnaam" name="straatnaam" placeholder="straatnaam" title="wordt automatisch ingevuld"
+                       required="" type="text">
+                <input id="woonplaats" name="woonplaats" placeholder="woonplaats" title="wordt automatisch ingevuld"
+                       required="" type="text">
             </div>
             <div class="grid_3">
                 <br>
-                <input id="registreren" name="registreren" onclick="registratieLaagUit()" type="submit" value="Registreren">
-<!--                <input id="registreren" name="registreren" type="submit" value="Registreren">-->
+                <input id="registreren" name="registreren" type="submit" value="Registreren">
                 <br>
             </div>
         </form>
