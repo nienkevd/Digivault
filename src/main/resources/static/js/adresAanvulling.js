@@ -4,11 +4,11 @@ document.querySelector('#huisnummer').addEventListener('focusout', checkForAddre
 function checkForAddressPart(){
     let regex = new RegExp(/^[1-9][0-9]{3}[\s]?[A-Za-z]{2}$/i);
 
-    // velden moeten niet leg zijn, liefst regex
+    // velden moeten niet leeg zijn, liefst regex
     let postcode = document.querySelector('#postcode').value
     let huisnummer = document.querySelector('#huisnummer').value
 
-    // als postcode een valide postcode is nummer niet leeg, dan
+    // als postcode een geldige postcode is nummer niet leeg, dan
     console.log('pc is valide: ' + regex.test(postcode))
 
     if(regex.test(postcode) && huisnummer){
