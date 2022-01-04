@@ -7,31 +7,30 @@
 * jQuery is een JS-library die veel gebruikt wordt en allerlei zaken rondom AJAX en DOM-manipulatie helpt versimpelen
 * */
 
+// Pagina herladen bij klikken op logoDigivault
+$('#logoDigivault').click(function() {
+    location.reload();
+});
 
 // Verberg registratieLaag na klik op #registreren (tijdelijk)
-$(document).ready(function() {
-    $("#registreren").click(function() {
-        $("#registratieLaag").hide();
-    });
+$("#registreren").click(function () {
+    $("#registratieLaag").hide();
 });
 
 // Toon registratieLaag na klik op #registratie en #registratieLabel
-$(document).ready(function() {
-    $("#registratie,#registratieLabel").click(function() {
-        $("#registratieLaag").show();
-    });
+$("#naarRegistreren,#registratieAdvertentie").click(function () {
+    $("#registratieLaag").show();
 });
 
+
 // Check op overeenkomst wachtwoorden in registratieLaag
-$(document).ready(function() {
-    $('#wachtwoord_reg, #wachtwoord_check').on('keyup', function() {
-        if ($('#wachtwoord_reg').val().length === 0 || $('#wachtwoord_check').val().length === 0) {
-            $('#wachtwoordInfo').html('').css('color', 'black');
-        } else if ($('#wachtwoord_reg').val() === $('#wachtwoord_check').val()) {
-            $('#wachtwoordInfo').html('komt overeen').css('color', 'green');
-        } else
-            $('#wachtwoordInfo').html('niet identiek').css('color', '#C0392B');
-    });
+$('#wachtwoord_reg, #wachtwoord_check').on('keyup', function () {
+    if ($('#wachtwoord_reg').val().length === 0 || $('#wachtwoord_check').val().length === 0) {
+        $('#wachtwoordInfo').html('').css('color', 'black');
+    } else if ($('#wachtwoord_reg').val() === $('#wachtwoord_check').val()) {
+        $('#wachtwoordInfo').html('komt overeen').css('color', 'green');
+    } else
+        $('#wachtwoordInfo').html('niet identiek').css('color', '#C0392B');
 });
 
 /*Info voor team:

@@ -154,17 +154,17 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 
 /* ----- ID'S ----- */
 
-#logo {    /* Stijl Digivault-logo */
+#logoDigivault {    /* Stijl Digivault-logo */
     cursor: pointer;
     width: 250px;
     height: 125px;
 }
 
-#logo:hover {    /* Stijl Digivault-logo bij hover */
+#logoDigivault:hover {    /* Stijl Digivault-logo bij hover */
     transform: scale(1.03);
 }
 
-#registratieLabel {    /* Stijl registratieLabel */
+#registratieAdvertentie {    /* Stijl registratieLabel */
     position: fixed;
     cursor: pointer;
     top: 20px;
@@ -176,7 +176,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     transition: .3s ease-in-out;
 }
 
-#registratieLabel:hover {    /* Stijl registratieLabel bij hover */
+#registratieAdvertentie:hover {    /* Stijl registratieLabel bij hover */
     opacity: 1;
     transform: scale(1.08);
     margin-right: 0px;
