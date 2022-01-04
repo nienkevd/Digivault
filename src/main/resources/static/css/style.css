@@ -50,7 +50,7 @@ p {    /* Paragraph (=alinea's) */
 
 p[class="registratie"] {    /* Aanpassingen voor alinea's in de registratieLaag */
     margin-top: 9px;
-    margin-right: -13px;
+    margin-right: -2px;
 }
 
 a {    /* Standaardstijl voor linkjes */
@@ -70,8 +70,7 @@ a:hover {    /* Standaardstijl voor gehoverde linkjes */
 input {    /* Standaardstijl invoerveld */
     width: 100%;
     margin-bottom: 20px;
-    margin-left: -5px;
-    font-size: 16px;
+    font-size: 17px;
     font-family: diva, serif;
     border: none;
     border-bottom: 1px solid;
@@ -84,7 +83,8 @@ input {    /* Standaardstijl invoerveld */
 input[type="submit"] {    /* Aanpassingen invoervelden van type submit */
     transition-duration: 1.2s;
     background: #f9e36e;
-    margin-top: 25px;
+    margin-top: 30px;
+    margin-bottom: 25px;
     text-align: center;
     border: none;
     outline: none;
@@ -107,7 +107,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     background: #131313;
     margin-top: 1%;
     border-radius: 40px;
-    padding: 70px 30px;
+    padding: 70px 40px;
     border: none;
     top: 50%;
     left: 50%;
@@ -119,7 +119,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 
 .loginPagina {    /* Aanpassingen voor loginPagina */
     width: 350px;
-    height: 485px;
+    height: 495px;
 }
 
 .registratieLaag {    /* Aanpassingen voor registratieLaag */
@@ -130,6 +130,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 }
 
 .grid_3 {   /* Standaardstijl voor gebruik grid van 3 grid-cellen */
+    padding-left: 45px;
     display: grid;
     grid-gap: 12px;
     grid-template-columns: auto auto auto;
@@ -153,12 +154,13 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 
 /* ----- ID'S ----- */
 
-#logo {    /* Stijl Digivault-icoon */
+#logo {    /* Stijl Digivault-logo */
+    cursor: pointer;
     width: 250px;
     height: 125px;
 }
 
-#logo:hover {    /* Stijl Digivault-icoon bij hover */
+#logo:hover {    /* Stijl Digivault-logo bij hover */
     transform: scale(1.03);
 }
 
@@ -187,10 +189,11 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 
 #wachtwoordInfo {    /* Stijl info over overeenkomen wachtwoorden */
     position: absolute;
+    left: calc(50% + 385px);
+    top: 190px;
     font-size: 12pt;
     line-height: 0.95em;
-    left: calc(50% + 385px);
-    top: 188px;
+    max-width: 20px;
 }
 
 /* ----- SCRIPTS ----- */
