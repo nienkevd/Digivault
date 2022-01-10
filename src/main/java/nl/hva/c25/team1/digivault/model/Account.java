@@ -74,7 +74,6 @@ public class Account {
         return "Account{" +
                 ", emailadres='" + emailadres + '\'' +
                 ", wachtwoord='" + wachtwoord + '\'' +
-                ", klant=" + klant +
                 '}';
     }
 

@@ -50,6 +50,7 @@ public class TransactieService {
             doeTransactieMutaties(transactie);
             return rootRepository.voerTransactieUit(transactie);
         }
+        System.out.println("Transactie kan niet uitgevoerd worden");
         return null;
     }
 
@@ -112,10 +113,14 @@ public class TransactieService {
     // Deze methode checkt of de verkoper voldoende crypto heeft.
     public boolean checkVerkoper(Transactie transactie) {
         for (PortefeuilleItem portefeuilleItem : transactie.getVerkoper().getPortefeuille()) {
+            System.out.println(portefeuilleItem.getAsset());
+            System.out.println(transactie.getAsset());
             if (portefeuilleItem.getAsset() == transactie.getAsset()) {
+                System.out.println("check verkoper");
                 return portefeuilleItem.getHoeveelheid() >= transactie.getAantalCryptos();
             }
         }
+        System.out.println("check verkoper false");
         return false;
     }
 

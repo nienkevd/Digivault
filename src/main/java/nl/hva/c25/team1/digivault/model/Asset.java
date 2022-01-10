@@ -103,6 +103,8 @@ public class Asset {
         return assetId == asset.assetId;
     }
 
+
+
     /**
      * HashCode Asset
      * @return Hash assetId

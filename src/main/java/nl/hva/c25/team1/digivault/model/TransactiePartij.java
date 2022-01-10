@@ -23,7 +23,7 @@ public abstract class TransactiePartij {
     }
 
     public void setTransactiepartijId(int transactiepartijId) throws IllegalArgumentException {
-        if (transactiepartijId > 0) {
+        if (transactiepartijId >= 0) {
             this.transactiepartijId = transactiepartijId;
         } else {
             throw new IllegalArgumentException("Het ID van een transactiepartij moet een positief geheel getal zijn!");
