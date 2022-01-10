@@ -7,21 +7,20 @@
 * jQuery is een JS-library die veel gebruikt wordt en allerlei zaken rondom AJAX en DOM-manipulatie helpt versimpelen
 * */
 
-// Pagina herladen bij klikken op logoDigivault
+// Pagina herladen bij klikken op #logoDigivault
 $('#logoDigivault').click(function() {
     location.reload();
 });
 
 // Verberg registratieLaag na klik op #registreren (tijdelijk)
-$("#registreren").click(function () {
-    $("#registratieLaag").hide();
-});
+// $("#registreren").click(function () {
+//     $("#registratieLaag").hide();
+// });
 
 // Toon registratieLaag na klik op #registratie en #registratieLabel
 $("#naarRegistreren,#registratieAdvertentie").click(function () {
     $("#registratieLaag").show();
 });
-
 
 // Check op overeenkomst wachtwoorden in registratieLaag
 $('#wachtwoord_reg, #wachtwoord_check').on('keyup', function () {

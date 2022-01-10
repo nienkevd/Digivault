@@ -55,5 +55,4 @@ public class FinancieelOverzichtController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
-
 }

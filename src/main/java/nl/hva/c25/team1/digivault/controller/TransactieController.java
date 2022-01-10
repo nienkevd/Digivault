@@ -61,5 +61,4 @@ public class TransactieController {
         if (transactie == null) return "transaction failed";
         return "transaction executed";
     }
-
 }

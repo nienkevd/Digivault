@@ -46,7 +46,6 @@ public class AssetMetAantal {
         this.assetId = assetId;
     }
 
-
     public String getAfkorting() {
         return afkorting;
     }

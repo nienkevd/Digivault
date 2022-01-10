@@ -45,7 +45,7 @@
             <div class="grid_4">
                 <p class="registratie">Inloggegevens:</p>
                 <input id="email_reg" name="email_reg" placeholder="e-mailadres *" title="je e-mailadres" required=""
-                       type="email"> <!-- /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i -->
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" type="email">
                 <input id="wachtwoord_reg" maxlength="65" minlength="10" name="wachtwoord_reg"
                        placeholder="wachtwoord *"
                        title="je wachtwoord (10 tot 65 tekens)" required="" onkeyup='check()' type="password">
@@ -69,7 +69,7 @@
                 <br>
                 <p class="registratie">Adresgegevens:</p>
                 <input id="postcode" name="postcode" placeholder="postcode *" title="je postcode" required=""
-                       type="text">
+                       pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" type="text">
                 <input id="huisnummer" name="huisnummer" placeholder="huisnummer *" title="je huisnummer" required=""
                        type="text">
                 <input id="toevoeging" name="toevoeging" placeholder="toevoeging"
