@@ -39,9 +39,11 @@ public class TransactieController {
             @RequestBody TransactieDTO transactieDTO) {
         boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
                 getEmailadres());
-        if (tokenService.valideerJWT(token) && authorized)
+        if (tokenService.valideerJWT(token) && authorized) {
+            System.out.println("authorized");
             return probeerTransactieOmTeZettenEnUitTeVoeren(transactieDTO);
-        return "not authorized";
+
+        } return "not authorized";
     }
 
     /*
@@ -59,6 +61,6 @@ public class TransactieController {
         }
         transactieService.voerTransactieUit(transactie);
         if (transactie == null) return "transaction failed";
-        return "transaction executed";
+        return "transactie door naar servicelaag";
     }
 }

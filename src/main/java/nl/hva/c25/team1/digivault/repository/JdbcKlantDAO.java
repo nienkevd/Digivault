@@ -94,7 +94,8 @@ public class JdbcKlantDAO implements KlantDAO {
      */
     @Override
     public List<Klant> vindAlleKlanten() {
-        String sql = "SELECT * FROM transactiepartij;";
+        String sql = "SELECT * FROM transactiepartij WHERE tpId > 9;";
+        System.out.println("jdbc");
         return jdbcTemplate.query(sql, new KlantRowMapper());
     }
 

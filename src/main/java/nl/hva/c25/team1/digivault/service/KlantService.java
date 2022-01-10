@@ -55,6 +55,7 @@ public class KlantService {
      * @return List<Klant>
      */
     public List<Klant> vindAlleKlanten() {
+        System.out.println("service");
         return klantDAO.vindAlleKlanten();
     }
 

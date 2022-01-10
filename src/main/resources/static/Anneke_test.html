@@ -9,6 +9,7 @@
     <script>
         'use strict'
         window.onload = function (){
+            console.log("start")
             var form = document.getElementById('loginForm');
             var email = document.querySelector('#emailadres_veld');
             var wachtwoord = document.querySelector('#wachtwoord_veld');
@@ -24,9 +25,9 @@
                     // mode: 'cors',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJodHRwczovL3d3dy5kaWdpdmF1bHQuY29tIiwiaXNzIjoiRGlnaXZhdWx0IiwiZXhwIjoxNjQwMjY5NTM2LCJpYXQiOjE2NDAyNjk0MTYsImVtYWlsYWRyZXMiOiJtYXJpZWtlQGdtYWlsLmNvbSJ9.zSmj4jMYM3elm8D2DhneHx7Ai4dqZ_k-nWY9aZdlNEc',
+                        // 'Authorization': ,
                         // 'Content-Type': 'application/x-www-form-urlencoded'
-                        'Access-Control-Allow-Origin': 'http://localhost:8080'
+                        'Access-Control-Allow-Origin': '*'
                     },
                     body: JSON.stringify(
                 {accountId: 0, 'emailadres': email, 'wachtwoord': wachtwoord},
