@@ -1,7 +1,7 @@
 /* ----- KLEUREN ----- */
 
 :root {
-    --divaGoud: #ffb43d;
+    --divaGoud: #ffb03f;
     --divaGeel: #fcc457;
     --divaRoze: #f27ddd;
     --divaDrop: #131313;
@@ -128,22 +128,21 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 
 .loginPagina {    /* Aanpassingen voor loginPagina */
     display: block;
-    width: 950px;
-    height: 655px;
+    width: 430px;
+    height: 505px;
 }
 
 .registratieLaag {    /* Aanpassingen voor registratieLaag */
     display: none;
     padding: 70px 50px;
     width: 950px;
-    height: 655px;
+    height: 660px;
 }
 
 .wachtwoordVergeten{ /* Aanpassing voor wachtwoord vergeten */
     display: none;
     width: 950px;
-    height: 655px;
-
+    height: 660px;
 }
 
 .grid_3 {   /* Standaardstijl voor gebruik grid van 3 grid-cellen */
