@@ -1,8 +1,7 @@
 /* ----- KLEUREN ----- */
 
 :root {
-    --divaGoud: #ffb03f;
-    --divaGeel: #fcc457;
+    --divaGoud: #ffbd54;
     --divaRoze: #f27ddd;
     --divaDrop: #131313;
     --divaIvoor: #fffff0;
@@ -92,7 +91,7 @@ input {    /* Standaardstijl invoerveld */
 input[type="submit"] {    /* Aanpassingen invoervelden van type submit */
     margin-top: 30px;
     margin-bottom: 25px;
-    background: var(--divaGeel);
+    background: var(--divaGoud);
     text-align: center;
     border: none;
     outline: none;
@@ -171,7 +170,9 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 /* ----- ID'S ----- */
 
 #logoDigivault {    /* Stijl Digivault-logo */
+    position: fixed;
     cursor: pointer;
+    top: 15px;
     width: 250px;
     height: 125px;
 }
@@ -203,7 +204,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     padding-right: 45px;
 }
 
-#wachtwoordInfo {    /* Stijl info over overeenkomen wachtwoorden */
+#wachtwoordCheckRegistratie {    /* Stijl info over overeenkomen wachtwoorden */
     position: absolute;
     left: calc(50% + 385px);
     top: 190px;
@@ -213,6 +214,12 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 }
 
 /* ----- SCRIPTS ----- */
+
+@media only screen and (max-width: 900px) {    /* vergroot margin-top bij scherm kleiner dan 600px ivm smartphones */
+    body {
+        margin-top: 200px;
+    }
+}
 
 ::-webkit-calendar-picker-indicator{    /* Aanpassing kalendericoon registratieLaag */
     filter: invert(1);

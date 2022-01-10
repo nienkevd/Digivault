@@ -22,6 +22,7 @@ document.getElementById("naarRegistreren1").addEventListener("click", toonRegist
 function toonLoginPagina(){
     document.getElementById("loginPagina").style.display = "block";
 }
+
 // Check op overkomen van wachtwoorden in wachtwoordVergetenLaag
 //als ik deze aan zet werkt het registreren knopje vanaf het inlog scherm niet meer...
 /*$('#wachtwoord_nieuw, #wachtwoord_herhaal').on('keyup', function () {
@@ -51,9 +52,9 @@ function verbergRegistratieLaag() {
 // Check op overkomen van wachtwoorden in registratieLaag
 $('#wachtwoord_reg, #wachtwoord_check').on('keyup', function () {
     if ($('#wachtwoord_reg').val().length === 0 || $('#wachtwoord_check').val().length === 0) {
-        $('#wachtwoordInfo').html('').css('color', 'black');
+        $('#wachtwoordCheckRegistratie').html('').css('color', 'black');
     } else if ($('#wachtwoord_reg').val() === $('#wachtwoord_check').val()) {
-        $('#wachtwoordInfo').html('komt overeen').css('color', 'green');
+        $('#wachtwoordCheckRegistratie').html('komt overeen').css('color', 'green');
     } else
-        $('#wachtwoordInfo').html('niet identiek').css('color', '#C0392B');
+        $('#wachtwoordCheckRegistratie').html('niet identiek').css('color', '#C0392B');
 });
