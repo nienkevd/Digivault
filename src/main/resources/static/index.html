@@ -10,14 +10,15 @@
         <script defer src="js/script.js"></script>
         <!-- javascript ivm aanvullen adresgegevens -->
         <script defer src="js/adresAanvulling.js"></script>
-        <script src="js/jquery-3.6.0.min.js"></script>
     </head>
 
     <body>
 
-    <!-- Opzet logo en registratieAdvertentie-->
-    <img id="logoDigivault" src="images/logo.png" alt="logo van Digivault">
-    <img id="registratieAdvertentie" src="images/label.png" alt="Advertentie voor registratie">
+    <!-- Opzet logo-->
+    <img id="logoDigivault" src="images/logoDigivault.png" alt="logo van Digivault">
+
+    <!-- Opzet welkomsAanbieding-->
+    <img id="welkomsAanbieding" src="images/welkomsAanbieding.png" alt="advertentie met welkomsAanbieding">
 
     <!-- Opzet loginPagina -->
     <div class="standaard loginPagina">
@@ -32,7 +33,7 @@
                    required="" type="password">
             <input id="login" name="login" type="submit" value="Login">
             <a id="naarWachtwoordVergeten" href="#">Wachtwoord vergeten?</a> <br>
-            <a id="naarRegistreren" href="#">Registreren? </a>
+            <a id="naarRegistreren" href="#">Registreren?</a>
         </form>
     </div>
 
@@ -64,8 +65,7 @@
                 <input id="geboortedatum" name="geboortedatum" placeholder="geboortedatum *" title="je geboortedatum"
                        required="" type="date">
                 <input id="bsn" maxlength="9" minlength="8" name="bsn" placeholder="bsn *"
-                       title="je BSN (8 of 9 cijfers)"
-                       required="" type="text">
+                       title="je BSN (8 of 9 cijfers)" required="" type="number">
                 <br>
                 <p class="registratie">Adresgegevens:</p>
                 <input id="postcode" name="postcode" placeholder="postcode *" title="je postcode" required=""

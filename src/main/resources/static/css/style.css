@@ -43,7 +43,7 @@ pre {    /* Preformatted text, neemt spaties mee */
     margin-bottom: 40px;
 }
 
-p {    /* Paragraph (=alinea's) */
+p {    /* Alinea's */
     margin: 0;
     padding: 0;
 }
@@ -164,7 +164,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     transform: scale(1.03);
 }
 
-#registratieAdvertentie {    /* Stijl registratieLabel */
+#welkomsAanbieding {    /* Stijl registratieLabel */
     position: fixed;
     cursor: pointer;
     top: 20px;
@@ -176,7 +176,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     transition: .3s ease-in-out;
 }
 
-#registratieAdvertentie:hover {    /* Stijl registratieLabel bij hover */
+#welkomsAanbieding:hover {    /* Stijl registratieLabel bij hover */
     opacity: 1;
     transform: scale(1.08);
     margin-right: 0px;

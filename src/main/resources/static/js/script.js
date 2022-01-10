@@ -1,28 +1,26 @@
 "use strict";
 
-/*Info voor team:
-* het tonen/verbergen van een laag kan op twee verschillende manieren: ik heb optie 2 gebruikt.
-* (1) met onclick methode in element en document.getElementById("registratieLaag").style.display = "none" [OF] "block";
-* (2) met jQuery: je geeft in script verwijzing naar #id in function, en hoeft geen methode meer toe te voegen aan element zelf
-* jQuery is een JS-library die veel gebruikt wordt en allerlei zaken rondom AJAX en DOM-manipulatie helpt versimpelen
-* */
+// Pagina verversen bij klik op #logoDigivault, verbergen van andere lagen
+document.getElementById("logoDigivault").addEventListener("click", verbergRegistratieLaag);
 
-// Pagina herladen bij klikken op #logoDigivault
-$('#logoDigivault').click(function() {
+function verversPagina() {
     location.reload();
-});
+}
 
-// Verberg registratieLaag na klik op #registreren (tijdelijk)
-// $("#registreren").click(function () {
-//     $("#registratieLaag").hide();
-// });
+// RegistratieLaag tonen bij klik op #welkomsAanbieding en #naarRegistreren
+document.getElementById("welkomsAanbieding").addEventListener("click", toonRegistratieLaag);
+document.getElementById("naarRegistreren").addEventListener("click", toonRegistratieLaag);
 
-// Toon registratieLaag na klik op #registratie en #registratieLabel
-$("#naarRegistreren,#registratieAdvertentie").click(function () {
-    $("#registratieLaag").show();
-});
+function toonRegistratieLaag() {
+    document.getElementById("registratieLaag").style.display = "block";
+}
 
-// Check op overeenkomst wachtwoorden in registratieLaag
+// RegistratieLaag verbergen (tijdelijk nog niet gebruikt)
+function verbergRegistratieLaag() {
+    document.getElementById("registratieLaag").style.display = "none";
+}
+
+// Check op overkomen van wachtwoorden in registratieLaag
 $('#wachtwoord_reg, #wachtwoord_check').on('keyup', function () {
     if ($('#wachtwoord_reg').val().length === 0 || $('#wachtwoord_check').val().length === 0) {
         $('#wachtwoordInfo').html('').css('color', 'black');
@@ -31,9 +29,3 @@ $('#wachtwoord_reg, #wachtwoord_check').on('keyup', function () {
     } else
         $('#wachtwoordInfo').html('niet identiek').css('color', '#C0392B');
 });
-
-/*Info voor team:
-Ik heb een reCHAPTA v2 aanvraag gedaan voor ons domein team-4, zie developers.google.com/recaptcha:
-- site key:   6Ld85NcdAAAAALDUx4Wl943frenGbzW_7Zx4QQDH
-- secret key: 6Ld85NcdAAAAAJ8m6eosIuvmNPbB58zG3Tv8hz6v
-*/
