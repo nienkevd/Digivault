@@ -12,7 +12,7 @@ function checkForAddressPart(){
     console.log('pc is valide: ' + regex.test(postcode))
 
     if(regex.test(postcode) && huisnummer){
-        // var data = { postcode: postcode, nr: huisnummer};
+        // let data = { postcode: postcode, nr: huisnummer};
         // stuur data als form data ipv json, want backend accepteert alleen form
         let formData = `postcode=${postcode}&number=${huisnummer}` //postcode=1234AB&nr=15
         fetch("https://postcode.tech/api/v1/postcode?" + formData , {

@@ -1,7 +1,7 @@
 "use strict";
 
 // Pagina verversen bij klik op #logoDigivault, verbergen van andere lagen
-document.getElementById("logoDigivault").addEventListener("click", verbergRegistratieLaag);
+document.getElementById("logoDigivault").addEventListener("click", verversPagina);
 
 function verversPagina() {
     location.reload();
