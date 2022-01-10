@@ -117,8 +117,9 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 }
 
 .loginPagina {    /* Aanpassingen voor loginPagina */
-    width: 350px;
-    height: 495px;
+    display: block;
+    width: 950px;
+    height: 655px;
 }
 
 .registratieLaag {    /* Aanpassingen voor registratieLaag */
@@ -126,6 +127,13 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     padding: 70px 50px;
     width: 950px;
     height: 655px;
+}
+
+.wachtwoordVergeten{ /* Aanpassing voor wachtwoord vergeten */
+    display: none;
+    width: 950px;
+    height: 655px;
+
 }
 
 .grid_3 {   /* Standaardstijl voor gebruik grid van 3 grid-cellen */

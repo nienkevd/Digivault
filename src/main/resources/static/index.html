@@ -21,7 +21,7 @@
     <img id="welkomsAanbieding" src="images/welkomsAanbieding.png" alt="advertentie met welkomsAanbieding">
 
     <!-- Opzet loginPagina -->
-    <div class="standaard loginPagina">
+    <div id = "loginPagina" class="standaard loginPagina">
         <img class="avatar" alt="Diva-avatar" src="images/diva_avatar.jpg">
         <h1>Inloggen</h1>
         <form>
@@ -36,6 +36,27 @@
             <a id="naarRegistreren" href="#">Registreren?</a>
         </form>
     </div>
+
+    <!-- Opzet wachtwoordVergeten -->
+    <div id= "wachtwoordVergetenLaag" class="standaard wachtwoordVergeten">
+        <img class="avatar" alt="Ooops" src="images/oops1.jpg">
+        <h1>Wachtwoord vergeten?</h1>
+        <form>
+            <p>E-mailadres</p>
+            <input id="email_login1" name="email_login" placeholder="e-mailadres" title="vul je e-mailadres in"
+                   required="" type="email">
+            <p>nieuw wachtwoord</p>
+            <input id="wachtwoord_nieuw" name="wachtwoord_nieuw" placeholder="nieuw wachtwoord" title="vul je wachtwoord in"
+                   required="" type="password">
+            <p>wachtwoord herhalen</p>
+            <input id="wachtwoord_herhaal" name="wachtwoord_herhaal" placeholder="herhaal wachtwoord" title="vul je wachtwoord in"
+                   required="" type="password">
+            <input id="veranderWachtwoord" name="verander" type="submit" value="Verander!">
+            <a id="naarLoginPagina" href="#">Inloggen?</a> <br>
+            <a id="naarRegistreren1" href="#">Registreren?</a>
+        </form>
+    </div>
+
 
     <!-- Opzet registratieLaag -->
     <div id="registratieLaag" class="standaard registratieLaag">
