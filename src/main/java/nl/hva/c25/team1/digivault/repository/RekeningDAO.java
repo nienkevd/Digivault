@@ -25,4 +25,6 @@ public interface RekeningDAO {
     public Rekening vindRekeningOpId(int rekeningId);
 
     public List<Rekening> geefAlleRekeningen();
+
+    Rekening vindRekeningOpTransactiePartijId(int transactiepartijId);
 }

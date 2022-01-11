@@ -92,6 +92,18 @@ public class JdbcRekeningDAO implements RekeningDAO{
 
     /**
      *
+     * @author Anneke
+     * @param transactiepartijId
+     * @return
+     */
+    @Override
+    public Rekening vindRekeningOpTransactiePartijId(int transactiepartijId) {
+        String sql = "SELECT r.rekeningId, iban, saldo FROM rekening r JOIN transactiepartij t ON r.rekeningId = t.rekeningId WHERE tpId = ?";
+        return jdbcTemplate.queryForObject(sql, new JdbcRekeningDAO.RekeningRowMapper(), transactiepartijId);
+    }
+
+    /**
+     *
      * @return List<Rekening> geeft lijst van alle rekeningen uit DB terug
      */
 
