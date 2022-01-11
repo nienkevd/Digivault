@@ -10,7 +10,6 @@
         <script defer src="js/script.js"></script>
         <!-- javascript ivm aanvullen adresgegevens -->
         <script defer src="js/adresAanvulling.js"></script>
-<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
     </head>
 
     <body>
@@ -85,13 +84,13 @@
                 <input id="geboortedatum" name="geboortedatum" placeholder="geboortedatum *" title="je geboortedatum"
                        required="" type="date">
                 <input id="bsn" maxlength="9" minlength="8" name="bsn" placeholder="bsn *"
-                       title="je BSN (8 of 9 cijfers)" required="" type="number">
+                       title="je BSN (8 of 9 cijfers)" required="" type="text">
                 <br>
                 <p class="registratie">Adresgegevens:</p>
                 <input id="postcode" name="postcode" placeholder="postcode *" title="je postcode" required=""
                        pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" type="text">
                 <input id="huisnummer" name="huisnummer" placeholder="huisnummer *" title="je huisnummer" required=""
-                       type="number">
+                       type="text">
                 <input id="toevoeging" name="toevoeging" placeholder="toevoeging"
                        title="je eventuele huisnummertoevoeging"
                        type="text">
@@ -107,11 +106,6 @@
                 <br>
             </div>
         </form>
-    </div>
-
-    <!-- Nog te verwijderen foutmelding -->
-    <div id="error" hidden>
-        <p>postcode, huisnummer combinatie is onbekend</p>
     </div>
 
     </body>
