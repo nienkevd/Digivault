@@ -115,7 +115,7 @@ public class RootRepository {
      */
     public FinancieelOverzicht genereerFinancieelOverzichtOpId(int klantId) {
         FinancieelOverzicht financieelOverzicht = new FinancieelOverzicht(klantId);
-        Rekening rekening = rekeningDAO.vindRekeningOpId(klantId);
+        Rekening rekening = rekeningDAO.vindRekeningOpTransactiePartijId(klantId);
         financieelOverzicht.setIban(rekening.getIBAN());
         financieelOverzicht.setSaldo(rekening.getSaldo());
         financieelOverzicht.setAssetMetAantal(genereerPortefeuilleOverzicht(klantId));
