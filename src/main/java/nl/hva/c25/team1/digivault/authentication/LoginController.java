@@ -34,7 +34,7 @@ public class LoginController {
         } else {
             HttpHeaders headers = new HttpHeaders();
             headers.add("Bearer", token);
-            return new ResponseEntity<>("Login geslaagd!", headers, HttpStatus.OK);
+            return new ResponseEntity<>("\"Login geslaagd!\"", headers, HttpStatus.OK);
         }
     }
 

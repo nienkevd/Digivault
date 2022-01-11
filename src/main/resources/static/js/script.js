@@ -7,6 +7,45 @@ function verversPagina() {
     location.reload();
 }
 
+// Loginpagina: actie bij klik op login knop en ingevulde velden
+
+// stuur data als form data ipv json, want backend accepteert alleen form
+// var formData = `emailadres=${email}&wachtwoord=${wachtwoord}`;
+
+document.getElementById("login").addEventListener("click", (e) => {
+    let email = document.getElementById("email_login").value;
+    let wachtwoord = document.getElementById("wachtwoord_login").value;
+
+    let data = {'emailadres': email, 'wachtwoord': wachtwoord};
+
+    e.preventDefault();
+    const login = 'http://localhost:8080/login';
+    console.log(JSON.stringify(data));
+    fetch(login, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            console.log(response);
+            return response.json()})
+        .then((data) => {
+            console.log(data);
+            // code here //
+            if (data.error) {
+                alert("Error Password or Username"); /*displays error message*/
+            } else {
+                alert("Login geslaagd!")
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
 //vanuit Login Scherm naar Wachtwoord vergeten pagina bij klik op #naarWachtwoordVergeten
 document.getElementById('naarWachtwoordVergeten').addEventListener('click',toonWachtwoordVergeten);
 
