@@ -1,6 +1,6 @@
 'use strict';
 
-// Pagina verversen bij klik op #logoDigivault, verbergen van andere lagen
+// LOGO: Pagina verversen bij klik op #logoDigivault, verbergen van andere lagen
 document.getElementById('logoDigivault').addEventListener('click', verversPagina);
 
 function verversPagina() {
@@ -45,34 +45,7 @@ document.getElementById("login").addEventListener("click", (e) => {
         });
 });
 
-//vanuit Login Scherm naar Wachtwoord vergeten pagina bij klik op #naarWachtwoordVergeten
-document.getElementById('naarWachtwoordVergeten').addEventListener('click',toonWachtwoordVergeten);
-
-function toonWachtwoordVergeten(){
-    document.getElementById('wachtwoordVergetenLaag').style.display = 'block';
-}
-
-//vanuit WachtwoordVergetenLaag naar login en registreren
-//TERUG NAAR INLOG WERK NIET
-document.getElementById('naarLoginPagina').addEventListener('click', toonLoginPagina);
-document.getElementById('naarRegistreren1').addEventListener('click', toonRegistratieLaag);
-
-function toonLoginPagina(){
-    document.getElementById('wachtwoordVergetenLaag').style.display = 'none';
-}
-
-// Check op overkomen van wachtwoorden in wachtwoordVergetenLaag
-//als ik deze aan zet werkt het registreren knopje vanaf het inlog scherm niet meer...
-/*$('#wachtwoord_nieuw, #wachtwoord_herhaal').on('keyup', function () {
-    if ($('#wachtwoord_nieuw').val().length === 0 || $('#wachtwoord_check').val().length === 0) {
-        $('#wachtwoordInfo').html('').css('color', 'black');
-    } else if ($('#wachtwoord_nieuw').val() === $('#wachtwoord_check').val()) {
-        $('#wachtwoordInfo').html('komt overeen').css('color', 'green');
-    } else
-        $('#wachtwoordInfo').html('niet identiek').css('color', '#C0392B');
-});*/
-
-// RegistratieLaag tonen bij klik op #welkomsAanbieding en #naarRegistreren
+// REGISTRATIE - Tonen van de registratieLaag bij klik op #welkomsAanbieding en #naarRegistreren
 document.getElementById('welkomsAanbieding').addEventListener('click', toonRegistratieLaag);
 document.getElementById('naarRegistreren').addEventListener('click', toonRegistratieLaag);
 
@@ -80,13 +53,70 @@ function toonRegistratieLaag() {
     document.getElementById('registratieLaag').style.display = 'block';
 }
 
-// RegistratieLaag verbergen (tijdelijk nog niet gebruikt)
+// REGISTRATIE - Verbergen van de registratieLaag (tijdelijk nog niet gebruikt)
 function verbergRegistratieLaag() {
     document.getElementById('registratieLaag').style.display = 'none';
 }
 
-// Vergelijkt values uit #wachtwoord_reg en #wachtwoord_check uit registratielaag en geeft in #wachtwoordCheckRegistratie
-// weer of de wachtwoorden al dan niet overeen komen
+// REGISTRATIE - Na invullen en validatie van het registratieFormulier en klik #registreren worden gegevens opgeslagen
+// in de database
+document.getElementById('registreren').addEventListener('click', (e) => {
+    let email_reg = document.getElementById('emailadres').value;       // emailadres
+    let wachtwoord_reg = document.getElementById('wachtwoord').value;  // wachtwoord
+    let voornaam = document.getElementById('voornaam').value;        // voornaam
+    let tussenvoegsel = document.getElementById('tussenvoegsel').value;     // tussenvoegsel
+    let achternaam = document.getElementById('achternaam').value;      // achternaam
+    let geboortedatum = document.getElementById('geboortedatum').value;   // geboortedatum
+    let bsn = document.getElementById('bsn').value;             // bsn
+    let straatnaam = document.getElementById('straat').value;      // straat
+    let huisnummer = document.getElementById('huisnummer').value;      // huisnummer
+    let toevoeging = document.getElementById('toevoeging').value;      // toevoeging
+    let postcode = document.getElementById('postcode').value;        // postcode
+    let woonplaats = document.getElementById('woonplaats').value;      // woonplaats
+
+    let data = {
+        "emailadres":email_reg,
+        "wachtwoord":wachtwoord_reg,
+        "voornaam":voornaam,
+        "tussenvoegsel":tussenvoegsel,
+        "achternaam":achternaam,
+        "geboortedatum":geboortedatum,
+        "bsn":bsn,
+        "straat":straatnaam,
+        "huisnummer":huisnummer,
+        "toevoeging":toevoeging,
+        "postcode":postcode,
+        "woonplaats":woonplaats
+    }
+
+    e.preventDefault();
+    const login = 'http://localhost:8080/registratie';
+    fetch(login, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            console.log(response);
+            return response.json()})
+        .then((data) => {
+            console.log(data);
+            if (data.error) {
+                alert("Registratie mislukt");
+            } else {
+                alert("Registratie geslaagd!")
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
+// REGISTRATIE - Vergelijkt de ingevulde values uit #wachtwoord_reg en #wachtwoord_check in de registratielaag en geeft
+// in #wachtwoordCheckRegistratie weer of de wachtwoorden al dan niet overeen komen
 document.getElementById('wachtwoord_reg').addEventListener('keyup', checkOvereenkomenWachtwoorden);
 document.getElementById('wachtwoord_check').addEventListener('keyup', checkOvereenkomenWachtwoorden);
 
@@ -109,6 +139,22 @@ function checkOvereenkomenWachtwoorden() {
     }
 }
 
+// FINANCIEEL-OVERZICHT
 function toonFinancieelOverzicht() {
     window.location.href = "FinancieelOverzicht.html";
+}
+
+// WACHTWOORD-RESET - Vanuit Login Scherm naar Wachtwoord vergeten pagina bij klik op #naarWachtwoordVergeten
+document.getElementById('naarWachtwoordVergeten').addEventListener('click',toonWachtwoordVergeten);
+
+function toonWachtwoordVergeten(){
+    document.getElementById('wachtwoordVergetenLaag').style.display = 'block';
+}
+
+// WACHTWOORD-RESET - Vanuit WachtwoordVergetenLaag naar login en registreren
+document.getElementById('naarLoginPagina').addEventListener('click', toonLoginPagina);
+document.getElementById('naarRegistreren1').addEventListener('click', toonRegistratieLaag);
+
+function toonLoginPagina(){
+    document.getElementById('wachtwoordVergetenLaag').style.display = 'none';
 }
