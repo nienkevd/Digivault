@@ -6,7 +6,7 @@
     --divaDrop: #131313;
     --divaIvoor: #fffff0;
     --divaGroen: #44c26e;
-    --divaRood: #E34234;
+    --divaRood: #ec1f1f;
 }
 
 /* ----- FONTS ----- */
@@ -143,8 +143,9 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 
 .wachtwoordVergeten{ /* Aanpassing voor wachtwoord vergeten */
     display: none;
-    width: 950px;
-    height: 660px;
+    padding-right: 48px;
+    width: 430px;
+    height: 635px;
 }
 
 .grid_3 {   /* Standaardstijl voor gebruik grid van 3 grid-cellen */

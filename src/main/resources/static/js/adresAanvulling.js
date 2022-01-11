@@ -1,7 +1,8 @@
-document.querySelector('#postcode').addEventListener('focusout', checkForAddressPart);
-document.querySelector('#huisnummer').addEventListener('focusout', checkForAddressPart);
+document.querySelector('#postcode').addEventListener('focusout', verkrijgAdresGegevens);
+document.querySelector('#huisnummer').addEventListener('focusout', verkrijgAdresGegevens);
 
-function checkForAddressPart() {
+// Checkt ingevoerde postcode op regex, en haalt op basis van postcode en huisnummer adresGegevens op
+function verkrijgAdresGegevens() {
     let regex = new RegExp(/^[1-9][0-9]{3}[\s]?[A-Za-z]{2}$/i);
     let postcode = document.querySelector('#postcode').value
     let huisnummer = document.querySelector('#huisnummer').value
@@ -14,11 +15,12 @@ function checkForAddressPart() {
             },
         })
             .then(response => response.json())
-            .then(json => vulAdresgegevens(json));
+            .then(json => vulAdresGegevens(json));
     }
 }
 
-function vulAdresgegevens(data) {
+// Vult de velden #woonplaats en #straatnaam met de verkregen gegevens
+function vulAdresGegevens(data) {
     let adresGegevens = data;
     document.querySelector('#woonplaats').value = adresGegevens.city;
     document.querySelector('#straatnaam').value = adresGegevens.street;
