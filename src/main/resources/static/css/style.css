@@ -7,6 +7,7 @@
     --divaIvoor: #fffff0;
     --divaGroen: #44c26e;
     --divaRood: #ec1f1f;
+    --divaBrons: #533302;
 }
 
 /* ----- FONTS ----- */
@@ -152,7 +153,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     display: none;
     padding: 70px 50px;
     width: 950px;
-    height: 660px;
+    height: 665px;
 }
 
 .financieelOverzicht { /* Aanpassingen voor financieel overzicht*/
@@ -247,16 +248,39 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 
 /* ----- SCRIPTS ----- */
 
-@media only screen and (max-width: 900px) {    /* vergroot margin-top bij scherm kleiner dan 600px ivm smartphones */
+/* vergroot margin-top bij scherm kleiner dan 600px ivm smartphones */
+@media only screen and (max-width: 900px) {
     body {
         margin-top: 200px;
     }
 }
 
-::-webkit-calendar-picker-indicator{    /* Aanpassing kalendericoon registratieLaag */
+/* Aanpassing kalendericoon registratieLaag */
+::-webkit-calendar-picker-indicator{
     filter: invert(1);
 }
 
-::-ms-reveal {    /* Aanpassing wachtwoord-iconen registratieLaag */
+/* Aanpassing wachtwoord-iconen registratieLaag */
+::-ms-reveal {
     filter: invert(1);
+}
+
+/* aanpassingen voor scrollbar */
+::-webkit-scrollbar {
+    margin-right: -5px;
+    width: 13px;
+}
+::-webkit-scrollbar-track {
+    background: #1c1c1c;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: var(--divaDrop);
+    height: 30px;
+    border: 6px solid #232323;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #222;
+    background: var(--divaBrons);
 }

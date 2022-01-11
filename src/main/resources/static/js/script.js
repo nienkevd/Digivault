@@ -58,61 +58,70 @@ function verbergRegistratieLaag() {
     document.getElementById('registratieLaag').style.display = 'none';
 }
 
-// REGISTRATIE - Na invullen en validatie van het registratieFormulier en klik #registreren worden gegevens opgeslagen
-// in de database
+// REGISTRATIE - Na het invullen en validatie van het #registratieFormulier en klik op #registreren worden gegevens
+// opgeslagen in de database
 document.getElementById('registreren').addEventListener('click', (e) => {
-    let email_reg = document.getElementById('emailadres').value;       // emailadres
-    let wachtwoord_reg = document.getElementById('wachtwoord').value;  // wachtwoord
-    let voornaam = document.getElementById('voornaam').value;        // voornaam
+    let email_reg = document.getElementById('email_reg').value;             // emailadres
+    let wachtwoord_reg = document.getElementById('wachtwoord_reg').value;   // wachtwoord
+    let voornaam = document.getElementById('voornaam').value;               // voornaam
     let tussenvoegsel = document.getElementById('tussenvoegsel').value;     // tussenvoegsel
-    let achternaam = document.getElementById('achternaam').value;      // achternaam
-    let geboortedatum = document.getElementById('geboortedatum').value;   // geboortedatum
-    let bsn = document.getElementById('bsn').value;             // bsn
-    let straatnaam = document.getElementById('straat').value;      // straat
-    let huisnummer = document.getElementById('huisnummer').value;      // huisnummer
-    let toevoeging = document.getElementById('toevoeging').value;      // toevoeging
-    let postcode = document.getElementById('postcode').value;        // postcode
-    let woonplaats = document.getElementById('woonplaats').value;      // woonplaats
-
+    let achternaam = document.getElementById('achternaam').value;           // achternaam
+    let geboortedatum = document.getElementById('geboortedatum').value;     // geboortedatum
+    let bsn = document.getElementById('bsn').value;                         // bsn
+    let straatnaam = document.getElementById('straatnaam').value;           // straat
+    let huisnummer = document.getElementById('huisnummer').value;           // huisnummer
+    let toevoeging = document.getElementById('toevoeging').value;           // toevoeging
+    let postcode = document.getElementById('postcode').value;               // postcode
+    let woonplaats = document.getElementById('woonplaats').value;           // woonplaats
     let data = {
-        "emailadres":email_reg,
-        "wachtwoord":wachtwoord_reg,
-        "voornaam":voornaam,
-        "tussenvoegsel":tussenvoegsel,
-        "achternaam":achternaam,
-        "geboortedatum":geboortedatum,
-        "bsn":bsn,
-        "straat":straatnaam,
-        "huisnummer":huisnummer,
-        "toevoeging":toevoeging,
-        "postcode":postcode,
-        "woonplaats":woonplaats
+        'emailadres': email_reg,
+        'wachtwoord': wachtwoord_reg,
+        'voornaam': voornaam,
+        'tussenvoegsel': tussenvoegsel,
+        'achternaam': achternaam,
+        'geboortedatum': geboortedatum,
+        'bsn': bsn,
+        'straat': straatnaam,
+        'huisnummer': huisnummer,
+        'toevoeging': toevoeging,
+        'postcode': postcode,
+        'woonplaats': woonplaats
     }
 
-    e.preventDefault();
-    const login = 'http://localhost:8080/registratie';
-    fetch(login, {
-        method: "POST",
+    fetch("http://localhost:8080/registratie" + data , {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify(data),
     })
-        .then((response) => {
-            console.log(response);
-            return response.json()})
-        .then((data) => {
-            console.log(data);
-            if (data.error) {
-                alert("Registratie mislukt");
-            } else {
-                alert("Registratie geslaagd!")
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+        .then(response => response.json())
+        .then(json => vulAdresGegevens(json));
+
+    // e.preventDefault();
+    // const login = 'http://localhost:8080/registratie';
+    // fetch(login, {
+    //     method: "POST",
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'Access-Control-Allow-Origin': '*'
+    //     },
+    //     body: JSON.stringify(data),
+    // })
+    //     .then((response) => {
+    //         console.log(response);
+    //         return response.json()})
+    //     .then((data) => {
+    //         console.log(data);
+    //         if (data.error) {
+    //             alert("Registratie mislukt");
+    //         } else {
+    //             alert("Registratie geslaagd!")
+    //         }
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
 });
 
 // REGISTRATIE - Vergelijkt de ingevulde values uit #wachtwoord_reg en #wachtwoord_check in de registratielaag en geeft
