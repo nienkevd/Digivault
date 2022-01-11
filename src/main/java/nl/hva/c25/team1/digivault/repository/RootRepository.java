@@ -65,7 +65,7 @@ public class RootRepository {
             portefeuilleItem.setTransactiePartij(klant);
         }
         klant.setPortefeuille(itemsKlant);
-        klant.setRekening(rekeningDAO.vindRekeningOpId(klantDAO.vindRekeningIdVanKlant(klant)));
+        klant.setRekening(rekeningDAO.vindRekeningOpTransactiePartijId(klantId));
         return klant;
     }
 
