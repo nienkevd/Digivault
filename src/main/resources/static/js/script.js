@@ -34,11 +34,10 @@ document.getElementById("login").addEventListener("click", (e) => {
             return response.json()})
         .then((data) => {
             console.log(data);
-            // code here //
             if (data.error) {
-                alert("Error Password or Username"); /*displays error message*/
+                alert("Error Password or Username");
             } else {
-                alert("Login geslaagd!")
+                toonFinancieelOverzicht();
             }
         })
         .catch((err) => {
@@ -108,4 +107,8 @@ function checkOvereenkomenWachtwoorden() {
         wachtwoord_info.innerHTML = identiek;
         wachtwoord_info.style.color = 'var(--divaGroen)';
     }
+}
+
+function toonFinancieelOverzicht() {
+    window.location.href = "FinancieelOverzicht.html";
 }

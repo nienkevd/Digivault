@@ -45,6 +45,13 @@ h1 {    /* Header 1 */
     margin-bottom: 30px;
 }
 
+h2[class="overzicht"] { /* Header 2 financieel overzicht */
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: -10px;
+
+}
+
 pre {    /* Preformatted text, neemt spaties mee */
     font-family: diva, Verdana, sans-serif;
     text-align: center;
@@ -61,6 +68,13 @@ p {    /* Alinea's */
 p[class="registratie"] {    /* Aanpassingen voor alinea's in de registratieLaag */
     margin-top: 9px;
     margin-right: -2px;
+}
+
+p[class="fi"] {    /* Aanpassingen voor alinea's in het financieel overzicht */
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--divaRoze);
+
 }
 
 a {    /* Standaardstijl voor linkjes */
@@ -139,6 +153,20 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     padding: 70px 50px;
     width: 950px;
     height: 660px;
+}
+
+.financieelOverzicht { /* Aanpassingen voor financieel overzicht*/
+    display: block;
+    padding: 30px 90px;
+    width: 950px;
+    height: 620px;
+    overflow-y: auto;
+    margin-top:42px;
+}
+
+.financieelOverzichtContainer { /* Container rondom financieel overzicht, anders valt avatar eraf door scrollbalk*/
+    width: 950px;
+    height: 620px;
 }
 
 .wachtwoordVergeten{ /* Aanpassing voor wachtwoord vergeten */
