@@ -12,7 +12,6 @@ document.getElementById("naarWachtwoordVergeten").addEventListener("click",toonW
 
 function toonWachtwoordVergeten(){
     document.getElementById("wachtwoordVergetenLaag").style.display = "block";
-
 }
 
 //vanuit WachtwoordVergetenLaag naar login en registreren
@@ -35,8 +34,6 @@ function toonLoginPagina(){
         $('#wachtwoordInfo').html('niet identiek').css('color', '#C0392B');
 });*/
 
-
-
 // RegistratieLaag tonen bij klik op #welkomsAanbieding en #naarRegistreren
 document.getElementById("welkomsAanbieding").addEventListener("click", toonRegistratieLaag);
 document.getElementById("naarRegistreren").addEventListener("click", toonRegistratieLaag);
@@ -50,12 +47,26 @@ function verbergRegistratieLaag() {
     document.getElementById("registratieLaag").style.display = "none";
 }
 
-// Check op overkomen van wachtwoorden in registratieLaag
-$('#wachtwoord_reg, #wachtwoord_check').on('keyup', function () {
-    if ($('#wachtwoord_reg').val().length === 0 || $('#wachtwoord_check').val().length === 0) {
-        $('#wachtwoordCheckRegistratie').html('').css('color', 'black');
-    } else if ($('#wachtwoord_reg').val() === $('#wachtwoord_check').val()) {
-        $('#wachtwoordCheckRegistratie').html('komt overeen').css('color', 'green');
-    } else
-        $('#wachtwoordCheckRegistratie').html('niet identiek').css('color', '#C0392B');
-});
+// Vergelijkt values uit #wachtwoord_reg en #wachtwoord_check uit registratielaag en geeft in #wachtwoordCheckRegistratie
+// weer of de wachtwoorden al dan niet overeen komen
+document.getElementById("wachtwoord_reg").addEventListener("keyup", checkOvereenkomenWachtwoorden);
+document.getElementById("wachtwoord_check").addEventListener("keyup", checkOvereenkomenWachtwoorden);
+
+function checkOvereenkomenWachtwoorden() {
+    let identiek = `komt overeen`;
+    let verschil = `niet identiek`;
+    let wachtwoord_reg = document.getElementById("wachtwoord_reg");
+    let wachtwoord_check = document.getElementById("wachtwoord_check");
+    let wachtwoord_info = document.getElementById("wachtwoordCheckInformatie");
+
+    if (wachtwoord_reg.value.length === 0 || wachtwoord_check.value.length === 0) {
+        wachtwoord_info.innerHTML = "";
+        wachtwoord_info.style.color = "black";
+    } else if (wachtwoord_reg.value !== wachtwoord_check.value) {
+        wachtwoord_info.innerHTML = verschil;
+        wachtwoord_info.style.color = "var(--divaRood)";
+    } else if (wachtwoord_reg.value === wachtwoord_check.value) {
+        wachtwoord_info.innerHTML = identiek;
+        wachtwoord_info.style.color = "var(--divaGroen)";
+    }
+}

@@ -5,6 +5,8 @@
     --divaRoze: #f27ddd;
     --divaDrop: #131313;
     --divaIvoor: #fffff0;
+    --divaGroen: #50C878;
+    --divaRood: #E34234;
 }
 
 /* ----- FONTS ----- */
@@ -205,7 +207,7 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     padding-right: 45px;
 }
 
-#wachtwoordCheckRegistratie {    /* Stijl info over overeenkomen wachtwoorden */
+#wachtwoordCheckInformatie {    /* Stijl info over overeenkomen wachtwoorden */
     position: absolute;
     left: calc(50% + 385px);
     top: 190px;
