@@ -10,6 +10,7 @@
         <script defer src="js/script.js"></script>
         <!-- javascript ivm aanvullen adresgegevens -->
         <script defer src="js/adresAanvulling.js"></script>
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
     </head>
 
     <body>
@@ -41,7 +42,7 @@
     <div id= "wachtwoordVergetenLaag" class="standaard wachtwoordVergeten">
         <img class="avatar" alt="Ooops" src="images/oops1.jpg">
         <h1>Wachtwoord vergeten?</h1>
-        <form>
+        <form name="registratieFormulier">
             <p>E-mailadres</p>
             <input id="email_login1" name="email_login" placeholder="e-mailadres" title="vul je e-mailadres in"
                    required="" type="email">
@@ -72,7 +73,7 @@
                 <input id="wachtwoord_check" maxlength="65" minlength="10" name="wachtwoord_check"
                        placeholder="wachtwoord (check) *" title="herhaal je wachtwoord" required="" onkeyup='check()'
                        type="password">
-                <span id='wachtwoordCheckRegistratie'></span>
+                <span id='wachtwoordCheckInformatie'></span>
                 <p class="registratie">Persoonsgegevens: </p>
                 <input id="voornaam" name="voornaam" placeholder="voornaam *" title="je voornaam" required=""
                        type="text">
