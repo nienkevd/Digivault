@@ -65,11 +65,10 @@
         <form id="registratieFormulier">
             <div class="grid_4">
                 <p class="registratie">Inloggegevens:</p>
-                <input id="email_reg" name="email_reg" placeholder="e-mailadres *" title="je e-mailadres" required=""
-                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" type="email">
-                <input id="wachtwoord_reg" maxlength="65" minlength="10" name="wachtwoord_reg"
-                       placeholder="wachtwoord *"
-                       title="je wachtwoord (10 tot 65 tekens)" required="" onkeyup='check()' type="password">
+                <input id="email_reg" name="email_reg" placeholder="e-mailadres *" title="vul een geldig e-mailadres in"
+                       required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,6}$" type="email">
+                <input id="wachtwoord_reg" maxlength="65" minlength="10" name="wachtwoord_reg" onkeyup='check()'
+                       placeholder="wachtwoord *" title="je wachtwoord (10 tot 65 tekens)" required="" type="password">
                 <input id="wachtwoord_check" maxlength="65" minlength="10" name="wachtwoord_check"
                        placeholder="wachtwoord (check) *" title="herhaal je wachtwoord" required="" onkeyup='check()'
                        type="password">
@@ -91,7 +90,7 @@
                 <input id="postcode" name="postcode" placeholder="postcode *" title="je postcode" required=""
                        pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" type="text">
                 <input id="huisnummer" name="huisnummer" placeholder="huisnummer *" title="je huisnummer" required=""
-                       type="text">
+                       type="number">
                 <input id="toevoeging" name="toevoeging" placeholder="toevoeging"
                        title="je eventuele huisnummertoevoeging"
                        type="text">

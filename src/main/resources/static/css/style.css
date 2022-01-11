@@ -1,7 +1,7 @@
 /* ----- KLEUREN ----- */
 
 :root {
-    --divaGoud: #ffbd54;
+    --divaGoud: #ffc95f;
     --divaRoze: #f27ddd;
     --divaDrop: #131313;
     --divaIvoor: #fffff0;
@@ -127,8 +127,9 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
 
 .loginPagina {    /* Aanpassingen voor loginPagina */
     display: block;
+    padding-right: 48px;
     width: 430px;
-    height: 505px;
+    height: 508px;
 }
 
 .registratieLaag {    /* Aanpassingen voor registratieLaag */

@@ -6,6 +6,7 @@ document.getElementById("logoDigivault").addEventListener("click", verversPagina
 function verversPagina() {
     location.reload();
 }
+
 //vanuit Login Scherm naar Wachtwoord vergeten pagina bij klik op #naarWachtwoordVergeten
 document.getElementById("naarWachtwoordVergeten").addEventListener("click",toonWachtwoordVergeten);
 

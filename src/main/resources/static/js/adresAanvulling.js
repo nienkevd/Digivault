@@ -14,7 +14,7 @@ function checkForAddressPart(){
     if(regex.test(postcode) && huisnummer){
         // let data = { postcode: postcode, nr: huisnummer};
         // stuur data als form data ipv json, want backend accepteert alleen form
-        let formData = `postcode=${postcode}&number=${huisnummer}` //postcode=1234AB&nr=15
+        let formData = `postcode=${postcode}&number=${huisnummer}` // postcode=1234AB&nr=15
         fetch("https://postcode.tech/api/v1/postcode?" + formData , {
             headers: {
                 'Authorization': 'Bearer f972ed2c-4197-4cde-823b-54cf38520abd',
