@@ -259,7 +259,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     cursor: pointer;
     top: 15px;
     width: 250px;
-    height: 125px;
+    height: 127px;
 }
 
 #logoDigivault:hover {    /* Stijl Digivault-logo bij hover */
@@ -271,18 +271,18 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     cursor: pointer;
     top: 20px;
     right: 0;
-    width: 225px;
-    height: 150px;
-    margin-right: -5px;
-    margin-top: -5px;
+    width: 250px;
+    height: 167px;
+    margin-right: 0px;
+    margin-top: 0px;
     transition: .3s ease-in-out;
 }
 
 #welkomsAanbieding:hover {    /* Stijl registratieLabel bij hover */
     opacity: 1;
     transform: scale(1.08);
-    margin-right: 0;
-    margin-top: 0;
+    margin-right: 5px;
+    margin-top: 5px;
 }
 
 #registratieFormulier {    /* Creëert ruimte voor wachtwoordInfo */
@@ -321,7 +321,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 /* vergroot margin-top bij scherm kleiner dan 600px ivm smartphones */
 @media only screen and (max-width: 900px) {
     body {
-        margin-top: 200px;
+        margin-top: 130px;
     }
 }
 
