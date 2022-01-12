@@ -124,10 +124,10 @@ function registratieBevestiging(data) {
 }
 
 // REGISTRATIE - Sluit #registratieBevestiging
-document.getElementById('welkomsAanbieding').addEventListener('click', verbergRegistratieBevestiging);
+document.getElementById('bevestigingSluiten').addEventListener('click', verbergRegistratieBevestiging);
 
 function verbergRegistratieBevestiging() {
-    document.getElementById('bevestigingSluiten').style.display = 'none';
+    document.getElementById('registratieBevestiging').style.display = 'none';
 }
 
 // REGISTRATIE - Vergelijkt de ingevulde values uit #wachtwoord_reg en #wachtwoord_check in de registratielaag en geeft
