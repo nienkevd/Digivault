@@ -61,7 +61,7 @@
     <div id="registratieLaag" class="standaard registratieLaag">
         <img class="avatar" alt="registratie-avatar" src="images/registratie_avatar.jpg">
         <h1>Registreren</h1>
-        <pre>Vul hieronder je gegevens in en loop binnen als DIVA!  Velden met een sterretje zijn verplicht.</pre>
+        <pre id="infoInvullen">Vul hieronder je gegevens in en loop binnen als DIVA!  Velden met een sterretje zijn verplicht.</pre>
         <form id="registratieFormulier">
             <div class="grid_4">
                 <p class="registratie">Inloggegevens:</p>
@@ -106,6 +106,15 @@
                 <br>
             </div>
         </form>
+    </div>
+
+    <!-- Opzet registratieLaag -->
+    <div id="registratieBevestiging" class="standaard registratieBevestiging">
+        <img class="avatarReg" alt="registratie-avatar" src="images/geregistreerd.gif">
+        <h1 id="registratieKop">Welkom DIVA!</h1>
+        <pre id="registratieInformatie"></pre>
+        <pre id="registratieTegoed">De  <span id="veelGeld">€100.000</span>  staat op je rekening!</pre>
+        <input id="bevestigingSluiten" type="submit" value="Fijn!">
     </div>
 
     </body>

@@ -50,11 +50,13 @@ h2[class="overzicht"] { /* Header 2 financieel overzicht */
     text-align: center;
     margin-bottom: 30px;
     margin-top: -10px;
-
 }
 
 pre {    /* Preformatted text, neemt spaties mee */
     font-family: diva, Verdana, sans-serif;
+}
+
+#infoInvullen {
     text-align: center;
     font-weight: normal;
     margin-top: -25px;
@@ -146,14 +148,21 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     display: block;
     padding-right: 48px;
     width: 430px;
-    height: 508px;
+    height: 504px;
 }
 
 .registratieLaag {    /* Aanpassingen voor registratieLaag */
     display: none;
     padding: 70px 50px;
     width: 950px;
-    height: 665px;
+    height: 655px;
+}
+
+.registratieBevestiging {    /* Melding na geslaagde registratie */
+    display: none;
+    padding-top: 240px;
+    width: 430px;
+    height: 625px;
 }
 
 .financieelOverzicht { /* Aanpassingen voor financieel overzicht*/
@@ -200,6 +209,16 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     left: calc(50% - 55px);
 }
 
+.avatarReg {
+    width: 430px;
+    height: 270px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 215px);
+}
+
 /* ----- ID'S ----- */
 
 #logoDigivault {    /* Stijl Digivault-logo */
@@ -237,6 +256,17 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     padding-right: 45px;
 }
 
+#registratieBevestiging {
+    font-size: 1.05em;
+    line-height: 1.50em;
+    text-align: center;
+    font-weight: lighter;
+}
+
+#registratieKop {
+    margin-top: 70px;
+}
+
 #wachtwoordCheckInformatie {    /* Stijl info over overeenkomen wachtwoorden */
     position: absolute;
     left: calc(50% + 385px);
@@ -244,6 +274,12 @@ input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij
     font-size: 12pt;
     line-height: 0.95em;
     max-width: 20px;
+}
+
+#veelGeld {
+    color: var(--divaRoze);
+    font-weight: bold;
+    font-size: x-large;
 }
 
 /* ----- SCRIPTS ----- */

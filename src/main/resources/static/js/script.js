@@ -93,7 +93,6 @@ document.getElementById('registreren').addEventListener('click', (e) => {
     console.log(JSON.stringify(data));
     fetch(url, {
         method: "POST",
-        // mode: 'no-cors',
         headers: {
             'Access-Control-Allow-Methods': 'POST',
             'Content-Type': 'application/json',
@@ -109,13 +108,27 @@ document.getElementById('registreren').addEventListener('click', (e) => {
             if (data.error) {
                 alert("Registratie mislukt");
             } else {
-                alert("Registratie geslaagd!")
+                registratieBevestiging(data);
             }
         })
         .catch((err) => {
             console.log(err);
         });
 });
+
+// REGISTRATIE - Toont #registratieBevestiging met daarop de melding dat registratie gelukt is
+function registratieBevestiging(data) {
+    document.getElementById('registratieBevestiging').style.display = 'block';
+    document.getElementById('registratieInformatie').innerHTML = data;
+    verbergRegistratieLaag()
+}
+
+// REGISTRATIE - Sluit #registratieBevestiging
+document.getElementById('welkomsAanbieding').addEventListener('click', verbergRegistratieBevestiging);
+
+function verbergRegistratieBevestiging() {
+    document.getElementById('bevestigingSluiten').style.display = 'none';
+}
 
 // REGISTRATIE - Vergelijkt de ingevulde values uit #wachtwoord_reg en #wachtwoord_check in de registratielaag en geeft
 // in #wachtwoordCheckRegistratie weer of de wachtwoorden al dan niet overeen komen
