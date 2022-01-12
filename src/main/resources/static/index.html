@@ -8,8 +8,7 @@
         <link rel="stylesheet" href="css/style.css">
         <!-- algemeen javascript -->
         <script defer src="js/script.js"></script>
-        <!-- javascript ivm aanvullen adresgegevens -->
-        <script defer src="js/adresAanvulling.js"></script>
+        <script defer src="js/registratie.js"></script>
     </head>
 
     <body>
@@ -67,11 +66,10 @@
                 <p class="registratie">Inloggegevens:</p>
                 <input id="email_reg" name="email_reg" placeholder="e-mailadres *" title="vul een geldig e-mailadres in"
                        required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,6}$" type="email">
-                <input id="wachtwoord_reg" maxlength="65" minlength="10" name="wachtwoord_reg" onkeyup='check()'
+                <input id="wachtwoord_reg" maxlength="65" minlength="10" name="wachtwoord_reg"
                        placeholder="wachtwoord *" title="je wachtwoord (10 tot 65 tekens)" required="" type="password">
                 <input id="wachtwoord_check" maxlength="65" minlength="10" name="wachtwoord_check"
-                       placeholder="wachtwoord (check) *" title="herhaal je wachtwoord" required="" onkeyup='check()'
-                       type="password">
+                       placeholder="wachtwoord (check) *" title="herhaal je wachtwoord" required="" type="password">
                 <span id='wachtwoordCheckInformatie'></span>
                 <p class="registratie">Persoonsgegevens: </p>
                 <input id="voornaam" name="voornaam" placeholder="voornaam *" title="je voornaam" required=""
@@ -87,8 +85,8 @@
                        title="je BSN (8 of 9 cijfers)" required="" type="text">
                 <br>
                 <p class="registratie">Adresgegevens:</p>
-                <input id="postcode" name="postcode" placeholder="postcode *" title="je postcode" required=""
-                       pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" type="text">
+                <input id="postcode" name="postcode" placeholder="postcode *" title="je postcode (AAAA11)" required=""
+                       pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" maxlength="6" type="text">
                 <input id="huisnummer" name="huisnummer" placeholder="huisnummer *" title="je huisnummer" required=""
                        type="text">
                 <input id="toevoeging" name="toevoeging" placeholder="toevoeging"
@@ -114,8 +112,11 @@
         <h1 id="registratieKop">Welkom DIVA!</h1>
         <pre id="registratieInformatie"></pre>
         <pre id="registratieTegoed">De  <span id="veelGeld">€100.000</span>  staat op je rekening!</pre>
-        <input id="bevestigingSluiten" type="submit" value="Fijn!">
+        <input id="bevestigingSluiten" type="submit" value="Super!">
     </div>
+
+    <!-- javascript ivm aanvullen adresgegevens -->
+    <script defer src="js/adresAanvulling.js"></script>
 
     </body>
 </html>
