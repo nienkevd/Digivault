@@ -50,6 +50,7 @@ h2[class="overzicht"] { /* Header 2 financieel overzicht */
     text-align: center;
     margin-bottom: 30px;
     margin-top: -10px;
+    color: var(--divaRoze);
 }
 
 pre {    /* Preformatted text, neemt spaties mee */
@@ -367,4 +368,19 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     text-align: center;
     border-radius: 15px;
     height: 30px;
+}
+
+/* ----- TABLES ----- */
+table {
+    width: 700px;
+}
+th {
+    color: var(--divaRoze);
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    height: 40px;
+}
+td {
+    width: 400px;
 }
