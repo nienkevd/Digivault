@@ -88,23 +88,14 @@ document.getElementById('registreren').addEventListener('click', (e) => {
         'woonplaats': woonplaats
     }
 
-    // fetch("http://localhost:8080/registratie" + data , {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Access-Control-Allow-Origin': '*'
-    //     },
-    // })
-    //     .then(response => response.json())
-    //     .then(json => vulAdresGegevens(json));
-
     e.preventDefault();
     const url = 'http://localhost:8080/registratie';
     console.log(JSON.stringify(data));
     fetch(url, {
         method: "POST",
-        mode: 'no-cors',
+        // mode: 'no-cors',
         headers: {
+            'Access-Control-Allow-Methods': 'POST',
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
         },

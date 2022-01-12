@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,20 +41,12 @@ public class RegistratieController {
      * @param registerDto RegisterDto
      * @return String met info over het slagen van de registratie
      */
+    @CrossOrigin
     @PostMapping("/registratie")
     public ResponseEntity<String> registratieHandler(@Valid @RequestBody RegisterDto registerDto) {
         Klant klant = new Klant(registerDto);
         registratieService.registratie(klant);
         HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(String.format("\"Registratie geslaagd!\""), headers,
-                HttpStatus.OK);
+        return new ResponseEntity<>(String.format("\"Registratie geslaagd!\""), headers, HttpStatus.OK);
     }
-
-//    @PostMapping("/registratie")
-//    public String registratieHandler(@Valid @RequestBody RegisterDto registerDto) {
-//        Klant klant = new Klant(registerDto);
-//        registratieService.registratie(klant);
-//        return String.format("Registratie geslaagd!\nNaam: %s\nE-mailadres: %s\nIBAN: %s", klant.getNaam(),
-//                klant.getAccount().getEmailadres(), klant.getRekening().getIBAN());
-//    }
 }
