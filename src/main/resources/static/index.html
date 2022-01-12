@@ -38,7 +38,7 @@
     <div id= "wachtwoordVergetenLaag" class="standaard wachtwoordVergeten">
         <img class="avatar" alt="Ooops" src="images/oops1.jpg">
         <h1>Wachtwoord vergeten?</h1>
-        <form>
+        <form name="registratieFormulier">
             <p>E-mailadres</p>
             <input id="email_login1" name="email_login" placeholder="e-mailadres" title="vul je e-mailadres in"
                    required="" type="email">
@@ -69,25 +69,25 @@
                 <input id="wachtwoord_check" maxlength="65" minlength="10" name="wachtwoord_check"
                        placeholder="wachtwoord (check) *" title="herhaal je wachtwoord" required="" onkeyup='check()'
                        type="password">
-                <span id='wachtwoordCheckRegistratie'></span>
+                <span id='wachtwoordCheckInformatie'></span>
                 <p class="registratie">Persoonsgegevens: </p>
                 <input id="voornaam" name="voornaam" placeholder="voornaam *" title="je voornaam" required=""
                        type="text">
-                <input id="voorvoegsel" name="voorvoegsel" placeholder="voorvoegsel" title="je eventuele voorvoegsel"
-                       type="text">
+                <input id="tussenvoegsel" name="tussenvoegsel" placeholder="tussenvoegsel"
+                       title="je eventuele tussenvoegsel" type="text">
                 <input id="achternaam" name="achternaam" placeholder="achternaam *" title="je achternaam" required=""
                        type="text">
                 <br>
                 <input id="geboortedatum" name="geboortedatum" placeholder="geboortedatum *" title="je geboortedatum"
                        required="" type="date">
                 <input id="bsn" maxlength="9" minlength="8" name="bsn" placeholder="bsn *"
-                       title="je BSN (8 of 9 cijfers)" required="" type="number">
+                       title="je BSN (8 of 9 cijfers)" required="" type="text">
                 <br>
                 <p class="registratie">Adresgegevens:</p>
                 <input id="postcode" name="postcode" placeholder="postcode *" title="je postcode" required=""
                        pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" type="text">
                 <input id="huisnummer" name="huisnummer" placeholder="huisnummer *" title="je huisnummer" required=""
-                       type="number">
+                       type="text">
                 <input id="toevoeging" name="toevoeging" placeholder="toevoeging"
                        title="je eventuele huisnummertoevoeging"
                        type="text">
@@ -103,11 +103,6 @@
                 <br>
             </div>
         </form>
-    </div>
-
-    <!-- Nog te verwijderen foutmelding -->
-    <div id="error" hidden>
-        <p>postcode, huisnummer combinatie is onbekend</p>
     </div>
 
     </body>
