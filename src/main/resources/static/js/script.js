@@ -46,7 +46,7 @@ document.getElementById("login").addEventListener("click", (e) => {
 });
 
 // REGISTRATIE - Tonen van de registratieLaag bij klik op #welkomsAanbieding en #naarRegistreren
-document.getElementById('welkomsAanbieding').addEventListener('click', toonRegistratieLaag);
+document.getElementById('bevestigingSluiten').addEventListener('click', toonRegistratieLaag);
 document.getElementById('naarRegistreren').addEventListener('click', toonRegistratieLaag);
 
 function toonRegistratieLaag() {

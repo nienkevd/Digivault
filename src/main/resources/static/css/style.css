@@ -290,6 +290,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 }
 
 #registratieBevestiging {
+    margin-top: 0px;
     font-size: 1.05em;
     line-height: 1.50em;
     text-align: center;
