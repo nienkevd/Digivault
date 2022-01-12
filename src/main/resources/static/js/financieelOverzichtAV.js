@@ -1,29 +1,29 @@
 window.onload = fetchData();
 
 function fetchData(){
-fetch("http://localhost:8080/info", {
+fetch("http://localhost:8080/financieeloverzicht/{klantId}", {
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("token"),
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
     },
 })
-    .then(r => {
-        if(r.status === 200){
-            return r.json()
-        } else if(r.status === 401){
-            // document.querySelector('#info').classList.add("error")
-            // return { "text": "Je bent niet geauthenticeerd. Haal eerst je token op" }
-            // of redirect naar opgegeven location
-            console.log(r.headers.get('Location'))
-            window.location.href = r.headers.get('Location');
-
+    .then(response => {
+        if(response.status === 200){
+            return response.json()
+        } else if(response.status === 401){
+            console.log(response.headers.get('Location'))
+            window.location.href = response.headers.get('Location');
         }
     })
     .then(data =>
-        document.querySelector('#info').innerHTML = data.text
+        createTable()
     )
     .catch()
+}
+
+function createTable(){
 }
 
 
