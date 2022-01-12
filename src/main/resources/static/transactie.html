@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DIGIVAULT - sterrenstatus by default</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- algemeen javascript -->
+    <script defer src="js/script.js"></script>
+</head>
+
+<body>
+
+
+<!-- Opzet transactiePagina -->
+<div id = "transactiePagina" class="standaard transactiePagina">
+    <img class="avatar" alt="Diva-trade" src="images/trade.jpeg">
+    <h1>Trade</h1>
+    <form>
+        <p>Saldo: {Saldo ophalen met JS</p>
+        <br>
+        <br>
+        <div class = "grid_3_transactie">
+        <p>Hoeveelheid</p>
+        <input class = "hoeveelheid" id="hoeveelheid" name="hoeveelheid" placeholder="vul hoeveelheid in" title="vul de hoeveelheid in"
+               required="" type="text">
+        <select id="dropdown" class = "dropdown_assets" name = "assets" required>
+            <option disabled selected value>Kies je cryptomunt</option>
+            <option id="asset" value = "BTC"> Bitcoin (BTC)</option>
+            <option  value = "ETH"> Ethereum (ETH)</option>
+            <option  value = "BNB"> Binance Coin (BNB)</option>
+        </select>
+        </div>
+        <br>
+        <br>
+        <p>Waarde: {Waarde ophalen met JS</p>
+        <br>
+        <p>Transactie kosten: {Transactie kosten ophalen met JS</p>
+        <div class = "grid_2">
+        <input id="koop" name="koop" type="submit" value="Koop">
+        <input id="verkoop" name="verkoop" type="submit" value="Verkoop">
+        </div>
+    </form>
+</div>
+</body>
+</html>
