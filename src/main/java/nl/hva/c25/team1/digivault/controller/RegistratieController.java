@@ -3,6 +3,9 @@ package nl.hva.c25.team1.digivault.controller;
 import nl.hva.c25.team1.digivault.model.*;
 import nl.hva.c25.team1.digivault.service.RegistratieService;
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,10 +41,19 @@ public class RegistratieController {
      * @return String met info over het slagen van de registratie
      */
     @PostMapping("/registratie")
-    public String registratieHandler(@Valid @RequestBody RegisterDto registerDto) {
+    public ResponseEntity<String> registratieHandler(@Valid @RequestBody RegisterDto registerDto) {
         Klant klant = new Klant(registerDto);
         registratieService.registratie(klant);
-        return String.format("Registratie geslaagd!\nNaam: %s\nE-mailadres: %s\nIBAN: %s", klant.getNaam(),
-                klant.getAccount().getEmailadres(), klant.getRekening().getIBAN());
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(String.format("\"Registratie geslaagd!\""), headers,
+                HttpStatus.OK);
     }
+
+//    @PostMapping("/registratie")
+//    public String registratieHandler(@Valid @RequestBody RegisterDto registerDto) {
+//        Klant klant = new Klant(registerDto);
+//        registratieService.registratie(klant);
+//        return String.format("Registratie geslaagd!\nNaam: %s\nE-mailadres: %s\nIBAN: %s", klant.getNaam(),
+//                klant.getAccount().getEmailadres(), klant.getRekening().getIBAN());
+//    }
 }

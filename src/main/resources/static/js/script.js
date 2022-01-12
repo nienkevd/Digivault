@@ -88,40 +88,42 @@ document.getElementById('registreren').addEventListener('click', (e) => {
         'woonplaats': woonplaats
     }
 
-    fetch("http://localhost:8080/registratie" + data , {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-        },
-    })
-        .then(response => response.json())
-        .then(json => vulAdresGegevens(json));
-
-    // e.preventDefault();
-    // const login = 'http://localhost:8080/registratie';
-    // fetch(login, {
-    //     method: "POST",
+    // fetch("http://localhost:8080/registratie" + data , {
+    //     method: 'POST',
     //     headers: {
     //         'Content-Type': 'application/json',
     //         'Access-Control-Allow-Origin': '*'
     //     },
-    //     body: JSON.stringify(data),
     // })
-    //     .then((response) => {
-    //         console.log(response);
-    //         return response.json()})
-    //     .then((data) => {
-    //         console.log(data);
-    //         if (data.error) {
-    //             alert("Registratie mislukt");
-    //         } else {
-    //             alert("Registratie geslaagd!")
-    //         }
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
+    //     .then(response => response.json())
+    //     .then(json => vulAdresGegevens(json));
+
+    e.preventDefault();
+    const url = 'http://localhost:8080/registratie';
+    console.log(JSON.stringify(data));
+    fetch(url, {
+        method: "POST",
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            console.log(response);
+            return response.json()})
+        .then((data) => {
+            console.log(data);
+            if (data.error) {
+                alert("Registratie mislukt");
+            } else {
+                alert("Registratie geslaagd!")
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
 // REGISTRATIE - Vergelijkt de ingevulde values uit #wachtwoord_reg en #wachtwoord_check in de registratielaag en geeft
