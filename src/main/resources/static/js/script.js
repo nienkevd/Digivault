@@ -64,3 +64,8 @@ document.getElementById('naarRegistreren1').addEventListener('click', toonRegist
 function toonLoginPagina(){
     document.getElementById('wachtwoordVergetenLaag').style.display = 'none';
 }
+
+function toonRegistratieLaag() {
+    registratieLaag.style.display = 'block';
+    welkomsAanbieding.style.display = 'none';
+}

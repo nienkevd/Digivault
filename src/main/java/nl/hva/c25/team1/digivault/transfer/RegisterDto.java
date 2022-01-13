@@ -15,9 +15,11 @@ import java.time.LocalDate;
 
 public class RegisterDto {
     @Email(message = "Vul een geldig e-mailadres in")
+    @Pattern(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$", message = "Vul een geldig e-mailadres in")
     @NotEmpty(message = "Vul een e-mailadres in")
     private String emailadres;
     @Size(min = 10, message = "Het wachtwoord moet uit minimaal 10 tekens bestaan")
+    @Size(max = 60, message = "Het wachtwoord moet uit minimaal 60 tekens bestaan")
     @Pattern(regexp = "[^ ]+", message = "Gebruik van spaties in wachtwoord is niet toegestaan")
     @NotEmpty(message = "Vul een wachtwoord in")
     private String wachtwoord;

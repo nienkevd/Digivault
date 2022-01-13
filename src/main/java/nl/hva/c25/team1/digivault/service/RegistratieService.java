@@ -123,7 +123,6 @@ public class RegistratieService {
      * methode om te checken of de ingevoerde bsn correct is
      * @param bsn
      */
-
     public boolean validateBsn (String bsn ){
         int bsnInt = Integer.valueOf(bsn);
 

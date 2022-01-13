@@ -74,7 +74,8 @@ p {    /* Alinea's */
 
 p[class="registratie"] {    /* Aanpassingen voor alinea's in de registratieLaag */
     margin-top: 9px;
-    margin-right: -2px;
+    margin-left: -10px;
+    margin-right: 2px;
 }
 
 p[class="fi"] {    /* Aanpassingen voor alinea's in het financieel overzicht */
@@ -169,9 +170,9 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 
 .registratieLaag {    /* Aanpassingen voor registratieLaag */
     display: none;
-    padding: 70px 50px;
+    padding: 70px 60px;
     width: 950px;
-    height: 670px;
+    height: 673px;
 }
 
 .registratieBevestiging {    /* Melding na geslaagde registratie */
@@ -224,7 +225,6 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 }
 
 .grid_3 {   /* Standaardstijl voor gebruik grid van 3 grid-cellen */
-    padding-left: 45px;
     display: grid;
     grid-gap: 12px;
     grid-template-columns: auto auto auto;
@@ -289,10 +289,6 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     margin-top: 5px;
 }
 
-#registratieFormulier {    /* Creëert ruimte voor wachtwoordInfo */
-    padding-right: 45px;
-}
-
 #registratieBevestiging {
     margin-top: 0px;
     font-size: 1.05em;
@@ -305,19 +301,10 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     margin-top: 70px;
 }
 
-#wachtwoordCheckInformatie {    /* Stijl info over overeenkomen wachtwoorden */
-    position: absolute;
-    left: calc(50% + 385px);
-    top: 200px;
-    font-size: 12pt;
-    line-height: 0.95em;
-    max-width: 20px;
-}
-
 #foutMeldingRegistratie {
     height: 14px;
     color: var(--divaRood);
-    top: -32px;
+    top: -34px;
     margin-bottom: 2px;
     position: relative;
     text-align: center;
