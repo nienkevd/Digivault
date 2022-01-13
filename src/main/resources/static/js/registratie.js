@@ -9,9 +9,6 @@ const registratieInformatie = document.getElementById('registratieInformatie');
 const registratieLaag = document.getElementById('registratieLaag');
 const foutMeldingRegistratie = document.getElementById('foutMeldingRegistratie');
 const welkomsAanbieding = document.getElementById('welkomsAanbieding');
-const domainArray = location.origin.split(':');
-const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
-const url = urlLead + 'registratie';
 
 // INPUTVELDEN
 const email_reg = document.getElementById('email_reg');
@@ -225,7 +222,7 @@ function registreerFormulier() {
     }
 
     console.log(JSON.stringify(data));
-    fetch(url, {
+    fetch(urlLead + 'registratie', {
         method: "POST",
         headers: {
             'Access-Control-Allow-Methods': 'POST',

@@ -2,7 +2,6 @@
 
 const domainArray = location.origin.split(':');
 const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
-const url = urlLead + 'login';
 
 // LOGO: Pagina verversen bij klik op #logoDigivault, verbergen van andere lagen
 document.getElementById('logoDigivault').addEventListener('click', verversPagina);
@@ -26,7 +25,7 @@ document.getElementById("login").addEventListener("click", (e) => {
 
     e.preventDefault();
     console.log(JSON.stringify(data));
-    fetch(url, {
+    fetch(urlLead + 'login', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',

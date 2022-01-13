@@ -1,8 +1,4 @@
-const domainArray = location.origin.split(':');
-const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
-const url = urlLead + 'financieeloverzicht/10';
-
-fetch(url, {
+fetch(urlLead + 'financieeloverzicht/10', {
     method: 'GET',
     headers: {
         'Authorization': localStorage.getItem("token"),
