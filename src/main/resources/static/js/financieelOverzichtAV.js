@@ -1,8 +1,7 @@
-
 fetch("http://localhost:8080/financieeloverzicht/10", {
     method: 'GET',
     headers: {
-        'Authorization': 'Bearer ' /*+ localStorage.getItem("token")*/,
+        'Authorization': localStorage.getItem("token"),
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
     },

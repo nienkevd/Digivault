@@ -87,6 +87,12 @@ public class JdbcKlantDAO implements KlantDAO {
         String sql = "SELECT rekeningID FROM transactiepartij WHERE tpID = ?;";
         return jdbcTemplate.queryForObject(sql, Integer.class, klant.getTransactiepartijId());
     }
+
+    @Override
+    public Klant vindKlantOpEmailadres(String email) {
+        String sql = "SELECT * FROM transactiepartij WHERE emailadres = ?;";
+        return jdbcTemplate.queryForObject(sql, new KlantRowMapper(), email);
+    }
     
     /**
      *

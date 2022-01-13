@@ -18,6 +18,8 @@ document.getElementById("login").addEventListener("click", (e) => {
 
     let data = {'emailadres': email, 'wachtwoord': wachtwoord};
 
+    // var token = JSON.parse(localStorage.getItem('token'));
+
     e.preventDefault();
     const login = 'http://localhost:8080/login';
     console.log(JSON.stringify(data));
@@ -38,6 +40,7 @@ document.getElementById("login").addEventListener("click", (e) => {
                 alert("Error Password or Username");
             } else {
                 toonFinancieelOverzicht();
+                localStorage.setItem("token", response.header('Authorization'));
             }
         })
         .catch((err) => {
