@@ -39,7 +39,7 @@ body {    /* Opzet body */
 h1 {    /* Header 1 */
     font-family: bling, Verdana, sans-serif;
     font-size: 38px;
-    font-weight: bold;
+    /*font-weight: bold;*/
     color: var(--divaGoud);
     text-align: center;
     margin-top: 3px;
@@ -47,9 +47,13 @@ h1 {    /* Header 1 */
 }
 
 h2[class="overzicht"] { /* Header 2 financieel overzicht */
+    /*font-family: bling, Verdana, sans-serif;*/
+    font-weight: bold;
+    font-size: 32px;
     text-align: center;
     margin-bottom: 30px;
-    margin-top: -10px;
+    margin-top: -20px;
+    color: var(--divaRoze);
 }
 
 pre {    /* Preformatted text, neemt spaties mee */
@@ -376,4 +380,19 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     text-align: center;
     border-radius: 15px;
     height: 30px;
+}
+
+/* ----- TABLES ----- */
+table {
+    width: 700px;
+}
+th {
+    color: var(--divaRoze);
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    height: 40px;
+}
+td {
+    width: 400px;
 }
