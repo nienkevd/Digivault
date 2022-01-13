@@ -11,7 +11,7 @@ fetch(url, {
         // 'Authorization': localStorage.getItem("token"),
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Authorization': 'Bearer ${inMemoryToken}'
+        'Authorization': 'Bearer ' + inMemoryToken
     },
 })
     .then(response => {
