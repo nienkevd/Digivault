@@ -9,52 +9,76 @@ const registratieLaag = document.getElementById('registratieLaag');
 const wachtwoord_reg = document.getElementById('wachtwoord_reg');
 const wachtwoord_check = document.getElementById('wachtwoord_check');
 const wachtwoord_info = document.getElementById('wachtwoordCheckInformatie');
+const foutMeldingRegistratie = document.getElementById('foutMeldingRegistratie');
 const welkomsAanbieding = document.getElementById('welkomsAanbieding');
+const url = 'http://localhost:8080/registratie';
 
-// EVENT_LISTENERS
+const algemeneValidatieFout = `Validatiefout: Voer de juiste gegevens in`
+const legeVeldenMelding = `Vul de ontbrekende gegevens in`
+
+// EVENT LISTENERS
 welkomsAanbieding.addEventListener('click', toonRegistratieLaag);
 naarRegistreren.addEventListener('click', toonRegistratieLaag);
 bevestigingSluiten.addEventListener('click', verbergRegistratieBevestiging);
 wachtwoord_reg.addEventListener('keyup', checkOvereenkomenWachtwoorden);
 wachtwoord_check.addEventListener('keyup', checkOvereenkomenWachtwoorden);
 
-// REGISTRATIE - Tonen van registratieLaag bij klik #welkomsAanbieding en #naarRegistreren, verbergen #welkomsAanbieding
+// REGISTRATIE LAAG - Tonen registratieLaag na klik #welkomsAanbieding en #naarRegistreren, verbergen #welkomsAanbieding
 function toonRegistratieLaag() {
     registratieLaag.style.display = 'block';
     welkomsAanbieding.style.display = 'none';
 }
 
-// REGISTRATIE - Verbergen van de registratieLaag (tijdelijk nog niet gebruikt)
+// REGISTRATIE LAAG - Verbergen van de registratieLaag
 function verbergRegistratieLaag() {
     registratieLaag.style.display = 'none';
 }
 
-// REGISTRATIE - Na het invullen en validatie van het #registratieFormulier en klik op #registreren worden gegevens
-// opgeslagen in de database
+// REGISTRATIE BEVESTIGING - Tonen van #registratieBevestiging met daarop de melding dat registratie gelukt is
+function toonRegistratieBevestiging(data) {
+    verbergRegistratieLaag();
+    registratieBevestiging.style.display = 'block';
+    registratieInformatie.innerHTML = data;
+    welkomsAanbieding.style.display = 'none';
+}
+
+// REGISTRATIE BEVESTIGING - Verbergen van #registratieBevestiging
+function verbergRegistratieBevestiging() {
+    location.reload();
+    welkomsAanbieding.style.display = 'none';
+}
+
+// REGISTRATIE FORMULIER - Na klik op #registreren worden de gegevens gecontroleerd en opgeslagen in de database
 registreren.addEventListener('click', function (e) {
-    // if (validatieRegistratie()) {
-    e.preventDefault();
-    registreerFormulier();
-    // }
+    if (validatieRegistratie()) {
+        e.preventDefault();
+        registreerFormulier();
+    } else {
+        console.log("Ik moet nu stoppen")
+    }
 })
 
-// function validatieRegistratie() {
-//     return true;
-// }
+function validatieRegistratie() {
+    if(wachtwoord_reg.value === '' || wachtwoord_check.value === '') {
+        document.getElementById('foutMeldingRegistratie').innerHTML = legeVeldenMelding;
+    }
+    return true;
+}
 
+// REGISTRATIE FORMULIER - Methode die het registreren van het #registratieFormulier daadwerkelijk uitvoert
 function registreerFormulier() {
-    let email_reg = document.getElementById('email_reg').value;             // emailadres
-    let wachtwoord_reg = document.getElementById('wachtwoord_reg').value;   // wachtwoord
-    let voornaam = document.getElementById('voornaam').value;               // voornaam
-    let tussenvoegsel = document.getElementById('tussenvoegsel').value;     // tussenvoegsel
-    let achternaam = document.getElementById('achternaam').value;           // achternaam
-    let geboortedatum = document.getElementById('geboortedatum').value;     // geboortedatum
-    let bsn = document.getElementById('bsn').value;                         // bsn
-    let straatnaam = document.getElementById('straatnaam').value;           // straat
-    let huisnummer = document.getElementById('huisnummer').value;           // huisnummer
-    let toevoeging = document.getElementById('toevoeging').value;           // toevoeging
-    let postcode = document.getElementById('postcode').value;               // postcode
-    let woonplaats = document.getElementById('woonplaats').value;           // woonplaats
+    let email_reg = document.getElementById('email_reg').value;
+    let wachtwoord_reg = document.getElementById('wachtwoord_reg').value;
+    let voornaam = document.getElementById('voornaam').value;
+    let tussenvoegsel = document.getElementById('tussenvoegsel').value;
+    let achternaam = document.getElementById('achternaam').value;
+    let geboortedatum = document.getElementById('geboortedatum').value;
+    let bsn = document.getElementById('bsn').value;
+    let straatnaam = document.getElementById('straatnaam').value;
+    let huisnummer = document.getElementById('huisnummer').value;
+    let toevoeging = document.getElementById('toevoeging').value;
+    let postcode = document.getElementById('postcode').value;
+    let woonplaats = document.getElementById('woonplaats').value;
     let data = {
         'emailadres': email_reg,
         'wachtwoord': wachtwoord_reg,
@@ -70,7 +94,6 @@ function registreerFormulier() {
         'woonplaats': woonplaats
     }
 
-    const url = 'http://localhost:8080/registratie';
     console.log(JSON.stringify(data));
     fetch(url, {
         method: "POST",
@@ -88,7 +111,7 @@ function registreerFormulier() {
         .then((data) => {
             console.log(data);
             if (data.error) {
-                alert("Registratie mislukt");
+                console.log("Validatiefout")
             } else {
                 toonRegistratieBevestiging(data);
             }
@@ -98,25 +121,11 @@ function registreerFormulier() {
         });
 }
 
-// REGISTRATIE - Tonen van #registratieBevestiging met daarop de melding dat registratie gelukt is
-function toonRegistratieBevestiging(data) {
-    verbergRegistratieLaag();
-    registratieBevestiging.style.display = 'block';
-    registratieInformatie.innerHTML = data;
-    welkomsAanbieding.style.display = 'none';
-}
-
-// REGISTRATIE - Verbergen van #registratieBevestiging
-function verbergRegistratieBevestiging() {
-    location.reload();
-    welkomsAanbieding.style.display = 'none';
-}
-
-// REGISTRATIE - Vergelijkt de ingevulde values uit #wachtwoord_reg en #wachtwoord_check in de registratielaag en geeft
-// in #wachtwoordCheckRegistratie weer of de wachtwoorden al dan niet overeen komen
+// REGISTRATIE WACHTWOORD-CHECK - Vergelijkt de ingevulde values #wachtwoord_reg en #wachtwoord_check in registratielaag
+//  en geeft in #wachtwoordCheckInformatie gelijk weer of de wachtwoorden al dan niet overeen komen
 function checkOvereenkomenWachtwoorden() {
-    let identiek = `komt overeen`;
-    let verschil = `niet identiek`;
+    const identiek = `komt overeen`;
+    const verschil = `niet identiek`;
 
     if (wachtwoord_reg.value.length === 0 || wachtwoord_check.value.length === 0) {
         wachtwoord_info.innerHTML = '';

@@ -6,7 +6,7 @@
     --divaDrop: #131313;
     --divaIvoor: #fffff0;
     --divaGroen: #44c26e;
-    --divaRood: #ec1f1f;
+    --divaRood: #E34232;
     --divaBrons: #704909;
 }
 
@@ -167,7 +167,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     display: none;
     padding: 70px 50px;
     width: 950px;
-    height: 655px;
+    height: 670px;
 }
 
 .registratieBevestiging {    /* Melding na geslaagde registratie */
@@ -304,10 +304,19 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 #wachtwoordCheckInformatie {    /* Stijl info over overeenkomen wachtwoorden */
     position: absolute;
     left: calc(50% + 385px);
-    top: 190px;
+    top: 200px;
     font-size: 12pt;
     line-height: 0.95em;
     max-width: 20px;
+}
+
+#foutMeldingRegistratie {
+    height: 14px;
+    color: var(--divaRood);
+    top: -32px;
+    margin-bottom: 2px;
+    position: relative;
+    text-align: center;
 }
 
 #veelGeld {
@@ -335,7 +344,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     filter: invert(1);
 }
 
-/* aanpassingen voor scrollbar */
+/* Aanpassingen voor scrollbar */
 ::-webkit-scrollbar {
     margin-right: -5px;
     width: 13px;
