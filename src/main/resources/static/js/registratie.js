@@ -1,6 +1,6 @@
 'use strict';
 
-// Verwijzingen
+// VERWIJZINGEN
 const bevestigingSluiten = document.getElementById('bevestigingSluiten');
 const naarRegistreren = document.getElementById('naarRegistreren');
 const registreren = document.getElementById('registreren');
@@ -11,7 +11,7 @@ const foutMeldingRegistratie = document.getElementById('foutMeldingRegistratie')
 const welkomsAanbieding = document.getElementById('welkomsAanbieding');
 const url = 'http://localhost:8080/registratie';
 
-// Inputvelden
+// INPUTVELDEN
 const email_reg = document.getElementById('email_reg');
 const wachtwoord_reg = document.getElementById('wachtwoord_reg');
 const wachtwoord_check = document.getElementById('wachtwoord_check');
@@ -26,7 +26,7 @@ const toevoeging = document.getElementById('toevoeging');
 const straatnaam = document.getElementById('straatnaam');
 const woonplaats = document.getElementById('woonplaats');
 
-// Meldingsberichten
+// MELDINGSBERICHTEN
 const regExpMailMelding = `Dit mailadres is niet geldig`
 const regExpPostcodeMelding = `Deze postcode is niet geldig`
 const legeVeldenMelding = `Je hebt nog niet alle verplichte velden ingevuld`
@@ -37,13 +37,13 @@ const kortWachtwoord = `Het wachtwoord moet uit minimaal 10 tekens bestaan`;
 const kortBsn = `Een geldig BSN-nummer bevat 8 of 9 cijfers`;
 const geldigeBsnMelding = `Controleer de geldigheid van je BSN-nummer`;
 
-// Overige
+// OVERIGE
 const emailRegExp = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
 const postcodeRegExp = new RegExp(/^([0-9]{4}[a-zA-Z]{2})$/)
 const alleenLetters = new RegExp(/^[A-Za-z]+$/)
 const alleenCijfers = new RegExp(/^[0-9]+$/)
 
-// EVENT LISTENERS
+// EVENT-LISTENERS
 welkomsAanbieding.addEventListener('click', toonRegistratieLaag);
 naarRegistreren.addEventListener('click', toonRegistratieLaag);
 bevestigingSluiten.addEventListener('click', verbergRegistratieBevestiging);
@@ -111,7 +111,7 @@ function bsnCheck() {
     }
     if((total % 11 ) !== 0) {
         console.log(">> bsnCheck")
-        foutMeldingRegistratie.innerHTML = geldigeBsnMelding;
+        vertraging(200).then(() => { foutMeldingRegistratie.innerHTML = geldigeBsnMelding; });
     }
 }
 
@@ -186,6 +186,11 @@ function monkeyCheckCijfers() {
     }
 }
 
+// Hulpfunctie bij checkOvereenkomenWachtwoorden() - Bouwt vertraging in uitvoering code
+function vertraging(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // REGISTRATIE WACHTWOORD-CHECK - Vergelijkt de ingevulde values #wachtwoord_reg en #wachtwoord_check in registratielaag
 // en geeft in #foutMeldingRegistratie gelijk weer of de wachtwoorden al dan niet overeen komen
 function checkOvereenkomenWachtwoorden() {
@@ -198,6 +203,7 @@ function checkOvereenkomenWachtwoorden() {
     } else if (wachtwoord_reg.value === wachtwoord_check.value) {
         foutMeldingRegistratie.innerHTML = identiekWachtwoord;
         foutMeldingRegistratie.style.color = 'var(--divaGroen)';
+        vertraging(2500).then(() => { foutMeldingRegistratie.innerHTML = ''; });
     }
 }
 

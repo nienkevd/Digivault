@@ -172,7 +172,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     display: none;
     padding: 70px 60px;
     width: 950px;
-    height: 673px;
+    height: 675px;
 }
 
 .registratieBevestiging {    /* Melding na geslaagde registratie */
