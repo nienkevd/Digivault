@@ -5,6 +5,7 @@ package nl.hva.c25.team1.digivault.authentication;
 
 import nl.hva.c25.team1.digivault.model.Account;
 import nl.hva.c25.team1.digivault.model.Klant;
+import nl.hva.c25.team1.digivault.service.KlantService;
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,11 +19,13 @@ import javax.validation.Valid;
 public class LoginController {
 
     private LoginService loginService;
+    private KlantService klantService;
 
     @Autowired
-    public LoginController(LoginService loginService) {
+    public LoginController(LoginService loginService, KlantService klantservice) {
         super();
         this.loginService = loginService;
+        this.klantService = klantservice;
     }
 
     @CrossOrigin

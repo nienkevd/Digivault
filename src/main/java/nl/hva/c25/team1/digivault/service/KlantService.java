@@ -50,6 +50,10 @@ public class KlantService {
         return rootRepository.vindKlantOpId(klantId);
     }
 
+    public Klant vindKlantOpEmail(String emailadres) {
+        return klantDAO.vindKlantOpEmailadres(emailadres);
+    }
+
     /**
      *
      * @return List<Klant>
