@@ -45,14 +45,20 @@ function createTable(json) {
             const td2 = document.createElement('td');
             const td3 = document.createElement('td');
             const td4 = document.createElement('td');
+            const td5 = document.createElement('td');
             td.textContent = overzicht.assetMetAantal[i].naam;
-            td2.textContent= json.assetMetAantal[i].afkorting;
-            td3.textContent= json.assetMetAantal[i].aantal;
-            td4.textContent= json.assetMetAantal[i].dagkoers;
+            td2.textContent= overzicht.assetMetAantal[i].afkorting;
+            td3.textContent= overzicht.assetMetAantal[i].aantal;
+            td4.textContent= overzicht.assetMetAantal[i].dagkoers;
+            const aantal = parseFloat(td3.textContent).toFixed(2);
+            const dagkoers = parseFloat(td4.textContent).toFixed(2);
+            const waarde = (aantal * dagkoers).toFixed(2).toString();
+            td5.textContent = ('€ ' + waarde + ',-');
             tr.appendChild(td);
             tr.appendChild(td2);
             tr.appendChild(td3);
             tr.appendChild(td4);
+            tr.appendChild(td5);
         tableBody.appendChild(tr);
     }
 }

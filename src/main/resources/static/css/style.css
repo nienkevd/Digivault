@@ -371,8 +371,9 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 
 /* ----- TABLES ----- */
 table {
-    width: 700px;
+    width: 820px;
 }
+
 th {
     color: var(--divaRoze);
     text-align: left;
@@ -381,5 +382,9 @@ th {
     height: 40px;
 }
 td {
-    width: 400px;
+    width: 250px;
+}
+
+td[class="rechts"]{
+    text-align: right;
 }
