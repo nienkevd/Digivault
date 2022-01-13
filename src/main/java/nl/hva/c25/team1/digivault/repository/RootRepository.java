@@ -131,9 +131,7 @@ public class RootRepository {
      */
     public List<AssetMetAantal> genereerPortefeuilleOverzicht(int klantId) {
         List<AssetMetAantal> portefeuilleOverzicht = new ArrayList<>();
-        for (PortefeuilleItem portefeuilleItem : portefeuilleItemDAO.genereerPortefeuilleVanTransactiepartijMetId(klantId)) {
-            portefeuilleItem.setAsset(assetDAO.vindAssetOpId(portefeuilleItemDAO.vindAssetIdVanPortefeuilleItem
-                    (portefeuilleItem)));
+        for (PortefeuilleItem portefeuilleItem : genereerPortefeuilleVanTransactiepartijMetId(klantId)) {
             AssetMetAantal overzicht = new AssetMetAantal();
             overzicht.setAssetId(portefeuilleItem.getAsset().getAssetId());
             overzicht.setAfkorting(portefeuilleItem.getAsset().getAfkorting());
