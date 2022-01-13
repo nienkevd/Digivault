@@ -39,9 +39,9 @@ const geldigeBsnMelding = `Controleer de geldigheid van je BSN-nummer`;
 
 // OVERIGE
 const emailRegExp = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
-const postcodeRegExp = new RegExp(/^([0-9]{4}[a-zA-Z]{2})$/)
-const alleenLetters = new RegExp(/^[A-Za-z]+$/)
-const alleenCijfers = new RegExp(/^[0-9]+$/)
+const postcodeRegExp = new RegExp(/^([0-9]{4}[a-zA-Z]{2})$/);
+const alleenLetters = new RegExp(/^[A-Za-z]+$/);
+const alleenCijfers = new RegExp(/^[0-9]+$/);
 
 // EVENT-LISTENERS
 welkomsAanbieding.addEventListener('click', toonRegistratieLaag);
@@ -80,8 +80,6 @@ registreren.addEventListener('click', function (e) {
     if (validatieRegistratie()) {
         e.preventDefault();
         registreerFormulier();
-    } else {
-        console.log('Validatie is niet geslaagd');
     }
 })
 
@@ -245,7 +243,6 @@ function registreerFormulier() {
                 return false;
             } else {
                 toonRegistratieBevestiging(data);
-                document.getElementById("registreren").contentWindow.location.reload();
             }
         })
         .catch((err) => {
