@@ -9,7 +9,9 @@ const registratieInformatie = document.getElementById('registratieInformatie');
 const registratieLaag = document.getElementById('registratieLaag');
 const foutMeldingRegistratie = document.getElementById('foutMeldingRegistratie');
 const welkomsAanbieding = document.getElementById('welkomsAanbieding');
-const url = 'http://localhost:8080/registratie';
+const domainArray = location.origin.split(':');
+const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
+const url = urlLead + 'registratie';
 
 // INPUTVELDEN
 const email_reg = document.getElementById('email_reg');
