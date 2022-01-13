@@ -21,8 +21,6 @@ document.getElementById("login").addEventListener("click", (e) => {
 
     let data = {'emailadres': email, 'wachtwoord': wachtwoord};
 
-    // var token = JSON.parse(localStorage.getItem('token'));
-
     e.preventDefault();
     console.log(JSON.stringify(data));
     fetch(urlLead + 'login', {
@@ -36,14 +34,17 @@ document.getElementById("login").addEventListener("click", (e) => {
         .then((response) => {
             console.log(response);
             return response.json()})
-        .then((data) => {
-            console.log(data);
-            if (data.error) {
-                alert("Error Password or Username");
-            } else {
+        .then((response) => {
+        // .then((data) => {
+        //     console.log(data);
+        //     if (data.error) {
+        //         alert("Error Password or Username");
+        //     } else {
                 toonFinancieelOverzicht();
-                localStorage.setItem("token", response.header('Authorization'));
-            }
+                // localStorage.setItem("token", response.header('Authorization'));
+                let inMemoryToken = response.bearer;
+                localStorage.setItem('user', JSON.stringify(response));
+            // }
         })
         .catch((err) => {
             console.log(err);
