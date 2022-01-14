@@ -2,7 +2,6 @@ package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.authentication.HashService;
 import nl.hva.c25.team1.digivault.model.*;
-import nl.hva.c25.team1.digivault.repository.AccountDAO;
 import nl.hva.c25.team1.digivault.repository.JdbcAccountDAO;
 import nl.hva.c25.team1.digivault.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +30,8 @@ public class RegistratieService {
     private JdbcAccountDAO accountDAO;
 
     public static int BEGINSALDO = 100000;      // Saldo dat een nieuwe klant meekrijgt op zijn rekening
+    public static int MINIMUM_LEEFTIJD = 18;
+    public static int MAXIMUM_LEEFTIJD = 121;
 
     /**
      * Constructor van de RegistratieService
@@ -120,8 +121,8 @@ public class RegistratieService {
     }
 
     /**
-     * methode om te checken of de ingevoerde bsn correct is
-     * @param bsn
+     * methode om te checken of de ingevoerde BSN-nummer correct is
+     * @param bsn het ingevoerde BSN-nummer
      */
     public boolean validateBsn (String bsn ){
         int bsnInt = Integer.valueOf(bsn);
@@ -140,11 +141,11 @@ public class RegistratieService {
     }
 
     /**
-     * methode om te checken of de klant 18 jaar of ouder is
-     * @param geboortedatum
+     * Methode om te checken of de klant tussen de 18 en 121 jaar is
+     * @param geboortedatum ingevoerde geboortedatum
      */
-
     public boolean validatieGeboortedatum (LocalDate geboortedatum) {
-        return Period.between(geboortedatum, LocalDate.now()).getYears()>=18;
+        int leeftijd = Period.between(geboortedatum, LocalDate.now()).getYears();
+        return leeftijd < MAXIMUM_LEEFTIJD && leeftijd > MINIMUM_LEEFTIJD;
     }
 }

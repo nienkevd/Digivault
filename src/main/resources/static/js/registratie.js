@@ -27,10 +27,13 @@ const woonplaats = document.getElementById('woonplaats');
 
 // MELDINGSBERICHTEN
 const serverDownMelding = `ERROR: er kan geen verbinding gemaakt worden met de server`;
+const minimumLeeftijdMelding = `Sorry, je moet 18 jaar of ouder zijn om te registreren`;
+const monkeyLeeftijdMelding = `Je bent aan het monkey-testen, vul je echte geboortedatum in`;
 const regExpMailMelding = `Dit mailadres is niet geldig`;
 const regExpPostcodeMelding = `Deze postcode is niet geldig`;
 const legeVeldenMelding = `Je hebt nog niet alle verplichte velden ingevuld`;
-const monkeyMelding = `Je bent nu aan het monkey-testen, vul geldige gegevens in`;
+const monkeyCijferMelding = `Je hebt letters ingevuld in een inputveld voor cijfers`;
+const monkeyLetterMelding = `Je hebt cijfers ingevuld in een inputveld voor letters`;
 const identiekWachtwoord = `De wachtwoorden komen overeen`;
 const verschilWachtwoord = `De wachtwoorden zijn niet identiek`;
 const kortWachtwoord = `Het wachtwoord moet uit minimaal 10 tekens bestaan`;
@@ -72,7 +75,7 @@ function toonRegistratieBevestiging(data) {
 // REGISTRATIE BEVESTIGING - Verbergen van #registratieBevestiging
 function verbergRegistratieBevestiging() {
     location.reload();
-    welkomsAanbieding.style.display = 'none';
+    welkomsAanbieding.style.display = 'none';    welkomsAanbieding.style.display = 'none';
 }
 
 // REGISTRATIE FORMULIER - Na klik op #registreren worden de gegevens gecontroleerd en opgeslagen in de database
@@ -93,6 +96,7 @@ function validatieRegistratie() {
     mailCheck();
     postcodeCheck();
     legeVeldenCheck();
+    leeftijdValidatie();
     return true;
 }
 
@@ -110,6 +114,30 @@ function bsnCheck() {
     if((total % 11 ) !== 0) {
         console.log(">> bsnCheck")
         vertraging(200).then(() => { foutMeldingRegistratie.innerHTML = geldigeBsnMelding; });
+    }
+}
+
+// VALIDATIE - Zoekt eerst de datum van 18 jaar geleden op, en checkt of de geboortedatum voor die datum ligt //
+function leeftijdValidatie() {
+    console.log("leeftijdValidatie")
+    let vandaag = new Date();
+    let ingevoerdeDatum = geboortedatum.value;
+    let geboorteDatum = new Date(ingevoerdeDatum);
+
+    let leeftijd = vandaag.getFullYear() - geboorteDatum.getFullYear();
+    let aantalMaanden = vandaag.getMonth() - geboorteDatum.getMonth();
+    let aantalDagen = vandaag.getDate() - geboorteDatum.getDate();
+
+    if (aantalMaanden < 0 || (aantalMaanden === 0 && aantalDagen < 0)) {
+        leeftijd -= 1;
+    }
+    if ((leeftijd === 18 && aantalMaanden <= 0 && aantalDagen <= 0) || leeftijd < 18) {
+        console.log(">> leeftijdValidatie 1");
+        foutMeldingRegistratie.innerHTML = minimumLeeftijdMelding;
+    }
+    if (leeftijd >= 121) {
+        console.log(">> leeftijdValidatie 2");
+        foutMeldingRegistratie.innerHTML = monkeyLeeftijdMelding;
     }
 }
 
@@ -171,7 +199,7 @@ function monkeyCheckLetters() {
     if(!alleenLetters.test(voornaam.value) || !alleenLetters.test(achternaam.value) ||
         !alleenLetters.test(straatnaam.value) || !alleenLetters.test(woonplaats.value)) {
         console.log(">> monkeyCheckLetters")
-        foutMeldingRegistratie.innerHTML = monkeyMelding;
+        foutMeldingRegistratie.innerHTML = monkeyLetterMelding;
     }
 }
 
@@ -180,7 +208,7 @@ function monkeyCheckCijfers() {
     console.log("monkeyCheckCijfers")
     if (!alleenCijfers.test(huisnummer.value) || !alleenCijfers.test(bsn.value)) {
         console.log(">> monkeyCheckCijfers")
-        foutMeldingRegistratie.innerHTML = monkeyMelding;
+        foutMeldingRegistratie.innerHTML = monkeyCijferMelding;
     }
 }
 
