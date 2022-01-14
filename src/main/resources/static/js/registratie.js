@@ -26,10 +26,11 @@ const straatnaam = document.getElementById('straatnaam');
 const woonplaats = document.getElementById('woonplaats');
 
 // MELDINGSBERICHTEN
-const regExpMailMelding = `Dit mailadres is niet geldig`
-const regExpPostcodeMelding = `Deze postcode is niet geldig`
-const legeVeldenMelding = `Je hebt nog niet alle verplichte velden ingevuld`
-const monkeyMelding = `Je bent nu aan het monkey-testen, vul geldige gegevens in`
+const serverDownMelding = `ERROR: er kan geen verbinding gemaakt worden met de server`;
+const regExpMailMelding = `Dit mailadres is niet geldig`;
+const regExpPostcodeMelding = `Deze postcode is niet geldig`;
+const legeVeldenMelding = `Je hebt nog niet alle verplichte velden ingevuld`;
+const monkeyMelding = `Je bent nu aan het monkey-testen, vul geldige gegevens in`;
 const identiekWachtwoord = `De wachtwoorden komen overeen`;
 const verschilWachtwoord = `De wachtwoorden zijn niet identiek`;
 const kortWachtwoord = `Het wachtwoord moet uit minimaal 10 tekens bestaan`;
@@ -38,7 +39,7 @@ const geldigeBsnMelding = `Controleer de geldigheid van je BSN-nummer`;
 
 // OVERIGE
 const emailRegExp = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
-const postcodeRegExp = new RegExp(/^([0-9]{4}[a-zA-Z]{2})$/);
+const postcodeRegExp = new RegExp(/^([1-9][0-9]{3}[a-zA-Z]{2})$/);
 const alleenLetters = new RegExp(/^[A-Za-z]+$/);
 const alleenCijfers = new RegExp(/^[0-9]+$/);
 
@@ -220,7 +221,6 @@ function registreerFormulier() {
         'postcode': postcode.value,
         'woonplaats': woonplaats.value
     }
-
     console.log(JSON.stringify(data));
     fetch(urlLead + 'registratie', {
         method: "POST",
@@ -246,5 +246,6 @@ function registreerFormulier() {
         })
         .catch((err) => {
             console.log(err);
+            foutMeldingRegistratie.innerHTML = serverDownMelding;
         });
 }

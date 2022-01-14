@@ -32,6 +32,7 @@ document.getElementById("login").addEventListener("click", (e) => {
         body: JSON.stringify(data),
     })
         .then((response) => {
+            console.log(response.status);
             console.log(response);
             return response.json()})
         .then((response) => {
