@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -48,21 +47,34 @@ public class JdbcKlantDAO implements KlantDAO {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setInt(1, klant.getRekening().getRekeningId());
-                ps.setInt(2, klant.getAdres().getAdresId());
-                ps.setString(3, "klant");
-                ps.setString(4, klant.getAccount().getEmailadres());
-                ps.setString(5, klant.getAccount().getWachtwoord());
-                ps.setString(6, klant.getNaam().getVoornaam());
-                ps.setString(7, klant.getNaam().getTussenvoegsel());
-                ps.setString(8, klant.getNaam().getAchternaam());
-                ps.setString(9, klant.getBsn());
-                ps.setDate(10, java.sql.Date.valueOf(klant.getGeboortedatum()));
+                bouwPs(ps, klant);
                 return ps;
             }
         } , keyholder);
         klant.setTransactiepartijId(keyholder.getKey().intValue());
         return klant;
+    }
+
+    /**
+     *
+     * In deze methode wordt de PreparedStatement gevuld met alle klantinformatie
+     * @param ps PreparedStatement
+     * @param klant die wordt opgeslagen
+     * @return volledige PreparedStatement voor Klant
+     * @throws SQLException SQLException
+     */
+    public PreparedStatement bouwPs(PreparedStatement ps, Klant klant) throws SQLException {
+        ps.setInt(1, klant.getRekening().getRekeningId());
+        ps.setInt(2, klant.getAdres().getAdresId());
+        ps.setString(3, "klant");
+        ps.setString(4, klant.getAccount().getEmailadres());
+        ps.setString(5, klant.getAccount().getWachtwoord());
+        ps.setString(6, klant.getNaam().getVoornaam());
+        ps.setString(7, klant.getNaam().getTussenvoegsel());
+        ps.setString(8, klant.getNaam().getAchternaam());
+        ps.setString(9, klant.getBsn());
+        ps.setDate(10, java.sql.Date.valueOf(klant.getGeboortedatum()));
+        return ps;
     }
 
     /**
@@ -88,6 +100,12 @@ public class JdbcKlantDAO implements KlantDAO {
         return jdbcTemplate.queryForObject(sql, Integer.class, klant.getTransactiepartijId());
     }
 
+    /**
+     *
+     * vindt een klant in database adhv emailadres
+     * @param email van klant
+     * @return Klant
+     */
     @Override
     public Klant vindKlantOpEmailadres(String email) {
         String sql = "SELECT * FROM transactiepartij WHERE emailadres = ?;";

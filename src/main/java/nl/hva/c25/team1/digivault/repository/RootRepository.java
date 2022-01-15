@@ -57,6 +57,14 @@ public class RootRepository {
         return klant;
     }
 
+    /**
+     *
+     * TODO: waarvoor wordt deze gebruikt??? Wissen?
+     * @author Anthon
+     * @author Anneke
+     * @param klantId van klant
+     * @return Klant
+     */
     public Klant vindKlantOpId(int klantId) {
         Klant klant = klantDAO.vindKlantOpKlantId(klantId);
         if (klant == null) return null;
@@ -69,6 +77,12 @@ public class RootRepository {
         return klant;
     }
 
+    /**
+     * TODO: waarvoor wordt deze gebruikt??? Wissen?
+     * Gelinkt aan methode hierboven
+     * @param tpId van klant
+     * @return lijst van portefeuilleitems
+     */
     public List<PortefeuilleItem> genereerPortefeuilleVanTransactiepartijMetId(int tpId) {
         List<PortefeuilleItem> itemsTransactiepartij = portefeuilleItemDAO
                 .genereerPortefeuilleVanTransactiepartijMetId(tpId);

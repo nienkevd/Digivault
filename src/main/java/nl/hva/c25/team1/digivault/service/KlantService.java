@@ -18,7 +18,7 @@ import java.util.Objects;
  * Service van de klasse Klant
  *
  * @author Anneke, studentnummer 500889251
- * @version 1-12-2021
+ * @since 1-12-2021
  */
 
 @Service

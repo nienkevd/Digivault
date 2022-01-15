@@ -4,17 +4,18 @@
 package nl.hva.c25.team1.digivault.authentication;
 
 import nl.hva.c25.team1.digivault.model.Account;
-import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.service.KlantService;
-import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
+/**
+ *
+ * @author Anneke en Anthon
+ */
 @RestController
 public class LoginController {
 
@@ -28,6 +29,13 @@ public class LoginController {
         this.klantService = klantservice;
     }
 
+    /**
+     *
+     * Methode die wordt aangeroepen in JS fetch loginpagina
+     * JWT token teruggegeven vanuit LoginService, gecheckt en meegegeven in de header
+     * @param account van klant die probeert in te loggen
+     * @return JSON string + headers + httpStatus 200
+     */
     @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity<String> loginHandler(@RequestBody Account account) {

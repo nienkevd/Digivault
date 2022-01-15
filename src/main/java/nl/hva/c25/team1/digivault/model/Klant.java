@@ -21,6 +21,17 @@ public class Klant extends TransactiePartij {
     private Adres adres;
     private Account account;
 
+    /**
+     * All args constructor Klant
+     * @param klantId van klant
+     * @param bsn van klant
+     * @param geboortedatum van klant
+     * @param naam van klant
+     * @param adres van klant
+     * @param account van klant
+     * @param rekening van klant
+     * @param portefeuille van klant
+     */
     private Klant(int klantId, String bsn, LocalDate geboortedatum, Naam naam, Adres adres,
                  Account account, Rekening rekening, List<PortefeuilleItem> portefeuille) {
         super(klantId,rekening, portefeuille);
@@ -32,29 +43,48 @@ public class Klant extends TransactiePartij {
 
     }
 
+    /**
+     *
+     * Constructor Klant zonder klantId
+     * @param bsn van klant
+     * @param geboortedatum van klant
+     * @param naam van klant
+     * @param adres van klant
+     * @param account van klant
+     */
     public Klant(String bsn, LocalDate geboortedatum, Naam naam, Adres adres, Account account) {
         this(0, bsn, geboortedatum, naam, adres, account, null, null);
     }
 
+    /**
+     *
+     * Constructor Klant voor in RegisterDto
+     * @param dto voor registreren klant
+     */
     public Klant(RegisterDto dto){
         this(dto.getBsn(), dto.getGeboortedatum(), new Naam(dto), new Adres(dto), new Account(dto) );
     }
 
+    /**
+     *
+     * Kale Klant constructor
+     * @param klantId van klant
+     * @param bsn van klant
+     * @param geboortedatum van klant
+     */
     public Klant(int klantId, String bsn, LocalDate geboortedatum) {
         this(klantId,bsn,geboortedatum, null, null,null, null, null);
     }
-
-//    public Klant(String bsn, LocalDate geboortedatum, Naam naam) {
-//        this.bsn = bsn;
-//        this.geboortedatum = geboortedatum;
-//        this.naam = naam;
-//    }
 
     public Klant(String bsn, LocalDate geboortedatum) {
         this(0, bsn, geboortedatum, null, null, null, null, null);
     }
 
-
+    /**
+     *
+     * Constructor met alleen klantId, wordt gebruikt om lege portefeuille aan klant te koppelen
+     * @param klantId van klant
+     */
     public Klant(int klantId) {
         this(klantId, "", null);
     }

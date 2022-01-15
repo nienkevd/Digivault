@@ -15,6 +15,14 @@ public class Adres {
     private int huisnummer;
     private String toevoeging;
 
+    /**
+     *
+     * All args constructor Adres
+     * @param adresId adres van klant
+     * @param postcode postcode van klant
+     * @param huisnummer huisnummer van klant
+     * @param toevoeging toevoeging huisnummer
+     */
     public Adres(int adresId, String postcode, int huisnummer, String toevoeging) {
         this.adresId = adresId;
         this.postcode = postcode;
@@ -22,10 +30,22 @@ public class Adres {
         this.toevoeging = toevoeging;
     }
 
+    /**
+     *
+     * Constructor Adres zonder adresId
+     * @param postcode van klant
+     * @param huisnummer van klant
+     * @param toevoeging van huisnummer
+     */
     public Adres(String postcode, int huisnummer, String toevoeging) {
         this(0, postcode, huisnummer, toevoeging);
     }
 
+    /**
+     *
+     * Constructor Adres voor in RegisterDto
+     * @param dto voor registratie van klant + adres
+     */
     public Adres(RegisterDto dto) {
         this(dto.getPostcode(), dto.getHuisnummer(), dto.getToevoeging());
     }

@@ -9,6 +9,7 @@ import java.util.UUID;
 
 /**
  *
+ * Wordt vooralsnog niet gebruikt
  * @author Anneke, studentnummer 500889251
  * @since 15-12-2021
  *

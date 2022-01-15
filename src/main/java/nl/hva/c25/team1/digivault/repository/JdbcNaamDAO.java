@@ -33,7 +33,7 @@ public class JdbcNaamDAO implements NaamDAO {
     }
 
     /**
-     *
+     * EDIT: naam niet meer los in database!
      * slaat naam op in database en genereert een surrogate key
      * @param naam die opgeslagen moet worden
      * @return int naamID, de automatisch gegenereerde surrogate key

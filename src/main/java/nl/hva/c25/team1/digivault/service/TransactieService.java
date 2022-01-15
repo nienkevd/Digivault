@@ -4,7 +4,6 @@ import nl.hva.c25.team1.digivault.model.*;
 import nl.hva.c25.team1.digivault.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
@@ -15,6 +14,8 @@ import java.util.List;
  *
  * @author Nienke
  * @author Anthon
+ *
+ * check door Anneke + Anthon
  */
 @Service
 public class TransactieService {

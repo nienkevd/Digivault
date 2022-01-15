@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author Nienke
  * @author Anthon
+ *
+ * bugfix door Anneke en Anthon
  */
 @RestController
 @RequestMapping("/transactie/")

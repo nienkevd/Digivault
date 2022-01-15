@@ -15,12 +15,24 @@ public class Naam {
     private String tussenvoegsel;
     private String achternaam;
 
+    /**
+     *
+     * All args constructor Naam
+     * @param voornaam van klant
+     * @param tussenvoegsel van klant
+     * @param achternaam van klant
+     */
     public Naam(String voornaam, String tussenvoegsel, String achternaam) {
         this.voornaam = voornaam;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
     }
 
+    /**
+     *
+     * Constructor Naam voor in RegisterDto
+     * @param dto voor registratie klant
+     */
     public Naam(RegisterDto dto) {
         this(dto.getVoornaam(), dto.getTussenvoegsel(), dto.getAchternaam());
     }

@@ -38,8 +38,7 @@ public class JdbcAdresDAO implements AdresDAO {
      */
     @Override
     public Adres bewaarAdresMetSK(Adres adres) {
-        String sql = "INSERT INTO adres " +
-                "(postcode, huisnummer, toevoeging) VALUES (?, ?, ?);";
+        String sql = "INSERT INTO adres (postcode, huisnummer, toevoeging) VALUES (?, ?, ?);";
         KeyHolder keyholder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -92,7 +91,6 @@ public class JdbcAdresDAO implements AdresDAO {
         String sql = "UPDATE adres SET postcode = ?, huisnummer = ?, toevoeging = ? WHERE adresId = ?";
         jdbcTemplate.update(sql, adres.getPostcode(), adres.getHuisnummer(), adres.getToevoeging(), adres.getAdresId());
     }
-
 
     private class AdresRowMapper implements RowMapper<Adres> {
         @Override

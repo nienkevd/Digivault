@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Controller van de klasse Klant
+ * Methodes zonder javadoc comments worden niet gebruikt
  *
  * @author Anneke, studentnummer 500889251
  * @since 1-12-2021
@@ -35,8 +36,12 @@ public class KlantController {
 
     @GetMapping("/klanten")
     public List<Klant> vindKlantenHandler() {
-        System.out.println("controller");
         return klantService.vindAlleKlanten();
+    }
+
+    @GetMapping("/klanten/{emailadres}")
+    public Klant vindKlantOpEmailadresHandler(@PathVariable String emailadres) {
+        return klantService.vindKlantOpEmail(emailadres);
     }
 
     @PutMapping("/klanten/{klantId}")

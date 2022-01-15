@@ -6,8 +6,11 @@ package nl.hva.c25.team1.digivault.authentication;
 import nl.hva.c25.team1.digivault.repository.AccountDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.UUID;
 
+/**
+ *
+ * @author Anneke en Anthon
+ */
 @Service
 public class LoginService {
 
@@ -22,6 +25,16 @@ public class LoginService {
         this.accountDAO = accountDAO;
     }
 
+    /**
+     *
+     * Deze methode wordt aangeroepen vanuit de LoginController
+     * en krijgt het door de gebruiker ingevulde wachtwoord en emailadres mee
+     * Via de hashservice wordt gecheckt of het wachtwoord een match is met dat van de gebruiker
+     * Zo ja, dan wordt het JWT token aangemaakt
+     * @param emailAdres van klant die probeert in te loggen
+     * @param password van klant die probeert in te loggen
+     * @return JWT token
+     */
     public String login(String emailAdres, String password) {
         String token = null;
         String storedHash = accountDAO.vindAccountOpEmailAdres(emailAdres).getWachtwoord();

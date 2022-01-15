@@ -6,6 +6,7 @@ import java.util.UUID;
 
 /**
  *
+ * Refreshtoken + klant, wordt vooralsnog niet gebruikt
  * @author Anneke, studentnummer 500889251
  * @since 15-12-2021
  *
