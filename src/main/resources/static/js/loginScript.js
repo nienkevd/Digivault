@@ -10,17 +10,16 @@ function verversPagina() {
     location.reload();
 }
 
-// Loginpagina: actie bij klik op login knop en ingevulde velden
+// VERWIJZINGEN LOGINPAGINA
+const email = document.getElementById("email_login").value;
+const wachtwoord = document.getElementById("wachtwoord_login").value;
 
-// stuur data als form data ipv json, want backend accepteert alleen form
-// let formData = `emailadres=${email}&wachtwoord=${wachtwoord}`;
+// DECLARATIE VAN CONSTANTEN
+const data = {'emailadres': email, 'wachtwoord': wachtwoord};
+
+// LOGINPAGINA: fetch bij klik op login knop en ingevulde velden
 
 document.getElementById("login").addEventListener("click", (e) => {
-    let email = document.getElementById("email_login").value;
-    let wachtwoord = document.getElementById("wachtwoord_login").value;
-
-    let data = {'emailadres': email, 'wachtwoord': wachtwoord};
-
     e.preventDefault();
     console.log(JSON.stringify(data));
     fetch(urlLead + 'login', {
@@ -35,14 +34,16 @@ document.getElementById("login").addEventListener("click", (e) => {
             console.log(response);
             return response.json()})
         .then((response) => {
+            //TODO: response of data meegeven? Lijkt allebei te werken
         // .then((data) => {
         //     console.log(data);
         //     if (data.error) {
         //         alert("Error Password or Username");
         //     } else {
                 toonFinancieelOverzicht();
+                //TODO: hoe token meegeven?
                 // localStorage.setItem("token", response.header('Authorization'));
-                let inMemoryToken = response.bearer;
+                const inMemoryToken = response.bearer;
                 localStorage.setItem('user', JSON.stringify(response));
             // }
         })
