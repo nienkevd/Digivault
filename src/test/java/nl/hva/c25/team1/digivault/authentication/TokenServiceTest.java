@@ -12,7 +12,11 @@ import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+/**
+ * Testen bij TokenService
+ *
+ * @author Anneke, studentnummer 500889251
+ */
 
 class TokenServiceTest {
 

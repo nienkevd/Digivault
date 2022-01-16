@@ -2,6 +2,8 @@ package nl.hva.c25.team1.digivault.model;
 
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
+import java.util.Objects;
+
 /**
  *
  * @author Anneke, studentnummer 500889251
@@ -90,5 +92,18 @@ public class Adres {
                 ", huisnummer=" + huisnummer +
                 ", toevoeging='" + toevoeging + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Adres adres = (Adres) o;
+        return adresId == adres.adresId && huisnummer == adres.huisnummer && Objects.equals(postcode, adres.postcode) && Objects.equals(toevoeging, adres.toevoeging);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(adresId, postcode, huisnummer, toevoeging);
     }
 }

@@ -48,10 +48,10 @@ INSERT INTO eurokoers (assetId, datum, koers) VALUES
     (19, '2021-12-07', 261.70),
     (20, '2021-12-07', 35.14);
     
-INSERT INTO adres (postcode, huisnummer, toevoeging) VALUES
-    ('1051NJ',24,'a'),
-    ('1061BB',354,NULL),
-    ('1837AB',1,'b');
+INSERT INTO adres (adresId, postcode, huisnummer, toevoeging) VALUES
+    (1, '1051NJ',24,'a'),
+    (2, '1061BB',354,NULL),
+    (3, '1837AB',1,'b');
     
 INSERT INTO transactiepartij (rekeningId, adresId, tpType, emailadres, wachtwoord, voornaam, tussenvoegsel, achternaam, bsn, geboortedatum, refreshToken, banknaam, transactiePercentage) VALUES
     (1,NULL,'bank',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Digivault',2.5),

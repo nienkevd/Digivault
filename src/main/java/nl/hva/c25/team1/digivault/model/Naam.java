@@ -2,6 +2,8 @@ package nl.hva.c25.team1.digivault.model;
 
 import nl.hva.c25.team1.digivault.transfer.RegisterDto;
 
+import java.util.Objects;
+
 /**
  *
  * @author Anneke, studentnummer 500889251
@@ -64,5 +66,18 @@ public class Naam {
     @Override
     public String toString() {
         return String.format("%s %s %s", voornaam, tussenvoegsel, achternaam);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Naam naam = (Naam) o;
+        return Objects.equals(voornaam, naam.voornaam) && Objects.equals(tussenvoegsel, naam.tussenvoegsel) && Objects.equals(achternaam, naam.achternaam);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(voornaam, tussenvoegsel, achternaam);
     }
 }

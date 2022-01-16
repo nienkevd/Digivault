@@ -2,6 +2,7 @@ package nl.hva.c25.team1.digivault.controller;
 
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.service.KlantService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,9 +40,14 @@ public class KlantController {
         return klantService.vindAlleKlanten();
     }
 
-    @GetMapping("/klanten/{emailadres}")
-    public Klant vindKlantOpEmailadresHandler(@PathVariable String emailadres) {
-        return klantService.vindKlantOpEmail(emailadres);
+    @GetMapping("/klant/{emailadres}")
+    public ResponseEntity<Klant> vindKlantOpEmailadresHandler(@PathVariable String emailadres) {
+        Klant klant = klantService.vindKlantOpEmail(emailadres);
+        if (klant == null) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(klant);
+        }
     }
 
     @PutMapping("/klanten/{klantId}")

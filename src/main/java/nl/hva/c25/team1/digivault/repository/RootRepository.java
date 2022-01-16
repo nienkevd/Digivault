@@ -59,7 +59,6 @@ public class RootRepository {
 
     /**
      *
-     * TODO: waarvoor wordt deze gebruikt??? Wissen?
      * @author Anthon
      * @author Anneke
      * @param klantId van klant
@@ -78,8 +77,7 @@ public class RootRepository {
     }
 
     /**
-     * TODO: waarvoor wordt deze gebruikt??? Wissen?
-     * Gelinkt aan methode hierboven
+     *
      * @param tpId van klant
      * @return lijst van portefeuilleitems
      */

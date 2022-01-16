@@ -1,52 +1,70 @@
-//package nl.hva.c25.team1.digivault.service;
-//
-//import nl.hva.c25.team1.digivault.model.Account;
-//import nl.hva.c25.team1.digivault.model.Adres;
-//import nl.hva.c25.team1.digivault.model.Klant;
-//import nl.hva.c25.team1.digivault.repository.JdbcKlantDAO;
-//import nl.hva.c25.team1.digivault.repository.KlantDAO;
-//import org.junit.jupiter.api.BeforeAll;
-//import org.junit.jupiter.api.Test;
-//import org.mockito.Mock;
-//import org.mockito.Mockito;
-//import org.springframework.boot.test.mock.mockito.MockBean;
-//
-//import java.time.LocalDate;
-//
-//import static org.assertj.core.api.Assertions.assertThat;
-//import static org.junit.jupiter.api.Assertions.*;
-//
-///**
-// * Testen bij KlantService
-// *
-// * @author Anneke, studentnummer 500889251
-// * @since 5-12-2021
-// */
-//
-//class KlantServiceTest {
-//
-//    @MockBean
-//    private static JdbcKlantDAO mockDAO = Mockito.mock(JdbcKlantDAO.class);
-//    KlantService serviceUnderTest = new KlantService(mockDAO);
-//
-//    @Test
-//    void vindKlantOpKlantID() {
-//        Klant expected = new Klant(5,"132456789", LocalDate.parse("1955-01-01"));
-//        Mockito.when(mockDAO.vindKlantOpKlantId(5)).thenReturn(expected);
-//
-//        Klant actual = serviceUnderTest.vindKlantOpKlantID(5);
-//        assertThat(actual).isNotNull().isEqualTo(expected);
-//    }
-//
-//    @Test
-//    void updateKlant() {
-//        Klant bestaandeKlant = new Klant(5,"132456789", LocalDate.parse("1955-02-01"));
-//        Mockito.when(mockDAO.vindKlantOpKlantId(5)).thenReturn(bestaandeKlant);
-//
-//        String actual = serviceUnderTest.updateKlant(bestaandeKlant);
-//        assertThat(actual).contains("geslaagd");
-//    }
-//
+package nl.hva.c25.team1.digivault.service;
+
+
+import nl.hva.c25.team1.digivault.model.Klant;
+import nl.hva.c25.team1.digivault.repository.JdbcKlantDAO;
+import nl.hva.c25.team1.digivault.repository.RootRepository;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import java.time.LocalDate;
+import static org.assertj.core.api.Assertions.assertThat;
+
+
+/**
+ * Testen bij KlantService
+ *
+ * @author Anneke, studentnummer 500889251
+ * @since 5-12-2021
+ */
+
+class KlantServiceTest {
+
+    @MockBean
+    private static JdbcKlantDAO mockDAO = Mockito.mock(JdbcKlantDAO.class);
+    @MockBean
+    private static RootRepository mockRoot = Mockito.mock(RootRepository.class);
+
+    private KlantService serviceUnderTest = new KlantService(mockDAO, mockRoot);
+    private Klant expected = new Klant(10,"080772547", LocalDate.parse("1983-07-05"));
+
+    @Test
+    void vindKlantOpKlantID() {
+        Mockito.when(mockRoot.vindKlantOpId(10)).thenReturn(expected);
+
+        Klant actual = serviceUnderTest.vindKlantOpKlantID(10);
+        assertThat(actual).isNotNull().isEqualTo(expected);
+    }
+
+    @Test
+    void vindKlantOpEmail() {
+        Mockito.when(mockDAO.vindKlantOpEmailadres("marieke@gmail.com")).thenReturn(expected);
+
+        Klant actual = serviceUnderTest.vindKlantOpEmail("marieke@gmail.com");
+        assertThat(actual).isNotNull().isEqualTo(expected);
+    }
+
+    @Test
+    void updateNietBestaandeKlant() {
+        Klant nietBestaandeKlant = new Klant(25,"132456789", LocalDate.parse("1955-02-01"));
+        Mockito.when(mockDAO.vindKlantOpKlantId(15)).thenReturn(null);
+
+        String actual = serviceUnderTest.updateKlant(nietBestaandeKlant);
+        String expected = "Klant bestaat niet, update mislukt.";
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void updateBestaandeKlant() {
+        Klant bestaandeKlant = new Klant(10,"080772547", LocalDate.parse("1984-07-05"));
+        Mockito.when(mockDAO.vindKlantOpKlantId(10)).thenReturn(bestaandeKlant);
+
+        String actual = serviceUnderTest.updateKlant(bestaandeKlant);
+        String expected = "Update geslaagd";
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    // TODO: staan deze validatiestesten op de juiste plek?
 //    @Test
 //    void validatieMailadres() {
 //        System.out.println();
@@ -84,45 +102,38 @@
 //        assertEquals(expected2, actual5);
 //        return false;
 //    }
+
+//    @Test
+//    void validateBsn() {
+//        //checken voor minder dan 8 digits
+//        String bsn = "1234567";
+//        boolean actual = serviceUnderTest.validateBsn(bsn);
+//        assertThat(actual).isFalse();
 //
-////    @Test
-////    void validateBsn() {
-////        //checken voor minder dan 8 digits
-////        String bsn = "1234567";
-////        boolean actual = serviceUnderTest.validateBsn(bsn);
-////        assertThat(actual).isFalse();
-////
-////        //checken voor meer dan 9 digits
-////        String bsn1 = "1234567890";
-////        boolean actual1 = serviceUnderTest.validateBsn(bsn1);
-////        assertThat(actual1).isFalse();
-////
-////        //checken voor een bestaande bsn
-////        String bsn2 = "635569139";
-////        boolean actual2 = serviceUnderTest.validateBsn(bsn2);
-////        assertThat(actual2).isTrue();
-////
-////        //checken voor een niet bestaande bsn die niet voldoet aan elf-proef
-////        String bsn3 = "635569138";
-////        boolean actual3 = serviceUnderTest.validateBsn(bsn3);
-////        assertThat(actual3).isFalse();
-////
-////    }
-////
-////    @Test
-////    void validatieGeboortedatum() {
-////    }
-////
-////    @Test
-////    void validatieWachtwoord() {
-////    }
+//        //checken voor meer dan 9 digits
+//        String bsn1 = "1234567890";
+//        boolean actual1 = serviceUnderTest.validateBsn(bsn1);
+//        assertThat(actual1).isFalse();
 //
-////    @Test
-////    void bewaarKlant() {
-////        Klant nieuw = new Klant("267827227", LocalDate.now());
-////        Mockito.when(mockDAO.bewaarKlantMetSK(nieuw)).thenReturn(nieuw);
-////        Klant actual = serviceUnderTest.bewaarKlant(nieuw);
-////        assertThat(actual.getKlantId()).isPositive();
-////    }
+//        //checken voor een bestaande bsn
+//        String bsn2 = "635569139";
+//        boolean actual2 = serviceUnderTest.validateBsn(bsn2);
+//        assertThat(actual2).isTrue();
 //
-//}
+//        //checken voor een niet bestaande bsn die niet voldoet aan elf-proef
+//        String bsn3 = "635569138";
+//        boolean actual3 = serviceUnderTest.validateBsn(bsn3);
+//        assertThat(actual3).isFalse();
+//
+//    }
+//
+//    @Test
+//    void validatieGeboortedatum() {
+//    }
+//
+//    @Test
+//    void validatieWachtwoord() {
+//    }
+
+
+}
