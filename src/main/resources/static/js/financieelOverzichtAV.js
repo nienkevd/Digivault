@@ -5,10 +5,6 @@ const domainArray = location.origin.split(':');
 const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
 const url = urlLead + 'financieeloverzicht/10';
 
-// TOKEN
-const localstorage_user = JSON.parse(localStorage.getItem('user'));
-const inMemoryToken = localstorage_user.bearer;
-
 // VERWIJZINGEN
 const iban = document.getElementById("iban");
 const saldo = document.getElementById("saldo");
@@ -18,10 +14,9 @@ const tableBody = document.querySelector("#fi-table > tbody");
 fetch(url, {
     method: 'GET',
     headers: {
-        // 'Authorization': localStorage.getItem("token"),
+        'Authorization': localStorage.getItem("token"),
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Authorization': 'Bearer ' + inMemoryToken
     },
 })
     .then(response => {
