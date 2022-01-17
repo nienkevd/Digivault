@@ -29,28 +29,6 @@ public class JdbcAccountDAO implements AccountDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    /**
-     * Slaat Account op in Database en geeft surrogate key (SK) accountId terug
-     * @param account de te bewaren Account
-     * @return de gegenereerde accountId
-     */
-
-//    @Override
-//    public Account bewaarAccountMetSK(Account account) {
-//        String sql = "INSERT INTO transactiepartij (emailadres, wachtwoord) VALUES (?, ?)";
-//        KeyHolder keyHolder = new GeneratedKeyHolder();
-//        jdbcTemplate.update(new PreparedStatementCreator() {
-//            @Override
-//            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-//                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//                ps.setString(1, account.getEmailadres());
-//                ps.setString(2, account.getWachtwoord());
-//                return ps;
-//            }
-//        }, keyHolder);
-//        account.setAccountId(keyHolder.getKey().intValue());
-//        return account;
-//    }
 
     /**
      *

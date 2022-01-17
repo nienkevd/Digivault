@@ -3,6 +3,7 @@ package nl.hva.c25.team1.digivault.controller;
 import nl.hva.c25.team1.digivault.model.Account;
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.service.AccountService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,21 +24,25 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-//    @PostMapping("/accounts")
-//    public Account bewaarAccount(@RequestBody Account account) {return accountService.bewaarAccountMetSK(account);}
 
     @PostMapping("/accounts/{klantId}")
     public void updateAccount(@RequestBody Klant klant) {
         accountService.updateAccount(klant);
     }
 
-//    @GetMapping("/accounts/{accountId}")
-//    public Account geefAccountOpAccountId(@PathVariable int accountId) {
-//        return accountService.vindAccountOpAccountId(accountId);
-//    }
 
     @GetMapping("/accounts")
     public List<Account> geefAccountsHandler() {
         return accountService.geefAlleAccounts();
+    }
+
+    @GetMapping("/account/{emailadres}")
+    public ResponseEntity<Account> vindAccountOpEmailadresHandler(@PathVariable String emailadres) {
+        Account account = accountService.vindAccountOpEmailadres(emailadres);
+        if (account == null) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(account);
+        }
     }
 }

@@ -19,7 +19,7 @@ public class Account {
     @JsonBackReference
     private Klant klant;
 
-    private Account (String emailadres, String wachtwoord, Klant klant) {
+    public Account (String emailadres, String wachtwoord, Klant klant) {
         super();
         this.emailadres = emailadres;
         this.wachtwoord = wachtwoord;
@@ -77,12 +77,26 @@ public class Account {
                 '}';
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Account account = (Account) o;
+//        return emailadres.equals(account.emailadres) && wachtwoord.equals(account.wachtwoord) && klant.equals(account.klant);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(emailadres, wachtwoord, klant);
+//    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return emailadres.equals(account.emailadres) && wachtwoord.equals(account.wachtwoord) && klant.equals(account.klant);
+        return Objects.equals(emailadres, account.emailadres) && Objects.equals(wachtwoord, account.wachtwoord) && Objects.equals(klant, account.klant);
     }
 
     @Override
