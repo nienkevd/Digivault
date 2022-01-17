@@ -165,7 +165,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     display: block;
     padding-right: 48px;
     width: 430px;
-    height: 504px;
+    height: 513px;
 }
 
 .registratieLaag {    /* Aanpassingen voor registratieLaag */
@@ -309,6 +309,16 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     position: relative;
     text-align: center;
 }
+
+#foutMeldingLogin {
+    height: 14px;
+    color: var(--divaRood);
+    top: -35px;
+    margin-bottom: 2px;
+    position: relative;
+    text-align: center;
+}
+
 
 #veelGeld {
     color: var(--divaRoze);
