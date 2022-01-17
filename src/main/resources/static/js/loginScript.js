@@ -1,5 +1,13 @@
 'use strict';
 
+// VERWIJZINGEN
+const foutMeldingLogin = document.getElementById('foutMeldingLogin');
+
+// MELDINGSBERICHTEN
+const serverDownMelding = `Er is geen verbinding met de server`;
+const inlogFoutMelding = `Je inloggegevens zijn onjuist`;
+
+// OVERIGE
 const domainArray = location.origin.split(':');
 const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
 
@@ -49,6 +57,7 @@ document.getElementById("login").addEventListener("click", (e) => {
         })
         .catch((err) => {
             console.log(err);
+            foutMeldingLogin.innerHTML = serverDownMelding;
         });
 });
 
