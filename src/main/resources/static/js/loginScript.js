@@ -18,18 +18,21 @@ function verversPagina() {
     location.reload();
 }
 
-// VERWIJZINGEN LOGINPAGINA
-const email = document.getElementById("email_login").value;
-const wachtwoord = document.getElementById("wachtwoord_login").value;
 
-// DECLARATIE VAN CONSTANTEN
-const data = {'emailadres': email, 'wachtwoord': wachtwoord};
 
 // LOGINPAGINA: fetch bij klik op login knop en ingevulde velden
 
 document.getElementById("login").addEventListener("click", (e) => {
+    // VERWIJZINGEN LOGINPAGINA
+    const email = document.getElementById("email_login").value;
+    const wachtwoord = document.getElementById("wachtwoord_login").value;
+
+// DECLARATIE VAN CONSTANTEN
+    const data = {'emailadres': email, 'wachtwoord': wachtwoord};
+
     e.preventDefault();
     console.log(JSON.stringify(data));
+
     fetch(urlLead + 'login', {
         method: "POST",
         headers: {
@@ -40,21 +43,20 @@ document.getElementById("login").addEventListener("click", (e) => {
     })
         .then((response) => {
             console.log(response.status);
-            console.log(response);
+            console.log(response.headers);
+            // statuscheck
+            if (response.status !== 200){
+                alert("Not authorized")
+            } else
+            localStorage.setItem("token", response.headers.get("Bearer"));
             return response.json()})
-        .then((response) => {
-            //TODO: response of data meegeven? Lijkt allebei te werken
-        // .then((data) => {
-        //     console.log(data);
-        //     if (data.error) {
-        //         alert("Error Password or Username");
-        //     } else {
+        .then((data) => {
+            console.log(data);
+            if (data.error) {
+                alert("Error Password or Username");
+            } else {
                 toonFinancieelOverzicht();
-                //TODO: hoe token meegeven?
-                // localStorage.setItem("token", response.header('Authorization'));
-                const inMemoryToken = response.bearer;
-                localStorage.setItem('user', JSON.stringify(response));
-            // }
+            }
         })
         .catch((err) => {
             console.log(err);

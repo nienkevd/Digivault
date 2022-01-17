@@ -38,13 +38,14 @@ public class LoginController {
      */
     @CrossOrigin
     @PostMapping("/login")
-    public ResponseEntity<String> loginHandler(@RequestBody Account account) {
+    public ResponseEntity<?> loginHandler(@RequestBody Account account) {
         String token = loginService.login(account.getEmailadres(), account.getWachtwoord());
         if (token == null) {
             return new ResponseEntity<>("Email en/of wachtwoord onjuist!", HttpStatus.UNAUTHORIZED);
         } else {
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Bearer", token);
+            headers.set("Bearer", token);
+            headers.set("Access-Control-Expose-Headers", "Bearer" );
             return new ResponseEntity<>("\"Login geslaagd!\"", headers, HttpStatus.OK);
         }
     }
