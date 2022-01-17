@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="images/favicon.png">
     <link rel="stylesheet" href="css/style.css">
     <!-- algemeen javascript -->
-    <script defer src="js/loginScript.js"></script>
+    <script defer src="js/transactie.js"></script>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
     <img class="avatar" alt="Diva-trade" src="images/trade.jpeg">
     <h1>Trade</h1>
     <form>
-        <p>Saldo: {Saldo ophalen met JS</p>
+        <p id="saldo">Saldo: € </p>
         <br>
         <br>
         <div class = "grid_3_transactie">
@@ -27,9 +27,9 @@
                required="" type="text">
         <select id="dropdown" class = "dropdown_assets" name = "assets" required>
             <option disabled selected value>Kies je cryptomunt</option>
-            <option id="asset" value = "BTC"> Bitcoin (BTC)</option>
-            <option  value = "ETH"> Ethereum (ETH)</option>
-            <option  value = "BNB"> Binance Coin (BNB)</option>
+            <option value = "BTC"> Bitcoin (BTC)</option>
+            <option value = "ETH"> Ethereum (ETH)</option>
+            <option value = "BNB"> Binance Coin (BNB)</option>
         </select>
         </div>
         <br>
