@@ -1,10 +1,14 @@
 package nl.hva.c25.team1.digivault.controller;
 
+import nl.hva.c25.team1.digivault.authentication.LoginService;
+import nl.hva.c25.team1.digivault.authentication.TokenService;
 import nl.hva.c25.team1.digivault.model.Account;
-import nl.hva.c25.team1.digivault.service.AccountService;
+import nl.hva.c25.team1.digivault.model.Klant;
+import nl.hva.c25.team1.digivault.service.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -16,49 +20,80 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-@WebMvcTest
+/**
+ * Testen bij AccountController
+ *
+ * @author Sezi, studentnummer 500889525
+ */
+
+@AutoConfigureMockMvc
+@SpringBootTest
 
 class AccountControllerTest {
+    private MockMvc mockMvc;
 
-//    private static Account annie = new Account(1, "annie@gmail.com", "Annie7890");
-//
-//    private MockMvc mockMvc;
-//    @MockBean
-//    private AccountService accountService;
-//
-//    @Autowired
-//    public AccountControllerTest(MockMvc mockMvc) {
-//        this.mockMvc = mockMvc;
-//    }
-//
-//    @Test
-//    void bewaarAccount() {
-//    }
-//
-//    @Test
-//    void updateAccount() {
-//    }
-//
-//    @Test
-//    void geefAccountOpAccountId() {
-//        Mockito.when(this.accountService.vindAccountOpAccountId(1)).thenReturn(annie);
-//        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/accounts/1", new Object[0]);
-//
-//        try {
-//            ResultActions response = this.mockMvc.perform(request);
-//            response.andExpect(MockMvcResultMatchers.status()
-//                    .isOk())
-//                    .andExpect(MockMvcResultMatchers.content()
-//                    .json("{\”accountid\”:1,\”emailadres\”:\”annie@gmail.com\”,\”wachtwoord\”:\”Annie7890}"))
-//                    .andDo(MockMvcResultHandlers.print());
-//        } catch (Exception var4) {
-//            System.out.println("O help, watskbeurt?");
-//        }
-//    }
-//
-//    @Test
-//    void geefAccountsHandler() {
-//    }
+    @MockBean
+    private KlantService klantService;
+
+    @MockBean
+    private LoginService loginService;
+
+    @MockBean
+    private AccountService accountService;
+
+    @MockBean
+    private AssetService assetService;
+
+    @MockBean
+    private EuroKoersService euroKoersService;
+
+    @MockBean
+    private FinancieelOverzichtService financieelOverzichtService;
+
+    @MockBean
+    private TokenService tokenService;
+
+    @MockBean
+    private PortefeuilleItemService portefeuilleItemService;
+
+    @MockBean
+    private RegistratieService registratieService;
+
+    @MockBean
+    private RekeningService rekeningService;
+
+    @MockBean
+    private TransactieService transactieService;
+
+    @Autowired
+    public AccountControllerTest(MockMvc mockMvc) {
+        super();
+        this.mockMvc = mockMvc;
+    }
+
+    @Test
+    void vindAccountOpEmailadresHandler() {
+        Account annie = new Account("annie@gmail.com", "Annie7890");
+        Mockito.when(accountService.vindAccountOpEmailadres("annie@gmail.com")).thenReturn(annie);
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/account/annie@gmail.com");
+
+        try {
+            ResultActions response = mockMvc.perform(request);
+            response
+                    .andExpect(MockMvcResultMatchers.status().isOk())
+                    .andExpect(MockMvcResultMatchers
+                            .content()
+                            .json(" {    \"emailadres\": annie@gmail.com,\n" +
+                                    " \"wachtwoord\": Annie7890}"))
+                    .andDo(MockMvcResultHandlers.print());
+
+        } catch (Exception e) {
+            System.out.println("O help, watskbeurt?");
+        }
+    }
 }

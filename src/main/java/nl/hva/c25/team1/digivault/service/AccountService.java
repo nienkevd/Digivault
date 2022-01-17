@@ -28,10 +28,6 @@ public class AccountService {
         this.klantDAO = klantDAO;
     }
 
-//    public Account bewaarAccountMetSK(Account account) {
-//        return accountDAO.bewaarAccountMetSK(account);
-//    }
-
     public String updateAccount(Klant klant) {
         if (klantDAO.vindKlantOpKlantId(klant.getTransactiepartijId()) == null) {
             return "Klant bestaat niet, update mislukt.";
@@ -41,9 +37,6 @@ public class AccountService {
         }
     }
 
-//    public Account vindAccountOpAccountId(int accountId) {
-//        return accountDAO.vindAccountOpAccountId(accountId);
-//    }
 
     public List<Account> geefAlleAccounts() {
         return accountDAO.geefAlleAccounts();
@@ -52,4 +45,6 @@ public class AccountService {
     public Account vindAccountOpKlantId(int klantId){
         return accountDAO.vindAccountOpKlantId(klantId);
     }
+
+    public Account vindAccountOpEmailadres(String emailadres) {return accountDAO.vindAccountOpEmailAdres(emailadres);}
 }
