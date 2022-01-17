@@ -26,18 +26,21 @@ function toonSaldo (json) {
     saldo.append(json.saldo);
 }
 
-// asset.addEventListener('click', function (e) {
-//     toonWaarde();
-//     toonTransactieKosten();
-// })
+document.getElementById('asset').addEventListener('change', function (e) {
+    toonWaarde();
+    toonTransactieKosten();
+})
+
+function toonWaarde (json) {
+
+}
 //
-// document.getElementById("koop").addEventListener("click", (e)
-//     || document.getElementById("verkoop").addEventListener("click", (e) => {
+// document.getElementById("koop").addEventListener("click", (e) => {
 //         let hoeveelheid = document.getElementById("hoeveelheid").value;
 //         let asset = document.getElementById("dropdown").value;
 //         let data = {'hoeveelheid': hoeveelheid, 'dropdown': asset};
 //
-//         fetch("http://localhost:8080/transactie/1", {
+//         fetch("http://localhost:8080/transactie/10", {
 //             method: 'POST',
 //             headers: {
 //                 'Content-Type': 'application/json',
