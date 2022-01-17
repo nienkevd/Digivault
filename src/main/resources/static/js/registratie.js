@@ -89,7 +89,7 @@ registreren.addEventListener('click', function (e) {
 // REGISTRATIE VALIDATIE - Voert alle validatiechecks uit op het registratieFormulier
 function validatieRegistratie() {
     foutMeldingRegistratie.style.color = 'var(--divaRood)';
-    // bsnCheck();
+    bsnCheck();
     monkeyCheckLetters();
     monkeyCheckCijfers();
     aantallenCheck();

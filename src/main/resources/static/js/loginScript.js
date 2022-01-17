@@ -4,7 +4,7 @@
 const foutMeldingLogin = document.getElementById('foutMeldingLogin');
 
 // MELDINGSBERICHTEN
-const serverDownMelding = `Er is geen verbinding met de server`;
+const serverDownLoginMelding = `Er is geen verbinding met de server`;
 const inlogFoutMelding = `Je inloggegevens zijn onjuist`;
 
 // OVERIGE
@@ -58,7 +58,7 @@ document.getElementById("login").addEventListener("click", (e) => {
         })
         .catch((err) => {
             console.log(err);
-            foutMeldingLogin.innerHTML = serverDownMelding;
+            foutMeldingLogin.innerHTML = serverDownLoginMelding;
         });
 });
 
