@@ -25,7 +25,7 @@
 /* ----- HTML ELEMENTEN ----- */
 
 body {    /* Opzet body */
-    background: url("../images/background.jpg");
+    background: url("../images/background.jpg") fixed;
     background-size: cover;
     font-family: diva, Verdana, serif;
     font-size: 17px;
@@ -289,6 +289,12 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     margin-top: 5px;
 }
 
+#infoInvullenSchaalbaar {
+    margin-top: -20px;
+    display: none;
+    text-align: center;
+}
+
 #registratieBevestiging {
     margin-top: 0px;
     font-size: 1.05em;
@@ -328,10 +334,33 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 
 /* ----- SCRIPTS ----- */
 
-/* vergroot margin-top bij scherm kleiner dan 600px ivm smartphones */
+/* vergroot margin-top bij scherm kleiner dan 800px ivm smartphones */
 @media only screen and (max-width: 900px) {
     body {
-        margin-top: 130px;
+        margin-top: 120px;
+    }
+    #grid_registratie {
+        grid-template-columns: auto auto;
+    }
+    #registratieLaag {
+        margin-top: 120px;
+        width: 550px;
+        height: 900px;
+    }
+    .schaalbaar {
+        display: none;
+    }
+    #infoInvullen {
+        display: none;
+    }
+    #infoInvullenSchaalbaar {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 1350px) {
+    #registratieLaag {
+        margin-top: 100px;
     }
 }
 

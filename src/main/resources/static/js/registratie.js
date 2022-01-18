@@ -4,6 +4,7 @@
 const bevestigingSluiten = document.getElementById('bevestigingSluiten');
 const naarRegistreren = document.getElementById('naarRegistreren');
 const registreren = document.getElementById('registreren');
+const loginPagina = document.getElementById('loginPagina');
 const registratieBevestiging = document.getElementById('registratieBevestiging');
 const registratieInformatie = document.getElementById('registratieInformatie');
 const registratieLaag = document.getElementById('registratieLaag');
@@ -56,12 +57,14 @@ wachtwoord_check.addEventListener('keyup', checkOvereenkomenWachtwoorden);
 // REGISTRATIE LAAG - Tonen registratieLaag na klik #welkomsAanbieding en #naarRegistreren, verbergen #welkomsAanbieding
 function toonRegistratieLaag() {
     registratieLaag.style.display = 'block';
+    loginPagina.style.display = 'none';
     welkomsAanbieding.style.display = 'none';
 }
 
 // REGISTRATIE LAAG - Verbergen van de registratieLaag
 function verbergRegistratieLaag() {
     registratieLaag.style.display = 'none';
+    loginPagina.style.display = 'block';
 }
 
 // REGISTRATIE BEVESTIGING - Tonen van #registratieBevestiging met daarop de melding dat registratie gelukt is
@@ -90,12 +93,12 @@ registreren.addEventListener('click', function (e) {
 function validatieRegistratie() {
     foutMeldingRegistratie.innerHTML = '';
     foutMeldingRegistratie.style.color = 'var(--divaRood)';
-    bsnCheck();
     monkeyCheckLetters();
     monkeyCheckCijfers();
     aantallenCheck();
     mailCheck();
     postcodeCheck();
+    bsnCheck();
     legeVeldenCheck();
     leeftijdValidatie();
     return true;

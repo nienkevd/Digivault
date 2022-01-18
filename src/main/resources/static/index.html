@@ -62,37 +62,38 @@
         <img class="avatar" alt="registratie-avatar" src="images/registratie_avatar.jpg">
         <h1>Registreren</h1>
         <pre id="infoInvullen">Vul hieronder je gegevens in en loop binnen als DIVA!  Velden met een sterretje zijn verplicht</pre>
+        <pre id="infoInvullenSchaalbaar">Vul hieronder je gegevens in en loop binnen als DIVA! <br> Velden met een sterretje zijn verplicht</pre>
         <pre id="foutMeldingRegistratie"></pre>
         <form id="registratieFormulier">
-            <div class="grid_4">
-                <p class="registratie">Inloggegevens:</p>
+            <div id="grid_registratie" class="grid_4">
+                <p class="registratie schaalbaar">Inloggegevens:</p>
                 <input id="email_reg" name="email_reg" placeholder="e-mailadres *" title="vul een geldig e-mailadres in"
                        required="" type="email">
                 <input id="wachtwoord_reg" maxlength="65" minlength="10" name="wachtwoord_reg"
                        placeholder="wachtwoord *" title="je wachtwoord (10 tot 65 tekens)" required="" type="password">
                 <input id="wachtwoord_check" maxlength="65" minlength="10" name="wachtwoord_check"
                        placeholder="wachtwoord (check) *" title="herhaal je wachtwoord" required="" type="password">
-                <p class="registratie">Persoonsgegevens: </p>
+                <p class="registratie schaalbaar">Persoonsgegevens: </p>
                 <input id="voornaam" name="voornaam" placeholder="voornaam *" title="je voornaam" required=""
                        type="text">
                 <input id="tussenvoegsel" name="tussenvoegsel" placeholder="tussenvoegsel" maxlength="15"
                        title="je eventuele tussenvoegsel" type="text">
                 <input id="achternaam" name="achternaam" placeholder="achternaam *" title="je achternaam" required=""
                        type="text">
-                <br>
+                <br class="schaalbaar">
                 <input id="geboortedatum" name="geboortedatum" placeholder="geboortedatum *" title="je geboortedatum"
                        required="" type="date">
                 <input id="bsn" maxlength="9" minlength="8" name="bsn" placeholder="bsn *"
                        title="je BSN (8 of 9 cijfers)" required="" type="text">
-                <br>
-                <p class="registratie">Adresgegevens:</p>
+                <br class="schaalbaar">
+                <p class="registratie schaalbaar">Adresgegevens:</p>
                 <input id="postcode" name="postcode" placeholder="postcode *" title="je postcode (AAAA11)" required=""
                        maxlength="6" type="text">
                 <input id="huisnummer" name="huisnummer" placeholder="huisnummer *" title="je huisnummer" required=""
                        type="text">
                 <input id="toevoeging" name="toevoeging" placeholder="toevoeging" maxlength="5"
                        title="je eventuele huisnummertoevoeging" type="text">
-                <p class="registratie"></p>
+                <p class="registratie schaalbaar"></p>
                 <input id="straatnaam" name="straatnaam" placeholder="straatnaam" title="wordt automatisch ingevuld"
                        required="" type="text">
                 <input id="woonplaats" name="woonplaats" placeholder="woonplaats" title="wordt automatisch ingevuld"
