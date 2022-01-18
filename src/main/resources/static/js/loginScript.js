@@ -6,6 +6,7 @@ const foutMeldingLogin = document.getElementById('foutMeldingLogin');
 // MELDINGSBERICHTEN
 const serverDownLoginMelding = `Er is geen verbinding met de server`;
 const inlogFoutMelding = `Je inloggegevens zijn onjuist`;
+const autorisatieFoutMelding = `Je bent niet geautoriseerd`;
 
 // OVERIGE
 const domainArray = location.origin.split(':');
@@ -17,8 +18,6 @@ document.getElementById('logoDigivault').addEventListener('click', verversPagina
 function verversPagina() {
     location.reload();
 }
-
-
 
 // LOGINPAGINA: fetch bij klik op login knop en ingevulde velden
 
@@ -46,14 +45,16 @@ document.getElementById("login").addEventListener("click", (e) => {
             console.log(response.headers);
             // statuscheck
             if (response.status !== 200){
-                alert("Not authorized")
+                foutMeldingLogin.innerHTML = autorisatieFoutMelding;
+                console.log(">> fout: gebruiker is niet geautoriseerd");
             } else
             localStorage.setItem("token", response.headers.get("Bearer"));
             return response.json()})
         .then((data) => {
             console.log(data);
             if (data.error) {
-                alert("Error Password or Username");
+                foutMeldingLogin.innerHTML = inlogFoutMelding;
+                console.log(">> fout: verkeerde inloggegevens");
             } else {
                 toonFinancieelOverzicht();
             }
@@ -61,6 +62,7 @@ document.getElementById("login").addEventListener("click", (e) => {
         .catch((err) => {
             console.log(err);
             foutMeldingLogin.innerHTML = serverDownLoginMelding;
+            console.log(">> fout: geen respons van de server");
         });
 });
 
