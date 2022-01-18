@@ -27,10 +27,10 @@ const straatnaam = document.getElementById('straatnaam');
 const woonplaats = document.getElementById('woonplaats');
 
 // MELDINGSBERICHTEN
-const serverDownMelding = `ERROR: er kan geen verbinding gemaakt worden met de server`;
+const serverDownMelding = `ERROR: er is geen verbinding met de server`;
 const minimumLeeftijdMelding = `Sorry, je moet 18 jaar of ouder zijn om te registreren`;
-const monkeyLeeftijdMelding = `Je bent aan het monkey-testen, vul je echte geboortedatum in`;
-const regExpMailMelding = `Dit mailadres is niet geldig`;
+const monkeyLeeftijdMelding = `Monkey-tester, vul je echte geboortedatum in`;
+const regExpMailMelding = `Dit e-mailadres is niet geldig`;
 const regExpPostcodeMelding = `Deze postcode is niet geldig`;
 const legeVeldenMelding = `Je hebt nog niet alle verplichte velden ingevuld`;
 const monkeyCijferMelding = `Je hebt letters ingevuld in een inputveld voor cijfers`;
@@ -47,7 +47,7 @@ const postcodeRegExp = new RegExp(/^([1-9][0-9]{3}[a-zA-Z]{2})$/);
 const alleenLetters = new RegExp(/^[A-Za-z]+$/);
 const alleenCijfers = new RegExp(/^[0-9]+$/);
 
-// EVENT-LISTENERS
+// LOSSE EVENT-LISTENERS
 welkomsAanbieding.addEventListener('click', toonRegistratieLaag);
 naarRegistreren.addEventListener('click', toonRegistratieLaag);
 bevestigingSluiten.addEventListener('click', verbergRegistratieBevestiging);
@@ -165,16 +165,6 @@ function leeftijdValidatie() {
         console.log(">> fout: te oud");
         foutMeldingRegistratie.innerHTML = monkeyLeeftijdMelding;
     }
-}
-
-// REGISTRATIE VALIDATIE - Hulpmethode voor bsnCheck(), verwijdert punten
-function verwijderPunten(param) {
-    let l = param.length;
-    let bankacct = "";
-    for(let i = 0; i < l; i++) {
-        bankacct += param.charAt(i) !== "." ? param.charAt(i) : "";
-    }
-    return bankacct;
 }
 
 // REGISTRATIE VALIDATIE - Controleert of alle verplichte velden in registratieFormulier zijn ingevuld

@@ -182,7 +182,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     height: 625px;
 }
 
-.financieelOverzicht { /* Aanpassingen voor financieel overzicht*/
+.financieelOverzicht { /* Aanpassingen voor financieel overzicht */
     display: block;
     padding: 30px 90px;
     width: 950px;
@@ -246,7 +246,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     left: calc(50% - 55px);
 }
 
-.avatarReg {
+.avatarReg {    /* Aanpassing avatar registratieLaag */
     width: 430px;
     height: 270px;
     border-top-left-radius: 40px;
@@ -325,7 +325,6 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     text-align: center;
 }
 
-
 #veelGeld {
     color: var(--divaRoze);
     font-weight: bold;
@@ -334,7 +333,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 
 /* ----- SCRIPTS ----- */
 
-/* vergroot margin-top bij scherm kleiner dan 800px ivm smartphones */
+/* Wijzig elementen bij scherm kleiner dan 900px */
 @media only screen and (max-width: 900px) {
     body {
         margin-top: 120px;
@@ -345,7 +344,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     #registratieLaag {
         margin-top: 120px;
         width: 550px;
-        height: 900px;
+        height: 840px;
     }
     .schaalbaar {
         display: none;
@@ -355,6 +354,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     }
 }
 
+/* Wijzig elementen bij scherm kleiner dan 1350px */
 @media only screen and (max-width: 1350px) {
     #registratieLaag {
         margin-top: 100px;
@@ -420,4 +420,3 @@ th {
 td {
     width: 250px;
 }
-
