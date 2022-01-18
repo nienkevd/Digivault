@@ -3,7 +3,7 @@
 // RELATIVE PATH URL FETCH
 const domainArray = location.origin.split(':');
 const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
-const url = urlLead + 'financieeloverzicht/'+ response.body.get(klantId);
+const url = urlLead + 'financieeloverzicht';
 
 // VERWIJZINGEN
 const iban = document.getElementById("iban");
@@ -12,7 +12,7 @@ const tableBody = document.querySelector("#fi-table > tbody");
 
 
 fetch(url, {
-    method: 'GET',
+    method: 'POST',
     headers: {
         'Authorization': localStorage.getItem("token"),
         'Content-Type': 'application/json',
@@ -22,9 +22,8 @@ fetch(url, {
     .then(response => {
         if(response.status === 200){
             return response.json()
-        } else if(response.status === 401){
-            console.log(response.headers.get('Location'))
-            window.location.href = response.headers.get('Location');
+        } else {
+            throw new Error("Er is iets verkeerd gegaan! " + response.status)
         }
     })
     .then(json =>

@@ -2,8 +2,10 @@ package nl.hva.c25.team1.digivault.controller;
 
 import nl.hva.c25.team1.digivault.authentication.TokenService;
 import nl.hva.c25.team1.digivault.model.FinancieelOverzicht;
+import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.service.AccountService;
 import nl.hva.c25.team1.digivault.service.FinancieelOverzichtService;
+import nl.hva.c25.team1.digivault.service.KlantService;
 import org.springframework.boot.autoconfigure.cassandra.CassandraProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,28 +25,32 @@ public class FinancieelOverzichtController {
     private FinancieelOverzichtService financieelOverzichtService;
     private TokenService tokenService;
     private AccountService accountService;
+    private KlantService klantService;
 
     /**
      * Constructor van de FinancieelOverzichtController
      * @param financieelOverzichtService FinancieelOverzichtService
      */
     public FinancieelOverzichtController(FinancieelOverzichtService financieelOverzichtService,
-                                         TokenService tokenService, AccountService accountService) {
+                                         TokenService tokenService, AccountService accountService,
+                                         KlantService klantService) {
         super();
         this.financieelOverzichtService = financieelOverzichtService;
         this.tokenService = tokenService;
         this.accountService = accountService;
+        this.klantService = klantService;
     }
 
     /**
      * Genereren van een financieel overzicht (rekening/portefeuille) op klantId
-     * @param klantId id waarop gezocht wordt
      * @return een FinancieelOverzicht
      */
     @CrossOrigin
-    @GetMapping("/financieeloverzicht/{klantId}")
-    public ResponseEntity<FinancieelOverzicht> vindFinancieelOverzicht(@PathVariable int klantId,
-                                                                       @RequestHeader("Authorization") String token) {
+    @PostMapping("/financieeloverzicht")
+    public ResponseEntity<FinancieelOverzicht> vindFinancieelOverzicht(@RequestHeader("Authorization") String token) {
+        String emailadres = tokenService.getEmailadresToken(token);
+        Klant klant = klantService.vindKlantOpEmail(emailadres);
+        int klantId = klant.getTransactiepartijId();
         boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
                 getEmailadres());
         if (tokenService.valideerJWT(token) && authorized) {
