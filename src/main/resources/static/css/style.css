@@ -350,9 +350,6 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     .schaalbaar {
         display: none;
     }
-    #infoInvullen {
-        display: none;
-    }
     #infoInvullenSchaalbaar {
         display: block;
     }
