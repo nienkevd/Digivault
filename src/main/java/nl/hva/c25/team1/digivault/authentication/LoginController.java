@@ -4,6 +4,7 @@
 package nl.hva.c25.team1.digivault.authentication;
 
 import nl.hva.c25.team1.digivault.model.Account;
+import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.service.KlantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -43,10 +44,12 @@ public class LoginController {
         if (token == null) {
             return new ResponseEntity<>("Email en/of wachtwoord onjuist!", HttpStatus.UNAUTHORIZED);
         } else {
+            Klant klant = klantService.vindKlantOpEmail(account.getEmailadres());
+            int klantId = klant.getTransactiepartijId();
             HttpHeaders headers = new HttpHeaders();
             headers.set("Bearer", token);
             headers.set("Access-Control-Expose-Headers", "Bearer" );
-            return new ResponseEntity<>("\"Login geslaagd!\"", headers, HttpStatus.OK);
+            return new ResponseEntity<>(klantId, headers, HttpStatus.OK);
         }
     }
 
