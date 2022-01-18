@@ -336,13 +336,13 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 /* Wijzig elementen bij scherm kleiner dan 900px */
 @media only screen and (max-width: 900px) {
     body {
-        margin-top: 120px;
+        margin-top: 100px;
     }
     #grid_registratie {
         grid-template-columns: auto auto;
     }
     #registratieLaag {
-        margin-top: 120px;
+        margin-top: 100px;
         width: 550px;
         height: 840px;
     }

@@ -27,7 +27,7 @@ const straatnaam = document.getElementById('straatnaam');
 const woonplaats = document.getElementById('woonplaats');
 
 // MELDINGSBERICHTEN
-const serverDownMelding = `ERROR: er is geen verbinding met de server`;
+const serverDownMelding = `Kan geen verbinding maken met de server`;
 const minimumLeeftijdMelding = `Sorry, je moet 18 jaar of ouder zijn om te registreren`;
 const monkeyLeeftijdMelding = `Monkey-tester, vul je echte geboortedatum in`;
 const regExpMailMelding = `Dit e-mailadres is niet geldig`;
@@ -251,6 +251,7 @@ function checkOvereenkomenWachtwoorden() {
 
 // REGISTRATIE FORMULIER - Methode die het registreren van het #registratieFormulier daadwerkelijk uitvoert
 function registreerFormulier() {
+
     let data = {
         'emailadres': email_reg.value,
         'wachtwoord': wachtwoord_reg.value,
@@ -282,7 +283,7 @@ function registreerFormulier() {
         .then((data) => {
             console.log(data);
             if (data.error) {
-                console.log("Validatiefout");
+                console.log(">> Algemene validatiefout");
                 return false;
             } else {
                 toonRegistratieBevestiging(data);

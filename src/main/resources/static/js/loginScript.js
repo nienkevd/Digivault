@@ -4,9 +4,8 @@
 const foutMeldingLogin = document.getElementById('foutMeldingLogin');
 
 // MELDINGSBERICHTEN
-const serverDownLoginMelding = `Er is geen verbinding met de server`;
 const inlogFoutMelding = `Je inloggegevens zijn onjuist`;
-const autorisatieFoutMelding = `Je bent niet geautoriseerd`;
+const geduldMelding = `Even geduld a.u.b.`;
 
 // OVERIGE
 const domainArray = location.origin.split(':');
@@ -29,6 +28,8 @@ document.getElementById("login").addEventListener("click", (e) => {
 // DECLARATIE VAN CONSTANTEN
     const data = {'emailadres': email, 'wachtwoord': wachtwoord};
 
+    foutMeldingLogin.innerHTML = geduldMelding;
+
     e.preventDefault();
     console.log(JSON.stringify(data));
 
@@ -41,15 +42,12 @@ document.getElementById("login").addEventListener("click", (e) => {
         body: JSON.stringify(data),
     })
         .then((response) => {
-            console.log(response.status);
-            console.log(response.headers);
             // statuscheck
-            if (response.status !== 200){
-                foutMeldingLogin.innerHTML = autorisatieFoutMelding;
-                console.log(">> fout: gebruiker is niet geautoriseerd");
-            } else
-            localStorage.setItem("token", response.headers.get("Bearer"));
-            return response.json()})
+            if (response.status === 200) {
+                localStorage.setItem("token", response.headers.get("Bearer"));
+            }
+            return response.json()
+        })
         .then((data) => {
             console.log(data);
             if (data.error) {
@@ -61,7 +59,11 @@ document.getElementById("login").addEventListener("click", (e) => {
         })
         .catch((err) => {
             console.log(err);
-            foutMeldingLogin.innerHTML = serverDownLoginMelding;
+            // if (email === '' && wachtwoord === '') {
+            //     foutMeldingLogin.innerHTML = inlogFoutMelding;
+            //     console.log(">> fout: verkeerde inloggegevens");
+            // }
+            foutMeldingLogin.innerHTML = serverDownMelding;
             console.log(">> fout: geen respons van de server");
         });
 });
