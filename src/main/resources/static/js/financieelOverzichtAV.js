@@ -3,7 +3,7 @@
 // RELATIVE PATH URL FETCH
 const domainArray = location.origin.split(':');
 const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
-const url = urlLead + 'financieeloverzicht/10';
+const url = urlLead + 'financieeloverzicht/'+ response.body.get(klantId);
 
 // VERWIJZINGEN
 const iban = document.getElementById("iban");
