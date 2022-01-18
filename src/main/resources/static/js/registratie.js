@@ -88,8 +88,9 @@ registreren.addEventListener('click', function (e) {
 
 // REGISTRATIE VALIDATIE - Voert alle validatiechecks uit op het registratieFormulier
 function validatieRegistratie() {
+    foutMeldingRegistratie.innerHTML = '';
     foutMeldingRegistratie.style.color = 'var(--divaRood)';
-    bsnCheck();
+    eleven_test();
     monkeyCheckLetters();
     monkeyCheckCijfers();
     aantallenCheck();
@@ -100,22 +101,43 @@ function validatieRegistratie() {
     return true;
 }
 
-// REGISTRATIE VALIDATIE - Controleert of BSN voldoet aan elfproef //
-function bsnCheck() {
+function eleven_test() {
     console.log("bsnCheck")
     let bsnWaarde = bsn.value;
-    let total = 0;
-    bsnWaarde = verwijderPunten(bsnWaarde);
-    let j = bsnWaarde.length;
-    for(let i = 0; i < bsnWaarde.length; i++) {
-        total += bsnWaarde.charAt(i) * j;
-        j -= 1;
+    let sum = 0;
+    for (let i = 1; i < 10; i++) {
+        let amount = bsnWaarde.charAt(i - 1);
+        if (i === 9 ) {
+            sum -= amount * (10 - i);
+        } else {
+            sum += amount * (10 - i);
+        }
     }
-    if((total % 11 ) !== 0) {
-        console.log(">> bsnCheck")
-        vertraging(200).then(() => { foutMeldingRegistratie.innerHTML = geldigeBsnMelding; });
+    if (!sum % 11) {
+        console.log(">> bsnCheck geslaagd")
+        return true
+    } else {
+        console.log(">> bsnCheck mislukt")
+        return false
     }
 }
+
+// REGISTRATIE VALIDATIE - Controleert of BSN voldoet aan elfproef //
+// function bsnCheck() {
+//     console.log("bsnCheck")
+//     let bsnWaarde = bsn.value;
+//     let total = 0;
+//     bsnWaarde = verwijderPunten(bsnWaarde);
+//     let j = bsnWaarde.length;
+//     for(let i = 0; i < bsnWaarde.length; i++) {
+//         total += bsnWaarde.charAt(i) * j;
+//         j -= 1;
+//     }
+//     if((total % 11 ) !== 0) {
+//         console.log(">> bsnCheck")
+//         vertraging(200).then(() => { foutMeldingRegistratie.innerHTML = geldigeBsnMelding; });
+//     }
+// }
 
 // VALIDATIE - Zoekt eerst de datum van 18 jaar geleden op, en checkt of de geboortedatum voor die datum ligt //
 function leeftijdValidatie() {
