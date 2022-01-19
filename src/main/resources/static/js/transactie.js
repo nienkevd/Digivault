@@ -31,6 +31,14 @@ function toonSaldo (json) {
     saldo.append(json.saldo);
 }
 
+var select = document.getElementById("dropdown");
+for(var i = 0; i <20; ++i) {
+    var option = document.createElement('option');
+    option.text = option.value = ;
+    select.add(option, 0);
+}
+
+
 // document.getElementById('asset').addEventListener('change', function (e) {
 //     toonWaarde();
 //     toonTransactieKosten();
