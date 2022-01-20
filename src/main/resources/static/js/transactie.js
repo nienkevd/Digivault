@@ -1,10 +1,15 @@
-// RELATIVE PATH URL FETCH
-    const domainArray = location.origin.split(':');
+const domainArray = location.origin.split(':');
 const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
-const url = urlLead + 'financieeloverzicht/10';
+const url = urlLead + 'financieeloverzicht';
+//asset array in financieeloverzicht json bestand
+let assets;
+//dropdown menu op transactie pagina
+const select = document.getElementById("dropdown")
+//hoeveelheid input veld op transactie pagina
+const hoeveelheid = document.getElementById("hoeveelheid")
 
 fetch(url, {
-    method: 'GET',
+    method: 'POST',
     headers: {
         'Authorization': localStorage.getItem("token"),
         'Content-Type': 'application/json',
@@ -31,31 +36,71 @@ function toonSaldo (json) {
     saldo.append(json.saldo);
 }
 
-// var select = document.getElementById("dropdown");
-// for(var i = 0; i <20; ++i) {
-//     var option = document.createElement('option');
-//     option.text = option.value = ;
-//     select.add(option, 0);
-// }
+select.addEventListener("click", (e) => {
+    console.log("button")
+    fetch(url, {
+        method: "POST",
+        headers: {
+            'Authorization': localStorage.getItem("token"),
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+    })
+        .then(response => {
+            console.log(response)
+            if (response.status === 200) {
+                return response.json()
+            } else {
+                throw new Error("Er is iets verkeerd gegaan! " + response.status)
+            }
+        })
+        .then(json => {
+            assets = json.assetMetAantal;
+            vulDropdownMenu(json);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+    function vulDropdownMenu(json) {
+        for (i = 0; i < 20; i++) {
+            var option = document.createElement('option');
+            option.text = option.value = json.assetMetAantal[i].naam;
+            select.add(option, 0);
+        }
+    }
+    select.addEventListener( "change", toonWaarde);
+
+    function toonWaarde() {
+        const value = select.options[select.selectedIndex].value;
+        const hoeveelheid = document.getElementById("hoeveelheid").value;
+        let dagkoers;
+
+        for (i = 0; i < 20; i++) {
+            if (assets[i].naam == value) {
+                dagkoers = assets[i].dagkoers;
+                break;
+            }
+        }
+        const waarde = hoeveelheid * dagkoers;
+        document.getElementById("waarde").innerText=waarde.toFixed(2);
+        const transactiekosten = waarde * 0.02;
+        document.getElementById("transactiekosten").innerText=transactiekosten.toFixed(2);
+    }
+
+    hoeveelheid.addEventListener("input", toonWaarde)
+
+})
 
 
-// document.getElementById('asset').addEventListener('change', function (e) {
-//     toonWaarde();
-//     toonTransactieKosten();
-// })
-//
-// function toonWaarde (json) {
-//     let hoeveelheid = document.getElementById("hoeveelheid").value;
-//     let dagkoers = json.dagkoers;
-//     const waarde = hoeveelheid;
-//     document.getElementById("waarde").append(waarde);
-// }
-//
-// function toonTransactieKosten(json) {
-//     const transactiekosten = (waarde * 0.02);
-//     document.getElementById("transactiekosten").append(transactiekosten);
-// }
-//
+
+
+
+
+
+
+
+
 // document.getElementById("koop").addEventListener("click", (e) => {
 //     let hoeveelheid = document.getElementById("hoeveelheid").value;
 //     let asset = document.getElementById("dropdown").value;

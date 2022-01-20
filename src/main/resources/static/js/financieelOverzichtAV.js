@@ -6,6 +6,7 @@ const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
 const url = urlLead + 'financieeloverzicht';
 
 // VERWIJZINGEN
+const transactie = document.getElementById("transactie");
 const iban = document.getElementById("iban");
 const saldo = document.getElementById("saldo");
 const tableBody = document.querySelector("#fi-table > tbody");
@@ -34,6 +35,7 @@ fetch(url, {
     });
 
 function vulPagina(json) {
+    transactie.addEventListener("click",window.location.href = "transactie.html");
     // toon IBAN van gebruiker
     iban.append(json.iban);
     // toon saldo van gebruiker
@@ -63,6 +65,8 @@ function vulPagina(json) {
         tableBody.appendChild(tr);
     }
 }
+
+
 
 
 
