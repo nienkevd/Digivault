@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- algemeen javascript -->
     <script defer src="js/financieelOverzichtAV.js"></script>
+    <script defer src="js/loginScript.js"></script>
+    <script defer src="js/transactie.js"></script>
 </head>
 <body>
 
@@ -27,7 +29,7 @@
     <table id="fi-table" class="fi-table">
         <thead>
         <tr>
-            <th>Beschikbare coins</th>
+            <th>Crypto</th>
             <th>Afkorting</th>
             <th>Aantal</th>
             <th>Dagkoers</th>
@@ -38,6 +40,12 @@
 <!--        lege body, deze wordt met JavaScript gevuld -->
         </tbody>
     </table>
+    <div class="grid_3">
+        <br>
+        <input id="naarTransactiePagina" name="Transactie" type="submit" value="Trade">
+        <br>
+    </div>
+    <a id="naarLoginPagina" href="#">Uitloggen</a>
 </div>
 </div>
 </body>
