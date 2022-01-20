@@ -229,7 +229,6 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     grid-gap: 12px;
     grid-template-columns: auto auto auto;
 }
-
 .grid_4 {   /* Standaardstijl voor gebruik grid van 4 grid-cellen */
     display: grid;
     grid-gap: 10px;
@@ -417,6 +416,32 @@ th {
     font-weight: bold;
     height: 40px;
 }
+th:hover{
+    color: var(--divaGoud);
+}
 td {
     width: 250px;
 }
+/* table sortable: de pizzapuntjes voor asc/desc. hover & kleur*/
+.fi-table th {
+    cursor: pointer;
+}
+
+.fi-table .th-sort-asc::after {
+    content: "\25b4";
+}
+
+.fi-table .th-sort-desc::after {
+    content: "\25be";
+}
+
+.fi-table .th-sort-asc::after,
+.fi-table .th-sort-desc::after {
+    margin-left: 5px;
+}
+
+.fi-table .th-sort-asc,
+.fi-table .th-sort-desc {
+    color: var(--divaGoud);
+}
+
