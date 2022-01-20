@@ -32,24 +32,27 @@ public class Transactie {
         this(0, null, null, transactieDatum, transactieTijd, null, aantalCryptos);
     }
 
-    public void setTransactieId(int transactieId) {
+    public Transactie setTransactieId(int transactieId) {
         this.transactieId = transactieId;
+        return this;
     }
 
     public TransactiePartij getKoper() {
         return koper;
     }
 
-    public void setKoper(TransactiePartij koper) {
+    public Transactie setKoper(TransactiePartij koper) {
         this.koper = koper;
+        return this;
     }
 
     public TransactiePartij getVerkoper() {
         return verkoper;
     }
 
-    public void setVerkoper(TransactiePartij verkoper) {
+    public Transactie setVerkoper(TransactiePartij verkoper) {
         this.verkoper = verkoper;
+        return this;
     }
 
     public LocalDate getTransactieDatum() {
@@ -64,20 +67,22 @@ public class Transactie {
         return asset;
     }
 
-    public void setAsset(Asset asset) {
+    public Transactie setAsset(Asset asset) {
         this.asset = asset;
+        return this;
     }
 
     public double getAantalCryptos() {
         return aantalCryptos;
     }
 
-    public void setAantalCryptos(double aantalCryptos) throws IllegalArgumentException {
+    public Transactie setAantalCryptos(double aantalCryptos) throws IllegalArgumentException {
         if (aantalCryptos > 0) {
             this.aantalCryptos = aantalCryptos;
         } else {
             throw new IllegalArgumentException("Aantal cryptomunten moet een positief getal zijn!");
         }
+        return this;
     }
 
     @Override

@@ -24,6 +24,7 @@ public class TransactieService {
     private AssetService assetService;
     private BankService bankService;
     private RootRepository rootRepository;
+    private double nettoTransactieWaarde;
 
 
     @Autowired
@@ -33,6 +34,7 @@ public class TransactieService {
         this.assetService = assetService;
         this.bankService = bankService;
         this.rootRepository = rootRepository;
+        nettoTransactieWaarde = 0;
     }
 
     /**
@@ -47,7 +49,9 @@ public class TransactieService {
      */
     public Transactie voerTransactieUit(Transactie transactie) {
         vulTransactie(transactie);
-        if (checkKoper(transactie) && checkVerkoper(transactie) && checkAccounts(transactie)) {
+        setNettoTransactieWaarde(transactie);
+        if ((transactie.getKoper().getRekening().getSaldo() >= nettoTransactieWaarde)
+                && verkoperHeeftVoldoendeCrypto(transactie) && koperEnVerkoperVerschillen(transactie)) {
             doeTransactieMutaties(transactie);
             return rootRepository.voerTransactieUit(transactie);
         }
@@ -58,15 +62,9 @@ public class TransactieService {
     void doeTransactieMutaties(Transactie transactie) {
         TransactiePartij koper = transactie.getKoper();
         TransactiePartij verkoper = transactie.getVerkoper();
-        double mutatieBedrag;
-        if (verkoper instanceof Bank) {
-            mutatieBedrag = berekenWaardeTransactie(transactie) *
-                    (1 + ((Bank) verkoper).getTransactiePercentage() / 100);
-        } else {
-            mutatieBedrag = berekenWaardeTransactie(transactie) * (1 - ((Bank) koper).getTransactiePercentage() / 100);
-        }
-        muteerRekening(verkoper.getRekening(), mutatieBedrag);
-        muteerRekening(koper.getRekening(), 0 - mutatieBedrag);
+
+        muteerRekening(verkoper.getRekening(), nettoTransactieWaarde);
+        muteerRekening(koper.getRekening(), 0 - nettoTransactieWaarde);
         muteerPortefeuille(koper.getPortefeuille(), transactie.getAsset(), transactie.getAantalCryptos());
         muteerPortefeuille(verkoper.getPortefeuille(), transactie.getAsset(), 0 - transactie.getAantalCryptos());
     }
@@ -100,28 +98,31 @@ public class TransactieService {
         transactie.setAsset(assetService.vindAssetOpId(transactie.getAsset().getAssetId()));
     }
 
-    // Deze methode berekent de bruto transactie-waarde. D.w.z. zonder transactiekosten.
-    public double berekenWaardeTransactie(Transactie transactie) {
-        return transactie.getAsset().getDagKoers() * transactie.getAantalCryptos();
+    void setNettoTransactieWaarde(Transactie transactie) {
+        double brutoWaarde = transactie.getAsset().getDagKoers() * transactie.getAantalCryptos();
+        TransactiePartij koper = transactie.getKoper();
+        TransactiePartij verkoper = transactie.getVerkoper();
+        if (verkoper instanceof Bank) {
+            nettoTransactieWaarde = brutoWaarde * (1 + ((Bank) verkoper).getTransactiePercentage() / 100);
+        } else {
+            nettoTransactieWaarde = brutoWaarde * (1 - ((Bank) koper).getTransactiePercentage() / 100);
+        }
     }
 
-    // Deze methode checkt of de koper voldoende geld heeft.
-    public boolean checkKoper(Transactie transactie) {
-        return transactie.getKoper().getRekening().getSaldo() >= berekenWaardeTransactie(transactie);
-    }
-
-    // Deze methode checkt of de verkoper voldoende crypto heeft.
-    boolean checkVerkoper(Transactie transactie) {
+    boolean verkoperHeeftVoldoendeCrypto(Transactie transactie) {
         for (PortefeuilleItem portefeuilleItem : transactie.getVerkoper().getPortefeuille()) {
-            if (portefeuilleItem.getAsset().getAfkorting().equals(transactie.getAsset().getAfkorting()))
+            if (portefeuilleItem.getAsset().getAssetId() ==  transactie.getAsset().getAssetId())
                 return portefeuilleItem.getHoeveelheid() >= transactie.getAantalCryptos();
         }
         return false;
     }
 
-    // Deze methode checkt of de koper en verkoper accounts van elkaar verschillen.
-    boolean checkAccounts (Transactie transactie) {
-        return !(transactie.getVerkoper().getRekening() == transactie.getKoper().getRekening());
+    boolean koperEnVerkoperVerschillen(Transactie transactie) {
+        return !(transactie.getVerkoper().getTransactiepartijId() == transactie.getKoper().getTransactiepartijId());
+    }
+
+    public double getNettoTransactieWaarde() {
+        return nettoTransactieWaarde;
     }
 
 }
