@@ -59,8 +59,12 @@ public class TransactieController {
         catch(IllegalArgumentException illegalArgumentException) {
             return illegalArgumentException.getMessage();
         }
-        transactieService.voerTransactieUit(transactie);
-        if (transactie == null) return "transaction failed";
+        if (transactie != null) {
+            transactie = transactieService.voerTransactieUit(transactie);
+        }
+        if (transactie == null) {
+            return "transaction failed";
+        }
         return "transaction executed";
     }
 }

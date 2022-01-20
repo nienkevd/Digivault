@@ -32,6 +32,9 @@ public class TransactieMapper {
         transactie.setAsset(new Asset(transactieDTO.getAssetId()));
         setKoper(transactie, transactieDTO.getKoperId());
         setVerkoper(transactie, transactieDTO.getVerkoperId());
+        if (transactie.getKoper() instanceof Bank && transactie.getVerkoper() instanceof Bank) { // beide bank
+            return null;
+        }
         return transactie;
     }
 

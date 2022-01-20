@@ -62,7 +62,6 @@ public class TransactieService {
     void doeTransactieMutaties(Transactie transactie) {
         TransactiePartij koper = transactie.getKoper();
         TransactiePartij verkoper = transactie.getVerkoper();
-
         muteerRekening(verkoper.getRekening(), nettoTransactieWaarde);
         muteerRekening(koper.getRekening(), 0 - nettoTransactieWaarde);
         muteerPortefeuille(koper.getPortefeuille(), transactie.getAsset(), transactie.getAantalCryptos());
