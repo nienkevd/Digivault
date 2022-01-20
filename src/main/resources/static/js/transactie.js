@@ -7,6 +7,8 @@ let assets;
 const select = document.getElementById("dropdown")
 //hoeveelheid input veld op transactie pagina
 const hoeveelheid = document.getElementById("hoeveelheid")
+//contant transactie kosten percentage
+const percentage = 0.02
 
 fetch(url, {
     method: 'POST',
@@ -76,7 +78,7 @@ select.addEventListener("click", (e) => {
         const hoeveelheid = document.getElementById("hoeveelheid").value;
         let dagkoers;
 
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < assets.length; i++) {
             if (assets[i].naam == value) {
                 dagkoers = assets[i].dagkoers;
                 break;
@@ -84,7 +86,7 @@ select.addEventListener("click", (e) => {
         }
         const waarde = hoeveelheid * dagkoers;
         document.getElementById("waarde").innerText=waarde.toFixed(2);
-        const transactiekosten = waarde * 0.02;
+        const transactiekosten = waarde * percentage;
         document.getElementById("transactiekosten").innerText=transactiekosten.toFixed(2);
     }
 
