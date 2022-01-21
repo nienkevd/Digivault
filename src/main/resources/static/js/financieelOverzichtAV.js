@@ -68,7 +68,6 @@ function vulPagina(json) {
     document.getElementById('naarLoginPagina').addEventListener('click', toonLoginPagina);
 
     function toonTransactiePagina() {
-        console.log("transactie")
         window.location.href = "transactie.html";
     }
 
