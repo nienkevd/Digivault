@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 // RELATIVE PATH URL FETCH
 const domainArray = location.origin.split(':');
