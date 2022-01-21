@@ -3,7 +3,9 @@ package nl.hva.c25.team1.digivault.controller;
 import nl.hva.c25.team1.digivault.model.EuroKoers;
 import nl.hva.c25.team1.digivault.service.EuroKoersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -65,5 +67,19 @@ public class EuroKoersController {
     @PutMapping("/eurokoersen/{euroKoersId}")
     public String update(@RequestBody EuroKoers euroKoers) {
         return euroKoersService.updateEuroKoers(euroKoers);
+    }
+
+
+    @GetMapping("/dagkoersen")
+    public ResponseEntity<EuroKoers> geeftActueleDagkoers() {
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<EuroKoers[]> response =
+                restTemplate.getForEntity(
+                        "https://api.binance.com/api/v3/ticker/price",
+                        EuroKoers[].class);
+        EuroKoers[] dagkoers = response.getBody();
+
+
+        return null;
     }
 }
