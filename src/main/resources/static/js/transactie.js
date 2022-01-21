@@ -7,6 +7,8 @@ const urltr = urlLead + 'transactie';
 let assets;
 //dropdown menu op transactie pagina
 const select = document.getElementById("dropdown")
+//hoeveelheid input veld
+const hoeveelheid = document.getElementById("hoeveelheid")
 //constant transactie kosten percentage
 const percentage = 0.02
 //knop koop
@@ -19,8 +21,6 @@ const klantId = localStorage.getItem("klantId")
 let assetId;
 //bankId is altijd 1
 const bankId = 1
-//hoeveelheid input veld
-const hoeveelheid = document.getElementById("hoeveelheid")
 
 // Ophalen saldo vanaf financieeloverzicht
 fetch(url, {
@@ -85,8 +85,6 @@ select.addEventListener("click", (e) => {
         }
     }
 
-
-
     //Toon waarde en transactie kosten wanneer een asset is gekozen uit de dropdown menu
     select.addEventListener("change", toonWaarde);
 
@@ -149,6 +147,34 @@ select.addEventListener("click", (e) => {
             .catch((err) => {
                 console.log(err);
             });
+
+        //voer transactie uit als verkoop knop is gedrukt
+        verkoop.addEventListener("click", (e) => {
+            const data = {'koperId': bankId, 'verkoperId': klantId, 'assetId': assetId, 'aantal': hoeveelheid.value};
+            fetch(urltr, {
+                method: "POST",
+                headers: {
+                    'Authorization': localStorage.getItem("token"),
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => {
+                    console.log(response)
+                    if (response.status === 200) {
+                        return response.json()
+                    } else {
+                        throw new Error("Er is iets verkeerd gegaan! " + response.status)
+                    }
+                })
+                .then(json => {
+                    toonFinancieelOverzicht();
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        })
 })
 
 
