@@ -2,6 +2,7 @@ package nl.hva.c25.team1.digivault.repository;
 
 import nl.hva.c25.team1.digivault.model.Asset;
 import nl.hva.c25.team1.digivault.model.EuroKoers;
+import nl.hva.c25.team1.digivault.model.Rekening;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -57,6 +58,12 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
         }, keyHolder);
         euroKoers.setEuroKoersId(keyHolder.getKey().intValue());
         return euroKoers;
+    }
+
+    @Override
+    public void updateEuroKoers(EuroKoers euroKoers) {
+        String sql = "UPDATE eurokoers SET datum = ?, koers = ? WHERE eurokoersId = ?";
+        jdbcTemplate.update(sql,  euroKoers.getDatum(), euroKoers.getKoers(), euroKoers.getEuroKoersId());
     }
 
     /**

@@ -69,17 +69,4 @@ public class EuroKoersController {
         return euroKoersService.updateEuroKoers(euroKoers);
     }
 
-
-    @GetMapping("/dagkoersen")
-    public ResponseEntity<EuroKoers> geeftActueleDagkoers() {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<EuroKoers[]> response =
-                restTemplate.getForEntity(
-                        "https://api.binance.com/api/v3/ticker/price",
-                        EuroKoers[].class);
-        EuroKoers[] dagkoers = response.getBody();
-
-
-        return null;
-    }
 }
