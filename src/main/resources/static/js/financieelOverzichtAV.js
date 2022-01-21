@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 // RELATIVE PATH URL FETCH
 const domainArray = location.origin.split(':');
@@ -68,7 +68,6 @@ function vulPagina(json) {
     document.getElementById('naarLoginPagina').addEventListener('click', toonLoginPagina);
 
     function toonTransactiePagina() {
-        console.log("transactie")
         window.location.href = "transactie.html";
     }
 

@@ -188,7 +188,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     width: 950px;
     height: 620px;
     overflow-y: auto;
-    margin-top:42px;
+    margin-top:58px;
 }
 
 .financieelOverzichtContainer { /* Container rondom financieel overzicht, anders valt avatar eraf door scrollbalk*/
@@ -332,8 +332,15 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 
 /* ----- SCRIPTS ----- */
 
-/* Wijzig elementen bij scherm kleiner dan 900px */
-@media only screen and (max-width: 900px) {
+/* Wijzig elementen bij scherm SMALLER dan 1350px */
+@media only screen and (max-width: 1350px) {
+    #registratieLaag {
+        margin-top: 100px;
+    }
+}
+
+/* Wijzig elementen bij scherm SMALLER dan 1000px */
+@media only screen and (max-width: 1020px) {
     body {
         margin-top: 100px;
     }
@@ -341,8 +348,8 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
         grid-template-columns: auto auto;
     }
     #registratieLaag {
-        margin-top: 100px;
         width: 550px;
+        margin-top: 100px;
         height: 840px;
     }
     .schaalbaar {
@@ -353,10 +360,39 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     }
 }
 
-/* Wijzig elementen bij scherm kleiner dan 1350px */
-@media only screen and (max-width: 1350px) {
+/* Wijzig elementen bij scherm SMALLER dan 600px */
+@media only screen and (max-width: 600px) {
     #registratieLaag {
-        margin-top: 100px;
+        width: 100%;
+        border-radius: 0;
+    }
+    #loginPagina {
+        width: 100%;
+        border-radius: 0;
+    }
+    #welkomsAanbieding {
+        display: none;
+    }
+}
+
+/* Wijzig elementen bij scherm LAGER dan 750px */
+@media only screen and (max-height: 750px) {
+    #registratieLaag {
+        margin-top: 150px;
+    }
+}
+
+/* Wijzig elementen bij scherm LAGER dan 750px */
+@media only screen and (max-height: 750px) {
+    #registratieLaag {
+        margin-top: 150px;
+    }
+}
+
+/* Wijzig elementen bij scherm LAGER dan 600px */
+@media only screen and (max-height: 600px) {
+    #logoDigivault, #welkomsAanbieding {
+        display: none;
     }
 }
 
