@@ -188,7 +188,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     width: 950px;
     height: 620px;
     overflow-y: auto;
-    margin-top:42px;
+    margin-top:58px;
 }
 
 .financieelOverzichtContainer { /* Container rondom financieel overzicht, anders valt avatar eraf door scrollbalk*/
