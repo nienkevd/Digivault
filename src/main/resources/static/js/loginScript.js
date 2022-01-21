@@ -21,7 +21,7 @@ function verversPagina() {
 // LOGINPAGINA: fetch bij klik op login knop en ingevulde velden
 
 document.getElementById("login").addEventListener("click", (e) => {
-    // VERWIJZINGEN LOGINPAGINA
+    // Verwijzingen loginPagina
     const email = document.getElementById("email_login").value;
     const wachtwoord = document.getElementById("wachtwoord_login").value;
 
