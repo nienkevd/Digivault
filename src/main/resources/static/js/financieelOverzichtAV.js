@@ -35,7 +35,7 @@ fetch(url, {
     });
 
 function vulPagina(json) {
-    transactie.addEventListener("click",window.location.href = "transactie.html");
+    //transactie.addEventListener("click",window.location.href = "transactie.html");
     // toon IBAN van gebruiker
     iban.append(json.iban);
     // toon saldo van gebruiker
