@@ -54,6 +54,7 @@ document.getElementById("login").addEventListener("click", (e) => {
                 foutMeldingLogin.innerHTML = inlogFoutMelding;
                 console.log(">> fout: verkeerde inloggegevens");
             } else {
+                localStorage.setItem("klantId", data);
                 toonFinancieelOverzicht();
             }
         })

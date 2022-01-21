@@ -16,29 +16,35 @@ import org.springframework.web.bind.annotation.*;
  * bugfix door Anneke en Anthon
  */
 @RestController
-@RequestMapping("/transactie/")
+@RequestMapping("/transactie")
 public class TransactieController {
 
     private TransactieService transactieService;
     private TokenService tokenService;
     private AccountService accountService;
+    private KlantService klantService;
 
     @Autowired
     public TransactieController(TransactieService transactieService, TokenService tokenService,
-                                AccountService accountService) {
+                                AccountService accountService, KlantService klantService) {
         this.transactieService = transactieService;
         this.tokenService = tokenService;
         this.accountService = accountService;
+        this.klantService = klantService;
     }
 
     /*
      * Deze request-handler verwerkt een transactie. Eerst worden authenticatie en autorisatie gecheckt; vervolgens
      * wordt de DTO doorgezet voor verwerking.
      */
-    @PostMapping("{klantId}")
+    @CrossOrigin
+    @PostMapping("")
     public String transactieHandler(
-            @PathVariable int klantId, @RequestHeader("Authorization") String token,
+            @RequestHeader("Authorization") String token,
             @RequestBody TransactieDTO transactieDTO) {
+        String emailadres = tokenService.getEmailadresToken(token);
+        Klant klant = klantService.vindKlantOpEmail(emailadres);
+        int klantId = klant.getTransactiepartijId();
         boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
                 getEmailadres());
         if (tokenService.valideerJWT(token) && authorized)

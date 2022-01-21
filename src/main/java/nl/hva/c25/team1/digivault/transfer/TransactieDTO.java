@@ -9,6 +9,7 @@ package nl.hva.c25.team1.digivault.transfer;
 public class TransactieDTO {
 
     private int koperId, verkoperId, assetId;
+    ;
     private double aantal;
 
     public TransactieDTO(int koperId, int verkoperId, int assetId, double aantal) {
@@ -26,16 +27,16 @@ public class TransactieDTO {
         return verkoperId;
     }
 
+    public double getAantal() {
+        return aantal;
+    }
+
     public int getAssetId() {
         return assetId;
     }
 
     public void setAssetId(int assetId) {
         this.assetId = assetId;
-    }
-
-    public double getAantal() {
-        return aantal;
     }
 
     @Override
