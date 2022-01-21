@@ -87,7 +87,7 @@ public class Transactie {
 
     @Override
     public String toString() {
-        return String.format("%5d%5d%5d%15s%15s%10s%15.5f", transactieId, koper.getTransactiepartijId(),
+        return String.format("%5d%5d%5d%15s%15s%25s%15.5f", transactieId, koper.getTransactiepartijId(),
                 verkoper.getTransactiepartijId(), transactieDatum, transactieTijd, asset.getAfkorting(), aantalCryptos);
     }
 

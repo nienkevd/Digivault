@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 // RELATIVE PATH URL FETCH
 const domainArray = location.origin.split(':');
@@ -35,7 +35,6 @@ fetch(url, {
     });
 
 function vulPagina(json) {
-    transactie.addEventListener("click",window.location.href = "transactie.html");
     // toon IBAN van gebruiker
     iban.append(json.iban);
     // toon saldo van gebruiker
@@ -69,6 +68,7 @@ function vulPagina(json) {
     document.getElementById('naarLoginPagina').addEventListener('click', toonLoginPagina);
 
     function toonTransactiePagina() {
+        console.log("transactie")
         window.location.href = "transactie.html";
     }
 

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
  * bugfix door Anneke en Anthon
  */
 @RestController
-@RequestMapping("/transactie")
 public class TransactieController {
 
     private TransactieService transactieService;
@@ -38,17 +37,20 @@ public class TransactieController {
      * wordt de DTO doorgezet voor verwerking.
      */
     @CrossOrigin
-    @PostMapping("")
+    @PostMapping("/transactie")
     public String transactieHandler(
             @RequestHeader("Authorization") String token,
             @RequestBody TransactieDTO transactieDTO) {
+        System.out.println("controller");
         String emailadres = tokenService.getEmailadresToken(token);
         Klant klant = klantService.vindKlantOpEmail(emailadres);
         int klantId = klant.getTransactiepartijId();
         boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
                 getEmailadres());
-        if (tokenService.valideerJWT(token) && authorized)
+        if (tokenService.valideerJWT(token) && authorized) {
+            System.out.println("authorized");
             return probeerTransactieOmTeZettenEnUitTeVoeren(transactieDTO);
+        }
         return "not authorized";
     }
 
@@ -61,6 +63,7 @@ public class TransactieController {
         Transactie transactie;
         try {
             transactie = transactieMapper.toObject(transactieDTO);
+            System.out.println(transactie);
         }
         catch(IllegalArgumentException illegalArgumentException) {
             return illegalArgumentException.getMessage();

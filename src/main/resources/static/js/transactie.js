@@ -7,8 +7,6 @@ const urltr = urlLead + 'transactie';
 let assets;
 //dropdown menu op transactie pagina
 const select = document.getElementById("dropdown")
-//hoeveelheid input veld
-const hoeveelheid = document.getElementById("hoeveelheid")
 //constant transactie kosten percentage
 const percentage = 0.02
 //knop koop
@@ -21,9 +19,10 @@ const klantId = localStorage.getItem("klantId")
 let assetId;
 //bankId is altijd 1
 const bankId = 1
+//hoeveelheid input veld
+const hoeveelheid = document.getElementById("hoeveelheid")
 
 // Ophalen saldo vanaf financieeloverzicht
-console.log(window.location.href);
 fetch(url, {
     method: 'POST',
     headers: {
@@ -86,12 +85,13 @@ select.addEventListener("click", (e) => {
         }
     }
 
+
+
     //Toon waarde en transactie kosten wanneer een asset is gekozen uit de dropdown menu
     select.addEventListener("change", toonWaarde);
 
     function toonWaarde() {
         const asset = select.options[select.selectedIndex].value;
-        const hoeveelheid = document.getElementById("hoeveelheid").value;
         let dagkoers;
         for (let i = 0; i < assets.length; i++) {
             if (assets[i].naam == asset) {
@@ -99,7 +99,7 @@ select.addEventListener("click", (e) => {
                 break;
             }
         }
-        const waarde = hoeveelheid * dagkoers;
+        const waarde = hoeveelheid.value * dagkoers;
         document.getElementById("waarde").innerText = waarde.toFixed(2);
         const transactiekosten = waarde * percentage;
         document.getElementById("transactiekosten").innerText = transactiekosten.toFixed(2);
@@ -122,8 +122,10 @@ select.addEventListener("click", (e) => {
 
     //voer transactie uit als koop knop is gedrukt
     koop.addEventListener("click", (e) => {
-        const data = {'koperId': klantId, 'verkoperId': bankId, 'assetId': assetId, 'aantal': hoeveelheid};
-        console.log('check');
+        const data = {'koperId': klantId, 'verkoperId': bankId, 'assetId': assetId, 'aantal': hoeveelheid.value};
+        console.log('check' + JSON.stringify(data));
+
+
         fetch(urltr, {
             method: "POST",
             headers: {
