@@ -1,15 +1,29 @@
+// RELATIVE PATH URL FETCH
 const domainArray = location.origin.split(':');
 const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
 const url = urlLead + 'financieeloverzicht';
+const urltr = urlLead + 'transactie';
 //asset array in financieeloverzicht json bestand
 let assets;
 //dropdown menu op transactie pagina
 const select = document.getElementById("dropdown")
-//hoeveelheid input veld op transactie pagina
+//hoeveelheid input veld
 const hoeveelheid = document.getElementById("hoeveelheid")
-//contant transactie kosten percentage
+//constant transactie kosten percentage
 const percentage = 0.02
+//knop koop
+const koop = document.getElementById("koop")
+//knop verkoop
+const verkoop = document.getElementById("verkoop")
+//klantID ophalen van localStorage
+const klantId = localStorage.getItem("klantId")
+//assetId declareren
+let assetId;
+//bankId is altijd 1
+const bankId = 1
 
+// Ophalen saldo vanaf financieeloverzicht
+console.log(window.location.href);
 fetch(url, {
     method: 'POST',
     headers: {
@@ -38,8 +52,8 @@ function toonSaldo (json) {
     saldo.append(json.saldo);
 }
 
+//Dropdown menu invullen met alle assets
 select.addEventListener("click", (e) => {
-    console.log("button")
     fetch(url, {
         method: "POST",
         headers: {
@@ -65,34 +79,77 @@ select.addEventListener("click", (e) => {
         });
 
     function vulDropdownMenu(json) {
-        for (i = 0; i < 20; i++) {
-            var option = document.createElement('option');
+        for (let i = 0; i < assets.length; i++) {
+            const option = document.createElement('option');
             option.text = option.value = json.assetMetAantal[i].naam;
             select.add(option, 0);
         }
     }
-    select.addEventListener( "change", toonWaarde);
+
+    //Toon waarde en transactie kosten wanneer een asset is gekozen uit de dropdown menu
+    select.addEventListener("change", toonWaarde);
 
     function toonWaarde() {
-        const value = select.options[select.selectedIndex].value;
+        const asset = select.options[select.selectedIndex].value;
         const hoeveelheid = document.getElementById("hoeveelheid").value;
         let dagkoers;
-
-        for (i = 0; i < assets.length; i++) {
-            if (assets[i].naam == value) {
+        for (let i = 0; i < assets.length; i++) {
+            if (assets[i].naam == asset) {
                 dagkoers = assets[i].dagkoers;
                 break;
             }
         }
         const waarde = hoeveelheid * dagkoers;
-        document.getElementById("waarde").innerText=waarde.toFixed(2);
+        document.getElementById("waarde").innerText = waarde.toFixed(2);
         const transactiekosten = waarde * percentage;
-        document.getElementById("transactiekosten").innerText=transactiekosten.toFixed(2);
+        document.getElementById("transactiekosten").innerText = transactiekosten.toFixed(2);
     }
 
+    //Toon waarde en transactie kosten wanneer hoeveelheid is gewijzigd
     hoeveelheid.addEventListener("input", toonWaarde)
 
+    select.addEventListener("change", setAssetId);
+    function setAssetId() {
+        const asset = select.options[select.selectedIndex].value;
+        for (let i = 0; i < assets.length; i++) {
+            if (assets[i].naam == asset) {
+                assetId = assets[i].assetId;
+                break;
+            }
+        }
+    }
 })
+
+    //voer transactie uit als koop knop is gedrukt
+    koop.addEventListener("click", (e) => {
+        const data = {'koperId': klantId, 'verkoperId': bankId, 'assetId': assetId, 'aantal': hoeveelheid};
+        console.log('check');
+        fetch(urltr, {
+            method: "POST",
+            headers: {
+                'Authorization': localStorage.getItem("token"),
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => {
+                console.log(response)
+                if (response.status === 200) {
+                    return response.json()
+                } else {
+                    throw new Error("Er is iets verkeerd gegaan! " + response.status)
+                }
+            })
+            .then(json => {
+                toonFinancieelOverzicht();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+})
+
+
 
 
 
