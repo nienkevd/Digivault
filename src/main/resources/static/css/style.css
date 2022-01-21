@@ -339,8 +339,8 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     }
 }
 
-/* Wijzig elementen bij scherm SMALLER dan 900px */
-@media only screen and (max-width: 900px) {
+/* Wijzig elementen bij scherm SMALLER dan 1000px */
+@media only screen and (max-width: 1020px) {
     body {
         margin-top: 100px;
     }
@@ -366,6 +366,13 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
         width: 100%;
         border-radius: 0;
     }
+    #loginPagina {
+        width: 100%;
+        border-radius: 0;
+    }
+    #welkomsAanbieding {
+        display: none;
+    }
 }
 
 /* Wijzig elementen bij scherm LAGER dan 750px */
@@ -384,10 +391,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 
 /* Wijzig elementen bij scherm LAGER dan 600px */
 @media only screen and (max-height: 600px) {
-    #registratieLaag {
-        margin-top: 150px;
-    }
-    #logoDigivault {
+    #logoDigivault, #welkomsAanbieding {
         display: none;
     }
 }
