@@ -1,6 +1,5 @@
 package nl.hva.c25.team1.digivault.dagkoersservice;
 
-import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +7,7 @@ import nl.hva.c25.team1.digivault.model.Asset;
 import nl.hva.c25.team1.digivault.model.EuroKoers;
 import nl.hva.c25.team1.digivault.repository.AssetDAO;
 import nl.hva.c25.team1.digivault.repository.EuroKoersDAO;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,9 @@ public class DagkoersService {
         String url
                 = "https://api.coinranking.com/v2/coins";
 
-//      In Javascript in headers  x-access-token: "coinrankingf65e600fd8d4915137af49c11c136d2619e87f7c49345115";
+        String accessKey = "coinrankingf65e600fd8d4915137af49c11c136d2619e87f7c49345115";
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("x-access-token", accessKey);
 
         ResponseEntity<String> response
                 = restTemplate.getForEntity(url, String.class);
