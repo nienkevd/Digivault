@@ -22,6 +22,7 @@ let assetId;
 //bankId is altijd 1
 const bankId = 1
 
+
 // Ophalen saldo vanaf financieeloverzicht
 fetch(url, {
     method: 'POST',
@@ -143,6 +144,7 @@ select.addEventListener("click", (e) => {
             })
             .then(json => {
                 toonFinancieelOverzicht();
+                //toonTransactieBevestiging(data);
             })
             .catch((err) => {
                 console.log(err);
@@ -170,12 +172,36 @@ select.addEventListener("click", (e) => {
                 })
                 .then(json => {
                     toonFinancieelOverzicht();
+                    //toonTransactieBevestiging(data);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         })
 })
+//transactieBevestiging constante
+const transactieBevestiging = document.getElementById('transactieBevestiging');
+const transactiePagina = document.getElementById('transactiePagina');
+
+//Event listner
+bevestigingSluiten.addEventListener('click', verbergTransactieBevestiging);
+
+// REGISTRATIE BEVESTIGING - Tonen van #registratieBevestiging met daarop de melding dat registratie gelukt is
+function toonTransactieBevestiging(data) {
+    verbergTransactieLaag();
+    transactieBevestiging.style.display = 'block';
+    //transactieInformatie.innerHTML = data;
+    //welkomsAanbieding.style.display = 'none';
+}
+// REGISTRATIE BEVESTIGING - Verbergen van #registratieBevestiging
+function verbergTransactieBevestiging() {
+    location.reload();
+    //welkomsAanbieding.style.display = 'none';
+}
+function verbergTransactieLaag() {
+    transactiePagina.style.display = 'none';
+    loginPagina.style.display = 'block';
+}
 
 
 
