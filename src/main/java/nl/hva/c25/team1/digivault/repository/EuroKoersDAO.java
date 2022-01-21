@@ -25,4 +25,6 @@ public interface EuroKoersDAO {
 
     EuroKoers vindMeestRecenteKoersAsset(Asset asset);
 
+    void updateEuroKoers(EuroKoers euroKoers);
+
 }
