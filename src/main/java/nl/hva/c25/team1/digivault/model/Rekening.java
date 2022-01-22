@@ -18,10 +18,14 @@ public class Rekening {
         this.IBAN = IBAN;
         this.saldo = saldo;
     }
+    public Rekening (String IBAN, double saldo){
+        this(0, IBAN,saldo);
+    }
 
     public Rekening (int rekeningId, String IBAN) {
         this(rekeningId, IBAN, 7);
     }
+
 
     public Rekening(int rekeningId) {
         this(rekeningId, "");
