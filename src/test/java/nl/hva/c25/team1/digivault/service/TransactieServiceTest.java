@@ -4,40 +4,48 @@ package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.model.*;
 import nl.hva.c25.team1.digivault.repository.RootRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
+import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import java.util.*;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest // tbv integratie test met BankService
 class TransactieServiceTest {
 
-    /*
-    * Met annotatie @Mock uitgeprobeerd. Werkt hetzelfde als Mockito.mock.
-    * Gebruik levert een cleaner beeld op: de setup() methode zou bijna verdwijnen in dit geval!
-    * */
-    @Mock
-    KlantService klantService;
+    @MockBean
+    private KlantService klantService;
 
-    AssetService assetService;
-    BankService bankService;
-    RootRepository rootRepository;
-    TransactieService transactieService; // klasse onder test
-    Transactie transactie1, transactie2, transactie3, transactie4, transactie5;
-    Klant koper1, koper2, verkoper;
-    Bank bank;
-    List<PortefeuilleItem> portefeuille;
-    List<Asset> assetsVanPortefeuille;
-    Asset assetVanTransactie2, assetVanTransactie5;
+    @MockBean
+    private AssetService assetService;
 
-    @BeforeEach // voor IEDERE test itt @BeforeAll eenmalig
-    void setUp() {
-        assetService = Mockito.mock(AssetService.class);
-        bankService = Mockito.mock(BankService.class);
-        rootRepository = Mockito.mock(RootRepository.class);
+    private BankService bankService;
+
+    @MockBean
+    private RootRepository rootRepository;
+
+    // klasse onder test
+    private TransactieService transactieService;
+
+    private Transactie transactie1, transactie2, transactie3, transactie4, transactie5;
+    private Klant koper1, koper2, verkoper;
+    private Bank bank;
+    private List<PortefeuilleItem> portefeuille;
+    private List<Asset> assetsVanPortefeuille;
+    private Asset bestaandeAsset, nietBestaandeAsset;
+
+    @Autowired // Bankservice injected
+    public TransactieServiceTest(BankService bankService) {
+        super();
+        this.bankService = bankService;
+    }
+
+    @BeforeEach
+    void setUpEach() {
         transactieService = new TransactieService(klantService, assetService, bankService, rootRepository);
 
         transactie1 = Mockito.mock(Transactie.class);
@@ -49,8 +57,8 @@ class TransactieServiceTest {
         koper2 = Mockito.mock(Klant.class);
         verkoper = Mockito.mock(Klant.class);
         bank = Mockito.mock(Bank.class);
-        assetVanTransactie2 = Mockito.mock(Asset.class);
-        assetVanTransactie5 = Mockito.mock(Asset.class);
+        bestaandeAsset = Mockito.mock(Asset.class);
+        nietBestaandeAsset = Mockito.mock(Asset.class);
         portefeuille = new ArrayList<>(); // vul portefeuille met gemockte items
         for (int itemTeller = 0; itemTeller < 20; itemTeller++) {
             portefeuille.add(Mockito.mock(PortefeuilleItem.class));
@@ -59,7 +67,14 @@ class TransactieServiceTest {
         for (int assetTeller = 0; assetTeller < 20; assetTeller++) {
             assetsVanPortefeuille.add(Mockito.mock(Asset.class));
         }
-        assetsVanPortefeuille.add(assetVanTransactie5); // toegevoegd ivm edge-case verkoperHeeftVoldoendeCrypto()
+        assetsVanPortefeuille.add(nietBestaandeAsset); // toegevoegd ivm edge-case verkoperHeeftVoldoendeCrypto()
+    }
+
+    @Test
+    void testBankServiceAvailable() { // verschil MockBean en injected object
+//        System.out.println(bankService); geeft "nl.hva.c25.team1.digivault.service.BankService@7434ee13"
+//        System.out.println(klantService); geeft "klantService bean"
+        assertThat(bankService).isNotNull(); // gebruik maken van assertJ
     }
 
     @Test
@@ -87,10 +102,10 @@ class TransactieServiceTest {
         Mockito.when(transactie2.getVerkoper()).thenReturn(verkoper);
         Mockito.when(transactie5.getVerkoper()).thenReturn(verkoper);
         Mockito.when(verkoper.getPortefeuille()).thenReturn(portefeuille);
-        Mockito.when(transactie2.getAsset()).thenReturn(assetVanTransactie2);
-        Mockito.when(transactie5.getAsset()).thenReturn(assetVanTransactie5);
-        Mockito.when(assetVanTransactie2.getAssetId()).thenReturn(19); // assetId = 19
-        Mockito.when(assetVanTransactie5.getAssetId()).thenReturn(21); // assetId = NIET BESTAAND
+        Mockito.when(transactie2.getAsset()).thenReturn(bestaandeAsset);
+        Mockito.when(transactie5.getAsset()).thenReturn(nietBestaandeAsset);
+        Mockito.when(bestaandeAsset.getAssetId()).thenReturn(19); // assetId = 19
+        Mockito.when(nietBestaandeAsset.getAssetId()).thenReturn(21); // assetId = NIET BESTAAND
         for (int itemTeller = 0; itemTeller < 20; itemTeller++) {
             Mockito.when(portefeuille.get(itemTeller).getAsset()).thenReturn(assetsVanPortefeuille.get(itemTeller));
         }
@@ -120,11 +135,11 @@ class TransactieServiceTest {
     @Test
     void setNettoTransactieWaarde() {
 
-        Mockito.when(assetVanTransactie2.getDagKoers()).thenReturn(100.); // dagkoers = 100
+        Mockito.when(bestaandeAsset.getDagKoers()).thenReturn(100.); // dagkoers = 100
         Mockito.when(bank.getTransactiePercentage()).thenReturn(2.5); // bankperc =2.5
 
         // transactie3: koper bank
-        Mockito.when(transactie3.getAsset()).thenReturn(assetVanTransactie2);
+        Mockito.when(transactie3.getAsset()).thenReturn(bestaandeAsset);
         Mockito.when(transactie3.getAantalCryptos()).thenReturn(10.); // brutoWaarde = 1000
         Mockito.when(transactie3.getKoper()).thenReturn(bank);
         Mockito.when(transactie3.getVerkoper()).thenReturn(verkoper);
@@ -133,7 +148,7 @@ class TransactieServiceTest {
 
 
         // transactie4: verkoper bank
-        Mockito.when(transactie4.getAsset()).thenReturn(assetVanTransactie2);
+        Mockito.when(transactie4.getAsset()).thenReturn(bestaandeAsset);
         Mockito.when(transactie4.getAantalCryptos()).thenReturn(10.); // brutoWaarde = 1000
         Mockito.when(transactie4.getKoper()).thenReturn(koper2);
         Mockito.when(transactie4.getVerkoper()).thenReturn(bank);
@@ -141,4 +156,10 @@ class TransactieServiceTest {
         assertEquals(1025., transactieService.getNettoTransactieWaarde(), 0.0001);
 
     }
+
+    @Test
+    void telOp() {
+        assertThat(transactieService.telOp(3, 4)).isNotNull().isEqualTo(7); // oefening fluent interface
+    }
+
 }

@@ -25,4 +25,9 @@ public class BankService {
         return rootRepository.vindBankOpId(bankId);
     }
 
+    // methode tbv integratietest
+    public int telOp(int i, int j) {
+        return i + j;
+    }
+
 }

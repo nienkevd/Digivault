@@ -48,7 +48,7 @@ public class TransactieService {
      * @return Geeft de transactie terug indien succesvol, anders null.
      */
     public Transactie voerTransactieUit(Transactie transactie) {
-        vulTransactie(transactie);
+        vulTransactieObjectMetDBData(transactie);
         setNettoTransactieWaarde(transactie);
         if ((transactie.getKoper().getRekening().getSaldo() >= nettoTransactieWaarde)
                 && verkoperHeeftVoldoendeCrypto(transactie) && koperEnVerkoperVerschillen(transactie)) {
@@ -82,8 +82,7 @@ public class TransactieService {
         rekening.setSaldo(rekening.getSaldo() + bedrag);
     }
 
-    // Deze methode vult de kale transactie met de gegevens uit de DB.
-    void vulTransactie(Transactie transactie) {
+    void vulTransactieObjectMetDBData(Transactie transactie) {
         if (transactie.getKoper() instanceof Bank) {
             transactie.setKoper(bankService.vindBankOpId(transactie.getKoper().getTransactiepartijId()));
         } else {
@@ -122,6 +121,11 @@ public class TransactieService {
 
     public double getNettoTransactieWaarde() {
         return nettoTransactieWaarde;
+    }
+
+    // methode tbv integratietest
+    public int telOp(int i, int j) {
+        return bankService.telOp(i, j);
     }
 
 }
