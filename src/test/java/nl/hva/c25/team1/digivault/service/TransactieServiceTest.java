@@ -20,7 +20,7 @@ class TransactieServiceTest {
     * Gebruik levert een cleaner beeld op: de setup() methode zou bijna verdwijnen in dit geval!
     * */
     @Mock
-    KlantService klantService; // met annotatie uitgeprobeerd; werkt hetzelfde als Mockito.mock
+    KlantService klantService;
 
     AssetService assetService;
     BankService bankService;
