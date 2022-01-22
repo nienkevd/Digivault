@@ -3,12 +3,10 @@
 package nl.hva.c25.team1.digivault.service;
 
 import nl.hva.c25.team1.digivault.model.*;
-import nl.hva.c25.team1.digivault.repository.RootRepository;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.*;
@@ -17,36 +15,24 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest // tbv integratie test met BankService
 class TransactieServiceTest {
 
-    @MockBean
-    private KlantService klantService;
-
-    @MockBean
-    private AssetService assetService;
-
+    private TransactieService transactieService;
     private BankService bankService;
 
-    @MockBean
-    private RootRepository rootRepository;
-
-    // klasse onder test
-    private TransactieService transactieService;
-
     private Transactie transactie1, transactie2, transactie3, transactie4, transactie5;
-    private Klant koper1, koper2, verkoper;
-    private Bank bank;
+    private TransactiePartij koper1, koper2, verkoper, bank;
     private List<PortefeuilleItem> portefeuille;
     private List<Asset> assetsVanPortefeuille;
     private Asset bestaandeAsset, nietBestaandeAsset;
 
-    @Autowired // Bankservice injected
-    public TransactieServiceTest(BankService bankService) {
+    @Autowired // DI
+    public TransactieServiceTest(TransactieService transactieService, BankService bankService) {
         super();
+        this.transactieService = transactieService;
         this.bankService = bankService;
     }
 
     @BeforeEach
-    void setUpEach() {
-        transactieService = new TransactieService(klantService, assetService, bankService, rootRepository);
+    void setUp() {
 
         transactie1 = Mockito.mock(Transactie.class);
         transactie2 = Mockito.mock(Transactie.class);
@@ -71,10 +57,8 @@ class TransactieServiceTest {
     }
 
     @Test
-    void testBankServiceAvailable() { // verschil MockBean en injected object
-//        System.out.println(bankService); geeft "nl.hva.c25.team1.digivault.service.BankService@7434ee13"
-//        System.out.println(klantService); geeft "klantService bean"
-        assertThat(bankService).isNotNull(); // gebruik maken van assertJ
+    void testBankServiceAvailable() {
+        assertThat(bankService).isNotNull(); // assertJ
     }
 
     @Test
@@ -136,7 +120,7 @@ class TransactieServiceTest {
     void setNettoTransactieWaarde() {
 
         Mockito.when(bestaandeAsset.getDagKoers()).thenReturn(100.); // dagkoers = 100
-        Mockito.when(bank.getTransactiePercentage()).thenReturn(2.5); // bankperc =2.5
+        Mockito.when(((Bank) bank).getTransactiePercentage()).thenReturn(2.5); // bankperc =2.5
 
         // transactie3: koper bank
         Mockito.when(transactie3.getAsset()).thenReturn(bestaandeAsset);
@@ -159,7 +143,7 @@ class TransactieServiceTest {
 
     @Test
     void telOp() {
-        assertThat(transactieService.telOp(3, 4)).isNotNull().isEqualTo(7); // oefening fluent interface
+        assertThat(transactieService.telOp(3, 4)).isNotNull().isEqualTo(7); // fluent interface
     }
 
 }

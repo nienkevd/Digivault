@@ -1,18 +1,13 @@
 package nl.hva.c25.team1.digivault.repository;
 
-import nl.hva.c25.team1.digivault.model.Transactie;
-import nl.hva.c25.team1.digivault.model.TransactiePartij;
+import nl.hva.c25.team1.digivault.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.jdbc.core.*;
+import org.springframework.jdbc.support.*;
 import org.springframework.stereotype.Repository;
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.List;
 
 /**
@@ -28,8 +23,6 @@ public class JdbcTransactieDAO implements TransactieDAO {
     public JdbcTransactieDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
-/*sla een transactie op met koper en verkoper die nummer krijgen van transactiepartij.*/
 
     @Override
     public Transactie bewaarTransacktieMetSK(Transactie transactie) {
@@ -52,26 +45,24 @@ public class JdbcTransactieDAO implements TransactieDAO {
         transactie.setTransactieId(keyHolder.getKey().intValue());
         return transactie;
     }
-/*haal een transactie op aan de hand van transactieId*/
+
     @Override
     public Transactie vindTransactieOpTransactieId(int transactieId) {
         String sql = "SELECT * FROM transactie WHERE transactieId = ? ";
         Transactie transactie;
-        System.out.println("transactie start");
         try {
             transactie = jdbcTemplate.queryForObject(sql, new TransactieRowMapper(), transactieId);
         } catch (EmptyResultDataAccessException noResult) {
             transactie = null;
         }
-        System.out.println("transactie eind");
         return transactie;
     }
 
     @Override
     public List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper){
-        String sql = "SELECT * FROM transactie WHERE verkoper = ? ";
+        String sql = "SELECT * FROM transactie WHERE verkoperId = ? ";
         try {
-            return jdbcTemplate.query(sql, new TransactieRowMapper(), verkoper);
+            return jdbcTemplate.query(sql, new TransactieRowMapper(), verkoper.getTransactiepartijId());
         } catch (EmptyResultDataAccessException noResult) {
             return null;
         }
@@ -79,9 +70,9 @@ public class JdbcTransactieDAO implements TransactieDAO {
 
     @Override
     public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper){
-        String sql = "SELECT * FROM transactie WHERE koper = ? ";
+        String sql = "SELECT * FROM transactie WHERE koperId = ? ";
         try {
-            return jdbcTemplate.query(sql, new TransactieRowMapper(), koper);
+            return jdbcTemplate.query(sql, new TransactieRowMapper(), koper.getTransactiepartijId());
         } catch (EmptyResultDataAccessException noResult) {
             return null;
         }
@@ -91,9 +82,9 @@ public class JdbcTransactieDAO implements TransactieDAO {
             @Override
             public Transactie mapRow(ResultSet resultSet, int RowNumber) throws SQLException {
                 Transactie transactie = new Transactie(
-                        LocalDate.parse(resultSet.getString("transactieDatum")),
-                        LocalTime.parse(resultSet.getString("transactieTijd")),
-                        resultSet.getDouble("aantalCryptos"));
+                        LocalDate.parse(resultSet.getString("datum")),
+                        LocalTime.parse(resultSet.getString("tijdstip")),
+                        resultSet.getDouble("aantal"));
                 transactie.setTransactieId(resultSet.getInt("transactieId"));
                 return transactie;
             }
