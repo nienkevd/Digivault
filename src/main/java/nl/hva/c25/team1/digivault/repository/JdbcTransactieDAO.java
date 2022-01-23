@@ -46,47 +46,17 @@ public class JdbcTransactieDAO implements TransactieDAO {
         return transactie;
     }
 
-    @Override
-    public Transactie vindTransactieOpTransactieId(int transactieId) {
-        String sql = "SELECT * FROM transactie WHERE transactieId = ? ";
-        Transactie transactie;
-        try {
-            transactie = jdbcTemplate.queryForObject(sql, new TransactieRowMapper(), transactieId);
-        } catch (EmptyResultDataAccessException noResult) {
-            transactie = null;
-        }
-        return transactie;
-    }
-
-    @Override
-    public List<Transactie> vindAlleTransactiesOpVerkoper(int verkoperId){
-        String sql = "SELECT * FROM transactie WHERE verkoperId = ? ";
-        try {
-            return jdbcTemplate.query(sql, new TransactieRowMapper(), verkoperId);
-        } catch (EmptyResultDataAccessException noResult) {
-            return null;
+    // gebruiken we momenteel niet maar laat hem er toch maar even in staan
+    private class TransactieRowMapper implements RowMapper<Transactie> {
+        @Override
+        public Transactie mapRow(ResultSet resultSet, int RowNumber) throws SQLException {
+            Transactie transactie = new Transactie(
+                    LocalDate.parse(resultSet.getString("datum")),
+                    LocalTime.parse(resultSet.getString("tijdstip")),
+                    resultSet.getDouble("aantal"));
+            transactie.setTransactieId(resultSet.getInt("transactieId"));
+            return transactie;
         }
     }
 
-    @Override
-    public List<Transactie> vindAlleTransactiesOpKoper(int koperId){
-        String sql = "SELECT * FROM transactie WHERE koperId = ? ";
-        try {
-            return jdbcTemplate.query(sql, new TransactieRowMapper(), koperId);
-        } catch (EmptyResultDataAccessException noResult) {
-            return null;
-        }
-    }
-
-        private class TransactieRowMapper implements RowMapper<Transactie> {
-            @Override
-            public Transactie mapRow(ResultSet resultSet, int RowNumber) throws SQLException {
-                Transactie transactie = new Transactie(
-                        LocalDate.parse(resultSet.getString("datum")),
-                        LocalTime.parse(resultSet.getString("tijdstip")),
-                        resultSet.getDouble("aantal"));
-                transactie.setTransactieId(resultSet.getInt("transactieId"));
-                return transactie;
-            }
-        }
-    }
+}
