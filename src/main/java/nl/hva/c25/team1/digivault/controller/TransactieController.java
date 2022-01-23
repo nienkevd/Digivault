@@ -7,6 +7,8 @@ import nl.hva.c25.team1.digivault.transfer.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Deze controller handelt requests af met betrekking tot transacties.
  *
@@ -41,14 +43,12 @@ public class TransactieController {
     public String transactieHandler(
             @RequestHeader("Authorization") String token,
             @RequestBody TransactieDTO transactieDTO) {
-        System.out.println("controller");
         String emailadres = tokenService.getEmailadresToken(token);
         Klant klant = klantService.vindKlantOpEmail(emailadres);
         int klantId = klant.getTransactiepartijId();
         boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
                 getEmailadres());
         if (tokenService.valideerJWT(token) && authorized) {
-            System.out.println("authorized");
             return probeerTransactieOmTeZettenEnUitTeVoeren(transactieDTO);
         }
         return "not authorized";
@@ -76,4 +76,19 @@ public class TransactieController {
         }
         return "transaction executed";
     }
+
+    @GetMapping("/transactie/{transactieId}")
+    public Transactie vindTrasactieopTransactieIdHandler(@PathVariable int transactieId) {
+        return transactieService.vindTrasactieopTransactieId(transactieId);
+    }
+
+    @GetMapping("/transactie/{verkoper}")
+    public List<Transactie> vindAlleTransactiesOpVerkoperHandler(@PathVariable TransactiePartij verkoper){
+        return transactieService.vindAlleTransactiesOpVerkoper(verkoper);
+    }
+    @GetMapping("/transactie/{koper}")
+    public List<Transactie> vindAlleTransactiesOpKoperHandler(@PathVariable TransactiePartij koper){
+        return transactieService.vindAlleTransactiesOpKoper(koper);
+    }
+
 }

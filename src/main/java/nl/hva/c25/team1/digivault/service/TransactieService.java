@@ -24,16 +24,18 @@ public class TransactieService {
     private AssetService assetService;
     private BankService bankService;
     private RootRepository rootRepository;
+    private JdbcTransactieDAO jdbcTransactieDAO;
     private double nettoTransactieWaarde;
 
 
     @Autowired
     public TransactieService(KlantService klantService, AssetService assetService, BankService bankService,
-                             RootRepository rootRepository) {
+                             RootRepository rootRepository, JdbcTransactieDAO jdbcTransactieDAO) {
         this.klantService = klantService;
         this.assetService = assetService;
         this.bankService = bankService;
         this.rootRepository = rootRepository;
+        this.jdbcTransactieDAO = jdbcTransactieDAO;
         nettoTransactieWaarde = 0;
     }
 
@@ -121,6 +123,18 @@ public class TransactieService {
 
     public double getNettoTransactieWaarde() {
         return nettoTransactieWaarde;
+    }
+
+    public Transactie vindTrasactieopTransactieId(int transactieId) {
+        return jdbcTransactieDAO.vindTransactieOpTransactieId(transactieId);
+    }
+
+    public List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper) {
+        return jdbcTransactieDAO.vindAlleTransactiesOpVerkoper(verkoper);
+    }
+
+    public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper) {
+        return jdbcTransactieDAO.vindAlleTransactiesOpVerkoper(koper);
     }
 
     // methode tbv integratietest
