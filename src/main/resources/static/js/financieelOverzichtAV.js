@@ -63,7 +63,7 @@ function vulPagina(json) {
         tr.appendChild(td5);
         tableBody.appendChild(tr);
     }
-    // UITLOGGEN EN TRANSACTIE BUTTON
+    // UITLOGGEN EN TRANSACTIE BUTTON - Nienke
     document.getElementById('naarTransactiePagina').addEventListener('click', toonTransactiePagina);
     document.getElementById('naarLoginPagina').addEventListener('click', toonLoginPagina);
 
@@ -75,20 +75,20 @@ function vulPagina(json) {
         window.location.href = "index.html";
     }
 
-    //ROW SORTING...Nienke, 20-01-2022
+
     /**
-     * Sorts a HTML table.
+     * ROW SORTING...Nienke, 20-01-2022
      *
-     * @param {HTMLTableElement} table The table to sort
-     * @param {number} column The index of the column to sort
-     * @param {boolean} asc Determines if the sorting will be in ascending
+     * @param {HTMLTableElement} table De te sorteren tabel (fi-tabele)
+     * @param {number} column Index van de colom te sorteren
+     * @param {boolean} asc Bepaald groot naar klein/klein naar groot
      */
     function sortTableByColumn(table, column, asc = true) {
         const dirModifier = asc ? 1 : -1;
         const tBody = table.tBodies[0];
         const rows = Array.from(tBody.querySelectorAll("tr"));
 
-        //Sort each row
+        //Sorteer elke row
         const sortedRows = rows.sort((a,b) => {
             const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
             const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
@@ -97,11 +97,11 @@ function vulPagina(json) {
             //console.log(sortedRows); test, zo kan je zien dat ze in de consol op volgorden staan
             //nu moeten ze alleen nog in de tabel op volgorden komen
         });
-        //remove all existing TRs from table (om ze te verwijderen zodat je ze weer in kan voegen op volgorde
+        //alle elementen (tr) uit tabel halen om zodat je ze weer toe kan voegen op volgorde
         while (tBody.firstChild) {
             tBody.removeChild(tBody.firstChild);
         }
-        //readd newly sortet rows
+        //terug plaatsen gesorted rows
         tBody.append(...sortedRows);
 
         //remember how the colom is sorted now, geeft nu aan de header een klasse mee in HTML
@@ -111,7 +111,7 @@ function vulPagina(json) {
         table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
     }
     //sortTableByColumn(document.querySelector("table"), 2, true);
-    // deze kaat over de afkortingen van crypto namen
+    // checken of het werkt, zo kan je per row het sorteren aanhalen.
     //nu ombouwen naar dat het op eke header gaat.
     document.querySelectorAll(".fi-table th").forEach(headerCell => {
         headerCell.addEventListener("click", () => {
