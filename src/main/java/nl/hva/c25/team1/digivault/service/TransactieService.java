@@ -125,18 +125,6 @@ public class TransactieService {
         return nettoTransactieWaarde;
     }
 
-    public Transactie vindTransactieOpTransactieId(int transactieId) {
-        return jdbcTransactieDAO.vindTransactieOpTransactieId(transactieId);
-    }
-
-    public List<Transactie> vindAlleTransactiesOpVerkoper(int verkoperId) {
-        return jdbcTransactieDAO.vindAlleTransactiesOpVerkoper(verkoperId);
-    }
-
-    public List<Transactie> vindAlleTransactiesOpKoper(int koperId) {
-        return jdbcTransactieDAO.vindAlleTransactiesOpVerkoper(koperId);
-    }
-
     // methode tbv integratietest
     public int telOp(int i, int j) {
         return bankService.telOp(i, j);
