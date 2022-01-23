@@ -125,6 +125,10 @@ public class TransactieService {
         return nettoTransactieWaarde;
     }
 
+    public List<Transactie> vindAlleTransactiesOpKoper(int koperId) {
+        return jdbcTransactieDAO.vindAlleTransactiesOpKoper(koperId);
+    }
+
     // methode tbv integratietest
     public int telOp(int i, int j) {
         return bankService.telOp(i, j);

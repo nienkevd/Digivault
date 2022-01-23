@@ -4,12 +4,14 @@ import nl.hva.c25.team1.digivault.model.Transactie;
 import java.util.List;
 
 /**
- * Author Nienke
- * Version 14-12-2021
+ * @author Nienke
+ * @author Anthon
  */
 public interface TransactieDAO {
 
     Transactie bewaarTransacktieMetSK(Transactie transactie);
+
+    List<Transactie> vindAlleTransactiesOpKoper(int koperId);
 
 }
 

@@ -46,7 +46,16 @@ public class JdbcTransactieDAO implements TransactieDAO {
         return transactie;
     }
 
-    // gebruiken we momenteel niet maar laat hem er toch maar even in staan
+    @Override
+    public List<Transactie> vindAlleTransactiesOpKoper(int koperId){
+        String sql = "SELECT * FROM transactie WHERE koperId = ? ";
+        try {
+            return jdbcTemplate.query(sql, new TransactieRowMapper(), koperId);
+        } catch (EmptyResultDataAccessException noResult) {
+            return null;
+        }
+    }
+
     private class TransactieRowMapper implements RowMapper<Transactie> {
         @Override
         public Transactie mapRow(ResultSet resultSet, int RowNumber) throws SQLException {
