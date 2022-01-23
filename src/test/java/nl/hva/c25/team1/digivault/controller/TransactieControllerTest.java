@@ -7,15 +7,17 @@
 //import org.junit.jupiter.api.Test;
 //import org.mockito.*;
 //import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+//import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+//import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.boot.test.mock.mockito.MockBean;
-//import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.test.web.servlet.ResultActions;
+//import org.springframework.test.web.servlet.*;
 //import org.springframework.test.web.servlet.request.*;
+//import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 //
 //import java.util.List;
 //
-//@WebMvcTest
+//@AutoConfigureMockMvc
+//@SpringBootTest
 //class TransactieControllerTest {
 //
 //    private MockMvc mockMvc;
@@ -36,10 +38,11 @@
 //        // geef aan wat de service als teruggeefwaarde heeft
 //        Mockito.when(transactieService.vindAlleTransactiesOpKoper(10)).thenReturn(transactieLijst);
 //        // Maak een gesimuleerde request aan
-//        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/transactie/10");
+//        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/transactie/{koper}", 10);
 //        // Stuur deze request naar de controller via de MockMvc (try-catch)
 //        try {
 //            ResultActions response = mockMvc.perform(request);
+//            response.andExpect(MockMvcResultMatchers.status().isOk());
 //        }
 //        catch(Exception e) {
 //            System.out.println(e.getMessage());

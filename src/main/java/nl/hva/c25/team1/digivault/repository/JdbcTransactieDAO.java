@@ -47,13 +47,15 @@ public class JdbcTransactieDAO implements TransactieDAO {
     }
 
     @Override
-    public List<Transactie> vindAlleTransactiesOpKoper(int koperId){
-        String sql = "SELECT * FROM transactie WHERE koperId = ? ";
+    public Transactie vindTransactieOpTransactieId(int transactieId) {
+        String sql = "SELECT * FROM transactie WHERE transactieId = ? ";
+        Transactie transactie;
         try {
-            return jdbcTemplate.query(sql, new TransactieRowMapper(), koperId);
-        } catch (EmptyResultDataAccessException noResult) {
-            return null;
+            transactie = jdbcTemplate.queryForObject(sql, new TransactieRowMapper(), transactieId);
+        } catch (EmptyResultDataAccessException noRestult) {
+            transactie = null;
         }
+        return transactie;
     }
 
     private class TransactieRowMapper implements RowMapper<Transactie> {

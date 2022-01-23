@@ -77,9 +77,9 @@ public class TransactieController {
         return "transaction executed";
     }
 
-    @GetMapping("/transactie/{koper}")
-    public List<Transactie> vindAlleTransactiesOpKoperHandler(@PathVariable int koperId){
-        return transactieService.vindAlleTransactiesOpKoper(koperId);
+    @GetMapping("/transactie/{transactieId}")
+    public Transactie vindTransactieOpTransactieIdHandler(@PathVariable int transactieId) {
+        return transactieService.vindTransactieOpTransactieId(transactieId);
     }
 
 }
