@@ -78,17 +78,17 @@ public class TransactieController {
     }
 
     @GetMapping("/transactie/{transactieId}")
-    public Transactie vindTrasactieopTransactieIdHandler(@PathVariable int transactieId) {
-        return transactieService.vindTrasactieopTransactieId(transactieId);
+    public Transactie vindTransactieopTransactieIdHandler(@PathVariable int transactieId) {
+        return transactieService.vindTransactieOpTransactieId(transactieId);
     }
 
-    @GetMapping("/transactie/{verkoper}")
-    public List<Transactie> vindAlleTransactiesOpVerkoperHandler(@PathVariable TransactiePartij verkoper){
-        return transactieService.vindAlleTransactiesOpVerkoper(verkoper);
+    @GetMapping("/transactie/{verkoperId}")
+    public List<Transactie> vindAlleTransactiesOpVerkoperHandler(@PathVariable int verkoperId){
+        return transactieService.vindAlleTransactiesOpVerkoper(verkoperId);
     }
-    @GetMapping("/transactie/{koper}")
-    public List<Transactie> vindAlleTransactiesOpKoperHandler(@PathVariable TransactiePartij koper){
-        return transactieService.vindAlleTransactiesOpKoper(koper);
+    @GetMapping("/transactie/{koperId}")
+    public List<Transactie> vindAlleTransactiesOpKoperHandler(@PathVariable int koperId){
+        return transactieService.vindAlleTransactiesOpKoper(koperId);
     }
 
 }

@@ -16,9 +16,9 @@ public interface TransactieDAO {
 
     Transactie vindTransactieOpTransactieId(int transactieId);
 
-    List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper);
+    List<Transactie> vindAlleTransactiesOpVerkoper(int verkoperId);
 
-    List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper);
+    List<Transactie> vindAlleTransactiesOpKoper(int koperId);
 
 
 }

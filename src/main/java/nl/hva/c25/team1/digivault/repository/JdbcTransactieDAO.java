@@ -59,20 +59,20 @@ public class JdbcTransactieDAO implements TransactieDAO {
     }
 
     @Override
-    public List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper){
+    public List<Transactie> vindAlleTransactiesOpVerkoper(int verkoperId){
         String sql = "SELECT * FROM transactie WHERE verkoperId = ? ";
         try {
-            return jdbcTemplate.query(sql, new TransactieRowMapper(), verkoper.getTransactiepartijId());
+            return jdbcTemplate.query(sql, new TransactieRowMapper(), verkoperId);
         } catch (EmptyResultDataAccessException noResult) {
             return null;
         }
     }
 
     @Override
-    public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper){
+    public List<Transactie> vindAlleTransactiesOpKoper(int koperId){
         String sql = "SELECT * FROM transactie WHERE koperId = ? ";
         try {
-            return jdbcTemplate.query(sql, new TransactieRowMapper(), koper.getTransactiepartijId());
+            return jdbcTemplate.query(sql, new TransactieRowMapper(), koperId);
         } catch (EmptyResultDataAccessException noResult) {
             return null;
         }

@@ -3,9 +3,7 @@
 package nl.hva.c25.team1.digivault.repository;
 
 import nl.hva.c25.team1.digivault.model.Transactie;
-import nl.hva.c25.team1.digivault.model.TransactiePartij;
 import org.junit.jupiter.api.*;
-import org.mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -20,9 +18,6 @@ class JdbcTransactieDAOTest {
     // klasse onder test
     private JdbcTransactieDAO jdbcTransactieDAO;
 
-    @Mock
-    private TransactiePartij transactiePartij1, transactiePartij2, transactiePartij3;
-
     @Autowired
     public JdbcTransactieDAOTest(JdbcTransactieDAO jdbcTransactieDAO) {
         super();
@@ -31,16 +26,13 @@ class JdbcTransactieDAOTest {
 
     @Test
     void vindAlleTransactiesOpKoper() {
-        Mockito.when(transactiePartij1.getTransactiepartijId()).thenReturn(10); // 2 records
-        List<Transactie> transactieLijst = jdbcTransactieDAO.vindAlleTransactiesOpKoper(transactiePartij1);
+        List<Transactie> transactieLijst = jdbcTransactieDAO.vindAlleTransactiesOpKoper(10); //  koper 10: 2 records
         assertThat(transactieLijst).isNotNull().hasSize(2);
 
-        Mockito.when(transactiePartij2.getTransactiepartijId()).thenReturn(11); // 1 record
-        transactieLijst = jdbcTransactieDAO.vindAlleTransactiesOpKoper(transactiePartij2);
+        transactieLijst = jdbcTransactieDAO.vindAlleTransactiesOpKoper(11); // koper 11: 1 record
         assertThat(transactieLijst).isNotNull().hasSize(1);
 
-        Mockito.when(transactiePartij3.getTransactiepartijId()).thenReturn(1); // 0 records
-        transactieLijst = jdbcTransactieDAO.vindAlleTransactiesOpKoper(transactiePartij3);
+        transactieLijst = jdbcTransactieDAO.vindAlleTransactiesOpKoper(1); // koper 1: 0 records
         assertThat(transactieLijst).isNotNull().hasSize(0);
 
     }

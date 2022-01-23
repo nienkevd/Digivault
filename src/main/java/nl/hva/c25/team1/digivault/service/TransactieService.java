@@ -125,16 +125,16 @@ public class TransactieService {
         return nettoTransactieWaarde;
     }
 
-    public Transactie vindTrasactieopTransactieId(int transactieId) {
+    public Transactie vindTransactieOpTransactieId(int transactieId) {
         return jdbcTransactieDAO.vindTransactieOpTransactieId(transactieId);
     }
 
-    public List<Transactie> vindAlleTransactiesOpVerkoper(TransactiePartij verkoper) {
-        return jdbcTransactieDAO.vindAlleTransactiesOpVerkoper(verkoper);
+    public List<Transactie> vindAlleTransactiesOpVerkoper(int verkoperId) {
+        return jdbcTransactieDAO.vindAlleTransactiesOpVerkoper(verkoperId);
     }
 
-    public List<Transactie> vindAlleTransactiesOpKoper(TransactiePartij koper) {
-        return jdbcTransactieDAO.vindAlleTransactiesOpVerkoper(koper);
+    public List<Transactie> vindAlleTransactiesOpKoper(int koperId) {
+        return jdbcTransactieDAO.vindAlleTransactiesOpVerkoper(koperId);
     }
 
     // methode tbv integratietest
