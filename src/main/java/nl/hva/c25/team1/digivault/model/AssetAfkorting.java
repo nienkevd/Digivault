@@ -10,5 +10,5 @@ package nl.hva.c25.team1.digivault.model;
  */
 
 public enum AssetAfkorting {
-    BTC, ETH, BNB, SOL, ADA, XRP, DOT, DOGE, AVAX, LUNA, LTC, MATIC, ALGO, BCH, XLM, VET, ICP, UST, EGLD, FIL;
+    BTC, ETH, BNB, SOL, ADA, XRP, DOT, DOGE, AVAX, LUNA, LTC, MATIC, ALGO, BCH, XLM, VET, ICP, HEX, EGLD, SHIB;
 }

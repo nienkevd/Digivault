@@ -22,9 +22,9 @@ INSERT INTO asset (afkorting, naam) VALUES
     ('XLM', 'Stellar'),
     ('VET', 'VeChain'),
     ('ICP', 'Internet Computer'),
-    ('UST', 'TerraUSD'),
+    ('HEX', 'HEX'),
     ('EGLD', 'Elrond'),
-    ('FIL', 'Filecoin');
+    ('SHIB', 'Shiba Inu');
     
 INSERT INTO eurokoers (assetId, datum, koers) VALUES
 	(1, '2021-12-07', 45329.81),

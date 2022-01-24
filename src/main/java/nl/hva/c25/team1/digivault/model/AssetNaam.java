@@ -27,9 +27,9 @@ public enum AssetNaam {
     STELLAR("Stellar"),
     VECHAIN("VeChain"),
     INTERNET_COMPUTER("Internet Computer"),
-    TERRA_USD("TerraUSD"),
+    HEX("HEX"),
     ELROND("Elrond"),
-    FILECOIN("Filecoin");
+    SHIBA_INU("Shiba Inu");
 
     private String naamAlsString;
 
