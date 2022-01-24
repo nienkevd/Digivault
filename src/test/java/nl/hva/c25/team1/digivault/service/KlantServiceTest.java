@@ -47,7 +47,7 @@ class KlantServiceTest {
     @Test
     void updateNietBestaandeKlant() {
         Klant nietBestaandeKlant = new Klant(25,"132456789", LocalDate.parse("1955-02-01"));
-        Mockito.when(mockDAO.vindKlantOpKlantId(15)).thenReturn(null);
+        Mockito.when(mockDAO.vindKlantOpKlantId(25)).thenReturn(null);
 
         String actual = serviceUnderTest.updateKlant(nietBestaandeKlant);
         String expected = "Klant bestaat niet, update mislukt.";
