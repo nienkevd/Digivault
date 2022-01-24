@@ -60,6 +60,13 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
         return euroKoers;
     }
 
+    /**
+     *
+     * @author Anneke, gemaakt voor dagkoersservice
+     * alleen toch besloten om te bewaren ipv updaten
+     * deze methode wordt gebruikt voor Testing
+     * @param euroKoers
+     */
     @Override
     public void updateEuroKoers(EuroKoers euroKoers) {
         String sql = "UPDATE eurokoers SET datum = ?, koers = ? WHERE eurokoersId = ?";

@@ -31,9 +31,9 @@ import static org.junit.jupiter.api.Assertions.*;
 // annotaties aangepast, omdat:
 //https://stackoverflow.com/questions/66321376/why-my-org-springframework-test-web-servlet-mockmvc-framework-is-failing-to-reso
 
-@AutoConfigureMockMvc
-@SpringBootTest
-//@WebMvcTest
+//@AutoConfigureMockMvc
+//@SpringBootTest
+@WebMvcTest(KlantController.class)
 class KlantControllerTest {
 
     private MockMvc mockMvc;
