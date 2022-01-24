@@ -363,6 +363,9 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     #financieelOverzicht{
         margin-top: 100px;
     }
+    #transactiePagina{
+        margin-top: 100px;
+    }
 
 }
 
@@ -395,6 +398,11 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
         margin-top: 100px;
         height: 840px;
     }
+    #transactiePagina{
+        width: 550px;
+        margin-top: 100px;
+        height: 840px;
+    }
 
 }
 
@@ -416,6 +424,10 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
         border-radius: 0;
     }
     #financieelOverzicht{
+        width: 100%;
+        border-radius: 0;
+    }
+    #transactiePagina{
         width: 100%;
         border-radius: 0;
     }
