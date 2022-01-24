@@ -89,10 +89,9 @@ registreren.addEventListener('click', function (e) {
     }
 })
 
-// REGISTRATIE VALIDATIE - Voert alle validatiechecks uit op het registratieFormulier
+// REGISTRATIE VALIDATIE - Reset #foutMeldingRegistratie en voert alle validatiechecks uit op het registratieFormulier
 function validatieRegistratie() {
-    foutMeldingRegistratie.innerHTML = '';
-    foutMeldingRegistratie.style.color = 'var(--divaRood)';
+    resetFoutMeldingRegistratie();
     monkeyCheckLetters();
     monkeyCheckCijfers();
     aantallenCheck();
@@ -102,6 +101,12 @@ function validatieRegistratie() {
     legeVeldenCheck();
     leeftijdValidatie();
     return true;
+}
+
+// FOUTMELDINGREGISTRATIE - Hulpmethode die #foutMeldingRegistratie terugzet naar basisinstellingen (geen melding, rood)
+function resetFoutMeldingRegistratie() {
+    foutMeldingRegistratie.innerHTML = '';
+    foutMeldingRegistratie.style.color = 'var(--divaRood)';
 }
 
 // VALIDATIE - Hulpmethode voor bsnCheck: zet een nul voor het bsn-nummer (als String)
@@ -127,25 +132,23 @@ function optellenBsn(bsn) {
 
 // VALIDATIE - Controleert of ingevoerde bsn-nummer niet te kort is en of het voldoet aan de elfproef
 function bsnCheck() {
-    console.log("bsnCheck");
-    let bsnWaarde = bsn.value;
+    const bsnWaarde = bsn.value;
 
-    if(isNaN(bsnWaarde) || bsnWaarde.length < 8){
-        console.log(">> fout: te korte BSN");
+    if (isNaN(bsnWaarde) || bsnWaarde.length < 8) {
+        console.log(">> validatiefout: te korte BSN");
         foutMeldingRegistratie.innerHTML = geldigeBsnMelding;
     }
 
     let bsnNegenCijfers = bsnMetNul(bsnWaarde);
 
     if (optellenBsn(bsnNegenCijfers) % 11) {
-        console.log(">> fout: ongeldige BSN");
+        console.log(">> validatiefout: ongeldige BSN");
         foutMeldingRegistratie.innerHTML = geldigeBsnMelding;
     }
 }
 
 // VALIDATIE - Zoekt eerst de datum van 18 jaar geleden op, en checkt of de geboortedatum voor die datum ligt
 function leeftijdValidatie() {
-    console.log("leeftijdValidatie");
     let vandaag = new Date();
     let ingevoerdeDatum = geboortedatum.value;
     let geboorteDatum = new Date(ingevoerdeDatum);
@@ -158,72 +161,66 @@ function leeftijdValidatie() {
         leeftijd -= 1;
     }
     if ((leeftijd === 18 && aantalMaanden <= 0 && aantalDagen <= 0) || leeftijd < 18) {
-        console.log(">> fout: te jong");
+        console.log(">> validatiefout: leeftijd is te jong");
         foutMeldingRegistratie.innerHTML = minimumLeeftijdMelding;
     }
     if (leeftijd >= 121) {
-        console.log(">> fout: te oud");
+        console.log(">> validatiefout: leeftijd is te oud");
         foutMeldingRegistratie.innerHTML = monkeyLeeftijdMelding;
     }
 }
 
 // REGISTRATIE VALIDATIE - Controleert of alle verplichte velden in registratieFormulier zijn ingevuld
 function legeVeldenCheck() {
-    console.log("legeVeldenCheck");
-    if(email_reg.value === '' || wachtwoord_reg.value === '' || wachtwoord_check.value === ''|| voornaam.value === ''
+    if (email_reg.value === '' || wachtwoord_reg.value === '' || wachtwoord_check.value === ''|| voornaam.value === ''
         || achternaam.value === ''|| geboortedatum.value === '' || bsn.value === ''|| postcode.value === ''
         || huisnummer.value === '') {
-        console.log(">> validatiefout: lege velden");
+        console.log(">> validatiefout: er zijn lege velden");
         foutMeldingRegistratie.innerHTML = legeVeldenMelding;
     }
 }
 
 // REGISTRATIE VALIDATIE - Controleert op juiste aantal cijfers bij wachtwoord en bsn-nummer
 function aantallenCheck() {
-    console.log("aantallenCheck");
-    if(wachtwoord_reg.value.length < 10) {
-        console.log(">> fout: te kort wachtwoord");
+    if (wachtwoord_reg.value.length < 10) {
+        console.log(">> validatiefout: te kort wachtwoord");
         foutMeldingRegistratie.innerHTML = kortWachtwoord;
     }
-    if(bsn.value.length < 8) {
-        console.log(">> fout: te kort bsn-nummer");
+    if (bsn.value.length < 8) {
+        console.log(">> validatiefout: te kort bsn-nummer");
         foutMeldingRegistratie.innerHTML = kortBsn;
     }
 }
 
 // REGISTRATIE VALIDATIE - Controleert via RegExp of het ingevoerde mailadres voldoet aan algemene criteria
 function mailCheck() {
-    console.log("mailCheck");
-    if(!emailRegExp.test(email_reg.value)) {
-        console.log(">> fout: ongeldige mailadres");
+    if (!emailRegExp.test(email_reg.value)) {
+        console.log(">> validatiefout: ongeldige mailadres");
         foutMeldingRegistratie.innerHTML = regExpMailMelding;
     }
 }
 
 // REGISTRATIE VALIDATIE - Controleert of het een geldige Nederlandse postcode is
 function postcodeCheck() {
-    console.log("postcodeCheck");
-    if(!postcodeRegExp.test(postcode.value)) {
-        console.log(">> fout: ongeldige postcode");
+    if (!postcodeRegExp.test(postcode.value)) {
+        console.log(">> validatiefout: ongeldige postcode");
         foutMeldingRegistratie.innerHTML = regExpPostcodeMelding;
     }
 }
 
 // REGISTRATIE VALIDATIE - Checkt of er alleen letters worden ingevuld in voor-, achter-, straatnaam en woonplaats
 function monkeyCheckLetters() {
-    console.log("monkeyCheckLetters");
-    if(!alleenLetters.test(voornaam.value) || !alleenLetters.test(achternaam.value) ||
+    if (!alleenLetters.test(voornaam.value) || !alleenLetters.test(achternaam.value) ||
         !alleenLetters.test(straatnaam.value) || !alleenLetters.test(woonplaats.value)) {
-        console.log(">> fout: alleen letters verwacht");
+        console.log(">> validatiefout: cijfers in veld met alleen letters");
         foutMeldingRegistratie.innerHTML = monkeyLetterMelding;
     }
 }
 
 // REGISTRATIE VALIDATIE - Checkt of er alleen cijfers worden ingevuld bij huisnummer en bsn
 function monkeyCheckCijfers() {
-    console.log("monkeyCheckCijfers");
     if (!alleenCijfers.test(huisnummer.value) || !alleenCijfers.test(bsn.value)) {
-        console.log(">> fout: alleen cijfers verwacht");
+        console.log(">> validatiefout: letters in veld met alleen cijfers");
         foutMeldingRegistratie.innerHTML = monkeyCijferMelding;
     }
 }
@@ -249,10 +246,9 @@ function checkOvereenkomenWachtwoorden() {
     }
 }
 
-// REGISTRATIE FORMULIER - Methode die het registreren van het #registratieFormulier daadwerkelijk uitvoert
-function registreerFormulier() {
-
-    let data = {
+// REGISTRATIE FORMULIER - Hulpmethode bij registreerFormulier() die de data verzamelt uit het #registratieFormulier
+function verzamelDataRegistratieFormulier() {
+    const registratieData = {
         'emailadres': email_reg.value,
         'wachtwoord': wachtwoord_reg.value,
         'voornaam': voornaam.value,
@@ -265,8 +261,13 @@ function registreerFormulier() {
         'toevoeging': toevoeging.value,
         'postcode': postcode.value,
         'woonplaats': woonplaats.value
-    }
-    console.log(JSON.stringify(data));
+    };
+    return registratieData;
+}
+
+// REGISTRATIE FORMULIER - Methode die het registreren van het #registratieFormulier daadwerkelijk uitvoert
+function registreerFormulier() {
+    let data = verzamelDataRegistratieFormulier();
     fetch(urlLead + 'registratie', {
         method: "POST",
         headers: {
@@ -281,7 +282,6 @@ function registreerFormulier() {
             return response.json();
         })
         .then((data) => {
-            console.log(data);
             if (data.error) {
                 console.log(">> Algemene validatiefout");
                 return false;

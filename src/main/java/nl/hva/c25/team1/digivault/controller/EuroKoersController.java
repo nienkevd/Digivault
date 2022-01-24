@@ -68,5 +68,4 @@ public class EuroKoersController {
     public String update(@RequestBody EuroKoers euroKoers) {
         return euroKoersService.updateEuroKoers(euroKoers);
     }
-
 }
