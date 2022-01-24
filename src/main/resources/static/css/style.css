@@ -197,10 +197,17 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 
 .registratieBevestiging {    /* Melding na geslaagde registratie */
     display: none;
+    padding-top: 400px;
+    width: 430px;
+    height: 625px;
+}
+.transactieBevestiging {    /* Melding na geslaagde registratie */
+    display: none;
     padding-top: 240px;
     width: 430px;
     height: 625px;
 }
+
 
 .financieelOverzicht { /* Aanpassingen voor financieel overzicht */
     display: block;
@@ -274,6 +281,15 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     top: 0px;
     left: calc(50% - 215px);
 }
+.avatarTrans {    /* Aanpassing avatar registratieLaag */
+    width: 430px;
+    height: 350px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 215px);
+}
 
 /* ----- ID'S ----- */
 
@@ -318,6 +334,13 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     margin-top: 0px;
     font-size: 1.05em;
     line-height: 1.50em;
+    text-align: center;
+    font-weight: lighter;
+}
+#transactieBevestiging {
+    margin-top: 0px;
+    font-size: 1.05em;
+    line-height: 2.00em;
     text-align: center;
     font-weight: lighter;
 }

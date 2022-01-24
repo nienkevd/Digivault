@@ -66,7 +66,7 @@ function vulPagina(json) {
     // UITLOGGEN EN TRANSACTIE BUTTON EN LOGO(naar login) - Nienke
     document.getElementById('naarTransactiePagina').addEventListener('click', toonTransactiePagina);
     document.getElementById('naarLoginPagina').addEventListener('click', toonLoginPagina);
-    document.getElementById('logoDigivault').addEventListener('click', toonLoginPagina);
+    //document.getElementById('logoDigivault').addEventListener('click', toonLoginPagina);
 
     function toonTransactiePagina() {
         window.location.href = "transactie.html";
