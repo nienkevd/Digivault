@@ -46,7 +46,7 @@ public class TransactieController {
         String emailadres = tokenService.getEmailadresToken(token);
         Klant klant = klantService.vindKlantOpEmail(emailadres);
         int klantId = klant.getTransactiepartijId();
-        boolean authorized = tokenService.getEmailadresToken(token).equals(accountService.vindAccountOpKlantId(klantId).
+        boolean authorized = emailadres.equals(accountService.vindAccountOpKlantId(klantId).
                 getEmailadres());
         if (tokenService.valideerJWT(token) && authorized) {
             return probeerTransactieOmTeZettenEnUitTeVoeren(transactieDTO);
