@@ -63,7 +63,6 @@ public class TransactieController {
         Transactie transactie;
         try {
             transactie = transactieMapper.toObject(transactieDTO);
-            System.out.println(transactie);
         }
         catch(IllegalArgumentException illegalArgumentException) {
             return illegalArgumentException.getMessage();

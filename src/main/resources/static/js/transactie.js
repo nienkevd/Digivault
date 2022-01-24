@@ -151,6 +151,7 @@ function setAssetId() {
             .catch((err) => {
                 console.log(err);
             });
+    })
 
 //voer transactie uit als verkoop knop is gedrukt
         verkoop.addEventListener("click", (e) => {
@@ -172,7 +173,7 @@ function setAssetId() {
                         throw new Error("Er is iets verkeerd gegaan! " + response.status)
                     }
                 })
-                .then((data) => {
+                .then((json) => {
                     toonFinancieelOverzicht();
                     //toonTransactieBevestiging(data);
                 })
@@ -217,7 +218,7 @@ function setAssetId() {
         function toonFinancieelOverzicht() {
             window.location.href = "FinancieelOverzicht.html";
         }
-    })
+
 
 
 
