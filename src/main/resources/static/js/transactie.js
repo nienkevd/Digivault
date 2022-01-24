@@ -174,8 +174,8 @@ function setAssetId() {
                     }
                 })
                 .then((json) => {
-                    toonFinancieelOverzicht();
-                    //toonTransactieBevestiging(data);
+                    //toonFinancieelOverzicht();
+                    toonTransactieBevestiging(data);
                 })
                 .catch((err) => {
                     console.log(err);
