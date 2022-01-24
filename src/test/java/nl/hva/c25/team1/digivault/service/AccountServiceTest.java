@@ -3,17 +3,12 @@ package nl.hva.c25.team1.digivault.service;
 import nl.hva.c25.team1.digivault.model.Account;
 import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.repository.JdbcAccountDAO;
-import nl.hva.c25.team1.digivault.repository.JdbcEuroKoersDAO;
 import nl.hva.c25.team1.digivault.repository.KlantDAO;
-import nl.hva.c25.team1.digivault.repository.RootRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
 import java.time.LocalDate;
-
 import static org.assertj.core.api.Assertions.assertThat;
-
 
 class AccountServiceTest {
 
