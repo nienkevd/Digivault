@@ -357,6 +357,13 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     #registratieLaag {
         margin-top: 100px;
     }
+    #financieelOverzichtContainer{
+        margin-top: 100px;
+    }
+    #financieelOverzicht{
+        margin-top: 100px;
+    }
+
 }
 
 /* Wijzig elementen bij scherm SMALLER dan 1000px */
@@ -378,6 +385,17 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     #infoInvullenSchaalbaar {
         display: block;
     }
+    #financieelOverzichtContainer{
+              width: 550px;
+              margin-top: 100px;
+              height: 840px;
+    }
+    #financieelOverzicht{
+        width: 550px;
+        margin-top: 100px;
+        height: 840px;
+    }
+
 }
 
 /* Wijzig elementen bij scherm SMALLER dan 600px */
@@ -392,6 +410,14 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     }
     #welkomsAanbieding {
         display: none;
+    }
+    #financieelOverzichtContainer{
+        width: 100%;
+        border-radius: 0;
+    }
+    #financieelOverzicht{
+        width: 100%;
+        border-radius: 0;
     }
 }
 
@@ -478,9 +504,12 @@ th:hover{
 td {
     width: 250px;
 }
-/* table sortable: de pizzapuntjes voor asc/desc. hover & kleur*/
+/* table sortable: de pizzapuntjes voor asc/desc. hover & kleur, responsive*/
 .fi-table th {
     cursor: pointer;
+}
+.fi-table {
+    overflow-x: auto;
 }
 
 .fi-table .th-sort-asc::after {
