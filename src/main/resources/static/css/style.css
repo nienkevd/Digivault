@@ -205,14 +205,14 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 .financieelOverzicht { /* Aanpassingen voor financieel overzicht */
     display: block;
     padding: 30px 90px;
-    width: 950px;
+    width: 1000px;
     height: 620px;
     overflow-y: auto;
     margin-top:58px;
 }
 
 .financieelOverzichtContainer { /* Container rondom financieel overzicht, anders valt avatar eraf door scrollbalk*/
-    width: 950px;
+    width: 1000px;
     height: 620px;
 }
 
