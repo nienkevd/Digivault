@@ -11,16 +11,12 @@ import java.util.List;
  * Interface met de te implementeren methodes voor JdbcAccountDAO
  *
  * @author Sezi, studentnummer 500889525
- * @version 6-12-2021
+ *
  */
 
 public interface AccountDAO {
 
-//    Account bewaarAccountMetSK(Account account);
-
     void updateAccount(Klant klant);
-
-//    Account vindAccountOpAccountId(int accountId);
 
     Account vindAccountOpEmailAdres(String emailAdres);
 

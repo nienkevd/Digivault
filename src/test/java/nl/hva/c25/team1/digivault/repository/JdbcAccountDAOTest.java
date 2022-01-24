@@ -9,7 +9,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -17,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class JdbcAccountDAOTest {
     private AccountDAO daoUnderTest;
     private static Account expected = new Account("marieke@gmail.com", "$2a$10$FdzlhHHLg2ciuK6WMK21TudBBzDu9ybfWdQVH96sko/AjvkhBa53.");
+
     @Autowired
     public JdbcAccountDAOTest(AccountDAO daoUnderTest) {
         super();
@@ -32,5 +32,4 @@ class JdbcAccountDAOTest {
         List<Account> actual = daoUnderTest.geefAlleAccounts();
         Assertions.assertThat(actual).isNotNull().contains(expected);
     }
-
 }

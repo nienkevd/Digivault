@@ -37,7 +37,6 @@ public class AccountService {
         }
     }
 
-
     public List<Account> geefAlleAccounts() {
         return accountDAO.geefAlleAccounts();
     }

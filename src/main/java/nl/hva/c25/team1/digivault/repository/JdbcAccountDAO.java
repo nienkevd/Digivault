@@ -18,7 +18,7 @@ import java.util.List;
  * Java Database Connectivity voor DB-tabel Account
  *
  * @author Sezi, studentnummer 500889525
- * @version 8-12-2021
+ *
  */
 
 @Repository
@@ -28,7 +28,6 @@ public class JdbcAccountDAO implements AccountDAO {
     public JdbcAccountDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
 
     /**
      *
@@ -43,24 +42,23 @@ public class JdbcAccountDAO implements AccountDAO {
         klant.getTransactiepartijId());
     }
 
-//    /**
-//     *
-//     * vindt een account in database adhv accountId
-//     * @param accountId
-//     * @return Account
-//     */
-//
-//    @Override
-//    public Account vindAccountOpAccountId(int accountId) {
-//        String sql = "Select * From account Where accountId = ?";
-//        return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), accountId);
-//    }
+    /**
+     *
+     * vind account op basis van klantId
+     * @param klantId
+     */
 
     @Override
     public Account vindAccountOpKlantId(int klantId) {
         String sql = "SELECT emailadres, wachtwoord FROM transactiepartij WHERE tpId = ?";
         return jdbcTemplate.queryForObject(sql, new AccountRowMapper(), klantId);
     }
+
+    /**
+     *
+     * vind account op basis van emailAdres
+     * @param emailAdres
+     */
 
     @Override
     public Account vindAccountOpEmailAdres(String emailAdres) {

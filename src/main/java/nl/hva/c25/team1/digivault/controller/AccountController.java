@@ -14,7 +14,7 @@ import java.util.List;
  * Controller van de klasse Account
  *
  * @author Sezi, studentnummer 500889525
- * @version 8-12-2021
+ *
  */
 @RestController
 public class AccountController {
