@@ -55,7 +55,7 @@ function vulPagina(json) {
         const aantal = parseFloat(td3.textContent).toFixed(2);
         const dagkoers = parseFloat(td4.textContent).toFixed(2);
         const waarde = (aantal * dagkoers).toFixed(2).toString();
-        td5.textContent = ('€ ' + waarde + ',-');
+        td5.textContent = ('€ ' + waarde);
         tr.appendChild(td);
         tr.appendChild(td2);
         tr.appendChild(td3);
