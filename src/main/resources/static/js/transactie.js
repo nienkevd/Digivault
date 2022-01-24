@@ -202,6 +202,11 @@ function verbergTransactieLaag() {
     transactiePagina.style.display = 'none';
     loginPagina.style.display = 'block';
 }
+//KLIK OP LOGO GAAT NAAR FINANCIEEL OVERZICHT
+document.getElementById('logoDigivault').addEventListener('click', toonFinancieelOverzicht);
+function toonFinancieelOverzicht() {
+    window.location.href = "FinancieelOverzicht.html";
+}
 
 
 

@@ -63,18 +63,17 @@ function vulPagina(json) {
         tr.appendChild(td5);
         tableBody.appendChild(tr);
     }
-    // UITLOGGEN EN TRANSACTIE BUTTON - Nienke
+    // UITLOGGEN EN TRANSACTIE BUTTON EN LOGO(naar login) - Nienke
     document.getElementById('naarTransactiePagina').addEventListener('click', toonTransactiePagina);
     document.getElementById('naarLoginPagina').addEventListener('click', toonLoginPagina);
+    document.getElementById('logoDigivault').addEventListener('click', toonLoginPagina);
 
     function toonTransactiePagina() {
         window.location.href = "transactie.html";
     }
-
     function toonLoginPagina() {
         window.location.href = "index.html";
     }
-
 
     /**
      * ROW SORTING...Nienke, 20-01-2022
