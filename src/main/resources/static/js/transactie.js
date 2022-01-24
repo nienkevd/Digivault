@@ -145,8 +145,8 @@ function setAssetId() {
                 }
             })
             .then(json => {
-                toonFinancieelOverzicht();
-                //toonTransactieBevestiging(data);
+                //toonFinancieelOverzicht();
+                toonTransactieBevestiging(data);
             })
             .catch((err) => {
                 console.log(err);
@@ -185,10 +185,16 @@ function setAssetId() {
         function toonFinancieelOverzicht() {
             window.location.href = "FinancieelOverzicht.html";
         }
+//Klik op LOGO naar financieel overzicht
+document.getElementById('logoDigivault').addEventListener('click', toonFinancieelOverzicht);
+
+
+        //TRANSACTIE BEVESTIGING
 
 //transactieBevestiging constante
         const transactieBevestiging = document.getElementById('transactieBevestiging');
         const transactiePagina = document.getElementById('transactiePagina');
+        //const transactieInformatie = document.getElementById('registratieInformatie');
 
 //Event listner
         bevestigingSluiten.addEventListener('click', verbergTransactieBevestiging);
@@ -203,13 +209,13 @@ function setAssetId() {
 
 // REGISTRATIE BEVESTIGING - Verbergen van #registratieBevestiging
         function verbergTransactieBevestiging() {
-            location.reload();
+            toonFinancieelOverzicht()
             //welkomsAanbieding.style.display = 'none';
         }
 
         function verbergTransactieLaag() {
             transactiePagina.style.display = 'none';
-            loginPagina.style.display = 'block';
+
         }
 
 //KLIK OP LOGO GAAT NAAR FINANCIEEL OVERZICHT
