@@ -264,14 +264,13 @@ function verkoopTransactie() {
             if (response.status === 200) {
                 return response.blob()
             } else if (response.status === 401) { // als token niet meer geldig is
-                console.log("401!!!!")
                 toonLoginPaginaSessieVerlopen();
             } else {
                 throw new Error("Er is iets verkeerd gegaan! " + response.status)
             }
         })
         .then((json) => {
-            // toonTransactieBevestiging();
+            toonTransactieBevestiging();
         })
         .catch((err) => {
             console.log(err);

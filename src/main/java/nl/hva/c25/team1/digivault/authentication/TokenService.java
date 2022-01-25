@@ -71,7 +71,7 @@ public class TokenService {
                 .withAudience(AUDIENCE)
                 .withClaim("emailadres", emailadres)
                 .withIssuedAt(Date.from(now))
-                .withExpiresAt(Date.from(now.plus(1 ,ChronoUnit.MINUTES)))
+                .withExpiresAt(Date.from(now.plus(15 ,ChronoUnit.MINUTES)))
                 .withHeader(headerClaims)
                 .sign(algorithm);
         return token;
