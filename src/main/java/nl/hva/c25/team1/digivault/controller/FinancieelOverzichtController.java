@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
+@CrossOrigin
 public class FinancieelOverzichtController {
 
     private FinancieelOverzichtService financieelOverzichtService;
@@ -45,7 +46,6 @@ public class FinancieelOverzichtController {
      * Genereren van een financieel overzicht (rekening/portefeuille) op klantId
      * @return een FinancieelOverzicht
      */
-    @CrossOrigin
     @PostMapping("/financieeloverzicht")
     public ResponseEntity<FinancieelOverzicht> vindFinancieelOverzicht(@RequestHeader("Authorization") String token) {
         String emailadres = tokenService.getEmailadresToken(token);
