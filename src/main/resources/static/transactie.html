@@ -25,14 +25,12 @@
         <br>
         <br>
         <div class = "grid_3_transactie">
-        <p>Hoeveelheid</p>
-        <input class = "hoeveelheid" id="hoeveelheid" name="hoeveelheid" placeholder="vul hoeveelheid in" title="vul de hoeveelheid in"
-               required="" type="text">
-            <div class="dropdownKoers">
-                <button onclick="myFunction()" class="dropKoers">Dropdown</button>
-                <div id="myDropdown" class="dropdown-content">
-                </div>
-            </div>
+            <p>Hoeveelheid</p>
+            <input class = "hoeveelheid" id="hoeveelheid" name="hoeveelheid" placeholder="vul hoeveelheid in" title="vul de hoeveelheid in"
+                   required="" type="text">
+            <select id="dropdown" class = "dropdown_assets" name = "assets" required>
+                <option disabled selected value>Kies je cryptomunt</option>
+            </select>
         </div>
         <br>
         <br>
@@ -40,8 +38,8 @@
         <br>
         <p id="transactiekosten€">Transactiekosten: € <span id="transactiekosten"></span></p>
         <div class = "grid_2">
-        <input id="koop" name="koop" type="button" value="Koop">
-        <input id="verkoop" name="verkoop" type="button" value="Verkoop">
+            <input id="koop" name="koop" type="button" value="Koop">
+            <input id="verkoop" name="verkoop" type="button" value="Verkoop">
         </div>
     </form>
 </div>
