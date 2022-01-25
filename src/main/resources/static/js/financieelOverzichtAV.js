@@ -55,7 +55,7 @@ function vulPagina(json) {
         const aantal = parseFloat(td3.textContent).toFixed(2);
         const dagkoers = parseFloat(td4.textContent).toFixed(2);
         const waarde = (aantal * dagkoers).toFixed(2).toString();
-        td5.textContent = ('€ ' + waarde);
+        td5.textContent = (waarde) + ' €';
         tr.appendChild(td);
         tr.appendChild(td2);
         tr.appendChild(td3);
@@ -89,7 +89,6 @@ function vulPagina(json) {
 
         //Sorteer elke row
         //onderstaan,function moet erin anders sorteert hij bij default alpabetisch
-        //arr.sort(function(a, b){return a-b;});
         const sortedRows = rows.sort((a,b) => {
             let aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
             let bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
