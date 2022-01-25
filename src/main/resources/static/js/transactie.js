@@ -48,9 +48,9 @@ fetch(url, {
     },
 })
     .then(response => {
-        if(response.status === 200){
+        if (response.status === 200) {
             return response.json()
-        } else if(response.status === 401){
+        } else if (response.status === 401) {
             console.log(response.headers.get('Location'))
             window.location.href = response.headers.get('Location');
         }
@@ -109,12 +109,12 @@ function toonWaarde() {
     const asset = select.options[select.selectedIndex].value;
     let dagkoers;
     for (let i = 0; i < assets.length; i++) {
-        if (assets[i].naam == asset) {
+        if (assets[i].naam === asset) {
             dagkoers = assets[i].dagkoers;
             break;
         }
     }
-    waarde= hoeveelheid.value * dagkoers;
+    waarde = hoeveelheid.value * dagkoers;
     document.getElementById("waarde").innerText = waarde.toFixed(2);
     transactiekosten = waarde * percentage;
     document.getElementById("transactiekosten").innerText = transactiekosten.toFixed(2);
@@ -128,7 +128,7 @@ select.addEventListener("change", setAssetId);
 function setAssetId() {
     const asset = select.options[select.selectedIndex].value;
     for (let i = 0; i < assets.length; i++) {
-        if (assets[i].naam == asset) {
+        if (assets[i].naam === asset) {
             assetId = assets[i].assetId;
             break;
         }
@@ -139,7 +139,7 @@ function setAssetId() {
 function setAssetAantal() {
     const asset = select.options[select.selectedIndex].value;
     for (let i = 0; i < assets.length; i++) {
-        if (assets[i].naam == asset) {
+        if (assets[i].naam === asset) {
             assetAantal = assets[i].aantal;
             break;
         }
@@ -169,67 +169,77 @@ koop.addEventListener("click", (e) => {
             }
         })
         .then((json) => {
+            console.log('tweede then')
             if (validatieKoopTransactie()) {
                 e.preventDefault();
-            } else {
-                toonFinancieelOverzicht();
+                toonTransactieBevestiging(data);
             }
         })
         .catch((err) => {
             console.log(err);
-        })
+        });
 })
 
 // Transactie koop validatie
 function validatieKoopTransactie() {
+    resetFoutMeldingTransactie();
+    console.log('validatie');
+    legeVeldenCheck();
+    validatieSaldo();
+    return true;
+}
+
+// Foutmelding Transactie - Hulpmethode die #foutMeldingTransactie terugzet naar basisinstellingen (geen melding, rood)
+function resetFoutMeldingTransactie() {
     foutMeldingTransactie.innerHTML = '';
     foutMeldingTransactie.style.color = 'var(--divaRood)';
-    validatieSaldo();
-    legeVeldenCheck();
-    return true;
 }
 
 // Transactie validatie - checkt of er genoeg saldo is om te kopen
 function validatieSaldo() {
-    console.log('check')
+    console.log('saldo check')
     let totaal = waarde + transactiekosten
     console.log(waarde)
     console.log(transactiekosten)
     console.log(saldoValue)
-    if(saldoValue < totaal) {
+    if (saldoValue < totaal) {
         console.log(totaal + "saldo niet genoeg")
         foutMeldingTransactie.innerHTML = koopFoutMelding;
     }
 }
 
 //voer transactie uit als verkoop knop is gedrukt
-        verkoop.addEventListener("click", (e) => {
-            const data = {'koperId': bankId, 'verkoperId': klantId, 'assetId': assetId, 'aantal': hoeveelheid.value};
-            fetch(urltr, {
-                method: "POST",
-                headers: {
-                    'Authorization': localStorage.getItem("token"),
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                body: JSON.stringify(data),
-            })
-                .then(response => {
-                    console.log(response)
-                    if (response.status === 200) {
-                        return response.blob()
-                    } else {
-                        throw new Error("Er is iets verkeerd gegaan! " + response.status)
-                    }
-                })
-                .then((data) => {
-                    toonFinancieelOverzicht();
-                    //toonTransactieBevestiging(data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
+verkoop.addEventListener("click", (e) => {
+    const data = {'koperId': bankId, 'verkoperId': klantId, 'assetId': assetId, 'aantal': hoeveelheid.value};
+    fetch(urltr, {
+        method: "POST",
+        headers: {
+            'Authorization': localStorage.getItem("token"),
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => {
+            console.log(response)
+            if (response.status === 200) {
+                return response.blob()
+            } else {
+                throw new Error("Er is iets verkeerd gegaan! " + response.status)
+            }
         })
+        .then((json) => {
+            if (validatieVerkoopTransactie()) {
+                e.preventDefault();
+            } else {
+                toonTransactieBevestiging(data);
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+})
+
 // Transactie verkoop validatie
 function validatieVerkoopTransactie() {
     foutMeldingTransactie.innerHTML = '';
@@ -242,7 +252,7 @@ function validatieVerkoopTransactie() {
 // Transactie validatie - checkt of er genoeg cryptomunten zijn om te verkopen
 function validatieMunten() {
     setAssetAantal();
-    if(assetAantal<hoeveelheid.value) {
+    if (assetAantal < hoeveelheid.value) {
         console.log("munten niet genoeg")
         foutMeldingTransactie.innerHTML = verkoopFoutMelding;
     }
@@ -251,8 +261,10 @@ function validatieMunten() {
 // Transactie validatie - checkt of alle verplichte velden bij transactie zijn ingevuld
 function legeVeldenCheck() {
     console.log("legeVeldenCheck");
-    if(hoeveelheid.value == '' || select.value == '') {
+    if (hoeveelheid.value ==='' || /*select.innerText*/select.options[select.selectedIndex].text === '') {
         console.log(">> validatiefout: lege velden");
+        console.log(hoeveelheid.value);
+        console.log(select.options[select.selectedIndex].text);
         foutMeldingTransactie.innerHTML = legeVeldenMelding;
     }
 }
@@ -260,41 +272,39 @@ function legeVeldenCheck() {
 function toonFinancieelOverzicht() {
     window.location.href = "FinancieelOverzicht.html";
 }
-        function toonFinancieelOverzicht() {
-            window.location.href = "FinancieelOverzicht.html";
-        }
+
 //Klik op LOGO naar financieel overzicht
 document.getElementById('logoDigivault').addEventListener('click', toonFinancieelOverzicht);
 
 
-        //TRANSACTIE BEVESTIGING
+//TRANSACTIE BEVESTIGING
 
 //transactieBevestiging constante
-        const transactieBevestiging = document.getElementById('transactieBevestiging');
-        const transactiePagina = document.getElementById('transactiePagina');
-        //const transactieInformatie = document.getElementById('registratieInformatie');
+const transactieBevestiging = document.getElementById('transactieBevestiging');
+const transactiePagina = document.getElementById('transactiePagina');
+//const transactieInformatie = document.getElementById('registratieInformatie');
 
 //Event listner
-        bevestigingSluiten.addEventListener('click', verbergTransactieBevestiging);
+bevestigingSluiten.addEventListener('click', verbergTransactieBevestiging);
 
 // REGISTRATIE BEVESTIGING - Tonen van #registratieBevestiging met daarop de melding dat registratie gelukt is
-        function toonTransactieBevestiging(data) {
-            verbergTransactieLaag();
-            transactieBevestiging.style.display = 'block';
-            //transactieInformatie.innerHTML = data;
-            //welkomsAanbieding.style.display = 'none';
-        }
+function toonTransactieBevestiging(data) {
+    verbergTransactieLaag();
+    transactieBevestiging.style.display = 'block';
+    //transactieInformatie.innerHTML = data;
+    //welkomsAanbieding.style.display = 'none';
+}
 
 // REGISTRATIE BEVESTIGING - Verbergen van #registratieBevestiging
-        function verbergTransactieBevestiging() {
-            location.reload();
-            //welkomsAanbieding.style.display = 'none';
-        }
+function verbergTransactieBevestiging() {
+    toonFinancieelOverzicht()
+    //welkomsAanbieding.style.display = 'none';
+}
 
-        function verbergTransactieLaag() {
-            transactiePagina.style.display = 'none';
-            loginPagina.style.display = 'block';
-        }
+function verbergTransactieLaag() {
+    transactiePagina.style.display = 'none';
+    // loginPagina.style.display = 'block';
+}
 
 //KLIK OP LOGO GAAT NAAR FINANCIEEL OVERZICHT
-        document.getElementById('logoDigivault').addEventListener('click', toonFinancieelOverzicht);
+document.getElementById('logoDigivault').addEventListener('click', toonFinancieelOverzicht);
