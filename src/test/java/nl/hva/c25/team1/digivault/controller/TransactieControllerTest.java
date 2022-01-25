@@ -12,7 +12,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.*;
 import org.springframework.test.web.servlet.request.*;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @WebMvcTest(TransactieController.class)
 class TransactieControllerTest {
@@ -39,10 +42,16 @@ class TransactieControllerTest {
 
     @Test
     void vindTransactieOpTransactieIdHandler() {
+        Transactie transactie = new Transactie(LocalDate.of(2022, 1, 25),
+                LocalTime.of(12, 12, 0), 1.5);
+        Mockito.when(transactieService.vindTransactieOpTransactieId(1)).thenReturn(transactie);
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/transactie/1");
         try {
             ResultActions response = mockMvc.perform(request);
-            response.andExpect(MockMvcResultMatchers.status().isOk());
+            response.andExpect(MockMvcResultMatchers.status().isOk())
+                    .andExpect(MockMvcResultMatchers.content().json("{\"koper\":null,\"verkoper\":null," +
+                            "\"transactieDatum\":\"2022-01-25\",\"transactieTijd\":\"12:12:00\",\"asset\":null," +
+                            "\"aantalCryptos\":1.5}"));
         }
         catch(Exception e) {
             System.out.println(e.getMessage());
