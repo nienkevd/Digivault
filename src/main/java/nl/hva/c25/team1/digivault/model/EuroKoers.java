@@ -22,7 +22,7 @@ public class EuroKoers {
      */
     private EuroKoers(int euroKoersId, LocalDate datum, double koers, int assetId) {
         super();
-        this.euroKoersId = euroKoersId;
+        setEuroKoersId(euroKoersId);
         this.datum = datum;
         this.koers = koers;
         this.assetId = assetId;
@@ -57,8 +57,12 @@ public class EuroKoers {
         return euroKoersId;
     }
 
-    public void setEuroKoersId(int euroKoersId) {
-        this.euroKoersId = euroKoersId;
+    public void setEuroKoersId(int euroKoersId) throws IllegalArgumentException {
+        if (euroKoersId > 0) {
+            this.euroKoersId = euroKoersId;
+        } else {
+            throw new IllegalArgumentException("Het ID van een asset moet een positief geheel getal zijn!");
+        }
     }
 
     public LocalDate getDatum() {
@@ -86,7 +90,7 @@ public class EuroKoers {
     }
 
     /**
-     * ToString-methode EuroKoers
+     * toString-methode EuroKoers
      * @return toString van klasse EuroKoers
      */
     @Override

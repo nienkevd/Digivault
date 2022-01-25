@@ -402,7 +402,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 }
 
 #registratieKop {
-    margin-top: 70px;
+    margin-top: -85px;
 }
 
 #actueleWaarde {

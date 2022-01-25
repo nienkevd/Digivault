@@ -17,30 +17,27 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5-12-2021
  */
 
+class AssetServiceTest {
 
-//class AssetServiceTest {
+    @MockBean
+    private static JdbcAssetDAO mockDAO = Mockito.mock(JdbcAssetDAO.class);
+    @MockBean
+    private static RootRepository mockRoot = Mockito.mock(RootRepository.class);
 
-//    private static Asset expected = new Asset(1, "BNB", "Binance_Coin");
-//
-//    @MockBean
-//    private static JdbcAssetDAO mockDAO = Mockito.mock(JdbcAssetDAO.class);
-//    @MockBean
-//            private static RootRepository mockRoot = Mockito.mock(RootRepository.class);
-//
-//
-//    AssetService serviceUnderTest = new AssetService(mockDAO, mockRoot);
-//
-//    @Test
-//    void vindAssetOpId() {
-//        Mockito.when(mockDAO.vindAssetOpId(1)).thenReturn(expected);
-//        Asset actual = serviceUnderTest.vindAssetOpId(1);
-//        assertThat(actual).isNotNull().isEqualTo(expected);
-//    }
-//
-//    @Test
-//    void verversAsset() {
-//        Mockito.when(mockDAO.vindAssetOpId(1)).thenReturn(expected);
-//        String actual = serviceUnderTest.updateAsset(expected);
-//        assertThat(actual).contains("geüpdatet");
-//    }
-//}
+    private final AssetService serviceUnderTest = new AssetService(mockDAO, mockRoot);
+    private final Asset expected = new Asset(1, "BNB", "Binance_Coin", 31558.66369);
+
+    @Test
+    void vindAssetOpId() {
+        Mockito.when(mockDAO.vindAssetOpId(1)).thenReturn(expected);
+        Asset actual = serviceUnderTest.vindAssetOpId(1);
+        assertThat(actual).isNotNull().isEqualTo(expected);
+    }
+
+    @Test
+    void verversAsset() {
+        Mockito.when(mockDAO.vindAssetOpId(1)).thenReturn(expected);
+        String actual = serviceUnderTest.updateAsset(expected);
+        assertThat(actual).contains("geüpdatet");
+    }
+}

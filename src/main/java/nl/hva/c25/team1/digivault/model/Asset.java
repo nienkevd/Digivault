@@ -103,8 +103,6 @@ public class Asset {
         return assetId == asset.assetId;
     }
 
-
-
     /**
      * HashCode Asset
      * @return Hash assetId
@@ -115,7 +113,7 @@ public class Asset {
     }
 
     /**
-     * ToString-methode Asset
+     * toString-methode Asset
      * @return toString van klasse Asset
      */
     @Override
