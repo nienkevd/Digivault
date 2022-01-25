@@ -146,8 +146,15 @@ function setAssetAantal() {
     }
 }
 
+koop.addEventListener('click', function (e) {
+    if (validatieKoopTransactie()) {
+        e.preventDefault();
+        koopTransactie();
+    }
+})
+
 //voer transactie uit als koop knop is gedrukt
-koop.addEventListener("click", (e) => {
+function koopTransactie() {
     const data = {'koperId': klantId, 'verkoperId': bankId, 'assetId': assetId, 'aantal': hoeveelheid.value};
     console.log('check' + JSON.stringify(data));
 
@@ -168,17 +175,18 @@ koop.addEventListener("click", (e) => {
                 throw new Error("Er is iets verkeerd gegaan! " + response.status)
             }
         })
-        .then((json) => {
-            console.log('tweede then')
-            if (validatieKoopTransactie()) {
-                e.preventDefault();
+        .then((data) => {
+            if (data.error) {
+                console.log(">> Algemene validatiefout");
+                return false;
+            } else {
                 toonTransactieBevestiging(data);
             }
         })
         .catch((err) => {
             console.log(err);
         });
-})
+}
 
 // Transactie koop validatie
 function validatieKoopTransactie() {
@@ -261,10 +269,11 @@ function validatieMunten() {
 // Transactie validatie - checkt of alle verplichte velden bij transactie zijn ingevuld
 function legeVeldenCheck() {
     console.log("legeVeldenCheck");
+    console.log(select.options[select.selectedIndex].text);
     if (hoeveelheid.value ==='' || /*select.innerText*/select.options[select.selectedIndex].text === '') {
         console.log(">> validatiefout: lege velden");
         console.log(hoeveelheid.value);
-        console.log(select.options[select.selectedIndex].text);
+
         foutMeldingTransactie.innerHTML = legeVeldenMelding;
     }
 }
