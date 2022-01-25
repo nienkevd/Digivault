@@ -172,5 +172,4 @@ public class RootRepository {
         }
         return transactieDAO.bewaarTransacktieMetSK(transactie);
     }
-
 }

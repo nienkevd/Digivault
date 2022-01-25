@@ -46,7 +46,7 @@ h1 {    /* Header 1 */
     margin-bottom: 30px;
 }
 
-h2[class="overzicht"] { /* Header 2 financieel overzicht */
+h2[class="overzicht"] {    /* Header 2 financieel overzicht */
     /*font-family: bling, Verdana, sans-serif;*/
     font-weight: bold;
     font-size: 32px;
@@ -60,7 +60,7 @@ pre {    /* Preformatted text, neemt spaties mee */
     font-family: diva, Verdana, sans-serif;
 }
 
-#infoInvullen {
+#infoInvullen {    /* Aanpassingen voor informatie #infoInvullen in #registratieLaag*/
     text-align: center;
     font-weight: normal;
     margin-top: -25px;
@@ -85,7 +85,7 @@ p[class="fi"] {    /* Aanpassingen voor alinea's in het financieel overzicht */
 
 }
 
-a {    /* Standaardstijl voor linkjes */
+a {    /* Standaardstijl voor alle linkjes */
     transition-duration: 0.4s;
     font-family: diva, Verdana, sans-serif;
     font-size: 13px;
@@ -93,6 +93,12 @@ a {    /* Standaardstijl voor linkjes */
     color: var(--divaIvoor);
     text-decoration: none;
     line-height: 20px;
+}
+
+a[id="naarAlleKoersen"] {    /* Aangepaste stijl voor linkje #naarAlleKoersen */
+    display: block;
+    text-align: center;
+    margin: 20px auto -30px;
 }
 
 a:hover {    /* Standaardstijl voor gehoverde linkjes */
@@ -112,7 +118,7 @@ input {    /* Standaardstijl invoerveld */
     height: 40px;
 }
 
-input[type="submit"] {    /* Aanpassingen invoervelden van type submit */
+input[type="submit"], input[type="button"] {    /* Aanpassingen invoervelden van type submit/button */
     margin-top: 30px;
     margin-bottom: 25px;
     background: var(--divaGoud);
@@ -126,27 +132,7 @@ input[type="submit"] {    /* Aanpassingen invoervelden van type submit */
     border-radius: 20px;
 }
 
-input[type="submit"]:hover {    /* Aanpassingen invoervelden van type submit bij hover */
-    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.24), 0 7px 20px 0 rgba(0,0,0,0.19);
-    transition-duration: 1.2s;
-    background: var(--divaRoze);
-    cursor: pointer;
-}
-input[type="button"] {    /* Aanpassingen invoervelden van type button */
-    margin-top: 30px;
-    margin-bottom: 25px;
-    background: var(--divaGoud);
-    text-align: center;
-    border: none;
-    outline: none;
-    height: 40px;
-    color: black;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 20px;
-}
-
-input[type="button"]:hover {    /* Aanpassingen invoervelden van type button bij hover */
+input[type="submit"]:hover, input[type="button"]:hover {    /* Aanpassingen invoervelden van submit/button bij hover */
     box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.24), 0 7px 20px 0 rgba(0,0,0,0.19);
     transition-duration: 1.2s;
     background: var(--divaRoze);
@@ -181,21 +167,37 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     box-sizing: border-box;
 }
 
-.loginPagina {    /* Aanpassingen voor loginPagina */
+.loginPagina {    /* Aanpassingen voor klasse loginPagina */
     display: block;
     padding-right: 48px;
     width: 430px;
     height: 513px;
 }
 
-.registratieLaag {    /* Aanpassingen voor registratieLaag */
-    display: none;
-    padding: 70px 60px;
-    width: 950px;
+.registratieLaag {    /* Aanpassingen voor klasse registratieLaag */
     height: 675px;
+    width: 950px;
+    padding: 70px 60px;
+    display: none;
+}
+
+.koersInformatieLaag {     /* Aanpassingen voor klasse registratieLaag */
+    height: 735px;
+    width: 630px;
+    padding-left: 52px;
+    padding-right: 52px;
+}
+
+.koersDiagramLaag {    /* Aanpassingen voor klasse koersDiagramLaag */
+    height: 735px;
+    width: 630px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .registratieBevestiging {    /* Melding na geslaagde registratie */
+    height: 625px;
+    width: 430px;
     display: none;
     padding-top: 400px;
     width: 430px;
@@ -204,8 +206,6 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 .transactieBevestiging {    /* Melding na geslaagde registratie */
     display: none;
     padding-top: 240px;
-    width: 430px;
-    height: 625px;
 }
 
 
@@ -291,6 +291,58 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     left: calc(50% - 215px);
 }
 
+.dropbtn {
+    background-color: var(--divaGoud);
+    color: var(--divaDrop);
+    font-family: diva, serif;
+    font-weight: bold;
+    padding: 2px;
+    font-size: 16px;
+    border-radius: 40px;
+    margin-bottom: 35px;
+    min-width: 200px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin-left: 175px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: var(--divaRoze);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    max-width: 240px;
+    margin-top: -25px;
+    margin-left: 190px;
+    border-radius: 10px;
+    background-color: #090909;
+    color: var(--divaGoud);
+    min-width: 160px;
+    overflow: auto;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: var(--divaGoud);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #1c1c1c;
+}
+
+.show {display: block;}
+
 /* ----- ID'S ----- */
 
 #logoDigivault {    /* Stijl Digivault-logo */
@@ -347,6 +399,33 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 
 #registratieKop {
     margin-top: 70px;
+}
+
+#actueleWaarde {
+    margin-top: -5px;
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+#vergrootKoers {     /* Maakt valutawaarde in Koersdiagram groter */
+    margin-bottom: 35px;
+    font-size: 40px;
+    height: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#standaardButtonBreedte {    /* Stijl voor een standaardbutton */
+    margin-top: 40px;
+    width: 330px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#historischDagwaarde {
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 #foutMeldingRegistratie {
