@@ -50,9 +50,10 @@ fetch(url, {
     .then(response => {
         if (response.status === 200) {
             return response.json()
-        } else if (response.status === 401) {
-            console.log(response.headers.get('Location'))
-            window.location.href = response.headers.get('Location');
+        } else if (response.status === 401) { // als token niet meer geldig is
+            toonLoginPaginaSessieVerlopen();
+        } else {
+            throw new Error("Er is iets verkeerd gegaan! " + response.status)
         }
     })
     .then(json =>
@@ -61,6 +62,18 @@ fetch(url, {
     .catch((err) => {
         console.log(err);
     });
+
+
+// Als token verlopen is, bij response.status 401
+function toonLoginPaginaSessieVerlopen() {
+    localStorage.removeItem("token");
+    alert("Sessie verlopen! Log opnieuw in.")
+    window.location.href = "index.html";
+}
+
+function toonLoginPagina() {
+    window.location.href = "index.html";
+}
 
 function toonSaldo(json) {
     saldoValue = json.saldo
@@ -78,9 +91,10 @@ select.addEventListener("click", (e) => {
         },
     })
         .then(response => {
-            console.log(response)
             if (response.status === 200) {
                 return response.json()
+            } else if (response.status === 401) { // als token niet meer geldig is
+                toonLoginPaginaSessieVerlopen();
             } else {
                 throw new Error("Er is iets verkeerd gegaan! " + response.status)
             }
@@ -157,7 +171,6 @@ koop.addEventListener('click', function (e) {
 
 // Transactie koop validatie
 function validatieKoopTransactie() {
-    console.log('validatie');
     resetFoutMeldingTransactie()
     if (legeVeldenCheck() && validatieSaldo()) {
         return true;
@@ -169,7 +182,6 @@ function validatieKoopTransactie() {
 //voer transactie uit als koop knop is gedrukt
 function koopTransactie() {
     const data = {'koperId': klantId, 'verkoperId': bankId, 'assetId': assetId, 'aantal': hoeveelheid.value};
-    console.log('check' + JSON.stringify(data));
 
     fetch(urltr, {
         method: "POST",
@@ -181,15 +193,16 @@ function koopTransactie() {
         body: JSON.stringify(data),
     })
         .then(response => {
-            console.log(response)
             if (response.status === 200) {
                 return response.blob()
+            } else if (response.status === 401) { // als token niet meer geldig is
+                toonLoginPaginaSessieVerlopen();
             } else {
                 throw new Error("Er is iets verkeerd gegaan! " + response.status)
             }
         })
-        .then((data) => {
-                toonTransactieBevestiging(data);
+        .then((json) => {
+                toonTransactieBevestiging();
         })
         .catch((err) => {
             console.log(err);
@@ -206,13 +219,11 @@ function resetFoutMeldingTransactie() {
 
 // Transactie validatie - checkt of er genoeg saldo is om te kopen
 function validatieSaldo() {
-    console.log('saldo check')
     let totaal = waarde + transactiekosten
     console.log(waarde)
     console.log(transactiekosten)
     console.log(saldoValue)
     if (saldoValue < totaal) {
-        console.log(totaal + "saldo niet genoeg")
         foutMeldingTransactie.innerHTML = koopFoutMelding;
         return false;
     }
@@ -250,15 +261,17 @@ function verkoopTransactie() {
         body: JSON.stringify(data),
     })
         .then(response => {
-            console.log(response)
             if (response.status === 200) {
                 return response.blob()
+            } else if (response.status === 401) { // als token niet meer geldig is
+                console.log("401!!!!")
+                toonLoginPaginaSessieVerlopen();
             } else {
                 throw new Error("Er is iets verkeerd gegaan! " + response.status)
             }
         })
-        .then((data) => {
-            toonTransactieBevestiging(data);
+        .then((json) => {
+            // toonTransactieBevestiging();
         })
         .catch((err) => {
             console.log(err);
@@ -271,7 +284,6 @@ function verkoopTransactie() {
 function validatieMunten() {
     setAssetAantal();
     if (assetAantal < hoeveelheid.value) {
-        console.log("munten niet genoeg")
         foutMeldingTransactie.innerHTML = verkoopFoutMelding;
         return false;
     }
@@ -280,7 +292,6 @@ function validatieMunten() {
 
 // Transactie validatie - checkt of alle verplichte velden bij transactie zijn ingevuld
 function legeVeldenCheck() {
-    console.log("legeVeldenCheck");
     console.log(select.options[select.selectedIndex].text);
     if (hoeveelheid.value ==='' || /*select.innerText*/select.options[select.selectedIndex].text === '') {
         console.log(">> validatiefout: lege velden");
@@ -311,7 +322,7 @@ const transactieInformatie = document.getElementById('registratieInformatie');
 bevestigingSluiten.addEventListener('click', verbergTransactieBevestiging);
 
 // REGISTRATIE BEVESTIGING - Tonen van #registratieBevestiging met daarop de melding dat registratie gelukt is
-function toonTransactieBevestiging(data) {
+function toonTransactieBevestiging() {
     verbergTransactieLaag();
     transactieBevestiging.style.display = 'block';
     transactieInformatie.innerHTML = data;
