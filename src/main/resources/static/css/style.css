@@ -367,6 +367,15 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     text-align: center;
 }
 
+#foutMeldingTransactie {
+    height: 14px;
+    color: var(--divaRood);
+    top: -35px;
+    margin-bottom: 2px;
+    position: relative;
+    text-align: center;
+}
+
 #veelGeld {
     color: var(--divaRoze);
     font-weight: bold;

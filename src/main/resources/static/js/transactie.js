@@ -19,9 +19,24 @@ const verkoop = document.getElementById("verkoop")
 const klantId = localStorage.getItem("klantId")
 //assetId declareren
 let assetId;
+//assetAantal declareren
+let assetAantal;
 //bankId is altijd 1
 const bankId = 1
-
+//Foutmeldingen koop en verkoop
+const koopFoutMelding = `Je hebt niet genoeg saldo`;
+const verkoopFoutMelding = 'Je hebt niet genoeg munten';
+const legeVeldenMelding = 'Je moet hoeveelheid invullen en cryptomunt selecteren'
+//Foutmelding op transactie pagina
+const foutMeldingTransactie = document.getElementById('foutMeldingTransactie');
+//saldo
+const saldo = document.getElementById("saldo");
+//waarde
+let waarde;
+//transactiekosten
+let transactiekosten;
+//saldo
+let saldoValue;
 
 // Ophalen saldo vanaf financieeloverzicht
 fetch(url, {
@@ -47,9 +62,9 @@ fetch(url, {
         console.log(err);
     });
 
-function toonSaldo (json) {
-    const saldo = document.getElementById("saldo")
-    saldo.append(json.saldo);
+function toonSaldo(json) {
+    saldoValue = json.saldo
+    document.getElementById("saldoValue").innerText = json.saldo;
 }
 
 //Dropdown menu invullen met alle assets
@@ -87,8 +102,8 @@ function vulDropdownMenu(json) {
     }
 }
 
-    //Toon waarde en transactie kosten wanneer een asset is gekozen uit de dropdown menu
-    select.addEventListener("change", toonWaarde);
+//Toon waarde en transactie kosten wanneer een asset is gekozen uit de dropdown menu
+select.addEventListener("change", toonWaarde);
 
 function toonWaarde() {
     const asset = select.options[select.selectedIndex].value;
@@ -99,14 +114,14 @@ function toonWaarde() {
             break;
         }
     }
-    const waarde = hoeveelheid.value * dagkoers;
+    waarde= hoeveelheid.value * dagkoers;
     document.getElementById("waarde").innerText = waarde.toFixed(2);
-    const transactiekosten = waarde * percentage;
+    transactiekosten = waarde * percentage;
     document.getElementById("transactiekosten").innerText = transactiekosten.toFixed(2);
 }
 
-    //Toon waarde en transactie kosten wanneer hoeveelheid is gewijzigd
-    hoeveelheid.addEventListener("input", toonWaarde)
+//Toon waarde en transactie kosten wanneer hoeveelheid is gewijzigd
+hoeveelheid.addEventListener("input", toonWaarde)
 
 select.addEventListener("change", setAssetId);
 
@@ -120,38 +135,72 @@ function setAssetId() {
     }
 }
 
+//vindt het aantal van de gekozen cryptomunten dat de klant in zijn portefeuille heeft
+function setAssetAantal() {
+    const asset = select.options[select.selectedIndex].value;
+    for (let i = 0; i < assets.length; i++) {
+        if (assets[i].naam == asset) {
+            assetAantal = assets[i].aantal;
+            break;
+        }
+    }
+}
 
-    //voer transactie uit als koop knop is gedrukt
-    koop.addEventListener("click", (e) => {
-        const data = {'koperId': klantId, 'verkoperId': bankId, 'assetId': assetId, 'aantal': hoeveelheid.value};
-        console.log('check' + JSON.stringify(data));
+//voer transactie uit als koop knop is gedrukt
+koop.addEventListener("click", (e) => {
+    const data = {'koperId': klantId, 'verkoperId': bankId, 'assetId': assetId, 'aantal': hoeveelheid.value};
+    console.log('check' + JSON.stringify(data));
 
-
-        fetch(urltr, {
-            method: "POST",
-            headers: {
-                'Authorization': localStorage.getItem("token"),
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
-            body: JSON.stringify(data),
-        })
-            .then(response => {
-                console.log(response)
-                if (response.status === 200) {
-                    return response.blob()
-                } else {
-                    throw new Error("Er is iets verkeerd gegaan! " + response.status)
-                }
-            })
-            .then(json => {
-                //toonFinancieelOverzicht();
-                toonTransactieBevestiging(data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+    fetch(urltr, {
+        method: "POST",
+        headers: {
+            'Authorization': localStorage.getItem("token"),
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify(data),
     })
+        .then(response => {
+            console.log(response)
+            if (response.status === 200) {
+                return response.blob()
+            } else {
+                throw new Error("Er is iets verkeerd gegaan! " + response.status)
+            }
+        })
+        .then((json) => {
+            if (validatieKoopTransactie()) {
+                e.preventDefault();
+            } else {
+                toonFinancieelOverzicht();
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
+
+// Transactie koop validatie
+function validatieKoopTransactie() {
+    foutMeldingTransactie.innerHTML = '';
+    foutMeldingTransactie.style.color = 'var(--divaRood)';
+    validatieSaldo();
+    legeVeldenCheck();
+    return true;
+}
+
+// Transactie validatie - checkt of er genoeg saldo is om te kopen
+function validatieSaldo() {
+    console.log('check')
+    let totaal = waarde + transactiekosten
+    console.log(waarde)
+    console.log(transactiekosten)
+    console.log(saldoValue)
+    if(saldoValue < totaal) {
+        console.log(totaal + "saldo niet genoeg")
+        foutMeldingTransactie.innerHTML = koopFoutMelding;
+    }
+}
 
 //voer transactie uit als verkoop knop is gedrukt
         verkoop.addEventListener("click", (e) => {
@@ -173,15 +222,44 @@ function setAssetId() {
                         throw new Error("Er is iets verkeerd gegaan! " + response.status)
                     }
                 })
-                .then((json) => {
-                    //toonFinancieelOverzicht();
-                    toonTransactieBevestiging(data);
+                .then((data) => {
+                    toonFinancieelOverzicht();
+                    //toonTransactieBevestiging(data);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         })
+// Transactie verkoop validatie
+function validatieVerkoopTransactie() {
+    foutMeldingTransactie.innerHTML = '';
+    foutMeldingTransactie.style.color = 'var(--divaRood)';
+    legeVeldenCheck();
+    validatieMunten();
+    return true;
+}
 
+// Transactie validatie - checkt of er genoeg cryptomunten zijn om te verkopen
+function validatieMunten() {
+    setAssetAantal();
+    if(assetAantal<hoeveelheid.value) {
+        console.log("munten niet genoeg")
+        foutMeldingTransactie.innerHTML = verkoopFoutMelding;
+    }
+}
+
+// Transactie validatie - checkt of alle verplichte velden bij transactie zijn ingevuld
+function legeVeldenCheck() {
+    console.log("legeVeldenCheck");
+    if(hoeveelheid.value == '' || select.value == '') {
+        console.log(">> validatiefout: lege velden");
+        foutMeldingTransactie.innerHTML = legeVeldenMelding;
+    }
+}
+
+function toonFinancieelOverzicht() {
+    window.location.href = "FinancieelOverzicht.html";
+}
         function toonFinancieelOverzicht() {
             window.location.href = "FinancieelOverzicht.html";
         }
@@ -209,60 +287,14 @@ document.getElementById('logoDigivault').addEventListener('click', toonFinanciee
 
 // REGISTRATIE BEVESTIGING - Verbergen van #registratieBevestiging
         function verbergTransactieBevestiging() {
-            toonFinancieelOverzicht()
+            location.reload();
             //welkomsAanbieding.style.display = 'none';
         }
 
         function verbergTransactieLaag() {
             transactiePagina.style.display = 'none';
-
+            loginPagina.style.display = 'block';
         }
 
 //KLIK OP LOGO GAAT NAAR FINANCIEEL OVERZICHT
         document.getElementById('logoDigivault').addEventListener('click', toonFinancieelOverzicht);
-
-        function toonFinancieelOverzicht() {
-            window.location.href = "FinancieelOverzicht.html";
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.getElementById("koop").addEventListener("click", (e) => {
-//     let hoeveelheid = document.getElementById("hoeveelheid").value;
-//     let asset = document.getElementById("dropdown").value;
-//     let data = {'hoeveelheid': hoeveelheid, 'dropdown': asset};
-//
-//         fetch("http://localhost:8080/transactie/10", {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Access-Control-Allow-Origin': '*'
-//             },
-//             body: JSON.stringify(data),
-//         })
-//             .then((response) => {
-//                 console.log(response);
-//                 return response.json()
-//             })
-//             .then((data) => {
-//                 console.log(data);
-//                 if (data.error) {
-//                     alert("Transactie niet mogelijk");
-//                 } else {
-//                     toonFinancieelOverzicht();
-//                 }
-//             })
-//             .catch((err) => {
-//                 console.log(err);
-//             })
-//     })
