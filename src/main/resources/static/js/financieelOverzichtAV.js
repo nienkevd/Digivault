@@ -1,5 +1,8 @@
 'use strict';
 
+let currency = 'EUR';
+let rate = 0.8847625;
+
 // RELATIVE PATH URL FETCH
 const domainArray = location.origin.split(':');
 const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
@@ -9,8 +12,40 @@ const url = urlLead + 'financieeloverzicht';
 const transactie = document.getElementById("transactie");
 const iban = document.getElementById("iban");
 const saldo = document.getElementById("saldo");
+const symbols = document.getElementsByClassName("symbol");
 const tableBody = document.querySelector("#fi-table > tbody");
 
+// eventlistener for currency-button
+document.getElementById('currency').addEventListener('click', (event) => {
+    switchCurrency();
+});
+
+function switchCurrency() { // Anthon
+    rate = 1 / rate;
+    if (currency === 'EUR') {
+        currency = 'USD';
+        // verander 3x teken in $
+        for (let symbol of symbols) {
+            symbol.textContent = '$';
+        }
+        // set saldo
+        saldo.textContent = (rate * parseFloat(saldo.textContent)).toFixed(2);
+        // set kolom 1
+        // set waardekolom door berekening
+    } else {
+        currency = 'EUR';
+        // verander 3x teken €
+        for (let symbol of symbols) {
+            symbol.textContent = '€';
+        }
+        // set saldo
+        saldo.textContent = (rate * parseFloat(saldo.textContent)).toFixed(2);
+        // set kolom 1
+        // set waardekolom door berekening
+    }
+    console.log(currency);
+    console.log(rate);
+}
 
 fetch(url, {
     method: 'POST',
@@ -49,7 +84,7 @@ function vulPagina(json) {
     // toon IBAN van gebruiker
     iban.append(json.iban);
     // toon saldo van gebruiker
-    saldo.append(json.saldo);
+    saldo.append(parseFloat(json.saldo).toFixed(2));
 
     // loop door portefeuilleitems en vul tabel
     for (let i = 0; i < 20; i++) {
@@ -88,7 +123,6 @@ function vulPagina(json) {
         localStorage.removeItem("token");
         window.location.href = "index.html";
     }
-
 
     /**
      * ROW SORTING...Nienke, 20-01-2022
