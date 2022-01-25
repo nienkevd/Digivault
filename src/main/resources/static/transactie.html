@@ -27,9 +27,11 @@
         <p>Hoeveelheid</p>
         <input class = "hoeveelheid" id="hoeveelheid" name="hoeveelheid" placeholder="vul hoeveelheid in" title="vul de hoeveelheid in"
                required="" type="text">
-        <select id="dropdown" class = "dropdown_assets" name = "assets" required>
-            <option disabled selected value>Kies je cryptomunt</option>
-        </select>
+            <div class="dropdownKoers">
+                <button onclick="myFunction()" class="dropKoers">Dropdown</button>
+                <div id="myDropdown" class="dropdown-content">
+                </div>
+            </div>
         </div>
         <br>
         <br>

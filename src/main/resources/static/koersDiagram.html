@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DIGIVAULT - Rich and famous by default</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <title>koersDiagram</title>
+
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <script defer src="js/koersDiagram.js"></script>
+<!--    <script defer src="js/koersInformatie.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-$END$
+
+<div class="standaard koersDiagramLaag">
+    <img class="avatar" alt="Koers-avatar" src="images/koers_avatar.jpg">
+    <h1>Koersinformatie</h1>
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">BTC</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+    <p id="actueleWaarde">Actuele waarde Bitcoin:</p>
+    <p id="vergrootKoers"><span id="huidigeKoers">...</span></p>
+<!--    <p id="historischDagwaarde">Historische dagwaarde:</p>-->
+    <canvas id="koersGrafiek"></canvas>
+    <a id="naarAlleKoersen" href="#">Toon alle koersen</a> <br>
+    <input id="standaardButtonBreedte" name="sluitKoersInfo" type="submit" value="Sluiten" onclick="location.href='koersInformatie.html'">
+</div>
+
 </body>
 </html>

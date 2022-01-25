@@ -19,26 +19,26 @@ const wsHEX = new WebSocket('wss://dex.binance.org/api/ws/BNB_BTCB-1DE@marketDep
 const wsEGLD = new WebSocket('wss://stream.binance.com:9443/ws/egldeur@trade');
 const wsSHIB = new WebSocket('wss://stream.binance.com:9443/ws/shibeur@trade');
 
-const koersBTC = document.getElementById('koersBTC')
-const koersETH = document.getElementById('koersETH')
-const koersBNB = document.getElementById('koersBNB')
-const koersSOL = document.getElementById('koersSOL')
-const koersADA = document.getElementById('koersADA')
-const koersXRP = document.getElementById('koersXRP')
-const koersDOT = document.getElementById('koersDOT')
-const koersDOGE = document.getElementById('koersDOGE')
-const koersAVAX = document.getElementById('koersAVAX')
-const koersLUNA = document.getElementById('koersLUNA')
-const koersLTC = document.getElementById('koersLTC')
-const koersMATIC = document.getElementById('koersMATIC')
-const koersALGO = document.getElementById('koersALGO')
-const koersBCH = document.getElementById('koersBCH')
-const koersXLM = document.getElementById('koersXLM')
-const koersVET = document.getElementById('koersVET')
-const koersICP = document.getElementById('koersICP')
-const koersHEX = document.getElementById('koersHEX')
-const koersEGLD = document.getElementById('koersEGLD')
-const koersSHIB = document.getElementById('koersSHIB')
+const koersBTC = document.getElementById('koersBTC');
+const koersETH = document.getElementById('koersETH');
+const koersBNB = document.getElementById('koersBNB');
+const koersSOL = document.getElementById('koersSOL');
+const koersADA = document.getElementById('koersADA');
+const koersXRP = document.getElementById('koersXRP');
+const koersDOT = document.getElementById('koersDOT');
+const koersDOGE = document.getElementById('koersDOGE');
+const koersAVAX = document.getElementById('koersAVAX');
+const koersLUNA = document.getElementById('koersLUNA');
+const koersLTC = document.getElementById('koersLTC');
+const koersMATIC = document.getElementById('koersMATIC');
+const koersALGO = document.getElementById('koersALGO');
+const koersBCH = document.getElementById('koersBCH');
+const koersXLM = document.getElementById('koersXLM');
+const koersVET = document.getElementById('koersVET');
+const koersICP = document.getElementById('koersICP');
+const koersHEX = document.getElementById('koersHEX');
+const koersEGLD = document.getElementById('koersEGLD');
+const koersSHIB = document.getElementById('koersSHIB');
 
 let laatsteWaarde = null;
 const divaGroen = '#44c26e';
@@ -180,13 +180,13 @@ wsICP.onmessage = (event) => {
     laatsteWaarde = waarde;
 }
 
-wsHEX.onmessage = (event) => {
-    let stockObject = JSON.parse(event.data)
-    let waarde = parseFloat(stockObject.p).toFixed(2);
-    koersHEX.innerText = waarde;
-    koersHEX.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
-    laatsteWaarde = waarde;
-}
+// wsHEX.onmessage = (event) => {
+//     let stockObject = JSON.parse(event.data)
+//     let waarde = parseFloat(stockObject.p).toFixed(2);
+//     koersHEX.innerText = waarde;
+//     koersHEX.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+//     laatsteWaarde = waarde;
+// }
 
 wsEGLD.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
