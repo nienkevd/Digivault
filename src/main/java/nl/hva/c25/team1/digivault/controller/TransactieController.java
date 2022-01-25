@@ -9,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * Deze controller handelt requests af met betrekking tot transacties.
  *
@@ -46,10 +44,8 @@ public class TransactieController {
             @RequestHeader("Authorization") String token,
             @RequestBody TransactieDTO transactieDTO) {
         String emailadres = tokenService.getEmailadresToken(token);
-        Klant klant = klantService.vindKlantOpEmail(emailadres);
-        int klantId = klant.getTransactiepartijId();
-        boolean authorized = emailadres.equals(accountService.vindAccountOpKlantId(klantId).
-                getEmailadres());
+        int klantId = klantService.vindKlantOpEmail(emailadres).getTransactiepartijId();
+        boolean authorized = emailadres.equals(accountService.vindAccountOpKlantId(klantId).getEmailadres());
         if (tokenService.valideerJWT(token) && authorized) {
             return ResponseEntity.ok(probeerTransactieOmTeZettenEnUitTeVoeren(transactieDTO));
         }
