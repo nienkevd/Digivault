@@ -88,9 +88,16 @@ function vulPagina(json) {
         const rows = Array.from(tBody.querySelectorAll("tr"));
 
         //Sorteer elke row
+        //onderstaan,function moet erin anders sorteert hij bij default alpabetisch
+        //arr.sort(function(a, b){return a-b;});
         const sortedRows = rows.sort((a,b) => {
-            const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
-            const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
+            let aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
+            let bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
+            // naar een float parsen als het een float is zoadat ze niet als string gesorteerd worden
+            if (!isNaN(parseFloat(aColText)) && !isNaN(parseFloat(bColText))) {
+                aColText = parseFloat(aColText)
+                bColText = parseFloat(bColText)
+            }
 
             return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
             //console.log(sortedRows); test, zo kan je zien dat ze in de consol op volgorden staan
@@ -109,9 +116,9 @@ function vulPagina(json) {
         table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
         table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
     }
-    //sortTableByColumn(document.querySelector("table"), 2, true);
-    // checken of het werkt, zo kan je per row het sorteren aanhalen.
-    //nu ombouwen naar dat het op eke header gaat.
+//sortTableByColumn(document.querySelector("table"), 2, true);
+// checken of het werkt, zo kan je per row het sorteren aanhalen.
+//nu ombouwen naar dat het op eke header gaat.
     document.querySelectorAll(".fi-table th").forEach(headerCell => {
         headerCell.addEventListener("click", () => {
             const tableElement = headerCell.parentElement.parentElement.parentElement;
@@ -121,6 +128,7 @@ function vulPagina(json) {
             sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
         });
     });
+
 
 }
 
