@@ -49,11 +49,11 @@ public class JdbcTransactieDAO implements TransactieDAO {
     @Override
     public Transactie vindTransactieOpTransactieId(int transactieId) {
         String sql = "SELECT * FROM transactie WHERE transactieId = ? ";
-        Transactie transactie;
+        Transactie transactie = null;
         try {
             transactie = jdbcTemplate.queryForObject(sql, new TransactieRowMapper(), transactieId);
-        } catch (EmptyResultDataAccessException noRestult) {
-            transactie = null;
+        } catch (EmptyResultDataAccessException noResult) {
+            System.out.println(noResult.getMessage());
         }
         return transactie;
     }

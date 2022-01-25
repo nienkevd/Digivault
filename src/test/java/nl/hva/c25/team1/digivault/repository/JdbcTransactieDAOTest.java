@@ -28,11 +28,16 @@ class JdbcTransactieDAOTest {
 
     @Test
     void vindTransactieOpTransactieId() {
+        // bestaande id
         Transactie transactie = jdbcTransactieDAO.vindTransactieOpTransactieId(1);
         assertThat(transactie).isNotNull().isInstanceOf(Transactie.class);
         assertThat(transactie.getTransactieDatum()).isEqualTo(LocalDate.of(2021, 12, 20));
         assertThat(transactie.getTransactieTijd()).isEqualTo(LocalTime.of(13, 23, 44));
         assertThat(transactie.getAantalCryptos()).isEqualTo(0.524);
+
+        // niet bestaande id
+        transactie = jdbcTransactieDAO.vindTransactieOpTransactieId(0);
+        assertThat(transactie).isNull();
     }
 
 }
