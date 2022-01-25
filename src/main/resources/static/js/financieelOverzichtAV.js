@@ -23,7 +23,11 @@ fetch(url, {
     .then(response => {
         if(response.status === 200){
             return response.json()
-        } else {
+        }
+        if(response.status === 401){ // als token niet meer geldig is
+            toonLoginPaginaSessieVerlopen();
+        }
+        else {
             throw new Error("Er is iets verkeerd gegaan! " + response.status)
         }
     })
@@ -33,6 +37,13 @@ fetch(url, {
     .catch((err) => {
         console.log(err);
     });
+
+// Als token verlopen is, bij response.status 401
+function toonLoginPaginaSessieVerlopen() {
+    localStorage.removeItem("token");
+    alert("Sessie verlopen! Log opnieuw in.")
+    window.location.href = "index.html";
+}
 
 function vulPagina(json) {
     // toon IBAN van gebruiker
@@ -55,7 +66,7 @@ function vulPagina(json) {
         const aantal = parseFloat(td3.textContent).toFixed(2);
         const dagkoers = parseFloat(td4.textContent).toFixed(2);
         const waarde = (aantal * dagkoers).toFixed(2).toString();
-        td5.textContent = (waarde) + ' €';
+        td5.textContent = (waarde);
         tr.appendChild(td);
         tr.appendChild(td2);
         tr.appendChild(td3);
@@ -66,14 +77,18 @@ function vulPagina(json) {
     // UITLOGGEN EN TRANSACTIE BUTTON EN LOGO(naar login) - Nienke
     document.getElementById('naarTransactiePagina').addEventListener('click', toonTransactiePagina);
     document.getElementById('naarLoginPagina').addEventListener('click', toonLoginPagina);
+
     //document.getElementById('logoDigivault').addEventListener('click', toonLoginPagina);
 
     function toonTransactiePagina() {
         window.location.href = "transactie.html";
     }
+
     function toonLoginPagina() {
+        localStorage.removeItem("token");
         window.location.href = "index.html";
     }
+
 
     /**
      * ROW SORTING...Nienke, 20-01-2022
@@ -127,6 +142,7 @@ function vulPagina(json) {
             sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
         });
     });
+
 
 
 }
