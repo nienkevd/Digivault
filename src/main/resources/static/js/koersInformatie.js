@@ -1,49 +1,49 @@
-let wsBTC = new WebSocket('wss://stream.binance.com:9443/ws/btceur@trade');
-let wsETH = new WebSocket('wss://stream.binance.com:9443/ws/etheur@trade');
-let wsBNB = new WebSocket('wss://stream.binance.com:9443/ws/bnbeur@trade');
-let wsSOL = new WebSocket('wss://stream.binance.com:9443/ws/soleur@trade');
-let wsADA = new WebSocket('wss://stream.binance.com:9443/ws/adaeur@trade');
-let wsXRP = new WebSocket('wss://stream.binance.com:9443/ws/xrpeur@trade');
-let wsDOT = new WebSocket('wss://stream.binance.com:9443/ws/doteur@trade');
-let wsDOGE = new WebSocket('wss://stream.binance.com:9443/ws/dogeeur@trade');
-let wsAVAX = new WebSocket('wss://stream.binance.com:9443/ws/avaxeur@trade');
-let wsLUNA = new WebSocket('wss://stream.binance.com:9443/ws/lunaeur@trade');
-let wsLTC = new WebSocket('wss://stream.binance.com:9443/ws/ltceur@trade');
-let wsMATIC = new WebSocket('wss://stream.binance.com:9443/ws/maticeur@trade');
-let wsALGO = new WebSocket('wss://stream.binance.com:9443/ws/algoeur@trade');
-let wsBCH = new WebSocket('wss://stream.binance.com:9443/ws/bcheur@trade');
-let wsXLM = new WebSocket('wss://stream.binance.com:9443/ws/xlmeur@trade');
-let wsVET = new WebSocket('wss://stream.binance.com:9443/ws/veteur@trade');
-let wsICP = new WebSocket('wss://stream.binance.com:9443/ws/icpeur@trade');
-let wsUST = new WebSocket('wss://stream.binance.com:9443/ws/usteur@trade');
-let wsEGLD = new WebSocket('wss://stream.binance.com:9443/ws/egldeur@trade');
-let wsFIL = new WebSocket('wss://stream.binance.com:9443/ws/fileur@trade');
+const wsBTC = new WebSocket('wss://stream.binance.com:9443/ws/btceur@trade');
+const wsETH = new WebSocket('wss://stream.binance.com:9443/ws/etheur@trade');
+const wsBNB = new WebSocket('wss://stream.binance.com:9443/ws/bnbeur@trade');
+const wsSOL = new WebSocket('wss://stream.binance.com:9443/ws/soleur@trade');
+const wsADA = new WebSocket('wss://stream.binance.com:9443/ws/adaeur@trade');
+const wsXRP = new WebSocket('wss://stream.binance.com:9443/ws/xrpeur@trade');
+const wsDOT = new WebSocket('wss://stream.binance.com:9443/ws/doteur@trade');
+const wsDOGE = new WebSocket('wss://stream.binance.com:9443/ws/dogeeur@trade');
+const wsAVAX = new WebSocket('wss://stream.binance.com:9443/ws/avaxeur@trade');
+const wsLUNA = new WebSocket('wss://stream.binance.com:9443/ws/lunaeur@trade');
+const wsLTC = new WebSocket('wss://stream.binance.com:9443/ws/ltceur@trade');
+const wsMATIC = new WebSocket('wss://stream.binance.com:9443/ws/maticeur@trade');
+const wsALGO = new WebSocket('wss://stream.binance.com:9443/ws/algoeur@trade');
+const wsBCH = new WebSocket('wss://stream.binance.com:9443/ws/bcheur@trade');
+const wsXLM = new WebSocket('wss://stream.binance.com:9443/ws/xlmeur@trade');
+const wsVET = new WebSocket('wss://stream.binance.com:9443/ws/veteur@trade');
+const wsICP = new WebSocket('wss://stream.binance.com:9443/ws/icpeur@trade');
+const wsHEX = new WebSocket('wss://dex.binance.org/api/ws/BNB_BTCB-1DE@marketDepth');
+const wsEGLD = new WebSocket('wss://stream.binance.com:9443/ws/egldeur@trade');
+const wsSHIB = new WebSocket('wss://stream.binance.com:9443/ws/shibeur@trade');
 
-let koersBTC = document.getElementById('koersBTC')
-let koersETH = document.getElementById('koersETH')
-let koersBNB = document.getElementById('koersBNB')
-let koersSOL = document.getElementById('koersSOL')
-let koersADA = document.getElementById('koersADA')
-let koersXRP = document.getElementById('koersXRP')
-let koersDOT = document.getElementById('koersDOT')
-let koersDOGE = document.getElementById('koersDOGE')
-let koersAVAX = document.getElementById('koersAVAX')
-let koersLUNA = document.getElementById('koersLUNA')
-let koersLTC = document.getElementById('koersLTC')
-let koersMATIC = document.getElementById('koersMATIC')
-let koersALGO = document.getElementById('koersALGO')
-let koersBCH = document.getElementById('koersBCH')
-let koersXLM = document.getElementById('koersXLM')
-let koersVET = document.getElementById('koersVET')
-let koersICP = document.getElementById('koersICP')
-let koersUST = document.getElementById('koersUST')
-let koersEGLD = document.getElementById('koersEGLD')
-let koersFIL = document.getElementById('koersFIL')
+const koersBTC = document.getElementById('koersBTC')
+const koersETH = document.getElementById('koersETH')
+const koersBNB = document.getElementById('koersBNB')
+const koersSOL = document.getElementById('koersSOL')
+const koersADA = document.getElementById('koersADA')
+const koersXRP = document.getElementById('koersXRP')
+const koersDOT = document.getElementById('koersDOT')
+const koersDOGE = document.getElementById('koersDOGE')
+const koersAVAX = document.getElementById('koersAVAX')
+const koersLUNA = document.getElementById('koersLUNA')
+const koersLTC = document.getElementById('koersLTC')
+const koersMATIC = document.getElementById('koersMATIC')
+const koersALGO = document.getElementById('koersALGO')
+const koersBCH = document.getElementById('koersBCH')
+const koersXLM = document.getElementById('koersXLM')
+const koersVET = document.getElementById('koersVET')
+const koersICP = document.getElementById('koersICP')
+const koersHEX = document.getElementById('koersHEX')
+const koersEGLD = document.getElementById('koersEGLD')
+const koersSHIB = document.getElementById('koersSHIB')
 
 let laatsteWaarde = null;
-let divaGroen = '#44c26e';
-let divaRood = '#E34232';
-let divaGoud = '#ffc95f';
+const divaGroen = '#44c26e';
+const divaRood = '#E34232';
+const divaGoud = '#ffc95f';
 
 wsBTC.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
@@ -180,11 +180,11 @@ wsICP.onmessage = (event) => {
     laatsteWaarde = waarde;
 }
 
-wsUST.onmessage = (event) => {
+wsHEX.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
-    koersUST.innerText = waarde;
-    koersUST.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersHEX.innerText = waarde;
+    koersHEX.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -196,10 +196,10 @@ wsEGLD.onmessage = (event) => {
     laatsteWaarde = waarde;
 }
 
-wsFIL.onmessage = (event) => {
+wsSHIB.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
-    koersFIL.innerText = waarde;
-    koersFIL.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersSHIB.innerText = waarde;
+    koersSHIB.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
     laatsteWaarde = waarde;
 }
