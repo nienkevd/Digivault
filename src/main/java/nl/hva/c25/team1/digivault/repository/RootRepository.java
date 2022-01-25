@@ -106,8 +106,7 @@ public class RootRepository {
 
     public Asset vindAssetOpId(int assetId) {
         Asset asset = assetDAO.vindAssetOpId(assetId);
-        if (asset == null) return null;
-        asset.setDagKoers(euroKoersDAO.vindMeestRecenteKoersAsset(asset).getKoers());
+        if (asset != null) asset.setDagKoers(euroKoersDAO.vindMeestRecenteKoersAsset(asset).getKoers());
         return asset;
     }
 
