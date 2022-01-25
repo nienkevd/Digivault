@@ -43,7 +43,7 @@ class AssetControllerTest {
         Mockito.when(assetService.vindAssetOpId(8)).thenReturn(asset);
         MockHttpServletRequestBuilder request1 = MockMvcRequestBuilders.get("/assets/8");
 
-        // No response
+        // Geen response
         Mockito.when(assetService.vindAssetOpId(1)).thenReturn(null);
         MockHttpServletRequestBuilder request2 = MockMvcRequestBuilders.get("/assets/1");
 
@@ -78,23 +78,4 @@ class AssetControllerTest {
             System.out.println(exception.getMessage());
         }
     }
-
-//    @Test
-//    void geefAlleAssets() {
-//        List<Asset> asset = null;
-//
-//        Mockito.when(assetService.geefAlleAssets()).thenReturn(asset);
-//        MockHttpServletRequestBuilder request1 = MockMvcRequestBuilders.get("/assets");
-//
-//        try {
-//            ResultActions response = mockMvc.perform(request1);
-//            response.andExpect(MockMvcResultMatchers.status().isOk())
-//                    .andExpect(MockMvcResultMatchers.content().json("{\"assetId\":8,\"afkorting\":\"DOGE\"," +
-//                            "\"naam\":\"Dogecoin\",\"dagKoers\":4.0}"));
-//        }
-//        catch (Exception exception) {
-//            System.out.println(exception.getMessage());
-//        }
-//
-//    }
 }

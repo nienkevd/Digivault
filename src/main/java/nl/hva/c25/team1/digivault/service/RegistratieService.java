@@ -65,23 +65,17 @@ public class RegistratieService {
             klant.setPortefeuille(aanmaakLegePortefeuille());
             Account account = klant.getAccount();
             account.setWachtwoord(hashService.hash(account.getWachtwoord()));
-            boolean b1 = validateBsn(klant.getBsn());
-            boolean b2 = validatieGeboortedatum(klant.getGeboortedatum());
-//            boolean b3 = validatieMailadres(klant.getAccount().getEmailadres());
-
-            if (b1
-                     && b2
-//                      && b3
-            ) {
+            boolean validatie1 = validateBsn(klant.getBsn());
+            boolean validatie2 = validatieGeboortedatum(klant.getGeboortedatum());
+            if (validatie1 && validatie2) {
                 return rootRepository.slaKlantOp(klant);
             } else {
                 throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
             }
+        } catch (HttpClientErrorException e) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
         }
-            catch(HttpClientErrorException e){
-                throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
-            }
-        }
+    }
 
     /**
      * Methode die een lege portefeuille aanmaakt: een lijst van 20 assets die op 0 zijn gezet
@@ -107,25 +101,11 @@ public class RegistratieService {
     }
 
     /**
-     * Check of mailadres al in database zit
-     * @param emailadres te checken mailadres
-     * @return boolean
-     */
-    public boolean validatieMailadres(String emailadres) {
-        for (Account account : accountDAO.geefAlleAccounts()) {
-            if (Objects.equals(account.getEmailadres(), emailadres)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * methode om te checken of de ingevoerde BSN-nummer correct is
      * @param bsn het ingevoerde BSN-nummer
      */
     public boolean validateBsn (String bsn ){
-        int bsnInt = Integer.valueOf(bsn);
+        int bsnInt = Integer.parseInt(bsn);
 
         if (bsnInt <= 9999999 || bsnInt > 999999999) {
             return false;
