@@ -305,7 +305,7 @@ document.getElementById('logoDigivault').addEventListener('click', toonFinanciee
 //transactieBevestiging constante
 const transactieBevestiging = document.getElementById('transactieBevestiging');
 const transactiePagina = document.getElementById('transactiePagina');
-//const transactieInformatie = document.getElementById('registratieInformatie');
+const transactieInformatie = document.getElementById('registratieInformatie');
 
 //Event listner
 bevestigingSluiten.addEventListener('click', verbergTransactieBevestiging);
@@ -314,19 +314,19 @@ bevestigingSluiten.addEventListener('click', verbergTransactieBevestiging);
 function toonTransactieBevestiging(data) {
     verbergTransactieLaag();
     transactieBevestiging.style.display = 'block';
-    //transactieInformatie.innerHTML = data;
-    //welkomsAanbieding.style.display = 'none';
+    transactieInformatie.innerHTML = data;
+
 }
 
 // REGISTRATIE BEVESTIGING - Verbergen van #registratieBevestiging
 function verbergTransactieBevestiging() {
     toonFinancieelOverzicht()
-    //welkomsAanbieding.style.display = 'none';
+
 }
 
 function verbergTransactieLaag() {
     transactiePagina.style.display = 'none';
-    // loginPagina.style.display = 'block';
+
 }
 
 //KLIK OP LOGO GAAT NAAR FINANCIEEL OVERZICHT
