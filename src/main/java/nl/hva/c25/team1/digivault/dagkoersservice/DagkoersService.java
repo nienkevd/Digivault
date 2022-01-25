@@ -22,9 +22,15 @@ import java.time.LocalDate;
 @EnableScheduling
 @Service
 public class DagkoersService {
-
     private EuroKoersDAO euroKoersDAO;
     private AssetDAO assetDAO;
+    public final double DOLLARKOERS = 0.88;
+    public final String URL = "https://api.coinranking.com/v2/coins";
+    public final String PATH = "/data/coins";
+    public final int MIN_ASSET = 1;
+    public final int MAX_ASSET = 20;
+    public final String SYMBOL = "symbol";
+    public final String PRICE = "price";
 
     public DagkoersService(EuroKoersDAO euroKoersDAO, AssetDAO assetDAO) {
         super();
@@ -32,38 +38,26 @@ public class DagkoersService {
         this.assetDAO = assetDAO;
     }
 
-    @Scheduled(cron = "0 01 00 * * ?", zone = "CET") // elke dag om 00:01 uur
+    @Scheduled(cron = "0 00 09 * * ?", zone = "CET") // elke dag om 00:01 uur
     public void slaDagkoersenOp() throws JsonProcessingException {
         EuroKoers euroKoers = new EuroKoers();
         RestTemplate restTemplate = new RestTemplate();
-        final double dollarkoers = 0.88;
-
-
-        String url
-                = "https://api.coinranking.com/v2/coins";
-
-//        String accessKey = "coinrankingf65e600fd8d4915137af49c11c136d2619e87f7c49345115";
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.set("x-access-token", accessKey);
-
-        ResponseEntity<String> response
-                = restTemplate.getForEntity(url, String.class);
-
         ObjectMapper mapper = new ObjectMapper();
+        ResponseEntity<String> response
+                = restTemplate.getForEntity(URL, String.class);
         JsonNode root = mapper.readTree(response.getBody());
-        JsonNode coins = root.at("/data/coins");
-
-        for (int i = 1; i < 21; i++) {
+        JsonNode coins = root.at(PATH);
+        for (int i = MIN_ASSET; i <= MAX_ASSET; i++) {
             Asset asset = assetDAO.vindAssetOpId(i);
             if (coins.isArray()) {
                 for (JsonNode jsonNode : coins) {
-                    String afkorting = jsonNode.get("symbol").asText();
+                    String afkorting = jsonNode.get(SYMBOL).asText();
                     if ((asset.getAfkorting()).equals(afkorting)) {
-                        JsonNode dagkoers = jsonNode.get("price");
+                        JsonNode dagkoers = jsonNode.get(PRICE);
                         euroKoers.setAssetId(i);
                         euroKoers.setEuroKoersId(i);
                         euroKoers.setDatum(LocalDate.now());
-                        euroKoers.setKoers(dagkoers.asDouble() * dollarkoers);
+                        euroKoers.setKoers(dagkoers.asDouble() * DOLLARKOERS);
                         euroKoersDAO.bewaarEuroKoersMetSK(euroKoers);
                     }
                 }
@@ -71,5 +65,7 @@ public class DagkoersService {
         }
     }
 
-
+    //        String accessKey = "coinrankingf65e600fd8d4915137af49c11c136d2619e87f7c49345115";
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.set("x-access-token", accessKey);
 }
