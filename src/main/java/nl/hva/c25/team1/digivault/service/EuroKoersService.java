@@ -27,7 +27,7 @@ public class EuroKoersService {
 //     * @param rootRepository RootRepository
      */
     @Autowired
-    public EuroKoersService(JdbcEuroKoersDAO jdbcEuroKoersDAO/*, RootRepository rootRepository*/) {
+    public EuroKoersService(JdbcEuroKoersDAO jdbcEuroKoersDAO, RootRepository rootRepository) {
         super();
         this.jdbcEuroKoersDAO = jdbcEuroKoersDAO;
 //        this.rootRepository = rootRepository;
