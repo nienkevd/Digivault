@@ -1,7 +1,5 @@
 package nl.hva.c25.team1.digivault.repository;
 
-
-
 import nl.hva.c25.team1.digivault.model.Klant;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
@@ -30,5 +31,11 @@ class JdbcAssetDAOTest {
     void geefAlleAssets() {
         List<Asset> actual = jdbcDaoUnderTest.geefAlleAssets();
         Assertions.assertThat(actual).isNotNull().contains(expected);
+    }
+
+    @Test
+    void vindAssetOpId() {
+        Asset actual = jdbcDaoUnderTest.vindAssetOpId(3);
+        assertThat(expected).isEqualTo(actual);
     }
 }
