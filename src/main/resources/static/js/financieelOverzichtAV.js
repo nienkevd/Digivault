@@ -1,7 +1,7 @@
 'use strict';
 
 let currency = 'EUR';
-let rate = 0.8847625;
+let rate = 0.885;
 
 // RELATIVE PATH URL FETCH
 const domainArray = location.origin.split(':');
@@ -21,6 +21,7 @@ document.getElementById('currency').addEventListener('click', (event) => {
 });
 
 function switchCurrency() { // Anthon
+    let koersGetallen = document.getElementsByClassName("koersGetal");
     rate = 1 / rate;
     if (currency === 'EUR') {
         currency = 'USD';
@@ -94,6 +95,8 @@ function vulPagina(json) {
         const td3 = document.createElement('td');
         const td4 = document.createElement('td');
         const td5 = document.createElement('td');
+        td4.classList.add('koersGetal');
+        td5.classList.add('waardeGetal');
         td.textContent = json.assetMetAantal[i].naam;
         td2.textContent = json.assetMetAantal[i].afkorting;
         td3.textContent = json.assetMetAantal[i].aantal;
