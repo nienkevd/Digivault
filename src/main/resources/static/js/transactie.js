@@ -146,12 +146,25 @@ function setAssetAantal() {
     }
 }
 
+
+
 koop.addEventListener('click', function (e) {
     if (validatieKoopTransactie()) {
         e.preventDefault();
         koopTransactie();
     }
 })
+
+// Transactie koop validatie
+function validatieKoopTransactie() {
+    console.log('validatie');
+    resetFoutMeldingTransactie()
+    if (legeVeldenCheck() && validatieSaldo()) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 //voer transactie uit als koop knop is gedrukt
 function koopTransactie() {
@@ -176,26 +189,14 @@ function koopTransactie() {
             }
         })
         .then((data) => {
-            if (data.error) {
-                console.log(">> Algemene validatiefout");
-                return false;
-            } else {
                 toonTransactieBevestiging(data);
-            }
         })
         .catch((err) => {
             console.log(err);
-        });
+        })
 }
 
-// Transactie koop validatie
-function validatieKoopTransactie() {
-    resetFoutMeldingTransactie();
-    console.log('validatie');
-    legeVeldenCheck();
-    validatieSaldo();
-    return true;
-}
+
 
 // Foutmelding Transactie - Hulpmethode die #foutMeldingTransactie terugzet naar basisinstellingen (geen melding, rood)
 function resetFoutMeldingTransactie() {
@@ -213,11 +214,31 @@ function validatieSaldo() {
     if (saldoValue < totaal) {
         console.log(totaal + "saldo niet genoeg")
         foutMeldingTransactie.innerHTML = koopFoutMelding;
+        return false;
+    }
+    return true;
+}
+
+verkoop.addEventListener('click', function (e) {
+    if (validatieVerkoopTransactie()) {
+        e.preventDefault();
+        verkoopTransactie();
+    }
+})
+
+// Transactie verkoop validatie
+function validatieVerkoopTransactie() {
+    foutMeldingTransactie.innerHTML = '';
+    foutMeldingTransactie.style.color = 'var(--divaRood)';
+    if (legeVeldenCheck() && validatieMunten()){
+        return true;
+    } else {
+        return false;
     }
 }
 
 //voer transactie uit als verkoop knop is gedrukt
-verkoop.addEventListener("click", (e) => {
+function verkoopTransactie() {
     const data = {'koperId': bankId, 'verkoperId': klantId, 'assetId': assetId, 'aantal': hoeveelheid.value};
     fetch(urltr, {
         method: "POST",
@@ -236,26 +257,15 @@ verkoop.addEventListener("click", (e) => {
                 throw new Error("Er is iets verkeerd gegaan! " + response.status)
             }
         })
-        .then((json) => {
-            if (validatieVerkoopTransactie()) {
-                e.preventDefault();
-            } else {
-                toonTransactieBevestiging(data);
-            }
+        .then((data) => {
+            toonTransactieBevestiging(data);
         })
         .catch((err) => {
             console.log(err);
         });
-})
-
-// Transactie verkoop validatie
-function validatieVerkoopTransactie() {
-    foutMeldingTransactie.innerHTML = '';
-    foutMeldingTransactie.style.color = 'var(--divaRood)';
-    legeVeldenCheck();
-    validatieMunten();
-    return true;
 }
+
+
 
 // Transactie validatie - checkt of er genoeg cryptomunten zijn om te verkopen
 function validatieMunten() {
@@ -263,7 +273,9 @@ function validatieMunten() {
     if (assetAantal < hoeveelheid.value) {
         console.log("munten niet genoeg")
         foutMeldingTransactie.innerHTML = verkoopFoutMelding;
+        return false;
     }
+    return true;
 }
 
 // Transactie validatie - checkt of alle verplichte velden bij transactie zijn ingevuld
@@ -275,7 +287,9 @@ function legeVeldenCheck() {
         console.log(hoeveelheid.value);
 
         foutMeldingTransactie.innerHTML = legeVeldenMelding;
+        return false;
     }
+    return true;
 }
 
 function toonFinancieelOverzicht() {
