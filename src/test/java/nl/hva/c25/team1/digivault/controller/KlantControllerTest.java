@@ -28,11 +28,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Anneke, studentnummer 500889251
  */
 
-// annotaties aangepast, omdat:
-//https://stackoverflow.com/questions/66321376/why-my-org-springframework-test-web-servlet-mockmvc-framework-is-failing-to-reso
-
-//@AutoConfigureMockMvc
-//@SpringBootTest
 @WebMvcTest(KlantController.class)
 class KlantControllerTest {
 
