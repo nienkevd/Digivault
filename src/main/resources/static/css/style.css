@@ -412,7 +412,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 
 #divaPlaatsing {    /* Positionering begroeting in financieelOverzicht */
     color: var(--divaRoze);
-    margin-top: -23px;
+    margin-top: -24px;
     font-weight: bolder;
     font-size: 25px;
     text-align: center;
@@ -514,9 +514,6 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     #financieelOverzichtContainer{
         margin-top: 100px;
     }
-    #financieelOverzicht{
-        margin-top: 100px;
-    }
     #transactiePagina{
         margin-top: 100px;
     }
@@ -545,19 +542,21 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     #financieelOverzichtContainer {
         width: 550px;
         margin-top: 100px;
-        height: 840px;
+        height: 750px;
+        grid-template-columns: auto;
     }
     #financieelOverzicht{
-        width: 550px;
-        margin-top: 230px;
-        height: 840px;
+        width: 500px;
+        height: 440px;
     }
     #transactiePagina{
         width: 550px;
         margin-top: 100px;
         height: 840px;
     }
-
+    #kopFO {
+        font-size: 30px;
+    }
 }
 
 /* Wijzig elementen bij scherm SMALLER dan 600px */
@@ -580,7 +579,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     #financieelOverzicht{
         width: 100%;
         border-radius: 0;
-        margin-top: 270px;
+        height: 350px;
     }
     #transactiePagina{
         width: 100%;
@@ -588,16 +587,30 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     }
 }
 
-/* Wijzig elementen bij scherm SMALLER dan 500px */
-@media only screen and (max-width: 500px) {
-    #financieelOverzicht {
-        margin-top: 280px;
+
+/* Wijzig elementen bij scherm LAGER dan 1050px */
+@media only screen and (max-height: 860px) {
+    #financieelOverzichtContainer {
+        margin-top: 40px;
+    }
+}
+
+/* Wijzig elementen bij scherm LAGER dan 1050px */
+@media only screen and (max-height: 800px) {
+    #financieelOverzichtContainer {
+        margin-top: 90px;
     }
 }
 
 /* Wijzig elementen bij scherm LAGER dan 750px */
-@media only screen and (max-height: 750px) {
+@media only screen and (max-height: 700px) {
     #registratieLaag {
+        margin-top: 150px;
+    }
+    #financieelOverzichtContainer {
+        margin-top: 150px;
+    }
+    #financieelOverzicht {
         margin-top: 150px;
     }
 }
@@ -606,6 +619,9 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 @media only screen and (max-height: 600px) {
     #logoDigivault, #welkomsAanbieding {
         display: none;
+    }
+    #financieelOverzichtContainer {
+        margin-top: 190px;
     }
 }
 
