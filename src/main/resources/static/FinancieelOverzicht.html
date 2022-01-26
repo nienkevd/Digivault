@@ -18,38 +18,37 @@
 <input type="button" id="currency" value="EUR / USD">
 
 <!-- Opzet Financieel Overzicht -->
-<div id = "financieelOverzichtContainer" class="standaard financieelOverzichtContainer">
-<img class="avatar" alt="financieel Overzicht-avatar" src="images/financieelOverzicht_avatar.jpg">
-<div id = "financieelOverzicht" class="standaard financieelOverzicht">
+<div id="financieelOverzichtContainer" class="standaard financieelOverzichtContainer">
+    <img class="avatar" alt="financieel Overzicht-avatar" src="images/financieelOverzicht_avatar.jpg">
     <h1>Financieel overzicht</h1>
-    <h2 id = "h2" class="overzicht">Welkom DIVA!</h2>
-    <br>
-        <p>IBAN: <span id="iban"></span></p>
-    <p>Saldo: <span class="symbol">€</span> <span id="saldo"></span></p>
-    <br>
-    <div style="overflow-x: auto;">
-    <table id="fi-table" class="fi-table">
-        <thead>
-        <tr>
-            <th>Crypto</th>
-            <th>Afkorting</th>
-            <th>Aantal</th>
-            <th id="dagkoers">Dagkoers(<span class="symbol">€</span>)</th>
-            <th id="waarde">Waarde(<span class="symbol">€</span>)</th>
-        </tr>
-        </thead>
-        <tbody>
-<!--        lege body, deze wordt met JavaScript gevuld -->
-        </tbody>
-    </table>
-        </div>
+    <p id="divaPlaatsing" class="overzicht">Welkom DIVA!</p>
+    <p id="ibanPlaatsing">IBAN: <span id="iban"></span></p>
+    <p id="saldoPlaatsing">Saldo: <span class="symbol">€</span> <span id="saldo"></span></p>
+    <div id="financieelOverzicht" class="standaard financieelOverzicht">
+        <!--    <div style="overflow-x: auto;">-->
+        <table id="fi-table" class="fi-table">
+            <thead>
+            <tr>
+                <th>Crypto</th>
+                <th>Afkorting</th>
+                <th>Aantal</th>
+                <th id="dagkoers">Dagkoers(<span class="symbol">€</span>)</th>
+                <th id="waarde">Waarde(<span class="symbol">€</span>)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--        lege body, deze wordt met JavaScript gevuld -->
+            </tbody>
+        </table>
+    </div>
     <div class="grid_3">
         <br>
         <input id="naarTransactiePagina" name="Transactie" type="button" value="Trade">
-        <br>
+        <a id="naarLoginPagina" href="#">Uitloggen</a>
     </div>
-    <a id="naarLoginPagina" href="#">Uitloggen</a>
+
 </div>
 </div>
+
 </body>
 </html>
