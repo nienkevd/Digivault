@@ -2,7 +2,7 @@
 
 // vars voor currency conversion
 // Anthon
-let currency = 'EUR';
+let currency = localStorage.getItem('munteenheid');
 let rate = 1.13;
 let eurosaldo;
 let dollarsaldo;
@@ -23,6 +23,12 @@ const iban = document.getElementById("iban");
 const saldo = document.getElementById("saldo");
 const symbols = document.getElementsByClassName("symbol");
 const tableBody = document.querySelector("#fi-table > tbody");
+
+if (currency === 'EUR') {
+    for (let symbol of symbols) symbol.textContent = '€';
+} else {
+    for (let symbol of symbols) symbol.textContent = '$';
+}
 
 // eventlistener for currency-button
 // Anthon
@@ -92,7 +98,11 @@ function vulPagina(json) {
     // toon saldo van gebruiker
     eurosaldo = parseFloat(json.saldo).toFixed(2);
     dollarsaldo = (rate * eurosaldo).toFixed(2);
-    saldo.append(eurosaldo);
+    if (currency === 'EUR') {
+        saldo.textContent = eurosaldo;
+    } else {
+        saldo.textContent = dollarsaldo;
+    }
 
     // loop door portefeuilleitems en vul tabel
     for (let i = 0; i < 20; i++) {
@@ -109,12 +119,20 @@ function vulPagina(json) {
         td3.textContent = json.assetMetAantal[i].aantal;
         eurodagkoers[i] = json.assetMetAantal[i].dagkoers;
         dollardagkoers[i] = (rate * eurodagkoers[i]).toFixed(5);
-        td4.textContent = eurodagkoers[i];
+        if (currency === 'EUR') {
+            td4.textContent = eurodagkoers[i];
+        } else {
+            td4.textContent = dollardagkoers[i];
+        }
         const aantal = parseFloat(td3.textContent).toFixed(2);
         const dagkoers = parseFloat(td4.textContent).toFixed(2);
         eurowaarde[i] = (aantal * dagkoers).toFixed(2);
         dollarwaarde[i] = (rate * eurowaarde[i]).toFixed(2);
-        td5.textContent = (eurowaarde[i].toString());
+        if (currency === 'EUR') {
+            td5.textContent = (eurowaarde[i].toString());
+        } else {
+            td5.textContent = (dollarwaarde[i].toString());
+        }
         tr.appendChild(td);
         tr.appendChild(td2);
         tr.appendChild(td3);
@@ -129,10 +147,12 @@ function vulPagina(json) {
     //document.getElementById('logoDigivault').addEventListener('click', toonLoginPagina);
 
     function toonTransactiePagina() {
+        localStorage.setItem('munteenheid', currency);
         window.location.href = "transactie.html";
     }
 
     function toonLoginPagina() {
+        localStorage.setItem('munteenheid', currency);
         localStorage.removeItem("token");
         window.location.href = "index.html";
     }

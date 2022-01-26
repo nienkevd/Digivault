@@ -2,7 +2,7 @@
 
 // vars voor currency conversion
 // Anthon
-let currency = 'EUR';
+let currency = localStorage.getItem('munteenheid');
 let rate = 1.13;
 let eurosaldo;
 let dollarsaldo;
@@ -14,6 +14,12 @@ let dollarkosten;
 const symbols = document.getElementsByClassName('symbol');
 const waarde = document.getElementById('waarde');
 const kosten = document.getElementById('transactiekosten');
+
+if (currency === 'EUR') {
+    for (let symbol of symbols) symbol.textContent = '€';
+} else {
+    for (let symbol of symbols) symbol.textContent = '$';
+}
 
 // eventlistener for currency-button
 // Anthon
@@ -111,7 +117,11 @@ function toonLoginPagina() {
 function toonSaldo(json) {
     eurosaldo = parseFloat(json.saldo).toFixed(2);
     dollarsaldo = (rate * eurosaldo).toFixed(2);
-    saldo.innerText = eurosaldo;
+    if (currency === 'EUR') {
+        saldo.textContent = eurosaldo;
+    } else {
+        saldo.textContent = dollarsaldo;
+    }
 }
 
 //Dropdown menu invullen met alle assets
@@ -169,10 +179,15 @@ function toonWaarde() {
         }
         eurowaarde = (hoeveelheid.value * dagkoers).toFixed(2);
         dollarwaarde = (rate * eurowaarde).toFixed(2);
-        waarde.innerText = eurowaarde;
         eurokosten = (eurowaarde * percentage).toFixed(2);
         dollarkosten = (rate * eurokosten).toFixed(2);
-        kosten.innerText = eurokosten;
+        if (currency === 'EUR') {
+            waarde.innerText = eurowaarde;
+            kosten.innerText = eurokosten;
+        } else {
+            waarde.innerText = dollarwaarde;
+            kosten.innerText = dollarkosten;
+        }
     }
 }
 

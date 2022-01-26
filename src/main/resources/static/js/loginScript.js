@@ -1,5 +1,8 @@
 'use strict';
 
+// globale munteenheid meegeven
+localStorage.setItem('munteenheid', 'EUR');
+
 // VERWIJZINGEN
 const foutMeldingLogin = document.getElementById('foutMeldingLogin');
 
