@@ -105,7 +105,7 @@ a[id="naarAlleKoersen"] {    /* Aangepaste stijl voor linkje #naarAlleKoersen */
 
 a[id="naarRegistreren"] {    /* Aangepaste stijl voor linkje #naarAlleKoersen */
     display: block;
-    margin-top: -8px;
+    margin-top: -9px;
     font-size: 14px;
     font-weight: lighter;
     text-align: center;
@@ -181,7 +181,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     display: block;
     padding-right: 48px;
     width: 430px;
-    height: 470px;
+    height: 490px;
 }
 
 .registratieLaag {    /* Aanpassingen voor klasse registratieLaag */
