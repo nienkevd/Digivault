@@ -465,6 +465,13 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     font-size: x-large;
 }
 
+#currency {
+    width: 150px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
 /* ----- SCRIPTS ----- */
 
 /* Wijzig elementen bij scherm SMALLER dan 1350px */

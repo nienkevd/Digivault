@@ -1,6 +1,18 @@
 'use strict';
 
+// vars voor currency conversion
+// Anthon
+let currency = 'EUR';
+let rate = 1.13;
+let eurosaldo;
+let dollarsaldo;
+const eurodagkoers = [];
+const dollardagkoers = [];
+const eurowaarde = [];
+const dollarwaarde = [];
+
 // RELATIVE PATH URL FETCH
+// Anthon
 const domainArray = location.origin.split(':');
 const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
 const url = urlLead + 'financieeloverzicht';
@@ -9,8 +21,37 @@ const url = urlLead + 'financieeloverzicht';
 const transactie = document.getElementById("transactie");
 const iban = document.getElementById("iban");
 const saldo = document.getElementById("saldo");
+const symbols = document.getElementsByClassName("symbol");
 const tableBody = document.querySelector("#fi-table > tbody");
 
+// eventlistener for currency-button
+// Anthon
+document.getElementById('currency').addEventListener('click', (event) => {
+    switchCurrency();
+});
+
+function switchCurrency() { // Anthon
+    if (currency === 'EUR') {
+        currency = 'USD';
+        for (let symbol of symbols) symbol.textContent = '$';
+        saldo.textContent = dollarsaldo;
+        setColumns(dollardagkoers, dollarwaarde);
+    } else {
+        currency = 'EUR';
+        for (let symbol of symbols) symbol.textContent = '€';
+        saldo.textContent = eurosaldo;
+        setColumns(eurodagkoers, eurowaarde);
+    }
+}
+
+// switch currency columns
+// Anthon
+function setColumns(dagkoers, waarde) {
+    for (let i = 0; i < 20; i++) {
+        document.getElementById('koersGetal' + i).textContent = dagkoers[i];
+        document.getElementById('waardeGetal' + i).textContent = waarde[i].toString();
+    }
+}
 
 fetch(url, {
     method: 'POST',
@@ -49,7 +90,9 @@ function vulPagina(json) {
     // toon IBAN van gebruiker
     iban.append(json.iban);
     // toon saldo van gebruiker
-    saldo.append(json.saldo);
+    eurosaldo = parseFloat(json.saldo).toFixed(2);
+    dollarsaldo = (rate * eurosaldo).toFixed(2);
+    saldo.append(eurosaldo);
 
     // loop door portefeuilleitems en vul tabel
     for (let i = 0; i < 20; i++) {
@@ -59,14 +102,19 @@ function vulPagina(json) {
         const td3 = document.createElement('td');
         const td4 = document.createElement('td');
         const td5 = document.createElement('td');
+        td4.setAttribute('id', 'koersGetal' + i);
+        td5.setAttribute('id', 'waardeGetal' + i);
         td.textContent = json.assetMetAantal[i].naam;
         td2.textContent = json.assetMetAantal[i].afkorting;
         td3.textContent = json.assetMetAantal[i].aantal;
-        td4.textContent = json.assetMetAantal[i].dagkoers;
+        eurodagkoers[i] = json.assetMetAantal[i].dagkoers;
+        dollardagkoers[i] = (rate * eurodagkoers[i]).toFixed(5);
+        td4.textContent = eurodagkoers[i];
         const aantal = parseFloat(td3.textContent).toFixed(2);
         const dagkoers = parseFloat(td4.textContent).toFixed(2);
-        const waarde = (aantal * dagkoers).toFixed(2).toString();
-        td5.textContent = (waarde);
+        eurowaarde[i] = (aantal * dagkoers).toFixed(2);
+        dollarwaarde[i] = (rate * eurowaarde[i]).toFixed(2);
+        td5.textContent = (eurowaarde[i].toString());
         tr.appendChild(td);
         tr.appendChild(td2);
         tr.appendChild(td3);
@@ -88,7 +136,6 @@ function vulPagina(json) {
         localStorage.removeItem("token");
         window.location.href = "index.html";
     }
-
 
     /**
      * ROW SORTING...Nienke, 20-01-2022

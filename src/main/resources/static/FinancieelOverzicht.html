@@ -15,6 +15,7 @@
 
 <!-- Opzet logo-->
 <img id="logoDigivault" src="images/logoDigivault.png" alt="logo van Digivault">
+<input type="button" id="currency" value="EUR / USD">
 
 <!-- Opzet Financieel Overzicht -->
 <div id = "financieelOverzichtContainer" class="standaard financieelOverzichtContainer">
@@ -23,8 +24,8 @@
     <h1>Financieel overzicht</h1>
     <h2 id = "h2" class="overzicht">Welkom DIVA!</h2>
     <br>
-        <p id="iban">IBAN: </p>
-        <p id="saldo">Saldo:  € </p>
+        <p>IBAN: <span id="iban"></span></p>
+    <p>Saldo: <span class="symbol">€</span> <span id="saldo"></span></p>
     <br>
     <div style="overflow-x: auto;">
     <table id="fi-table" class="fi-table">
@@ -33,8 +34,8 @@
             <th>Crypto</th>
             <th>Afkorting</th>
             <th>Aantal</th>
-            <th>Dagkoers</th>
-            <th>Waarde in €</th>
+            <th id="dagkoers">Dagkoers(<span class="symbol">€</span>)</th>
+            <th id="waarde">Waarde(<span class="symbol">€</span>)</th>
         </tr>
         </thead>
         <tbody>
