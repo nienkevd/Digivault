@@ -17,7 +17,7 @@
 <input type="button" id="currency" value="EUR / USD">
 
 <!-- Opzet transactiePagina -->
-<div id = "transactiePagina" class="standaard transactiePagina">
+<div id="transactiePagina" class="standaard transactiePagina">
     <img class="avatar" alt="Diva-trade" src="images/piggie.jpg">
     <h1>Trade</h1>
     <p id="foutMeldingTransactie"></p>
@@ -25,22 +25,28 @@
         <p>Saldo: <span class="symbol"></span> <span id="saldo"></span></p>
         <br>
         <br>
-        <div class = "grid_3_transactie">
+        <div class="grid_3_transactie">
             <p>Hoeveelheid</p>
-            <input class = "hoeveelheid" id="hoeveelheid" name="hoeveelheid" placeholder="vul hoeveelheid in" title="vul de hoeveelheid in"
+            <input class="hoeveelheid" id="hoeveelheid" name="hoeveelheid" placeholder="vul hoeveelheid in"
+                   title="vul de hoeveelheid in"
                    required="" type="text">
-            <select id="dropdown" class = "dropdown_assets" name = "assets" required>
+            <select id="dropdown" class="dropdown_assets" name="assets" required>
                 <option disabled selected value>Kies je cryptomunt</option>
             </select>
         </div>
         <br>
+        <p>Munten in wallet: <span id="coins"> </span></p>
         <br>
         <p>Waarde: <span class="symbol"></span> <span id="waarde"> </span></p>
         <br>
         <p>Transactiekosten: <span class="symbol"></span> <span id="transactiekosten"></span></p>
-        <div class = "grid_2">
+        <div class="grid_2">
             <input id="koop" name="koop" type="button" value="Koop">
             <input id="verkoop" name="verkoop" type="button" value="Verkoop">
+        </div>
+        <div class = "linkjes">
+        <a id="terug" href="#">Terug</a>
+        <a id="uitlog" href="#">Uitloggen</a>
         </div>
     </form>
 </div>
@@ -50,7 +56,7 @@
     <img class="avatarTrans" alt="transactie-avatar" src="images/transactieBevestiging.gif">
     <h1 id="transactieKop">Lekker gehandeld!</h1>
     <pre id="registratieInformatie"></pre>
-   <!-- <pre id="registratieTegoed">De  <span id="veelGeld">€100.000</span>  staat op je rekening!</pre>-->
+    <!-- <pre id="registratieTegoed">De  <span id="veelGeld">€100.000</span>  staat op je rekening!</pre>-->
     <input id="bevestigingSluiten" type="button" value="Awesome!">
 </div>
 

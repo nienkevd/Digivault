@@ -241,7 +241,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     display: block;
     padding-right: 48px;
     width: 800px;
-    height: 508px;
+    height: 550px;
 }
 
 .grid_2 {    /* Standaardstijl voor gebruik grid van 2 grid-cellen */
@@ -438,6 +438,21 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     text-align: right;
 }
 
+.linkjes {
+    text-align: right;
+}
+
+#terug {    /* Positionering terugKnop in transactie */
+    margin-top: 380px;
+    margin-right: 10px;
+}
+
+#uitlog {    /* Positionering uitlogKnop in transactie */
+    margin-top: 480px;
+    margin-right: 10px;
+
+}
+
 #login {    /* Positionering loginKnop op loginPagina */
     margin-top: 32px;
 }
@@ -552,7 +567,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     #transactiePagina{
         width: 550px;
         margin-top: 100px;
-        height: 840px;
+        height: 900px;
     }
     #kopFO {
         font-size: 30px;
