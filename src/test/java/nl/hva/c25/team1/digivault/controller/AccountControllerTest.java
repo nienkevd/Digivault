@@ -30,44 +30,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Sezi, studentnummer 500889525
  */
 
-@AutoConfigureMockMvc
-@SpringBootTest
-
+@WebMvcTest(AccountController.class)
 class AccountControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private KlantService klantService;
-
-    @MockBean
-    private LoginService loginService;
-
-    @MockBean
     private AccountService accountService;
-
-    @MockBean
-    private AssetService assetService;
-
-    @MockBean
-    private EuroKoersService euroKoersService;
-
-    @MockBean
-    private FinancieelOverzichtService financieelOverzichtService;
-
-    @MockBean
-    private TokenService tokenService;
-
-    @MockBean
-    private PortefeuilleItemService portefeuilleItemService;
-
-    @MockBean
-    private RegistratieService registratieService;
-
-    @MockBean
-    private RekeningService rekeningService;
-
-    @MockBean
-    private TransactieService transactieService;
 
     @Autowired
     public AccountControllerTest(MockMvc mockMvc) {
