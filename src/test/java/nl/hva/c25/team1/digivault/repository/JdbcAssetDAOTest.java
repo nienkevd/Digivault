@@ -10,9 +10,15 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
+/**
+ * Testen bij de JdbcAssetDAO
+ *
+ * @author Erwin, studentnummer 500889293
+ * @since 25-1-2021
+ */
+
 @SpringBootTest
 @ActiveProfiles("test")
-
 class JdbcAssetDAOTest {
     private final JdbcAssetDAO jdbcDaoUnderTest;
     private final Asset expected = new Asset(3,"BNB", "Binance Coin");

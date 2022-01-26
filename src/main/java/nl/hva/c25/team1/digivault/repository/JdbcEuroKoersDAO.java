@@ -118,7 +118,7 @@ public class JdbcEuroKoersDAO implements EuroKoersDAO {
                 vindDatumMeestRecenteKoersAsset(asset).toString());
     }
 
-    private LocalDate vindDatumMeestRecenteKoersAsset(Asset asset) {
+    public LocalDate vindDatumMeestRecenteKoersAsset(Asset asset) {
         String sql = "SELECT max(datum) FROM eurokoers WHERE assetId=?";
         String datumString = jdbcTemplate.queryForObject(sql, String.class, asset.getAssetId());
         return LocalDate.parse(datumString);

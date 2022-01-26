@@ -60,10 +60,6 @@ document.getElementById("login").addEventListener("click", (e) => {
         })
         .catch((err) => {
             console.log(err);
-            // if (email === '' && wachtwoord === '') {
-            //     foutMeldingLogin.innerHTML = inlogFoutMelding;
-            //     console.log(">> fout: verkeerde inloggegevens");
-            // }
             foutMeldingLogin.innerHTML = serverDownMelding;
             console.log(">> fout: geen respons van de server");
         });
