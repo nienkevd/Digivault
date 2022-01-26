@@ -24,7 +24,7 @@ public class DagkoersController {
     @CrossOrigin
     @GetMapping("/dagkoersen")
     public String geefDagkoersen() throws JsonProcessingException {
-        dagkoersService.slaDagkoersenOp();
+        dagkoersService.dagkoersBuilder();
         return "Geslaagd!";
     }
 
