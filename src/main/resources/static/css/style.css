@@ -47,12 +47,13 @@ h1 {    /* Header 1 */
 }
 
 h2[class="overzicht"] {    /* Header 2 financieel overzicht */
-    /*font-family: bling, Verdana, sans-serif;*/
+    font-family: diva, Verdana, sans-serif;
     font-weight: bold;
     font-size: 32px;
     text-align: center;
     margin-bottom: 30px;
     margin-top: -20px;
+    margin-left: 30px;
     color: var(--divaRoze);
 }
 
@@ -210,16 +211,16 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 
 .financieelOverzicht { /* Aanpassingen voor financieel overzicht */
     display: block;
-    padding: 30px 90px;
-    width: 1000px;
-    height: 620px;
+    padding: 0 60px;
+    width: 940px;
+    height: 420px;
     overflow-y: auto;
-    margin-top:58px;
+    margin-top: 75px;
 }
 
 .financieelOverzichtContainer { /* Container rondom financieel overzicht, anders valt avatar eraf door scrollbalk*/
     width: 1000px;
-    height: 620px;
+    height: 750px;
 }
 
 .wachtwoordVergeten{ /* Aanpassing voor wachtwoord vergeten */
@@ -404,6 +405,34 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     margin-top: -85px;
 }
 
+#divaPlaatsing {
+    color: var(--divaRoze);
+    margin-top: -23px;
+    font-weight: bolder;
+    font-size: 24px;
+    text-align: center;
+}
+
+#ibanPlaatsing {    /* positioneert #iban in financieelOverzicht */
+    margin-top: 10px;
+    text-align: center;
+}
+
+#saldoPlaatsing {    /* positioneert #saldo in financieelOverzicht */
+    text-align: center;
+}
+
+#naarTransactiePagina {    /* Plaatsing Trade-button op FinancieelOverzicht */
+    margin-left: 40px;
+    margin-top: 463px;
+}
+
+#naarLoginPagina {
+    margin-top: 473px;
+    margin-right: 20px;
+    text-align: right;
+}
+
 #actueleWaarde {
     margin-top: -5px;
     margin-bottom: 2px;
@@ -509,14 +538,14 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     #infoInvullenSchaalbaar {
         display: block;
     }
-    #financieelOverzichtContainer{
-              width: 550px;
-              margin-top: 100px;
-              height: 840px;
+    #financieelOverzichtContainer {
+        width: 550px;
+        margin-top: 100px;
+        height: 840px;
     }
     #financieelOverzicht{
         width: 550px;
-        margin-top: 100px;
+        margin-top: 230px;
         height: 840px;
     }
     #transactiePagina{
@@ -547,10 +576,18 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     #financieelOverzicht{
         width: 100%;
         border-radius: 0;
+        margin-top: 270px;
     }
     #transactiePagina{
         width: 100%;
         border-radius: 0;
+    }
+}
+
+/* Wijzig elementen bij scherm SMALLER dan 500px */
+@media only screen and (max-width: 500px) {
+    #financieelOverzicht {
+        margin-top: 280px;
     }
 }
 
@@ -582,6 +619,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 ::-webkit-scrollbar {
     margin-right: -5px;
     width: 13px;
+    height: 13px;
 }
 ::-webkit-scrollbar-track {
     background: #0d0c0c;
