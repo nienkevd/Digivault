@@ -2,6 +2,7 @@
 
 // VERWIJZINGEN
 const bevestigingSluiten = document.getElementById('bevestigingSluiten');
+const terugNaarLogin = document.getElementById('terugNaarLogin');
 const naarRegistreren = document.getElementById('naarRegistreren');
 const registreren = document.getElementById('registreren');
 const loginPagina = document.getElementById('loginPagina');
@@ -48,6 +49,7 @@ const alleenLetters = new RegExp(/^[A-Za-z -]+$/);
 const alleenCijfers = new RegExp(/^[0-9]+$/);
 
 // LOSSE EVENT-LISTENERS
+terugNaarLogin.addEventListener('click', verbergRegistratieLaag);
 welkomsAanbieding.addEventListener('click', toonRegistratieLaag);
 naarRegistreren.addEventListener('click', toonRegistratieLaag);
 bevestigingSluiten.addEventListener('click', verbergRegistratieBevestiging);

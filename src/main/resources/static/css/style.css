@@ -103,10 +103,11 @@ a[id="naarAlleKoersen"] {    /* Aangepaste stijl voor linkje #naarAlleKoersen */
     margin: 20px auto -30px;
 }
 
-a[id="naarRegistreren"] {    /* Aangepaste stijl voor linkje #naarAlleKoersen */
+a[id="naarRegistreren"] {    /* Aangepaste stijl voor linkje #naarRegistreren bij loginPagina */
+    color: var(--divaIvoor);
     display: block;
     margin-top: -9px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: lighter;
     text-align: center;
 }
@@ -181,7 +182,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     display: block;
     padding-right: 48px;
     width: 430px;
-    height: 490px;
+    height: 475px;
 }
 
 .registratieLaag {    /* Aanpassingen voor klasse registratieLaag */
@@ -433,6 +434,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 }
 
 #naarLoginPagina {    /* Positionering uitlogKnop in financieelOverzicht */
+    color: var(--divaIvoor);
     margin-top: 480px;
     margin-right: 20px;
     text-align: right;
@@ -447,10 +449,19 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     margin-right: 10px;
 }
 
-#uitlog {    /* Positionering uitlogKnop in transactie */
+#uitlog { /* Positionering uitlogKnop in transactie */
     margin-top: 480px;
     margin-right: 10px;
+}
 
+#registreren {    /* Positionering loginButton */
+    margin-left: 40px;
+}
+
+#terugNaarLogin {     /* Positionering terugKnop in registratieLaag */
+    color: var(--divaIvoor);
+    margin-top: 40px;
+    text-align: right;
 }
 
 #login {    /* Positionering loginKnop op loginPagina */
