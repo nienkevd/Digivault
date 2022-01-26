@@ -29,9 +29,9 @@ class AssetServiceTest {
 
     @Test
     void vindAssetOpId() {
-//        Mockito.when(mockDAO.vindAssetOpId(1)).thenReturn(expected);
-//        Asset actual = serviceUnderTest.vindAssetOpId(1);
-//        assertThat(actual).isNotNull();
+        Mockito.when(mockDAO.vindAssetOpId(1)).thenReturn(expected);
+        Asset actual = serviceUnderTest.vindAssetOpId(1);
+        assertThat(actual).isNotNull();
     }
 
     @Test

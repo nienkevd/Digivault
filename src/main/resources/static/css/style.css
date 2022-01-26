@@ -7,7 +7,7 @@
     --divaIvoor: #fffff0;
     --divaGroen: #44c26e;
     --divaRood: #E34232;
-    --divaBrons: #704909;
+    --divaBrons: #614101;
 }
 
 /* ----- FONTS ----- */
@@ -103,6 +103,14 @@ a[id="naarAlleKoersen"] {    /* Aangepaste stijl voor linkje #naarAlleKoersen */
     margin: 20px auto -30px;
 }
 
+a[id="naarRegistreren"] {    /* Aangepaste stijl voor linkje #naarAlleKoersen */
+    display: block;
+    margin-top: -9px;
+    font-size: 14px;
+    font-weight: lighter;
+    text-align: center;
+}
+
 a:hover {    /* Standaardstijl voor gehoverde linkjes */
     color: var(--divaGoud);
 }
@@ -173,7 +181,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     display: block;
     padding-right: 48px;
     width: 430px;
-    height: 513px;
+    height: 490px;
 }
 
 .registratieLaag {    /* Aanpassingen voor klasse registratieLaag */
@@ -209,7 +217,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 }
 
 
-.financieelOverzicht { /* Aanpassingen voor financieel overzicht */
+.financieelOverzicht {    /* Aanpassingen voor financieel overzicht */
     display: block;
     padding: 0 60px;
     width: 940px;
@@ -218,12 +226,12 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     margin-top: 70px;
 }
 
-.financieelOverzichtContainer { /* Container rondom financieel overzicht, anders valt avatar eraf door scrollbalk*/
+.financieelOverzichtContainer {    /* Container rondom financieel overzicht, anders valt avatar eraf door scrollbalk*/
     width: 1000px;
     height: 760px;
 }
 
-.wachtwoordVergeten{ /* Aanpassing voor wachtwoord vergeten */
+.wachtwoordVergeten{    /* Aanpassing voor wachtwoord vergeten */
     display: none;
     width: 950px;
     height: 660px;
@@ -236,7 +244,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     height: 508px;
 }
 
-.grid_2 {  /* Standaardstijl voor gebruik grid van 2 grid-cellen */
+.grid_2 {    /* Standaardstijl voor gebruik grid van 2 grid-cellen */
     /*padding-left: 45px;*/
     display: grid;
     grid-gap: 12px;
@@ -244,14 +252,13 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 }
 
 .grid_3_transactie {   /* Standaardstijl voor gebruik grid van 3 grid-cellen transactie */
-    /*padding-left: 45px;*/
     display: grid;
     grid-gap: 12px;
     grid-column-gap: 30px;
     grid-template-columns: auto auto auto;
 }
 
-.grid_3 {   /* Standaardstijl voor gebruik grid van 3 grid-cellen */
+.grid_3 {    /* Standaardstijl voor gebruik grid van 3 grid-cellen */
     display: grid;
     grid-gap: 12px;
     grid-template-columns: auto auto auto;
@@ -291,7 +298,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     left: calc(50% - 215px);
 }
 
-.dropKoers {
+.dropKoers {    /* Stijl voor dropdown in koersDiagram */
     background-color: var(--divaGoud);
     color: var(--divaDrop);
     font-family: diva, serif;
@@ -306,16 +313,13 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     position: relative;
     margin-left: 175px;
 }
-
 .dropKoers:hover, .dropKoers:focus {
     background-color: var(--divaRoze);
 }
-
 .dropdownKoers {
     position: relative;
     display: inline-block;
 }
-
 .dropdownKoers-content {
     display: none;
     position: absolute;
@@ -330,7 +334,6 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     overflow: auto;
     z-index: 1;
 }
-
 .dropdownKoers-content a {
     color: var(--divaIvoor);
     padding: 8px 16px;
@@ -340,12 +343,12 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     text-decoration: none;
     display: block;
 }
-
 .dropdownKoers a:hover {
     background-color: #1c1c1c;
 }
-
-.show {display: block;}
+.show {
+    display: block;
+}
 
 /* ----- ID'S ----- */
 
@@ -380,20 +383,25 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     margin-top: 5px;
 }
 
-#infoInvullenSchaalbaar {
+#infoInvullenSchaalbaar {    /* Ruimte voor creëren van break in registratieLaag ivm schaalbaarheid */
     margin-top: -20px;
     display: none;
     text-align: center;
 }
 
-#registratieBevestiging {
+#registratieBevestiging {    /* Laag met bevestiging van registratie */
     margin-top: 0px;
     font-size: 1.05em;
     line-height: 1.50em;
     text-align: center;
     font-weight: lighter;
 }
-#transactieBevestiging {
+
+#registratieKop {    /* Kop voor begroeting in registratieBevestiging */
+    margin-top: -85px;
+}
+
+#transactieBevestiging {    /* Laag met bevestiging van transactie */
     margin-top: 0px;
     font-size: 1.05em;
     line-height: 2.00em;
@@ -401,11 +409,8 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     font-weight: lighter;
 }
 
-#registratieKop {
-    margin-top: -85px;
-}
 
-#divaPlaatsing {
+#divaPlaatsing {    /* Positionering begroeting in financieelOverzicht */
     color: var(--divaRoze);
     margin-top: -23px;
     font-weight: bolder;
@@ -422,18 +427,22 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     text-align: center;
 }
 
-#naarTransactiePagina {    /* Plaatsing Trade-button op FinancieelOverzicht */
+#naarTransactiePagina {    /* Plaatsing Trade-button op financieelOverzicht */
     margin-left: 40px;
     margin-top: 470px;
 }
 
-#naarLoginPagina {
+#naarLoginPagina {    /* Positionering uitlogKnop in financieelOverzicht */
     margin-top: 480px;
     margin-right: 20px;
     text-align: right;
 }
 
-#actueleWaarde {
+#login {    /* Positionering loginKnop op loginPagina */
+    margin-top: 32px;
+}
+
+#actueleWaarde {    /* Positionering van #actueleWaarde in koersDiagram */
     margin-top: -5px;
     margin-bottom: 2px;
     text-align: center;
@@ -455,12 +464,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     display: block;
 }
 
-#historischDagwaarde {
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-#foutMeldingRegistratie {
+#foutMeldingRegistratie {    /* Veld voor foutmeldingen in registratieLaag */
     height: 14px;
     color: var(--divaRood);
     top: -34px;
@@ -469,7 +473,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     text-align: center;
 }
 
-#foutMeldingLogin {
+#foutMeldingLogin {     /* Veld voor foutmeldingen op loginPagina */
     height: 14px;
     color: var(--divaRood);
     top: -35px;
@@ -478,7 +482,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     text-align: center;
 }
 
-#foutMeldingTransactie {
+#foutMeldingTransactie {     /* Veld voor foutmeldingen in transactie */
     height: 14px;
     color: var(--divaRood);
     top: -35px;
@@ -627,9 +631,9 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 }
 ::-webkit-scrollbar-thumb {
     border-radius: 100px;
-    background: #101010;
+    background: #303030;
     height: 30px;
-    border: 6px solid #171717;
+    border: 6px solid #1b1b1b;
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #222;
