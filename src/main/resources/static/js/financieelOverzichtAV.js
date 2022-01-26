@@ -1,5 +1,7 @@
 'use strict';
 
+// vars voor currency conversion
+// Anthon
 let currency = 'EUR';
 let rate = 1.13;
 let eurosaldo;
@@ -10,6 +12,7 @@ const eurowaarde = [];
 const dollarwaarde = [];
 
 // RELATIVE PATH URL FETCH
+// Anthon
 const domainArray = location.origin.split(':');
 const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
 const url = urlLead + 'financieeloverzicht';
@@ -22,43 +25,32 @@ const symbols = document.getElementsByClassName("symbol");
 const tableBody = document.querySelector("#fi-table > tbody");
 
 // eventlistener for currency-button
+// Anthon
 document.getElementById('currency').addEventListener('click', (event) => {
     switchCurrency();
 });
 
 function switchCurrency() { // Anthon
-    let koersGetallen = document.getElementsByClassName("koersGetal");
-    rate = 1 / rate;
     if (currency === 'EUR') {
         currency = 'USD';
-        // verander 3x teken in $
-        for (let symbol of symbols) {
-            symbol.textContent = '$';
-        }
-        // set saldo
+        for (let symbol of symbols) symbol.textContent = '$';
         saldo.textContent = dollarsaldo;
-        // set kolommen
-        for (let i = 0; i < 20; i++) {
-            document.getElementById('koersGetal' + i).textContent = dollardagkoers[i];
-            document.getElementById('waardeGetal' + i).textContent = dollarwaarde[i].toString();
-
-        }
+        setColumns(dollardagkoers, dollarwaarde);
     } else {
         currency = 'EUR';
-        // verander 3x teken €
-        for (let symbol of symbols) {
-            symbol.textContent = '€';
-        }
-        // set saldo
+        for (let symbol of symbols) symbol.textContent = '€';
         saldo.textContent = eurosaldo;
-        // set kolommen
-        for (let i = 0; i < 20; i++) {
-            document.getElementById('koersGetal' + i).textContent = eurodagkoers[i];
-            document.getElementById('waardeGetal' + i).textContent = eurowaarde[i].toString();
-        }
+        setColumns(eurodagkoers, eurowaarde);
     }
-    console.log(currency);
-    console.log(rate);
+}
+
+// switch currency columns
+// Anthon
+function setColumns(dagkoers, waarde) {
+    for (let i = 0; i < 20; i++) {
+        document.getElementById('koersGetal' + i).textContent = dagkoers[i];
+        document.getElementById('waardeGetal' + i).textContent = waarde[i].toString();
+    }
 }
 
 fetch(url, {
