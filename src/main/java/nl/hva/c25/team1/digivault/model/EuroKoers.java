@@ -22,7 +22,7 @@ public class EuroKoers {
      */
     private EuroKoers(int euroKoersId, LocalDate datum, double koers, int assetId) {
         super();
-        setEuroKoersId(euroKoersId);
+        this.euroKoersId = euroKoersId;
         this.datum = datum;
         this.koers = koers;
         this.assetId = assetId;
