@@ -1,7 +1,13 @@
 'use strict';
 
 let currency = 'EUR';
-let rate = 0.885;
+let rate = 1.13;
+let eurosaldo;
+let dollarsaldo;
+const eurodagkoers = [];
+const dollardagkoers = [];
+const eurowaarde = [];
+const dollarwaarde = [];
 
 // RELATIVE PATH URL FETCH
 const domainArray = location.origin.split(':');
@@ -30,9 +36,13 @@ function switchCurrency() { // Anthon
             symbol.textContent = '$';
         }
         // set saldo
-        saldo.textContent = (rate * parseFloat(saldo.textContent)).toFixed(2);
-        // set kolom 1
-        // set waardekolom door berekening
+        saldo.textContent = dollarsaldo;
+        // set kolommen
+        for (let i = 0; i < 20; i++) {
+            document.getElementById('koersGetal' + i).textContent = dollardagkoers[i];
+            document.getElementById('waardeGetal' + i).textContent = dollarwaarde[i].toString();
+
+        }
     } else {
         currency = 'EUR';
         // verander 3x teken €
@@ -40,9 +50,12 @@ function switchCurrency() { // Anthon
             symbol.textContent = '€';
         }
         // set saldo
-        saldo.textContent = (rate * parseFloat(saldo.textContent)).toFixed(2);
-        // set kolom 1
-        // set waardekolom door berekening
+        saldo.textContent = eurosaldo;
+        // set kolommen
+        for (let i = 0; i < 20; i++) {
+            document.getElementById('koersGetal' + i).textContent = eurodagkoers[i];
+            document.getElementById('waardeGetal' + i).textContent = eurowaarde[i].toString();
+        }
     }
     console.log(currency);
     console.log(rate);
@@ -85,7 +98,9 @@ function vulPagina(json) {
     // toon IBAN van gebruiker
     iban.append(json.iban);
     // toon saldo van gebruiker
-    saldo.append(parseFloat(json.saldo).toFixed(2));
+    eurosaldo = parseFloat(json.saldo).toFixed(2);
+    dollarsaldo = (rate * eurosaldo).toFixed(2);
+    saldo.append(eurosaldo);
 
     // loop door portefeuilleitems en vul tabel
     for (let i = 0; i < 20; i++) {
@@ -95,16 +110,19 @@ function vulPagina(json) {
         const td3 = document.createElement('td');
         const td4 = document.createElement('td');
         const td5 = document.createElement('td');
-        td4.classList.add('koersGetal');
-        td5.classList.add('waardeGetal');
+        td4.setAttribute('id', 'koersGetal' + i);
+        td5.setAttribute('id', 'waardeGetal' + i);
         td.textContent = json.assetMetAantal[i].naam;
         td2.textContent = json.assetMetAantal[i].afkorting;
         td3.textContent = json.assetMetAantal[i].aantal;
-        td4.textContent = json.assetMetAantal[i].dagkoers;
+        eurodagkoers[i] = json.assetMetAantal[i].dagkoers;
+        dollardagkoers[i] = (rate * eurodagkoers[i]).toFixed(5);
+        td4.textContent = eurodagkoers[i];
         const aantal = parseFloat(td3.textContent).toFixed(2);
         const dagkoers = parseFloat(td4.textContent).toFixed(2);
-        const waarde = (aantal * dagkoers).toFixed(2).toString();
-        td5.textContent = (waarde);
+        eurowaarde[i] = (aantal * dagkoers).toFixed(2);
+        dollarwaarde[i] = (rate * eurowaarde[i]).toFixed(2);
+        td5.textContent = (eurowaarde[i].toString());
         tr.appendChild(td);
         tr.appendChild(td2);
         tr.appendChild(td3);
