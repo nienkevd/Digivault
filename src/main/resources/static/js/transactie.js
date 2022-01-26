@@ -1,3 +1,38 @@
+'use strict';
+
+// vars voor currency conversion
+// Anthon
+let currency = 'EUR';
+let rate = 1.13;
+let eurosaldo;
+let dollarsaldo;
+let eurowaarde;
+let dollarwaarde;
+let eurokosten;
+let dollarkosten;
+
+const symbols = document.getElementsByClassName("symbol");
+
+// eventlistener for currency-button
+// Anthon
+document.getElementById('currency').addEventListener('click', (event) => {
+    switchCurrency();
+});
+
+function switchCurrency() { // Anthon
+    if (currency === 'EUR') {
+        currency = 'USD';
+        for (let symbol of symbols) symbol.textContent = '$';
+        saldo.textContent = dollarsaldo;
+        // setColumns(dollardagkoers, dollarwaarde);
+    } else {
+        currency = 'EUR';
+        for (let symbol of symbols) symbol.textContent = '€';
+        saldo.textContent = eurosaldo;
+        // setColumns(eurodagkoers, eurowaarde);
+    }
+}
+
 // RELATIVE PATH URL FETCH
 const domainArray = location.origin.split(':');
 const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
@@ -35,8 +70,6 @@ const saldo = document.getElementById("saldo");
 let waarde;
 //transactiekosten
 let transactiekosten;
-//saldo
-let saldoValue;
 
 // Ophalen saldo vanaf financieeloverzicht
 fetch(url, {
@@ -76,8 +109,9 @@ function toonLoginPagina() {
 }
 
 function toonSaldo(json) {
-    saldoValue = json.saldo
-    document.getElementById("saldoValue").innerText = json.saldo;
+    eurosaldo = parseFloat(json.saldo).toFixed(2);
+    dollarsaldo = (rate * eurosaldo).toFixed(2);
+    saldo.innerText = eurosaldo;
 }
 
 //Dropdown menu invullen met alle assets
@@ -220,10 +254,7 @@ function resetFoutMeldingTransactie() {
 // Transactie validatie - checkt of er genoeg saldo is om te kopen
 function validatieSaldo() {
     let totaal = waarde + transactiekosten
-    console.log(waarde)
-    console.log(transactiekosten)
-    console.log(saldoValue)
-    if (saldoValue < totaal) {
+    if (eurosaldo < totaal) {
         foutMeldingTransactie.innerHTML = koopFoutMelding;
         return false;
     }
