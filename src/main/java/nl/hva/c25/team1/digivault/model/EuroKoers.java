@@ -90,6 +90,28 @@ public class EuroKoers {
     }
 
     /**
+     * Equals-methode EuroKoers
+     * @param other te vergelijken EuroKoers
+     * @return boolean
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        EuroKoers euroKoers = (EuroKoers) other;
+        return euroKoersId == euroKoers.euroKoersId;
+    }
+
+    /**
+     * HashCode EuroKoers
+     * @return Hash euroKoersId
+     */
+    @Override
+    public int hashCode() {
+        return euroKoersId;
+    }
+
+    /**
      * toString-methode EuroKoers
      * @return toString van klasse EuroKoers
      */
