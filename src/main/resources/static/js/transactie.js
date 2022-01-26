@@ -154,20 +154,26 @@ function vulDropdownMenu(json) {
 select.addEventListener("change", toonWaarde);
 
 function toonWaarde() {
-    const asset = select.options[select.selectedIndex].value;
-    let dagkoers;
-    for (let i = 0; i < assets.length; i++) {
-        if (assets[i].naam === asset) {
-            dagkoers = assets[i].dagkoers;
-            break;
+    console.log(select.innerText);
+    if (select.innerText === 'Kies je cryptomunt') {
+        waarde.innerText = '';
+        kosten.innerText = '';
+    } else {
+        const asset = select.options[select.selectedIndex].value;
+        let dagkoers;
+        for (let i = 0; i < assets.length; i++) {
+            if (assets[i].naam === asset) {
+                dagkoers = assets[i].dagkoers;
+                break;
+            }
         }
+        eurowaarde = (hoeveelheid.value * dagkoers).toFixed(2);
+        dollarwaarde = (rate * eurowaarde).toFixed(2);
+        waarde.innerText = eurowaarde;
+        eurokosten = (eurowaarde * percentage).toFixed(2);
+        dollarkosten = (rate * eurokosten).toFixed(2);
+        kosten.innerText = eurokosten;
     }
-    eurowaarde = (hoeveelheid.value * dagkoers).toFixed(2);
-    dollarwaarde = (rate * eurowaarde).toFixed(2);
-    waarde.innerText = eurowaarde;
-    eurokosten = (eurowaarde * percentage).toFixed(2);
-    dollarkosten = (rate * eurokosten).toFixed(2);
-    kosten.innerText = eurokosten;
 }
 
 //Toon waarde en transactie kosten wanneer hoeveelheid is gewijzigd
