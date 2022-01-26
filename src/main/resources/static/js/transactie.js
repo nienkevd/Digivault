@@ -48,34 +48,34 @@ const domainArray = location.origin.split(':');
 const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
 const url = urlLead + 'financieeloverzicht';
 const urltr = urlLead + 'transactie';
-//asset array in financieeloverzicht json bestand
-let assets = [];
-//dropdown menu op transactie pagina
+
+//Const verwijzing naar een veld op transactie pagina
 const select = document.getElementById("dropdown")
-//hoeveelheid input veld
 const hoeveelheid = document.getElementById("hoeveelheid")
-//constant transactie kosten percentage
-const percentage = 0.02
-//knop koop
 const koop = document.getElementById("koop")
-//knop verkoop
 const verkoop = document.getElementById("verkoop")
-//klantID ophalen van localStorage
-const klantId = localStorage.getItem("klantId")
-//assetId declareren
+const saldo = document.getElementById("saldo");
+const foutMeldingTransactie = document.getElementById('foutMeldingTransactie');
+const terug = document.getElementById("terug")
+const uitlog = document.getElementById("uitlog")
+
+//Variabelen declareren
+let assets = [];
 let assetId;
-//assetAantal declareren
 let assetAantal;
-//bankId is altijd 1
+
+//constante waardes declareren
+const percentage = 0.02
 const bankId = 1
+
+//klantId ophalen van localStorage
+const klantId = localStorage.getItem("klantId")
+
 //Foutmeldingen koop en verkoop
 const koopFoutMelding = `Je hebt niet genoeg saldo`;
 const verkoopFoutMelding = 'Je hebt niet genoeg munten';
 const legeVeldenMelding = 'Je moet hoeveelheid invullen en cryptomunt selecteren'
-//Foutmelding op transactie pagina
-const foutMeldingTransactie = document.getElementById('foutMeldingTransactie');
-//saldo
-const saldo = document.getElementById("saldo");
+
 
 // Ophalen saldo vanaf financieeloverzicht
 fetch(url, {
@@ -107,10 +107,6 @@ fetch(url, {
 function toonLoginPaginaSessieVerlopen() {
     localStorage.removeItem("token");
     alert("Sessie verlopen! Log opnieuw in.")
-    window.location.href = "index.html";
-}
-
-function toonLoginPagina() {
     window.location.href = "index.html";
 }
 
@@ -164,7 +160,6 @@ function vulDropdownMenu(json) {
 select.addEventListener("change", toonWaarde);
 
 function toonWaarde() {
-    console.log(select.innerText);
     if (select.innerText === 'Kies je cryptomunt') {
         waarde.innerText = '';
         kosten.innerText = '';
@@ -194,7 +189,15 @@ function toonWaarde() {
 //Toon waarde en transactie kosten wanneer hoeveelheid is gewijzigd
 hoeveelheid.addEventListener("input", toonWaarde)
 
+//Als een munt gekozen is uit de dropdown menu wordt assetId bijgehouden
 select.addEventListener("change", setAssetId);
+select.addEventListener("change", toonMuntenInWallet);
+
+function toonMuntenInWallet() {
+    setAssetAantal();
+    document.getElementById('coins').textContent = assetAantal;
+}
+
 
 function setAssetId() {
     const asset = select.options[select.selectedIndex].value;
@@ -216,8 +219,6 @@ function setAssetAantal() {
         }
     }
 }
-
-
 
 koop.addEventListener('click', function (e) {
     if (validatieKoopTransactie()) {
@@ -356,8 +357,23 @@ function legeVeldenCheck() {
     return true;
 }
 
+//als de klant op Terug klikt gaat het naar financieel overzocht pagina
+terug.addEventListener('click', (event) => {
+    toonFinancieelOverzicht();
+});
+
+//als de klant op Uitloggen klikt gaat het naar inlog pagina
+uitlog.addEventListener('click', (event) => {
+    toonLoginPagina();
+});
+
 function toonFinancieelOverzicht() {
+    localStorage.setItem('munteenheid', currency);
     window.location.href = "FinancieelOverzicht.html";
+}
+
+function toonLoginPagina() {
+    window.location.href = "index.html";
 }
 
 //Klik op LOGO naar financieel overzicht
@@ -390,6 +406,3 @@ function verbergTransactieLaag() {
     transactiePagina.style.display = 'none';
 
 }
-
-//KLIK OP LOGO GAAT NAAR FINANCIEEL OVERZICHT
-document.getElementById('logoDigivault').addEventListener('click', toonFinancieelOverzicht);
