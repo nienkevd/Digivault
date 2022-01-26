@@ -2,6 +2,8 @@ package nl.hva.c25.team1.digivault.model;
 
 // review door Erwin, 1 december
 
+import java.util.Objects;
+
 /**
  * @author Sezi, studentnummer 500889525
  * @version 4-12-2021
@@ -58,6 +60,19 @@ public class Rekening {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rekening rekening = (Rekening) o;
+        return rekeningId == rekening.rekeningId && Double.compare(rekening.saldo, saldo) == 0 && IBAN.equals(rekening.IBAN);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rekeningId, IBAN, saldo);
     }
 
     public String toString() {
