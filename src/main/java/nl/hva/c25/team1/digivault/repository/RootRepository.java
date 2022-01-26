@@ -154,6 +154,7 @@ public class RootRepository {
         return portefeuilleOverzicht;
     }
 
+    // Anthon
     public Transactie voerTransactieUit(Transactie transactie) {
         TransactiePartij koper = transactie.getKoper();
         TransactiePartij verkoper = transactie.getVerkoper();
