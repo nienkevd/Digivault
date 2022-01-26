@@ -67,7 +67,8 @@ public class RegistratieService {
             account.setWachtwoord(hashService.hash(account.getWachtwoord()));
             boolean validatie1 = validateBsn(klant.getBsn());
             boolean validatie2 = validatieGeboortedatum(klant.getGeboortedatum());
-            if (validatie1 && validatie2) {
+            boolean validatie3 = validatieMailadres(klant.getAccount().getEmailadres());
+            if (validatie1 && validatie2 && validatie3) {
                 return rootRepository.slaKlantOp(klant);
             } else {
                 throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
@@ -127,5 +128,19 @@ public class RegistratieService {
     public boolean validatieGeboortedatum (LocalDate geboortedatum) {
         int leeftijd = Period.between(geboortedatum, LocalDate.now()).getYears();
         return leeftijd < MAXIMUM_LEEFTIJD && leeftijd > MINIMUM_LEEFTIJD;
+    }
+
+    /**
+     * Check of mailadres al in database zit
+     * @param emailadres te checken mailadres
+     * @return boolean
+     */
+    public boolean validatieMailadres(String emailadres) {
+        for (Account account : accountDAO.geefAlleAccounts()) {
+            if (Objects.equals(account.getEmailadres(), emailadres)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

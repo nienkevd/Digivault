@@ -74,29 +74,29 @@
                        placeholder="wachtwoord (check) *" title="herhaal je wachtwoord" required="" type="password">
                 <p class="registratie schaalbaar">Persoonsgegevens: </p>
                 <input id="voornaam" name="voornaam" placeholder="voornaam *" title="je voornaam" required=""
-                       type="text">
+                       pattern="[A-Za-z -]+" type="text">
                 <input id="tussenvoegsel" name="tussenvoegsel" placeholder="tussenvoegsel" maxlength="15"
                        title="je eventuele tussenvoegsel" type="text">
                 <input id="achternaam" name="achternaam" placeholder="achternaam *" title="je achternaam" required=""
-                       type="text">
+                       pattern="[A-Za-z -]+" type="text">
                 <br class="schaalbaar">
                 <input id="geboortedatum" name="geboortedatum" placeholder="geboortedatum *" title="je geboortedatum"
                        required="" type="date">
                 <input id="bsn" minlength="8" maxlength="9" name="bsn" placeholder="bsn *"
-                       title="je BSN (8 of 9 cijfers)" required="" type="number">
+                       title="je BSN (8 of 9 cijfers)" required="" pattern="[0-9]+" type="number">
                 <br class="schaalbaar">
                 <p class="registratie schaalbaar">Adresgegevens:</p>
                 <input id="postcode" name="postcode" placeholder="postcode *" title="je postcode (AAAA11)" required=""
                        maxlength="6" type="text">
                 <input id="huisnummer" name="huisnummer" placeholder="huisnummer *" title="je huisnummer" required=""
-                       type="number">
+                       pattern="[0-9]+" maxlength="5" type="number">
                 <input id="toevoeging" name="toevoeging" placeholder="toevoeging" maxlength="5"
                        title="je eventuele huisnummertoevoeging" type="text">
                 <p class="registratie schaalbaar"></p>
-                <input id="straatnaam" name="straatnaam" placeholder="straatnaam" title="wordt automatisch ingevuld"
-                       required="" type="text">
-                <input id="woonplaats" name="woonplaats" placeholder="woonplaats" title="wordt automatisch ingevuld"
-                       required="" type="text">
+                <input id="straatnaam" name="straatnaam" placeholder="straatnaam *" title="wordt automatisch ingevuld"
+                       required="" pattern="[A-Za-z -]+" type="text">
+                <input id="woonplaats" name="woonplaats" placeholder="woonplaats *" title="wordt automatisch ingevuld"
+                       required="" pattern="[A-Za-z -]+" type="text">
             </div>
             <div class="grid_3">
                 <br>
