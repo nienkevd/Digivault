@@ -35,13 +35,13 @@ class JdbcRekeningDAOTest {
     //TODO leraar vragen waarom dit niet werkt
     //op deze manier getest, wilde graag als rekenening nummer testen of hij erin zat, maar lukte niet.
     //Gaf de juiste rekening terug, maar herkende hem niet als dezelfde..
-   /* @Test
+    @Test
     void vindRekeningOpId() {
         Rekening actual = daoUnderTest.vindRekeningOpId(1);
         Rekening expected = new Rekening(1,"NL81DIVA2208729564",10000000);
         assertThat(actual).isNotNull().isEqualTo(expected);
-    }*/
-    /*@Test
+    }
+   /* @Test
     void vindRekeningOpIBAN() {
         Rekening actual = daoUnderTest.vindRekeningOpIBAN("NL81DIVA2208729564");
         Rekening expected = new Rekening("NL81DIVA2208729564",10000000);

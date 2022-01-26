@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -16,8 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.junit.jupiter.api.Assertions.*;
-@AutoConfigureMockMvc
-@SpringBootTest
+@WebMvcTest(RekeningController.class)
 class RekeningControllerTest {
     private MockMvc mockMvc;
 
@@ -32,6 +32,7 @@ class RekeningControllerTest {
 
 
     @Test
+    //checkt of de rekening in het goede format word word doorgegeven.
     void vindRekeningOpIBAN() {
             Rekening expected = new Rekening(1,"AA00ABCD0000000000", 500);
             Mockito.when(rekeningService.vindRekeningOpId(1)).thenReturn(expected);
