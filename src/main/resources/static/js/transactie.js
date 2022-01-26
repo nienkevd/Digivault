@@ -255,7 +255,7 @@ function resetFoutMeldingTransactie() {
 
 // Transactie validatie - checkt of er genoeg saldo is om te kopen
 function validatieSaldo() {
-    let totaal = eurowaarde + eurokosten
+    let totaal = parseFloat(eurowaarde) + parseFloat(eurokosten);
     if (eurosaldo < totaal) {
         foutMeldingTransactie.innerHTML = koopFoutMelding;
         return false;
@@ -325,13 +325,13 @@ function validatieMunten() {
 // Transactie validatie - checkt of alle verplichte velden bij transactie zijn ingevuld
 function legeVeldenCheck() {
     console.log(select.options[select.selectedIndex].text);
-    if (hoeveelheid.value ==='' || /*select.innerText*/select.options[select.selectedIndex].text === '') {
+    if (hoeveelheid.value ==='' || select.options[select.selectedIndex].text === 'Kies je cryptomunt') {
         console.log(">> validatiefout: lege velden");
-        console.log(hoeveelheid.value);
 
         foutMeldingTransactie.innerHTML = legeVeldenMelding;
         return false;
     }
+    console.log("legeveldencheck true");
     return true;
 }
 
@@ -348,7 +348,6 @@ document.getElementById('logoDigivault').addEventListener('click', toonFinanciee
 //transactieBevestiging constante
 const transactieBevestiging = document.getElementById('transactieBevestiging');
 const transactiePagina = document.getElementById('transactiePagina');
-const transactieInformatie = document.getElementById('registratieInformatie');
 
 //Event listner
 bevestigingSluiten.addEventListener('click', verbergTransactieBevestiging);
@@ -357,7 +356,6 @@ bevestigingSluiten.addEventListener('click', verbergTransactieBevestiging);
 function toonTransactieBevestiging() {
     verbergTransactieLaag();
     transactieBevestiging.style.display = 'block';
-    transactieInformatie.innerHTML = data;
 
 }
 
