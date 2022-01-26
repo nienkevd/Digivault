@@ -44,7 +44,7 @@ const geldigeBsnMelding = `Controleer de geldigheid van je BSN-nummer`;
 // OVERIGE
 const emailRegExp = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
 const postcodeRegExp = new RegExp(/^([1-9][0-9]{3}[a-zA-Z]{2})$/);
-const alleenLetters = new RegExp(/^[A-Za-z]+$/);
+const alleenLetters = new RegExp(/^[A-Za-z -]+$/);
 const alleenCijfers = new RegExp(/^[0-9]+$/);
 
 // LOSSE EVENT-LISTENERS
