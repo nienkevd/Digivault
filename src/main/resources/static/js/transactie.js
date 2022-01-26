@@ -11,7 +11,9 @@ let dollarwaarde;
 let eurokosten;
 let dollarkosten;
 
-const symbols = document.getElementsByClassName("symbol");
+const symbols = document.getElementsByClassName('symbol');
+const waarde = document.getElementById('waarde');
+const kosten = document.getElementById('transactiekosten');
 
 // eventlistener for currency-button
 // Anthon
@@ -24,12 +26,14 @@ function switchCurrency() { // Anthon
         currency = 'USD';
         for (let symbol of symbols) symbol.textContent = '$';
         saldo.textContent = dollarsaldo;
-        // setColumns(dollardagkoers, dollarwaarde);
+        waarde.textContent = dollarwaarde;
+        kosten.textContent = dollarkosten;
     } else {
         currency = 'EUR';
         for (let symbol of symbols) symbol.textContent = '€';
         saldo.textContent = eurosaldo;
-        // setColumns(eurodagkoers, eurowaarde);
+        waarde.textContent = eurowaarde;
+        kosten.textContent = eurokosten;
     }
 }
 
@@ -66,10 +70,6 @@ const legeVeldenMelding = 'Je moet hoeveelheid invullen en cryptomunt selecteren
 const foutMeldingTransactie = document.getElementById('foutMeldingTransactie');
 //saldo
 const saldo = document.getElementById("saldo");
-//waarde
-let waarde;
-//transactiekosten
-let transactiekosten;
 
 // Ophalen saldo vanaf financieeloverzicht
 fetch(url, {
@@ -162,10 +162,12 @@ function toonWaarde() {
             break;
         }
     }
-    waarde = hoeveelheid.value * dagkoers;
-    document.getElementById("waarde").innerText = waarde.toFixed(2);
-    transactiekosten = waarde * percentage;
-    document.getElementById("transactiekosten").innerText = transactiekosten.toFixed(2);
+    eurowaarde = (hoeveelheid.value * dagkoers).toFixed(2);
+    dollarwaarde = (rate * eurowaarde).toFixed(2);
+    waarde.innerText = eurowaarde;
+    eurokosten = (eurowaarde * percentage).toFixed(2);
+    dollarkosten = (rate * eurokosten).toFixed(2);
+    kosten.innerText = eurokosten;
 }
 
 //Toon waarde en transactie kosten wanneer hoeveelheid is gewijzigd
@@ -253,7 +255,7 @@ function resetFoutMeldingTransactie() {
 
 // Transactie validatie - checkt of er genoeg saldo is om te kopen
 function validatieSaldo() {
-    let totaal = waarde + transactiekosten
+    let totaal = eurowaarde + eurokosten
     if (eurosaldo < totaal) {
         foutMeldingTransactie.innerHTML = koopFoutMelding;
         return false;
