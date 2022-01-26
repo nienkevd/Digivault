@@ -215,12 +215,12 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     width: 940px;
     height: 420px;
     overflow-y: auto;
-    margin-top: 75px;
+    margin-top: 70px;
 }
 
 .financieelOverzichtContainer { /* Container rondom financieel overzicht, anders valt avatar eraf door scrollbalk*/
     width: 1000px;
-    height: 750px;
+    height: 760px;
 }
 
 .wachtwoordVergeten{ /* Aanpassing voor wachtwoord vergeten */
@@ -409,12 +409,12 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     color: var(--divaRoze);
     margin-top: -23px;
     font-weight: bolder;
-    font-size: 24px;
+    font-size: 25px;
     text-align: center;
 }
 
 #ibanPlaatsing {    /* positioneert #iban in financieelOverzicht */
-    margin-top: 10px;
+    margin-top: 7px;
     text-align: center;
 }
 
@@ -424,11 +424,11 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 
 #naarTransactiePagina {    /* Plaatsing Trade-button op FinancieelOverzicht */
     margin-left: 40px;
-    margin-top: 463px;
+    margin-top: 470px;
 }
 
 #naarLoginPagina {
-    margin-top: 473px;
+    margin-top: 480px;
     margin-right: 20px;
     text-align: right;
 }
