@@ -93,7 +93,7 @@ p[id="naarAlleKoersen"] {    /* Aangepaste stijl voor linkje #naarAlleKoersen */
     display: block;
     font-size: 16px;
     text-align: center;
-    margin: 20px auto -30px;
+    margin: 24px auto -28px;
 }
 
 a[id="naarRegistreren"] {    /*  Stijl voor linkje #naarRegistreren bij loginPagina */

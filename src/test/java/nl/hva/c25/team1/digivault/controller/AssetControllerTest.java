@@ -35,6 +35,9 @@ class AssetControllerTest {
         this.mockMvc = mockMvc;
     }
 
+    /**
+     * Test van de methode vindAssetOpId uit de AssetController
+     */
     @Test
     void vindAssetOpId() {
         Asset asset = new Asset(8, "DOGE", "Dogecoin");

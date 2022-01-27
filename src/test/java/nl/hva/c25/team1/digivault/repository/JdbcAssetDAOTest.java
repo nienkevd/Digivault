@@ -28,6 +28,7 @@ class JdbcAssetDAOTest {
         this.jdbcDaoUnderTest = jdbcDaoUnderTest;
     }
 
+
     @Test
     public void setupTest() {
         Assertions.assertThat(this.jdbcDaoUnderTest).isNotNull();
