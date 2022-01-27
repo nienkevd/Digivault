@@ -94,7 +94,7 @@ public class JdbcRekeningDAO implements RekeningDAO{
      *
      * @author Anneke
      * @param transactiepartijId
-     * @return
+     * @return Rekening gevonden op transactiepartijID
      */
     @Override
     public Rekening vindRekeningOpTransactiePartijId(int transactiepartijId) {

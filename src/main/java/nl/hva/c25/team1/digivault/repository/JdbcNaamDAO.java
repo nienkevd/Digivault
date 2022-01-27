@@ -33,30 +33,6 @@ public class JdbcNaamDAO implements NaamDAO {
     }
 
     /**
-     * EDIT: naam niet meer los in database!
-     * slaat naam op in database en genereert een surrogate key
-     * @param naam die opgeslagen moet worden
-     * @return int naamID, de automatisch gegenereerde surrogate key
-     */
-//    @Override
-//    public Naam bewaarNaamMetSK(Naam naam) {
-//        String sql = "INSERT INTO naam (voornaam,tussenvoegsel,achternaam) VALUES (?,?,?);";
-//        KeyHolder keyholder = new GeneratedKeyHolder();
-//        jdbcTemplate.update(new PreparedStatementCreator() {
-//            @Override
-//            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-//                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//                ps.setString(1, naam.getVoornaam());
-//                ps.setString(2, naam.getTussenvoegsel());
-//                ps.setString(3, naam.getAchternaam());
-//                return ps;
-//            }
-//        } , keyholder);
-//        naam.setNaamId(keyholder.getKey().intValue());
-//        return naam;
-//    }
-
-    /**
      *
      * vindt een klant in database adhv klantID
      * @param klantId van klant
