@@ -1,4 +1,4 @@
-package nl.hva.c25.team1.digivault.authentication;
+package nl.hva.c25.team1.digivault.auth_nietgebruikt;
 
 import nl.hva.c25.team1.digivault.model.Klant;
 

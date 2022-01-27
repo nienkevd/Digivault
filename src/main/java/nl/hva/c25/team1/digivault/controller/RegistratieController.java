@@ -52,12 +52,4 @@ public class RegistratieController {
                 klant.getNaam().getVoornaam(), klant.getRekening().getIBAN()), headers, HttpStatus.OK);
     }
 
-    @CrossOrigin
-    @PostMapping("/weg")
-    public ResponseEntity<String> registratieHandler2(@Valid @RequestBody RegisterDto registerDto) {
-        Klant klant = new Klant(registerDto);
-        registratieService.registratie(klant);
-        HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(String.format("\"Registratie geslaagd!\""), headers, HttpStatus.OK);
-    }
 }

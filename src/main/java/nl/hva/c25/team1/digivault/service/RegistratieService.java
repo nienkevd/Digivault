@@ -49,15 +49,15 @@ public class RegistratieService {
     }
 
     /**
-     * Methode voor het registreren van een klant, de klant krijgt een goed gevulde rekening en lege portefeuille mee:
+     * Methodes voor het registreren van een klant, de klant krijgt een goed gevulde rekening en lege portefeuille mee:
      * een lijst van 20 assets die op 0 zijn gezet
+     *
+     * uitgesplitst in registatie en validatieKlant
      *
      * @author Anneke en Erwin
      *
-     * @param klant Klant die geregistreerd moet worden
-     * @return de geregistreerde Klant
      */
-    public Klant registratie(Klant klant) {
+    public void registratie(Klant klant) {
         try {
             Rekening rekening = new Rekening(0, genereerIban());
             rekening.setSaldo(BEGINSALDO);
@@ -65,15 +65,24 @@ public class RegistratieService {
             klant.setPortefeuille(aanmaakLegePortefeuille());
             Account account = klant.getAccount();
             account.setWachtwoord(hashService.hash(account.getWachtwoord()));
-            boolean validatie1 = validateBsn(klant.getBsn());
-            boolean validatie2 = validatieGeboortedatum(klant.getGeboortedatum());
-            boolean validatie3 = validatieMailadres(klant.getAccount().getEmailadres());
-            if (validatie1 && validatie2 && validatie3) {
-                return rootRepository.slaKlantOp(klant);
-            } else {
-                throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
-            }
+            valideerKlant(klant);
         } catch (HttpClientErrorException e) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     *
+     * @param klant Klant die geregistreerd moet worden
+     * @return de geregistreerde Klant
+     */
+    public Klant valideerKlant(Klant klant){
+        boolean validatie1 = validateBsn(klant.getBsn());
+        boolean validatie2 = validatieGeboortedatum(klant.getGeboortedatum());
+        boolean validatie3 = validatieMailadres(klant.getAccount().getEmailadres());
+        if (validatie1 && validatie2 && validatie3) {
+            return rootRepository.slaKlantOp(klant);
+        } else {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
         }
     }
