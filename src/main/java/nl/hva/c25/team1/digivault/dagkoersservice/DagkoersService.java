@@ -15,7 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.time.LocalDate;
 
-
+/**
+ *
+ * @author Anneke
+ *
+ */
 @Configuration
 @EnableScheduling
 @Service
@@ -30,7 +34,7 @@ public class DagkoersService {
     public final String SYMBOL = "symbol";
     public final String PRICE = "price";
     public final String ZONE = "CET";
-    public final String OPHAALTIJD = "0 00 09 * * ?";
+    public final String OPHAALTIJD = "0 00 01 * * ?";
 
     public DagkoersService(EuroKoersDAO euroKoersDAO, AssetDAO assetDAO) {
         super();
@@ -38,7 +42,15 @@ public class DagkoersService {
         this.assetDAO = assetDAO;
     }
 
-    @Scheduled(cron = OPHAALTIJD, zone = ZONE) // elke dag om 9 am
+    /**
+     *
+     * Deze methode wordt elke dag om 1:00 uur automatisch aangeroepen.
+     * Via een RestTemplate wordt met een GET request een response gehaald van coinranking.com
+     * In de response staan o.a. de huidige dagkoers van verschillende cryptomunten
+     * Om JSON te lezen en om te zetten naar andere datatypes wordt Jackson gebruikt.
+     * @throws JsonProcessingException jsonProcessingException
+     */
+    @Scheduled(cron = OPHAALTIJD, zone = ZONE) // elke dag om 1 am
     public void dagkoersBuilder() throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
         ObjectMapper mapper = new ObjectMapper();
@@ -49,6 +61,13 @@ public class DagkoersService {
         bouwEuroKoersEnSlaOp(coins);
     }
 
+    /**
+     *
+     * Deze methode gaat al onze assets af, vanaf assetId 1 en vergelijkt de afkorting van de asset
+     * met de afkortingen in de responseJson. Als de afkorting hetzelfde is wordt de
+     * slaEuroKoersOp-methode aangeroepen
+     * @param coins array met coins en bijbehorende dagkoers (response)
+     */
     public void bouwEuroKoersEnSlaOp(JsonNode coins) {
         EuroKoers euroKoers = new EuroKoers();
         for (int i = MIN_ASSET; i <= MAX_ASSET; i++) {
@@ -62,6 +81,14 @@ public class DagkoersService {
         }
     }
 
+    /**
+     *
+     * de dagkoers van van asset is bekend. De gehele eurokoers kan nu opgeslagen worden
+     * dmv setters en de eurokoersDAO bewaarmethode
+     * @param i assetId
+     * @param euroKoers eurokoers die opgeslagen gaat worden
+     * @param jsonNode jsonNode met zelfde afkorting (symbol) als asset die bij eurokoers hoort
+     */
     public void slaEuroKoersOp(int i, EuroKoers euroKoers, JsonNode jsonNode) {
         JsonNode dagkoers = jsonNode.get(PRICE);
         euroKoers.setAssetId(i);
@@ -71,7 +98,4 @@ public class DagkoersService {
         euroKoersDAO.bewaarEuroKoersMetSK(euroKoers);
     }
 
-    //        String accessKey = "coinrankingf65e600fd8d4915137af49c11c136d2619e87f7c49345115";
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.set("x-access-token", accessKey);
 }

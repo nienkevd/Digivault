@@ -1,8 +1,7 @@
-package nl.hva.c25.team1.digivault.authentication;
+package nl.hva.c25.team1.digivault.auth_nietgebruikt;
 
 import nl.hva.c25.team1.digivault.model.Klant;
-import nl.hva.c25.team1.digivault.authentication.TokenKlantPaar;
-import org.springframework.stereotype.Repository;
+import nl.hva.c25.team1.digivault.auth_nietgebruikt.TokenKlantPaar;
 
 import java.util.Optional;
 import java.util.UUID;
