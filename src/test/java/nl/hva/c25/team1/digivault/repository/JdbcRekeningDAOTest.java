@@ -41,10 +41,10 @@ class JdbcRekeningDAOTest {
         Rekening expected = new Rekening(1,"NL81DIVA2208729564",10000000);
         assertThat(actual).isNotNull().isEqualTo(expected);
     }
-   /* @Test
+    @Test
     void vindRekeningOpIBAN() {
         Rekening actual = daoUnderTest.vindRekeningOpIBAN("NL81DIVA2208729564");
-        Rekening expected = new Rekening("NL81DIVA2208729564",10000000);
+        Rekening expected = new Rekening(1,"NL81DIVA2208729564",10000000);
         assertThat(actual).isNotNull().isEqualTo(expected);
     }
 
@@ -52,10 +52,10 @@ class JdbcRekeningDAOTest {
     //Gaf de juiste rekening terug, maar herkende hem niet als dezelfde..
     @Test
     void geefAlleRekeningenBevatSpecifiekRekeningNr() {
-        Rekening expected = new Rekening("NL88DIVA4776153180",1000);
+        Rekening expected = new Rekening(3,"NL88DIVA4776153180",1000);
         List<Rekening> actual = daoUnderTest.geefAlleRekeningen();
         assertThat(actual).isNotNull().contains(expected);
-    }*/
+    }
 
     //Als de test lukt betekend het dat hij connectie maakt met de database, en kan laat zien dat hij ophaalt wat daar
     //is weggeschreven. In de H2 database staan 4 Rekening items, dus hij haalt de correcte informatie op.
