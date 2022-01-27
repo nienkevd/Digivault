@@ -61,13 +61,6 @@ pre {    /* Preformatted text, neemt spaties mee */
     font-family: diva, Verdana, sans-serif;
 }
 
-#infoInvullen {    /* Aanpassingen voor informatie #infoInvullen in #registratieLaag*/
-    text-align: center;
-    font-weight: normal;
-    margin-top: -25px;
-    margin-bottom: 40px;
-}
-
 p {    /* Alinea's */
     margin: 0;
     padding: 0;
@@ -106,7 +99,7 @@ p[id="naarAlleKoersen"] {    /* Aangepaste stijl voor linkje #naarAlleKoersen */
 a[id="naarRegistreren"] {    /*  Stijl voor linkje #naarRegistreren bij loginPagina */
     color: var(--divaIvoor);
     display: block;
-    margin-top: 0px;
+    margin-top: 1px;
     font-size: 13px;
     font-weight: lighter;
     text-align: center;
@@ -115,7 +108,7 @@ a[id="naarRegistreren"] {    /*  Stijl voor linkje #naarRegistreren bij loginPag
 a[id="naarKoersInformatie"] {    /*  Stijl voor linkje #naarRegistreren bij loginPagina */
     color: var(--divaIvoor);
     display: block;
-    margin-top: -7px;
+    margin-top: -6px;
     font-size: 13px;
     font-weight: lighter;
     text-align: center;
@@ -191,7 +184,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     display: block;
     padding-right: 48px;
     width: 430px;
-    height: 500px;
+    height: 502px;
 }
 
 .registratieLaag {    /* Aanpassingen voor klasse registratieLaag */
@@ -236,7 +229,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     margin-top: 70px;
 }
 
-.financieelOverzichtContainer {    /* Container rondom financieel overzicht, anders valt avatar eraf door scrollbalk*/
+.financieelOverzichtContainer {    /* Container rondom financieel overzicht, anders valt avatar eraf door scrollbalk */
     width: 1000px;
     height: 760px;
 }
@@ -255,7 +248,6 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 }
 
 .grid_2 {    /* Standaardstijl voor gebruik grid van 2 grid-cellen */
-    /*padding-left: 45px;*/
     display: grid;
     grid-gap: 12px;
     grid-template-columns: auto auto;
@@ -295,16 +287,16 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     position: absolute;
-    top: 0px;
+    top: 0;
     left: calc(50% - 215px);
 }
-.avatarTrans {    /* Aanpassing avatar registratieLaag */
+.avatarTrans {    /* Aanpassing avatar transactieLaag */
     width: 430px;
     height: 350px;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     position: absolute;
-    top: 0px;
+    top: 0;
     left: calc(50% - 215px);
 }
 
@@ -323,14 +315,17 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     position: relative;
     margin-left: 175px;
 }
-.dropKoers:hover, .dropKoers:focus {
+
+.dropKoers:hover, .dropKoers:focus {    /* Stijl voor hover bij dropdown in koersDiagram */
     background-color: var(--divaRoze);
 }
-.dropdownKoers {
+
+.dropdownKoers {    /* Stijl voor dropdownKoers-element in koersDiagram */
     position: relative;
     display: inline-block;
 }
-.dropdownKoers-content {
+
+.dropdownKoers-content {    /* Stijl voor dropdownKoers-content in koersDiagram */
     display: none;
     position: absolute;
     margin-top: -25px;
@@ -344,7 +339,8 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     overflow: auto;
     z-index: 1;
 }
-.dropdownKoers-content a {
+
+.dropdownKoers-content a {    /* Stijl voor dropdownKoers-element in koersDiagram */
     color: var(--divaIvoor);
     padding: 8px 16px;
     font-size: 15px;
@@ -353,21 +349,39 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     text-decoration: none;
     display: block;
 }
-.dropdownKoers-content a[class="rodeTekst"] {
+
+.dropdownKoers-content a[class="rodeTekst"] {     /* Stijl voor dropdownKoers-element in koersDiagram */
     color: var(--divaRood);
 }
-.dropdownKoers-content a[class="goudenTekst"] {
+
+.dropdownKoers-content a[class="goudenTekst"] {    /* Stijl voor dropdownKoers-element in koersDiagram */
     color: var(--divaGoud);
 }
-.dropdownKoers a:hover {
+
+.dropdownKoers a:hover {    /* Stijl voor dropdownKoers-element in koersDiagram */
     background-color: #1c1c1c;
 }
-.show {
+
+.dropdown_assets {    /* Stijl voor dropdownAssets */
+    background-color: var(--divaGoud);
+    color: black;
+    font-size: 17px;
+    font-family: diva, serif;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    border-radius: 15px;
+    height: 30px;
+}
+
+.show {    /* Stijl voor vertonen dropdownKoers-element */
     display: block;
 }
 
-.rodeTekst {     /* Maakt betreffende tekst uit klasse rood */
-    color: var(--divaRood);
+.linkjes {    /* Stijl voor linkjes in transactie */
+    text-align: right;
 }
 
 /* ----- ID'S ----- */
@@ -391,8 +405,8 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     right: 0;
     width: 250px;
     height: 167px;
-    margin-right: 0px;
-    margin-top: 0px;
+    margin-right: 0;
+    margin-top: 0;
     transition: .3s ease-in-out;
 }
 
@@ -403,6 +417,13 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     margin-top: 5px;
 }
 
+#infoInvullen {    /* Aanpassingen voor informatie #infoInvullen in #registratieLaag*/
+    text-align: center;
+    font-weight: normal;
+    margin-top: -25px;
+    margin-bottom: 40px;
+}
+
 #infoInvullenSchaalbaar {    /* Ruimte voor creëren van break in registratieLaag ivm schaalbaarheid */
     margin-top: -20px;
     display: none;
@@ -410,7 +431,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 }
 
 #registratieBevestiging {    /* Laag met bevestiging van registratie */
-    margin-top: 0px;
+    margin-top: 0;
     font-size: 1.05em;
     line-height: 1.50em;
     text-align: center;
@@ -422,13 +443,12 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 }
 
 #transactieBevestiging {    /* Laag met bevestiging van transactie */
-    margin-top: 0px;
+    margin-top: 0;
     font-size: 1.05em;
     line-height: 2.00em;
     text-align: center;
     font-weight: lighter;
 }
-
 
 #divaPlaatsing {    /* Positionering begroeting in financieelOverzicht */
     color: var(--divaRoze);
@@ -456,10 +476,6 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     color: var(--divaIvoor);
     margin-top: 480px;
     margin-right: 20px;
-    text-align: right;
-}
-
-.linkjes {
     text-align: right;
 }
 
@@ -640,7 +656,6 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     }
 }
 
-
 /* Wijzig elementen bij scherm LAGER dan 1050px */
 @media only screen and (max-height: 860px) {
     #financieelOverzichtContainer {
@@ -688,7 +703,7 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
     filter: invert(1);
 }
 
-/* Aanpassingen voor scrollbar */
+/* Algemene stijl voor scrollbars */
 ::-webkit-scrollbar {
     margin-right: -5px;
     width: 13px;
@@ -707,20 +722,6 @@ input[class = "hoeveelheid"] {    /* Hoeveelheid invoerveld voor transactie*/
 ::-webkit-scrollbar-thumb:hover {
     background: #222;
     background: var(--divaBrons);
-}
-
-.dropdown_assets {
-    background-color: var(--divaGoud);
-    color: black;
-    font-size: 17px;
-    font-family: diva, serif;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-    text-align: center;
-    border-radius: 15px;
-    height: 30px;
 }
 
 /* ----- TABLES ----- */
