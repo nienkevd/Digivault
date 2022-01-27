@@ -15,7 +15,7 @@ import java.util.List;
 // review door Erwin, 6 december
 
 /**
- * Java Database Connectivity voor DB-tabel Account
+ * Java Database Connectivity voor DB-tabel transactiepartij
  *
  * @author Sezi, studentnummer 500889525
  *
