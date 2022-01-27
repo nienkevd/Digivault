@@ -24,13 +24,13 @@ public class EuroKoersService {
     /**
      * Constructor van de EuroKoersService
      * @param jdbcEuroKoersDAO JDBC EuroKoers-DAO
-//     * @param rootRepository RootRepository
+     * @param rootRepository RootRepository
      */
     @Autowired
     public EuroKoersService(JdbcEuroKoersDAO jdbcEuroKoersDAO, RootRepository rootRepository) {
         super();
         this.jdbcEuroKoersDAO = jdbcEuroKoersDAO;
-//        this.rootRepository = rootRepository;
+        this.rootRepository = rootRepository;
     }
 
     /**

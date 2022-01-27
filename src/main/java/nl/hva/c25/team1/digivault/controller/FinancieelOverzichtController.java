@@ -6,11 +6,9 @@ import nl.hva.c25.team1.digivault.model.Klant;
 import nl.hva.c25.team1.digivault.service.AccountService;
 import nl.hva.c25.team1.digivault.service.FinancieelOverzichtService;
 import nl.hva.c25.team1.digivault.service.KlantService;
-import org.springframework.boot.autoconfigure.cassandra.CassandraProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 /**
  * Controller van de klasse FinancieelOverzicht

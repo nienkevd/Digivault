@@ -40,7 +40,8 @@ public class RegistratieService {
      * @param hashService HashService
      */
     @Autowired
-    public RegistratieService(RootRepository rootRepository, AssetService assetService, HashService hashService, JdbcAccountDAO accountDAO) {
+    public RegistratieService(RootRepository rootRepository, AssetService assetService, HashService hashService,
+                              JdbcAccountDAO accountDAO) {
         super();
         this.rootRepository = rootRepository;
         this.assetService = assetService;

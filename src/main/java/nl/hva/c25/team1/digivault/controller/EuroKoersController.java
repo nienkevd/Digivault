@@ -3,9 +3,7 @@ package nl.hva.c25.team1.digivault.controller;
 import nl.hva.c25.team1.digivault.model.EuroKoers;
 import nl.hva.c25.team1.digivault.service.EuroKoersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 

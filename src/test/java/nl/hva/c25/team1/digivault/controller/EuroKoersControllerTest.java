@@ -37,6 +37,9 @@ class EuroKoersControllerTest {
         this.mockMvc = mockMvc;
     }
 
+    /**
+     * Test van de methode vindEuroKoersOpId uit de EuroKoersController
+     */
     @Test
     void vindEuroKoersOpId() {
         EuroKoers euroKoers = new EuroKoers(20, LocalDate.of(2021, 12, 7),
