@@ -19,6 +19,13 @@ public class Account {
     @JsonBackReference
     private Klant klant;
 
+    /**
+     * All args constructor Account
+     * @param emailadres
+     * @param wachtwoord
+     * @param klant
+     */
+
     public Account (String emailadres, String wachtwoord, Klant klant) {
         super();
         this.emailadres = emailadres;
@@ -26,17 +33,27 @@ public class Account {
         this.klant = klant;
     }
 
+    /**
+     *
+     * Constructor Account met kale klant object
+     * @param emailadres
+     * @param wachtwoord
+     */
+
     public Account(String emailadres, String wachtwoord) {
         this(emailadres, wachtwoord, null);
     }
 
-    public Account() {
-        this("onbekend", "onbekend");
-    }
+    /**
+     *
+     * Constructor Account voor in RegisterDto
+     * @param dto voor het maken van Account object
+     */
 
     public Account(RegisterDto dto){
         this(dto.getEmailadres(),dto.getWachtwoord());
     }
+
 
     public String getEmailadres() {
         return emailadres;

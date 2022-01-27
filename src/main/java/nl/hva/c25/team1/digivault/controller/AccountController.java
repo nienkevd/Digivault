@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Controller van de klasse Account
+ *Methodes zonder javadoc comments worden niet gebruikt
  *
  * @author Sezi, studentnummer 500889525
  *
@@ -29,7 +30,6 @@ public class AccountController {
     public void updateAccount(@RequestBody Klant klant) {
         accountService.updateAccount(klant);
     }
-
 
     @GetMapping("/accounts")
     public List<Account> geefAccountsHandler() {
