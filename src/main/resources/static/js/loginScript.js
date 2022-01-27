@@ -72,7 +72,7 @@ document.getElementById("login").addEventListener("click", (e) => {
 
 // FINANCIEEL-OVERZICHT
 function toonFinancieelOverzicht() {
-    window.location.href = "FinancieelOverzicht.html";
+    window.location.href = "financieelOverzicht.html";
 }
 
 // WACHTWOORD-RESET - Vanuit Login Scherm naar Wachtwoord vergeten pagina bij klik op #naarWachtwoordVergeten

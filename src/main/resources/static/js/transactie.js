@@ -369,7 +369,7 @@ uitlog.addEventListener('click', (event) => {
 
 function toonFinancieelOverzicht() {
     localStorage.setItem('munteenheid', currency);
-    window.location.href = "FinancieelOverzicht.html";
+    window.location.href = "financieelOverzicht.html";
 }
 
 function toonLoginPagina() {

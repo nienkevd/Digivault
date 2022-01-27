@@ -19,14 +19,14 @@ const vijfDagen = new Date;
 const zesDagen = new Date();
 const week = new Date();
 
-// DECLARATIE KOERSEN
-let koers1 = 31714.99;
-let koers2 = 31726.35;
-let koers3 = 31722.71;
-let koers4 = 31703.04;
-let koers5 = 31688.12;
-let koers6 = 31686.87;
-let koers7 = 31672.63;
+// DECLARATIE KOERSEN (nog tijdelijke harde data)
+let koers1 = 36403.7;
+let koers2 = 36800.4;
+let koers3 = 36950.6;
+let koers4 = 36686.3;
+let koers5 = 36269.5;
+let koers6 = 35075.2;
+let koers7 = 36475.5;
 let laatsteWaarde = null;
 
 // VERWIJZINGEN
@@ -66,12 +66,12 @@ const labels = [
 let data = {
     labels: labels,
     datasets: [{
-        label: 'week',
+        label: 'dagkoers',
         backgroundColor: divaRoze,
         borderColor: divaRoze,
         data: [koers7, koers6, koers5, koers4, koers3, koers2, koers1],
     }, {
-        label: 'dagkoers',
+        label: 'huidige koers',
         backgroundColor: divaGold,
         borderColor: divaGold,
         data: [koers1, koers1, koers1, koers1, koers1, koers1, koers1   ],
