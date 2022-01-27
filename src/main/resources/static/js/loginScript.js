@@ -3,7 +3,7 @@
 // JavaScript voor index.html, met specifiek ook de inlogfunctionaliteit
 // Auteurs: Anneke, Erwin en Nienke
 
-// globale munteenheid meegeven
+// Globale munteenheid meegeven
 localStorage.setItem('munteenheid', 'EUR');
 
 // VERWIJZINGEN
@@ -82,14 +82,16 @@ function toonWachtwoordVergeten(){
     document.getElementById('wachtwoordVergetenLaag').style.display = 'block';
 }
 
-// WACHTWOORD-RESET - Vanuit WachtwoordVergetenLaag naar login en registreren
+// WACHTWOORD-RESET - Vanuit wachtwoordVergetenLaag naar login en registreren
 document.getElementById('naarLoginPagina').addEventListener('click', toonLoginPagina);
 document.getElementById('naarRegistreren1').addEventListener('click', toonRegistratieLaag);
 
+// Toon de loginPagina vanuit wachtwoordVergetenLaag
 function toonLoginPagina(){
     document.getElementById('wachtwoordVergetenLaag').style.display = 'none';
 }
 
+// Toon de registratieLaag vanuit wachtwoordVergetenLaag
 function toonRegistratieLaag() {
     registratieLaag.style.display = 'block';
     welkomsAanbieding.style.display = 'none';

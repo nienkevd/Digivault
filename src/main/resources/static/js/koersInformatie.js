@@ -1,7 +1,7 @@
 'use strict';
 
 // JavaScript voor het vertonen van koersinformatie in koersInformatie.html
-// Disclaimer: deze niet-gepubliceerde pagina is nog in ontwikkeling
+// Disclaimer: deze niet-gepubliceerde pagina is nog in ontwikkeling en kent te 'zware' code
 // Auteur: Erwin, studentnummer 500889293
 
 // DECLARATIE WEBSOCKETS
@@ -54,12 +54,13 @@ const divaGroen = '#44c26e';
 const divaRood = '#E34232';
 const divaGoud = '#ffc95f';
 
-// Aanroepen per cryptomunt op Websocket (een tijdelijke te trage methode)
+// AANROEPEN PER CRYPTOMUNT (een tijdelijke en trage manier)
 wsBTC.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersBTC.innerText = waarde;
-    koersBTC.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersBTC.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -67,7 +68,8 @@ wsETH.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersETH.innerText = waarde;
-    koersETH.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersETH.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -75,7 +77,8 @@ wsBNB.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersBNB.innerText = waarde;
-    koersBNB.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersBNB.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -83,7 +86,8 @@ wsADA.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersADA.innerText = waarde;
-    koersADA.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersADA.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -91,7 +95,8 @@ wsSOL.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersSOL.innerText = waarde;
-    koersSOL.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersSOL.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -99,7 +104,8 @@ wsXRP.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersXRP.innerText = waarde;
-    koersXRP.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersXRP.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -107,7 +113,8 @@ wsDOGE.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersDOGE.innerText = waarde;
-    koersDOGE.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersDOGE.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -115,7 +122,8 @@ wsDOT.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersDOT.innerText = waarde;
-    koersDOT.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersDOT.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -123,7 +131,8 @@ wsAVAX.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersAVAX.innerText = waarde;
-    koersAVAX.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersAVAX.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -131,7 +140,8 @@ wsLUNA.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersLUNA.innerText = waarde;
-    koersLUNA.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersLUNA.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -139,7 +149,8 @@ wsLTC.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersLTC.innerText = waarde;
-    koersLTC.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersLTC.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -147,7 +158,8 @@ wsMATIC.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersMATIC.innerText = waarde;
-    koersMATIC.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersMATIC.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -155,14 +167,16 @@ wsALGO.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersALGO.innerText = waarde;
-    koersALGO.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersALGO.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 wsBCH.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersBCH.innerText = waarde;
-    koersBCH.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersBCH.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -170,7 +184,8 @@ wsXLM.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersXLM.innerText = waarde;
-    koersXLM.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersXLM.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -178,7 +193,8 @@ wsVET.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersVET.innerText = waarde;
-    koersVET.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersVET.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -186,7 +202,8 @@ wsICP.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersICP.innerText = waarde;
-    koersICP.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersICP.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -194,7 +211,8 @@ wsHEX.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersHEX.innerText = waarde;
-    koersHEX.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersHEX.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -202,7 +220,8 @@ wsEGLD.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersEGLD.innerText = waarde;
-    koersEGLD.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersEGLD.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
 
@@ -210,6 +229,7 @@ wsSHIB.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
     koersSHIB.innerText = waarde;
-    koersSHIB.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    koersSHIB.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen
+        : divaRood;
     laatsteWaarde = waarde;
 }
