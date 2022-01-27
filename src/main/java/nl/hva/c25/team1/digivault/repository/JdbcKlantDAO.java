@@ -55,15 +55,7 @@ public class JdbcKlantDAO implements KlantDAO {
         return klant;
     }
 
-    /**
-     *
-     * In deze methode wordt de PreparedStatement gevuld met alle klantinformatie
-     * @param ps PreparedStatement
-     * @param klant die wordt opgeslagen
-     * @return volledige PreparedStatement voor Klant
-     * @throws SQLException SQLException
-     */
-    public PreparedStatement bouwPs(PreparedStatement ps, Klant klant) throws SQLException {
+    private PreparedStatement bouwPs(PreparedStatement ps, Klant klant) throws SQLException {
         ps.setInt(1, klant.getRekening().getRekeningId());
         ps.setInt(2, klant.getAdres().getAdresId());
         ps.setString(3, "klant");
@@ -92,12 +84,6 @@ public class JdbcKlantDAO implements KlantDAO {
             klant = null;
         }
         return klant;
-    }
-
-    @Override
-    public int vindRekeningIdVanKlant(Klant klant) {
-        String sql = "SELECT rekeningID FROM transactiepartij WHERE tpID = ?;";
-        return jdbcTemplate.queryForObject(sql, Integer.class, klant.getTransactiepartijId());
     }
 
     /**

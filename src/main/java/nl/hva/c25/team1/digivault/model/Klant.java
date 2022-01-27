@@ -40,7 +40,6 @@ public class Klant extends TransactiePartij {
         this.naam = naam;
         this.adres = adres;
         this.account = account;
-
     }
 
     /**

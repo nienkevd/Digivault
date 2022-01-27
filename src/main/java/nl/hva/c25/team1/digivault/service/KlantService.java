@@ -35,7 +35,7 @@ public class KlantService {
 
     /**
      *
-     * @param klant opslaan
+     * @param klant die wordt opgeslagen
      */
     public Klant bewaarKlant(Klant klant) {
         return klantDAO.bewaarKlantMetSK(klant);
@@ -56,16 +56,16 @@ public class KlantService {
 
     /**
      *
-     * @return List<Klant>
+     * @return List<Klant> klantenlijst
      */
     public List<Klant> vindAlleKlanten() {
-        System.out.println("service");
         return klantDAO.vindAlleKlanten();
     }
 
     /**
      *
      * update een bestaande klant uit de database
+
      * @param klant die geupdate moet worden
      * @return String melding die aangeeft of update geslaagd is
      */
