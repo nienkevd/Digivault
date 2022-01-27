@@ -1,8 +1,12 @@
 'use strict';
 
+// JavaScript voor het registeren van klantgegevens in de registratieLaag op index.html
+// Auteur: Erwin, studentnummer 500889293
+
 // VERWIJZINGEN
 const bevestigingSluiten = document.getElementById('bevestigingSluiten');
 const terugNaarLogin = document.getElementById('terugNaarLogin');
+const naarKoersInformatie = document.getElementById('naarKoersInformatie');
 const naarRegistreren = document.getElementById('naarRegistreren');
 const registreren = document.getElementById('registreren');
 const loginPagina = document.getElementById('loginPagina');
@@ -51,12 +55,18 @@ const alleenCijfers = new RegExp(/^[0-9]+$/);
 // LOSSE EVENT-LISTENERS
 terugNaarLogin.addEventListener('click', verbergRegistratieLaag);
 welkomsAanbieding.addEventListener('click', toonRegistratieLaag);
+naarKoersInformatie.addEventListener('click', toonKoersInformatie);
 naarRegistreren.addEventListener('click', toonRegistratieLaag);
 bevestigingSluiten.addEventListener('click', verbergRegistratieBevestiging);
 wachtwoord_reg.addEventListener('keyup', checkOvereenkomenWachtwoorden);
 wachtwoord_check.addEventListener('keyup', checkOvereenkomenWachtwoorden);
 
 // REGISTRATIE LAAG - Tonen registratieLaag na klik #welkomsAanbieding en #naarRegistreren, verbergen #welkomsAanbieding
+function toonKoersInformatie() {
+    window.location.href = "koersDiagram.html";
+}
+
+// REGISTRATIE LAAG - Tonen van uitgebreide koersInformatie na klik op linkje #toonRegistratieLaag
 function toonRegistratieLaag() {
     registratieLaag.style.display = 'block';
     loginPagina.style.display = 'none';
@@ -67,6 +77,7 @@ function toonRegistratieLaag() {
 function verbergRegistratieLaag() {
     registratieLaag.style.display = 'none';
     loginPagina.style.display = 'block';
+    welkomsAanbieding.style.display = 'block';
 }
 
 // REGISTRATIE BEVESTIGING - Tonen van #registratieBevestiging met daarop de melding dat registratie gelukt is

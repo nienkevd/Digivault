@@ -1,3 +1,10 @@
+'use strict';
+
+// JavaScript voor het vertonen van koersinformatie in koersInformatie.html
+// Disclaimer: deze niet-gepubliceerde pagina is nog in ontwikkeling
+// Auteur: Erwin, studentnummer 500889293
+
+// DECLARATIE WEBSOCKETS
 const wsBTC = new WebSocket('wss://stream.binance.com:9443/ws/btceur@trade');
 const wsETH = new WebSocket('wss://stream.binance.com:9443/ws/etheur@trade');
 const wsBNB = new WebSocket('wss://stream.binance.com:9443/ws/bnbeur@trade');
@@ -19,6 +26,7 @@ const wsHEX = new WebSocket('wss://dex.binance.org/api/ws/BNB_BTCB-1DE@marketDep
 const wsEGLD = new WebSocket('wss://stream.binance.com:9443/ws/egldeur@trade');
 const wsSHIB = new WebSocket('wss://stream.binance.com:9443/ws/shibeur@trade');
 
+// DECLARATIE VERWIJZINGEN
 const koersBTC = document.getElementById('koersBTC');
 const koersETH = document.getElementById('koersETH');
 const koersBNB = document.getElementById('koersBNB');
@@ -40,11 +48,13 @@ const koersHEX = document.getElementById('koersHEX');
 const koersEGLD = document.getElementById('koersEGLD');
 const koersSHIB = document.getElementById('koersSHIB');
 
+// DECLARATIE VARIABELEN
 let laatsteWaarde = null;
 const divaGroen = '#44c26e';
 const divaRood = '#E34232';
 const divaGoud = '#ffc95f';
 
+// Aanroepen per cryptomunt op Websocket (een tijdelijke te trage methode)
 wsBTC.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
@@ -180,13 +190,13 @@ wsICP.onmessage = (event) => {
     laatsteWaarde = waarde;
 }
 
-// wsHEX.onmessage = (event) => {
-//     let stockObject = JSON.parse(event.data)
-//     let waarde = parseFloat(stockObject.p).toFixed(2);
-//     koersHEX.innerText = waarde;
-//     koersHEX.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
-//     laatsteWaarde = waarde;
-// }
+wsHEX.onmessage = (event) => {
+    let stockObject = JSON.parse(event.data)
+    let waarde = parseFloat(stockObject.p).toFixed(2);
+    koersHEX.innerText = waarde;
+    koersHEX.style.color = !laatsteWaarde || laatsteWaarde === waarde ? divaGoud : waarde > laatsteWaarde ? divaGroen : divaRood;
+    laatsteWaarde = waarde;
+}
 
 wsEGLD.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)

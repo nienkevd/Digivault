@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 /**
- * @author Nienke
+ * @author Nienke en Erwin (validatie)
  * @version 8-12-2021
  */
 
