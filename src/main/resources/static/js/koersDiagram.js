@@ -1,12 +1,14 @@
 'use strict';
 
+// JavaScript voor het vertonen van koersinformatie in koersDiagram.html
+// Auteur: Erwin, studentnummer 500889293
+
 // DECLARATIE KLEUREN
 const divaRoze = '#f27ddd';
 const divaGold = '#ffc95f';
 const divaGroen = '#44c26e';
 const divaRood = '#E34232';
 const divaGoud = '#ffc95f';
-
 
 // DECLARATIE DAGEN
 const vandaag = new Date();
@@ -26,6 +28,20 @@ let koers5 = 31688.12;
 let koers6 = 31686.87;
 let koers7 = 31672.63;
 let laatsteWaarde = null;
+
+// VERWIJZINGEN
+const buttonKoersInformatie = document.getElementById('buttonKoersInformatie');
+const select = document.getElementById("dropdownKoers");
+const dropKoersContent = document.getElementById("dropKoersContent")
+const koersGrafiek = document.getElementById('koersGrafiek');
+
+// EVENT-LISTENERS
+buttonKoersInformatie.addEventListener('click', naarLoginScherm);
+
+// TERUG NAAR LOGINSCHERM
+function naarLoginScherm() {
+    window.location.href = "index.html";
+}
 
 // BEREKENEN ACTUELE DAGEN
 gisteren.setDate(gisteren.getDate() - 2);
@@ -62,24 +78,20 @@ let data = {
     }]
 };
 
-// CONFIGURATIE VAN GRAFIEK
+// CONFIGURATIE VAN DE GRAFIEK
 const config = {
     type: 'line',
     data: data,
     options: {
-        // plugins: {
-        //     legend: {
-        //         display: false
-        //     }
-        // }
     }
 };
 
+// Functie voor het tonen van de dropDown
 function myFunction() {
-    document.getElementById("dropKoersContent").classList.toggle("show");
+    dropKoersContent.classList.toggle("show");
 }
 
-// Close the dropdown if the user clicks outside of it
+// Functie voor het sluiten van de dropDown
 window.onclick = function(event) {
     if (!event.target.matches('.dropKoers')) {
         var dropdowns = document.getElementsByClassName("dropdownKoers-content");
@@ -93,21 +105,18 @@ window.onclick = function(event) {
     }
 }
 
-const select = document.getElementById("dropdownKoers")
 
-// DECLAREREN
-const myChart = new Chart(
-    document.getElementById('koersGrafiek'),
-    config
-);
+// DECLAREREN GRAFIEK MYCHART
+const myChart = new Chart(koersGrafiek, config);
 
 let basisString = 'wss://stream.binance.com:9443/ws/'
-let koersString = 'eth'
+let koersString = 'btc'
 let valutaString = 'eur'
 let eindString = '@trade'
 const wsBTC = new WebSocket(basisString + koersString + valutaString + eindString);
 const koersBTC = document.getElementById('huidigeKoers');
 
+// Ophalen van online koersinformatie
 wsBTC.onmessage = (event) => {
     let stockObject = JSON.parse(event.data)
     let waarde = parseFloat(stockObject.p).toFixed(2);
@@ -119,56 +128,8 @@ wsBTC.onmessage = (event) => {
     laatsteWaarde = waarde;
 }
 
+// Vul de diagram met cryptoInformatie
 function vulDiagram(waarde) {
     koers1 = waarde;
     koers2 = waarde;
 }
-
-document.getElementById('naarAlleKoersen').addEventListener('click', toonAlleKoersen);
-
-function toonAlleKoersen(){
-    window.location.href = "koersInformatie.html";
-}
-
-
-// RELATIVE PATH URL FETCH
-const domainArray = location.origin.split(':');
-const urlLead = domainArray[0] + ':' + domainArray[1] + ':8080/';
-
-fetch(urlLead + 'eurokoersen', {
-    method: 'GET',
-    mode: 'no-cors',
-    header: {
-        'Access-Control-Allow-Methods': 'GET',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-    },
-}).then(function(response) {
-    if(response.ok) {
-        console.log(response)
-        return response.json();
-    } else {
-        console.log('Network response was not ok.');
-    }
-})
-    .catch(function(error) {
-        console.log('There has been a problem with your fetch operation: ' + error.message);
-    });
-
-// postData(urlLead + 'eurokoersen') {
-//     // Default options are marked with *
-//     const response = await fetch(url, {
-//         method: 'POST', // *GET, POST, PUT, DELETE, etc.
-//         mode: 'cors', // no-cors, *cors, same-origin
-//         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//         credentials: 'same-origin', // include, *same-origin, omit
-//         headers: {
-//             'Content-Type': 'application/json'
-//             // 'Content-Type': 'application/x-www-form-urlencoded',
-//         },
-//         redirect: 'follow', // manual, *follow, error
-//         referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-//         body: JSON.stringify(data) // body data type must match "Content-Type" header
-//     });
-//     return response.json(); // parses JSON response into native JavaScript objects
-// }

@@ -1,5 +1,8 @@
 'use strict';
 
+// JavaScript voor index.html, met specifiek ook de inlogfunctionaliteit
+// Auteurs: Anneke, Erwin en Nienke
+
 // globale munteenheid meegeven
 localStorage.setItem('munteenheid', 'EUR');
 
@@ -22,7 +25,6 @@ function verversPagina() {
 }
 
 // LOGINPAGINA: fetch bij klik op login knop en ingevulde velden
-
 document.getElementById("login").addEventListener("click", (e) => {
     // Verwijzingen loginPagina
     const email = document.getElementById("email_login").value;

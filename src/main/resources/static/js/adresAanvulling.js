@@ -1,3 +1,9 @@
+'use strict';
+
+// JavaScript voor het aanvullen van adresgegevens in de registratieLaag
+// Auteur: Erwin, studentnummer 500889293
+
+// EVENT-LISTENERS
 document.querySelector('#postcode').addEventListener('focusout', verkrijgAdresGegevens);
 document.querySelector('#huisnummer').addEventListener('focusout', verkrijgAdresGegevens);
 

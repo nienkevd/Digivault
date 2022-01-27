@@ -10,7 +10,6 @@
 
     <link rel="icon" type="image/x-icon" href="images/favicon.png">
     <script defer src="js/koersDiagram.js"></script>
-<!--    <script defer src="js/koersInformatie.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -22,7 +21,8 @@
     <div class="dropdownKoers">
         <button onclick="myFunction()" class="dropKoers">BTC</button>
         <div id="dropKoersContent" class="dropdownKoers-content">
-            <a href="#BTC">BTC</a>
+            <a class="rodeTekst" href="#BTC">Deze functionaliteit werkt nog niet</a>
+            <a class="goudenTekst" href="#BTC">BTC</a>
             <a href="#ETH">ETH</a>
             <a href="#BNB">BNB</a>
             <a href="#SOL">SOL</a>
@@ -46,10 +46,9 @@
     </div>
     <p id="actueleWaarde">Actuele waarde Bitcoin:</p>
     <p id="vergrootKoers"><span id="huidigeKoers">...</span></p>
-<!--    <p id="historischDagwaarde">Historische dagwaarde:</p>-->
     <canvas id="koersGrafiek"></canvas>
-    <a id="naarAlleKoersen" href="#">Toon alle koersen</a> <br>
-    <input id="standaardButtonBreedte" name="sluitKoersInfo" type="submit" value="Sluiten" onclick="location.href='koersInformatie.html'">
+    <p id="naarAlleKoersen" href="#">Preview met beperkte functionaliteit</p> <br>
+    <input id="buttonKoersInformatie" name="sluitKoersInfo" type="submit" value="Sluiten">
 </div>
 
 </body>
